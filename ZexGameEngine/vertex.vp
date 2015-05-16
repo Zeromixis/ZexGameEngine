@@ -1,0 +1,13 @@
+#version 400
+layout ( location = 0 ) in vec4 InVertexPosition;
+layout ( location = 1 ) in vec2 VertexTexCoord;
+out vec2 vVaryingTexCoords;
+
+uniform mat4 mvpMatrix;
+
+void main ()
+{
+    //OutVertexColor = InVertexColor;
+	vVaryingTexCoords = VertexTexCoord;
+    gl_Position = mvpMatrix * vec4 ( InVertexPosition );
+}

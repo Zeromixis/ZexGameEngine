@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\App">
+      <UniqueIdentifier>{122c4924-198c-4a0b-a9cf-69d11bebc8bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Core">
+      <UniqueIdentifier>{7d01233b-9e5c-46ad-920b-b1eac3bc67c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Core\Input">
+      <UniqueIdentifier>{a0cf95a0-5375-42af-92f1-f11a035de9fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Math">
+      <UniqueIdentifier>{e5d747f8-2328-4c23-b64f-133e65ab19d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Render">
+      <UniqueIdentifier>{3fcefea4-d773-4e4a-bc81-a1afa05f7588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\App">
+      <UniqueIdentifier>{4eb3486b-cfd1-4f3a-8cfa-425878ce082d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core">
+      <UniqueIdentifier>{09005972-58db-495e-abd4-4fd9431c4db2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\RenderEngine">
+      <UniqueIdentifier>{56868ce4-511d-4757-9789-69e8be8c0c4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core\Input">
+      <UniqueIdentifier>{d9d97fb9-29e9-4f9e-8740-9d0a3f1e0785}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Test">
+      <UniqueIdentifier>{e71e886e-1b95-42d2-9692-a1c84391a2ab}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Clock.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DataDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Node.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Singleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Timer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Context.h">
+      <Filter>头文件\App</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Window.h">
+      <Filter>头文件\App</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\WindowWin.h">
+      <Filter>头文件\App</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Camera.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\CameraController.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Input\InputDevice.h">
+      <Filter>头文件\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Input\InputManager.h">
+      <Filter>头文件\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Input\WInputDevice.h">
+      <Filter>头文件\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Matrix.h">
+      <Filter>头文件\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Vector.h">
+      <Filter>头文件\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Render\RenderEngine.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Render\ShaderObject.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Input\InputDeviceStatus.h">
+      <Filter>头文件\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Test\LightningTest.h">
+      <Filter>头文件\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\TimeManager.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\WindowWin.cpp">
+      <Filter>源文件\App</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Camera.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\CameraController.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Input\InputDevice.cpp">
+      <Filter>源文件\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Input\InputManager.cpp">
+      <Filter>源文件\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Input\WInputDevice.cpp">
+      <Filter>源文件\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderEngine\RenderEngine.cpp">
+      <Filter>源文件\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderEngine\ShaderObject.cpp">
+      <Filter>源文件\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Clock.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Timer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\TimeManager.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
