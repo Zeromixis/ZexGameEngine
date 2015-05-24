@@ -4,6 +4,7 @@
 #include <vector>
 #include "Math/Vector.h"
 #include "../Timer.h"
+#include "Core/ArrayBuffer.h"
 
 namespace ZGE
 {
@@ -27,9 +28,11 @@ namespace ZGE
 				positionData[ i * 3 + 2 ] = m_Points[ i ].z ();
 			}
 
-			glGenBuffers ( 1, &m_VertexBuffer );
-			glBindBuffer ( GL_ARRAY_BUFFER, m_VertexBuffer );
-			glBufferData ( GL_ARRAY_BUFFER, m_Points.size () * 3 * 4, positionData, GL_STATIC_DRAW );
+			
+			m_pVertexBuffer = new ArrayBuffer ( m_Points.size () * 3 * 4, ArrayBuffer::ArrayBufferUsage::Static );
+			m_pVertexBuffer->CopyData ( positionData, m_Points.size () * 3 * 4 );
+			m_pVertexBuffer->TransferData ();
+			
 
 			// Bind Tex Data
 			F32 *texData = new F32[ m_Points.size () * 2 ];
@@ -46,12 +49,18 @@ namespace ZGE
 				texData[ i * 2 + 1 ] = 0.0f;
 			}
 
+			m_pTexCoordBuffer = new ArrayBuffer ( m_Points.size () * 2 * 4, ArrayBuffer::ArrayBufferUsage::Static );
+			m_pTexCoordBuffer->CopyData ( texData, m_Points.size () * 2 * 4 );
+			m_pTexCoordBuffer->TransferData ();
+
+			/*
 			glGenBuffers ( 1, &m_TexCoordBuffer );
 			glBindBuffer ( GL_ARRAY_BUFFER, m_TexCoordBuffer );
 			glBufferData ( GL_ARRAY_BUFFER, m_Points.size () * 2 * 4, texData, GL_STATIC_DRAW );
+			*/
 
+			glBindBuffer ( GL_ARRAY_BUFFER, m_pVertexBuffer->BufferId () );
 			glEnableVertexAttribArray ( 0 );
-			glBindBuffer ( GL_ARRAY_BUFFER, m_VertexBuffer );
 			glVertexAttribPointer
 			(
 				0,
@@ -62,8 +71,8 @@ namespace ZGE
 				0
 			);
 
+			glBindBuffer ( GL_ARRAY_BUFFER, m_pTexCoordBuffer->BufferId () );
 			glEnableVertexAttribArray ( 1 );
-			glBindBuffer ( GL_ARRAY_BUFFER, m_TexCoordBuffer );
 			glVertexAttribPointer
 			(
 				1,
@@ -107,6 +116,7 @@ namespace ZGE
 
 		~LightningTest ()
 		{
+			delete m_pVertexBuffer;
 			glDeleteTextures ( 1, &m_LightingTexture );
 		}
 		
@@ -266,8 +276,9 @@ namespace ZGE
 		bool isFirst;
 		std::vector< Vector3f > m_Points;
 		GLuint m_VertexArray;
-		GLuint m_VertexBuffer;
-		GLuint m_TexCoordBuffer;
+		ArrayBuffer *m_pVertexBuffer;
+		ArrayBuffer *m_pTexCoordBuffer;
+		
 		
 		GLuint m_LightingTexture;
 
@@ -275,6 +286,7 @@ namespace ZGE
 		Vector3f ENDPOINT = Vector3f ( 3.0f, 0.0f, -0.5f );
 		F64 m_NowTime;
 		Timer m_Timer;
+		
 
 	};
 }

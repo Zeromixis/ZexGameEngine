@@ -158,6 +158,7 @@
     <ClInclude Include="include\Core\Input\InputManager.h" />
     <ClInclude Include="include\Core\Input\WInputDevice.h" />
     <ClInclude Include="include\Core\TimeManager.h" />
+    <ClInclude Include="include\Core\ArrayBuffer.h" />
     <ClInclude Include="include\DataDef.h" />
     <ClInclude Include="include\Math\Matrix.h" />
     <ClInclude Include="include\Math\Vector.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="src\Core\Input\InputManager.cpp" />
     <ClCompile Include="src\Core\Input\WInputDevice.cpp" />
     <ClCompile Include="src\Core\TimeManager.cpp" />
+    <ClCompile Include="src\Core\ArrayBuffer.cpp" />
     <ClCompile Include="src\RenderEngine\RenderEngine.cpp" />
     <ClCompile Include="src\RenderEngine\ShaderObject.cpp" />
     <ClCompile Include="src\Timer.cpp" />

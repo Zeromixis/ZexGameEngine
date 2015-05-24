@@ -124,8 +124,6 @@ namespace ZGE
         myCamera->SetView ( Vector3f ( 0.0f, 0.0f, -8.0f ), Vector3f ( 0.0f, 0.0f, 0.0f ) );
 
         m_CameraController = std::make_shared< CameraController > ( myCamera );
-
-		
     }
 
     RenderEngine::~RenderEngine ()
@@ -152,7 +150,6 @@ namespace ZGE
 		lightningTest.Draw ();
 
         Context::GetInstance ()->GetWindowPtr ()->SwapBuffer ();
-        
     }
 
     void RenderEngine::FullScreen ( bool isFullScreen )

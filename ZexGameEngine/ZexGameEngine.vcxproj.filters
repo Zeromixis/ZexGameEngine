@@ -111,6 +111,9 @@
     <ClInclude Include="include\Core\TimeManager.h">
       <Filter>头文件\Core</Filter>
     </ClInclude>
+    <ClInclude Include="include\Core\ArrayBuffer.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -147,6 +150,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\TimeManager.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\ArrayBuffer.cpp">
       <Filter>源文件\Core</Filter>
     </ClCompile>
   </ItemGroup>
