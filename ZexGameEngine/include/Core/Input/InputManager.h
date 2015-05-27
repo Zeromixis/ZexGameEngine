@@ -10,9 +10,9 @@
 
 namespace ZGE
 {
-    class InputManager : public Singleton< InputManager, true >
+    class InputManager : public Singleton< InputManager >
     {
-        friend class Singleton< InputManager, true >;
+        friend class Singleton< InputManager >;
     public:
         ~InputManager () {};
 

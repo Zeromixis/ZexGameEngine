@@ -7,9 +7,9 @@
 
 namespace ZGE
 {
-    class Clock : public Singleton< Clock, true >
+    class Clock : public Singleton< Clock >
     {
-        friend class Singleton< Clock, true >;
+        friend class Singleton< Clock >;
     public:
         ~Clock ();
         F64 GetElapsedTimeFromStartMS ();

@@ -7,9 +7,9 @@
 
 namespace ZGE
 {
-	class TimeManager : public Singleton < TimeManager, true >
+	class TimeManager : public Singleton < TimeManager >
 	{
-		friend class Singleton< TimeManager, true >;
+		friend class Singleton< TimeManager >;
 	public:
 		~TimeManager ();
 

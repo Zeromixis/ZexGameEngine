@@ -8,9 +8,9 @@
 
 namespace ZGE
 {
-    class Context : public Singleton< Context, true >
+    class Context : public Singleton< Context >
     {
-        friend class Singleton< Context, true >;
+        friend class Singleton< Context >;
     public:
         ~Context () {};
 
