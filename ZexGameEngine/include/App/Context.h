@@ -2,7 +2,7 @@
 #define _CONTEXT_H_
 
 #include <memory>
-#include "Singleton.h"
+#include "Pattern/Singleton.h"
 #include "Window.h"
 #include "Render/RenderEngine.h"
 

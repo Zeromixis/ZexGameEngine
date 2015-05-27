@@ -1,7 +1,7 @@
 #ifndef _CLOCK_H_
 #define _CLOCK_H_
 
-#include "Singleton.h"
+#include "Pattern/Singleton.h"
 #include "DataDef.h"
 #include "Timer.h"
 

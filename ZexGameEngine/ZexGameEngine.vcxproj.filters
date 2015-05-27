@@ -43,9 +43,9 @@
     <Filter Include="头文件\Test">
       <UniqueIdentifier>{e71e886e-1b95-42d2-9692-a1c84391a2ab}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <Filter Include="头文件\Pattern">
+      <UniqueIdentifier>{719a84c5-b7c4-46a7-9d65-a8356b048481}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Clock.h">
@@ -57,13 +57,7 @@
     <ClInclude Include="include\Node.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\Singleton.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Timer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Util.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\App\Context.h">
@@ -113,6 +107,12 @@
     </ClInclude>
     <ClInclude Include="include\Core\ArrayBuffer.h">
       <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Pattern\Observer.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

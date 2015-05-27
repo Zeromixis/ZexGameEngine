@@ -144,9 +144,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="include\App\Context.h" />
     <ClInclude Include="include\App\Window.h" />
     <ClInclude Include="include\App\WindowWin.h" />
@@ -163,9 +160,9 @@
     <ClInclude Include="include\Math\Matrix.h" />
     <ClInclude Include="include\Math\Vector.h" />
     <ClInclude Include="include\Node.h" />
+    <ClInclude Include="include\Pattern\Observer.h" />
     <ClInclude Include="include\Render\RenderEngine.h" />
     <ClInclude Include="include\Render\ShaderObject.h" />
-    <ClInclude Include="include\Singleton.h" />
     <ClInclude Include="include\Test\LightningTest.h" />
     <ClInclude Include="include\Timer.h" />
     <ClInclude Include="include\Util.h" />

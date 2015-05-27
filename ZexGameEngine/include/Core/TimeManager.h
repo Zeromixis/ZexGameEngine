@@ -1,7 +1,7 @@
 #ifndef _CORE_TIMEMANAGER_H_
 #define _CORE_TIMEMANAGER_H_
 
-#include "Singleton.h"
+#include "Pattern/Singleton.h"
 #include "Timer.h"
 
 

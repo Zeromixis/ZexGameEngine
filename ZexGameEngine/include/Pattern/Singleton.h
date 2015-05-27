@@ -1,8 +1,8 @@
-#ifndef _SINGLETON_H_
-#define _SINGLETON_H_
+#ifndef _PATTERN_SINGLETON_H_
+#define _PATTERN_SINGLETON_H_
 
 /******************************************************************************************************************************************/
-/* Thanks to Technical reference which coming from																									  */
+/* Thanks to Technical reference which coming from																						  */
 /* http://www.klayge.org/2015/04/27/c%E4%B8%AD%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%B9%B6%E4%B8%94%E9%AB%98%E6%95%88%E7%9A%84singleton/ */
 /******************************************************************************************************************************************/
 
@@ -64,5 +64,5 @@ namespace ZGE
 	std::mutex Singleton< T >::m;
 }
 
-#endif
+#endif // _PATTERN_SINGLETON_H_
 

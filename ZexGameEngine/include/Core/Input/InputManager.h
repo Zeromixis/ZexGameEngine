@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 #include <map>
-#include "Singleton.h"
+#include "Pattern/Singleton.h"
 #include "Core/Input/InputDevice.h"
 #include "App/WindowWin.h"
 
