@@ -13,8 +13,8 @@ namespace ZGE
 	public:
 		enum ArrayBufferUsage
 		{
-			Static  = GL_STATIC_DRAW,
-			Dynamic = GL_DYNAMIC_DRAW,
+			STATIC  = GL_STATIC_DRAW,
+			DYNAMIC = GL_DYNAMIC_DRAW,
 		};
 
 		//VertexBuffer ();

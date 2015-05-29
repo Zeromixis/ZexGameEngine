@@ -29,7 +29,7 @@ namespace ZGE
 			}
 
 			
-			m_pVertexBuffer = new ArrayBuffer ( m_Points.size () * 3 * 4, ArrayBuffer::ArrayBufferUsage::Static );
+			m_pVertexBuffer = new ArrayBuffer ( m_Points.size () * 3 * 4, ArrayBuffer::ArrayBufferUsage::STATIC );
 			m_pVertexBuffer->CopyData ( positionData, m_Points.size () * 3 * 4 );
 			m_pVertexBuffer->TransferData ();
 			
@@ -49,15 +49,9 @@ namespace ZGE
 				texData[ i * 2 + 1 ] = 0.0f;
 			}
 
-			m_pTexCoordBuffer = new ArrayBuffer ( m_Points.size () * 2 * 4, ArrayBuffer::ArrayBufferUsage::Static );
+			m_pTexCoordBuffer = new ArrayBuffer ( m_Points.size () * 2 * 4, ArrayBuffer::ArrayBufferUsage::STATIC );
 			m_pTexCoordBuffer->CopyData ( texData, m_Points.size () * 2 * 4 );
 			m_pTexCoordBuffer->TransferData ();
-
-			/*
-			glGenBuffers ( 1, &m_TexCoordBuffer );
-			glBindBuffer ( GL_ARRAY_BUFFER, m_TexCoordBuffer );
-			glBufferData ( GL_ARRAY_BUFFER, m_Points.size () * 2 * 4, texData, GL_STATIC_DRAW );
-			*/
 
 			glBindBuffer ( GL_ARRAY_BUFFER, m_pVertexBuffer->BufferId () );
 			glEnableVertexAttribArray ( 0 );

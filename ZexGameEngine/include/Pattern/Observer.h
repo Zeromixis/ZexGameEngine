@@ -26,12 +26,12 @@ namespace ZGE
 		{
 			for ( auto &ob : m_ObserverList )
 			{
-				ob->OnNotify ( this, args... );
+				ob->OnNotify ( *this, args... );
 			}
 		}
 
 	private:
-		std::set < Observer * > m_ObserverList;
+		std::set < Observer< Args... > * > m_ObserverList;
 	};
 
 	template < typename... Args >
