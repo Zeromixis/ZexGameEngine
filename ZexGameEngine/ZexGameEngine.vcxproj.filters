@@ -46,6 +46,9 @@
     <Filter Include="头文件\Pattern">
       <UniqueIdentifier>{719a84c5-b7c4-46a7-9d65-a8356b048481}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\UI">
+      <UniqueIdentifier>{a20ca48b-306f-4525-a5b4-21bd8a0468b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Clock.h">
@@ -111,11 +114,14 @@
     <ClInclude Include="include\Util.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Pattern\Singleton.h">
+      <Filter>头文件\Pattern</Filter>
+    </ClInclude>
     <ClInclude Include="include\Pattern\Observer.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="include\UI\UIObject.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,22 +1,57 @@
 #ifndef _NODE_H_
 #define _NODE_H_
 
+#include <set>
 #include "Math/Vector.h"
 
 namespace ZGE
 {
-    class Node
+	template < typename ElementType >
+    class NodeBase
     {
+		typedef ElementType  ET;
     public:
-        virtual ~Node ();
+		NodeBase ()
+			: m_Parent ( nullptr )
+		{
 
-    protected:
-        Node*    m_Parent;
-        Vector3f m_Position;
-        Vector3f m_Rotation;
-        Vector3f m_Scale;
+		}
+
+		virtual ~NodeBase ()
+		{
+
+			for ( auto &child : m_Childs )
+			{
+				delete[] child;
+			}
+		}
+
+		virtual NodeBase *& Parent ()
+		{
+			return m_Parent;
+		}
+
+		virtual ElementType & Position ()
+		{
+			return m_Position;
+		}
+
+		virtual ElementType & Rotation ()
+		{
+			return m_Rotation;
+		}
+
+		virtual ElementType & Scale ()
+		{
+			return m_Scale;
+		}
+
+	private:
+		NodeBase*				m_Parent;
+		ElementType				m_Position;
+		ElementType				m_Rotation;
+		ElementType				m_Scale;
+		std::set< NodeBase * > m_Childs;
     };
 }
-
-
-#endif
+#endif // _NODE_H_

@@ -162,6 +162,7 @@
     <ClInclude Include="include\Math\Vector.h" />
     <ClInclude Include="include\Node.h" />
     <ClInclude Include="include\Pattern\Observer.h" />
+    <ClInclude Include="include\Pattern\Singleton.h" />
     <ClInclude Include="include\Render\RenderEngine.h" />
     <ClInclude Include="include\Render\ShaderObject.h" />
     <ClInclude Include="include\Test\LightningTest.h" />
