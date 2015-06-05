@@ -24,7 +24,7 @@ namespace ZGE
 
         HANDLE m_Device;
 
-        Vector3I m_OffsetState;
+        Vector3i m_OffsetState;
 
 		std::array< bool, 3 > m_ButtonState;
 

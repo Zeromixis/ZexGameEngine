@@ -128,7 +128,7 @@ namespace ZGE
         }
 
     protected:
-        Vector3I m_Offset;
+        Vector3i m_Offset;
 
         // L, R, M
         std::array< std::array< bool, ACTIONUMS >, 2 > m_Actions;
@@ -167,7 +167,7 @@ namespace ZGE
 
     struct InputMouseStatus : public InputDeviceStatus
     {
-        Vector3I Offset;
+        Vector3i Offset;
         std::array< bool, InputMouse::ACTIONUMS > Action;
 
         virtual InputDevice::InputDeviceType DeviceType ( ) const

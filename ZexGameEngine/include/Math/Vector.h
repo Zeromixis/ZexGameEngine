@@ -11,6 +11,7 @@
 
 namespace ZGE
 {
+    class VectorHelper;
     template < typename T, size_t row, size_t col > class Matrix;
 
     template< typename T, size_t N >
@@ -26,16 +27,27 @@ namespace ZGE
         boost::equality_comparable< Vector< T, N > > > > > > > > > >
     {
         BOOST_STATIC_ASSERT ( N != 0 );
+        friend class VectorHelper;
     public:
         typedef T value_type;
 
-        enum { elemNum = N };
+        enum { ElemNum = N };
 
         Vector ()
         {
-			
+            m_VecArray.fill ( T ( 0 ) );
         }
 
+        template < typename... Args >
+        explicit Vector ( const Args&... args )
+        {
+            /*
+            m_VecArray[ 0 ] = val;
+            VectorHelper::RecursiveAssignValue ( *this, 1, std::forward< Args > ( args )... );
+            */
+            VectorHelper::AssignValue ( *this, 1, args... );
+        }
+        
         ~Vector ()
         {
 
@@ -61,16 +73,16 @@ namespace ZGE
         template < typename U, size_t M >
         Vector ( const Vector< U, M >& rhs )
         {
-            if ( rhs.elemNum >= this->elemNum )
+            if ( rhs.ElemNum >= this->ElemNum )
             {
-                for ( size_t i = 0; i < this->elemNum; ++i )
+                for ( size_t i = 0; i < this->ElemNum; ++i )
                 {
                     m_VecArray[ i ] = rhs[ i ];
                 }
             }
             else
             {
-                for ( size_t i = 0; i < rhs.elemNum; ++i )
+                for ( size_t i = 0; i < rhs.ElemNum; ++i )
                 {
                     m_VecArray[ i ] = rhs[ i ];
                 }
@@ -149,19 +161,19 @@ namespace ZGE
 
         T& operator [] ( const size_t& index )
         {
-            assert ( index < elemNum );
+            assert ( index < ElemNum );
             return m_VecArray[ index ];
         }
 
         const T& operator [] ( const size_t& index ) const
         {
-            assert ( index < elemNum );
+            assert ( index < ElemNum );
             return m_VecArray[ index ];
         }
 
         T& operator - ()
         {
-            for ( int i = 0; i < elemNum; ++i )
+            for ( int i = 0; i < ElemNum; ++i )
             {
                 m_VecArray[ i ] = -m_VecArray[ i ];
             }
@@ -169,10 +181,10 @@ namespace ZGE
 
         bool operator == ( const Vector& rhs )
         {
-            if ( this->elemNum != rhs.elemNum )
+            if ( this->ElemNum != rhs.elemNum )
                 return false;
 
-            for ( int i = 0; i < elemNum; ++i )
+            for ( int i = 0; i < ElemNum; ++i )
             {
                 if ( m_VecArray[ i ] != rhs.m_VecArray[ i ] )
                     return false;
@@ -182,7 +194,7 @@ namespace ZGE
         
         const Vector& operator += ( const Vector& rhs )
         {
-            for ( int i = 0; i < elemNum; ++i )
+            for ( int i = 0; i < ElemNum; ++i )
             {
                 m_VecArray[ i ] += rhs.m_VecArray[ i ];
             }
@@ -191,7 +203,7 @@ namespace ZGE
 
         const Vector& operator += ( const T& rhs )
         {
-            for ( int i = 0; i < elemNum; ++i )
+            for ( int i = 0; i < ElemNum; ++i )
             {
                 m_VecArray[ i ] += rhs;
             }
@@ -200,7 +212,7 @@ namespace ZGE
 
         const Vector& operator -= ( const Vector& rhs )
         {
-            for ( int i = 0; i < elemNum; ++i )
+            for ( int i = 0; i < ElemNum; ++i )
             {
                 m_VecArray[ i ] -= rhs.m_VecArray[ i ];
             }
@@ -209,7 +221,7 @@ namespace ZGE
 
         const Vector& operator -= ( const T& rhs )
         {
-            for ( int i = 0; i < elemNum; ++i )
+            for ( int i = 0; i < ElemNum; ++i )
             {
                 m_VecArray[ i ] -= rhs;
             }
@@ -218,7 +230,7 @@ namespace ZGE
 
         const Vector& operator *= ( const Vector& rhs )
         {
-            for ( int i = 0; i < elemNum; ++i )
+            for ( int i = 0; i < ElemNum; ++i )
             {
                 m_VecArray[ i ] *= rhs.m_VecArray[ i ];
             }
@@ -227,7 +239,7 @@ namespace ZGE
 
         const Vector& operator *= ( const T& rhs )
         {
-            for ( int i = 0; i < elemNum; ++i )
+            for ( int i = 0; i < ElemNum; ++i )
             {
                 m_VecArray[ i ] *= rhs;
             }
@@ -249,7 +261,7 @@ namespace ZGE
 
         const Vector& operator /= ( const Vector& rhs )
         {
-            for ( int i = 0; i < elemNum; ++i )
+            for ( int i = 0; i < ElemNum; ++i )
             {
                 m_VecArray[ i ] /= rhs.m_VecArray[ i ];
             }
@@ -258,7 +270,7 @@ namespace ZGE
 
         const Vector& operator /= ( const T& rhs )
         {
-            for ( int i = 0; i < elemNum; ++i )
+            for ( int i = 0; i < ElemNum; ++i )
             {
                 m_VecArray[ i ] /= rhs;
             }
@@ -281,7 +293,7 @@ namespace ZGE
         return retrunVector;
     }
     */
-    
+    /*
     template< typename T >
     class Vector3 : public Vector< T, 3 >
     {
@@ -347,6 +359,7 @@ namespace ZGE
             m_VecArray[ 3 ] = rhs.w ();
         }
     };
+    */
 
     template< typename T, size_t N >
     static F32 Length ( const Vector< T, N >& vec )
@@ -396,15 +409,59 @@ namespace ZGE
         return dot;
     }
 
+    
     class VectorHelper
     {
+    public:
 
+        template< typename T, size_t N, typename... Args >
+        static void AssignValue ( Vector< T, N >& vector, const Args&... restVal )
+        {
+            return RecursiveAssignValue ( vector, 0, restVal... );
+        }
+
+        template< typename T, size_t N, typename U, typename... Args >
+        static void RecursiveAssignValue ( Vector< T, N >& vector, size_t position, const U& val, const Args&... restVal )
+        {
+            if ( position < Vector< T, N >::ElemNum )
+            {
+                vector.m_VecArray[ position ] = val;
+                return RecursiveAssignValue ( vector, position + 1, restVal... );
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        template< typename T, size_t N, typename U >
+        static void RecursiveAssignValue ( Vector< T, N >& vector, size_t position, const U& val )
+        {
+            if ( position < Vector< T, N >::ElemNum )
+            {
+                vector.m_VecArray[ position ] = val;
+                ++position;
+                while ( position < Vector< T, N >::ElemNum )
+                {
+                    vector.m_VecArray[ position ] = T ( 0 );
+                    ++position;
+                }
+            }
+        }
     };
 
+    /*
     typedef Vector3< I32 > Vector3I;
     typedef Vector3< F32 > Vector3f;
     typedef Vector4< I32 > Vector4I;
     typedef Vector4< F32 > Vector4f;
+    */
+    typedef Vector <I32, 2 > Vector2i;
+    typedef Vector< F32, 2 > Vector2f;
+    typedef Vector< I32, 3 > Vector3i;
+    typedef Vector< F32, 3 > Vector3f;
+    typedef Vector< I32, 4 > Vector4i;
+    typedef Vector< F32, 4 > Vector4f;
 }
 
 #endif

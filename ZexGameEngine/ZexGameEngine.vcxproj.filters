@@ -123,6 +123,9 @@
     <ClInclude Include="include\UI\UIObject.h">
       <Filter>头文件\UI</Filter>
     </ClInclude>
+    <ClInclude Include="include\UI\UIRect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">

@@ -87,7 +87,7 @@ namespace ZGE
         m_Index = !m_Index;
         m_Actions[ m_Index ] = m_Action;
         m_Offset = m_OffsetState;
-        m_OffsetState = Vector3I ( 0, 0, 0 );
+        m_OffsetState = Vector3i ( 0, 0, 0 );
     }
 
     WInputKeyboard::WInputKeyboard ( HWND hwnd, HANDLE device ) :

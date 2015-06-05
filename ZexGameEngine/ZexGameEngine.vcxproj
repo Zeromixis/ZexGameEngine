@@ -168,6 +168,7 @@
     <ClInclude Include="include\Test\LightningTest.h" />
     <ClInclude Include="include\Timer.h" />
     <ClInclude Include="include\UI\UIObject.h" />
+    <ClInclude Include="include\UI\UIRect.h" />
     <ClInclude Include="include\Util.h" />
   </ItemGroup>
   <ItemGroup>

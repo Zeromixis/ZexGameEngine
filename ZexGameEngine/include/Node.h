@@ -6,11 +6,12 @@
 
 namespace ZGE
 {
-	template < typename ElementType >
+	template < typename Element_Type >
     class NodeBase
     {
-		typedef ElementType  ET;
     public:
+		typedef Element_Type ElementType;
+
 		NodeBase ()
 			: m_Parent ( nullptr )
 		{
@@ -19,7 +20,6 @@ namespace ZGE
 
 		virtual ~NodeBase ()
 		{
-
 			for ( auto &child : m_Childs )
 			{
 				delete[] child;
@@ -51,7 +51,10 @@ namespace ZGE
 		ElementType				m_Position;
 		ElementType				m_Rotation;
 		ElementType				m_Scale;
-		std::set< NodeBase * > m_Childs;
+		std::set< NodeBase * >  m_Childs;
     };
+
+    typedef NodeBase< Vector2f > Node2D;
+    typedef NodeBase< Vector3f > Node3D;
 }
 #endif // _NODE_H_
