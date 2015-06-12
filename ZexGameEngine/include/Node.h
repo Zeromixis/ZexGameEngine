@@ -26,27 +26,47 @@ namespace ZGE
 			}
 		}
 
-		virtual NodeBase *& Parent ()
+		NodeBase *& Parent ()
 		{
 			return m_Parent;
 		}
 
-		virtual ElementType & Position ()
+		const NodeBase *& Parent () const
+		{
+			return m_Parent;
+		}
+
+		ElementType & Position ()
 		{
 			return m_Position;
 		}
 
-		virtual ElementType & Rotation ()
+		const ElementType & Position () const
+		{
+			return m_Position;
+		}
+
+		ElementType & Rotation ()
 		{
 			return m_Rotation;
 		}
 
-		virtual ElementType & Scale ()
+		const ElementType & Rotation () const
+		{
+			return m_Rotation;
+		}
+
+		ElementType & Scale ()
 		{
 			return m_Scale;
 		}
 
-	private:
+		const ElementType & Scale () const
+		{
+			return m_Scale;
+		}
+
+	protected:
 		NodeBase*				m_Parent;
 		ElementType				m_Position;
 		ElementType				m_Rotation;

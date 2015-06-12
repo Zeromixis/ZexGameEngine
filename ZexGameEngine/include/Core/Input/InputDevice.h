@@ -40,6 +40,7 @@ namespace ZGE
     typedef std::pair< U32, std::shared_ptr< const InputDeviceStatus > > InputAction;
 
     typedef boost::signals2::signal< void ( const InputAction & action ) > ActionSignal;
+
     typedef std::shared_ptr< ActionSignal > ActionSignalPtr;
 
     class InputDevice
@@ -57,6 +58,7 @@ namespace ZGE
 
         virtual void Update () = 0;
 
+		// First type is Self-defined Enum, Second type is Engine-defined Enum.
         virtual void OnActionMap ( const std::map< U32, U32 > &actionMap, const ActionSignalPtr &signal ) = 0;
 
     protected:
@@ -82,6 +84,11 @@ namespace ZGE
     {
     public:
         enum { ACTIONUMS = MouseAction::MA_ACTIONEND - MouseAction::MA_ACTIONSTART - 1 };
+
+		InputMouse ()
+		{
+			m_Status.reset ( new InputMouseStatus );
+		}
 
         virtual ~InputMouse () {};
 
@@ -138,6 +145,11 @@ namespace ZGE
     {
     public:
         enum { ACTIONUMS = KeyboardAction::KA_ACTIONEND - KeyboardAction::KA_ACTIONSTART - 1 };
+
+		InputKeyboard ()
+		{
+			m_Status.reset ( new InputKeyboard );
+		}
 
         virtual ~InputKeyboard () {};
 

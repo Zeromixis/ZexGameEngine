@@ -40,11 +40,6 @@ namespace ZGE
 
             if ( MOUSE_MOVE_RELATIVE == ( rawInput->data.mouse.usFlags & 1UL ) )
             {
-// 				if ( m_Action[ 3 ] == true )
-// 				{
-// 					std::cout << "X Offset: " << rawInput->data.mouse.lLastX << std::endl;
-// 					std::cout << "Y Offset: " << rawInput->data.mouse.lLastY << std::endl;
-// 				}
                 m_OffsetState.x () = rawInput->data.mouse.lLastX;
                 m_OffsetState.y () = rawInput->data.mouse.lLastY;
             }
@@ -54,22 +49,17 @@ namespace ZGE
 
     void WInputMouse::OnActionMap ( const std::map< U32, U32 > &actionMap, const ActionSignalPtr &signal )
     {
-        if ( nullptr == m_Status )
-        {
-            InputMouseStatus *status = new InputMouseStatus;
-            status->Action = m_Actions[ m_Index ];
-            status->Offset = m_Offset;
-            m_Status.reset ( status );
-        }
-
-        
+		InputMouseStatus *status = static_cast< InputMouseStatus * > ( m_Status.get () );
+		status->Action = m_Actions[ m_Index ];
+		status->Offset = m_Offset;
+		
         // Check ActionMap
         for ( auto element : actionMap )
         {
             // Check if it is the Mouse Action
             if ( element.second > MA_ACTIONSTART && element.second < MA_ACTIONEND )
             {
-                if ( IsButtonDown ( static_cast< MouseAction >( element.second ) ) )
+				if ( IsButtonDown ( static_cast< MouseAction >( element.second ) ) || IsButtonUp ( static_cast< MouseAction >( element.second ) ) )
                 {
                     InputAction inputAction;
                     inputAction.first = element.first;
@@ -120,12 +110,8 @@ namespace ZGE
 
     void WInputKeyboard::OnActionMap ( const std::map< U32, U32 > &actionMap, const ActionSignalPtr &signal )
     {
-        if ( nullptr == m_Status )
-        {
-            InputKeyboardStatus *status = new InputKeyboardStatus;
-            status->Action = m_Actions[ m_Index ];
-            m_Status.reset ( status );
-        }
+		InputKeyboardStatus *status = static_cast< InputKeyboardStatus * > ( m_Status.get () );
+		status->Action = m_Actions[ m_Index ];
 
         // Check ActionMap
         for ( auto element : actionMap )
@@ -133,7 +119,7 @@ namespace ZGE
             // Check if it is the Mouse Action
             if ( element.second > KA_ACTIONSTART && element.second < KA_ACTIONEND )
             {
-                if ( IsKeyDown ( static_cast< KeyboardAction >( element.second ) ) )
+				if ( IsKeyDown ( static_cast< KeyboardAction >( element.second ) ) || IsKeyUp ( static_cast< KeyboardAction >( element.second ) ) )
                 {
                     InputAction inputAction;
                     inputAction.first = element.first;

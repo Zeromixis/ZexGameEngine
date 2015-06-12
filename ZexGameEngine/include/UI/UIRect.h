@@ -10,10 +10,36 @@ namespace ZGE
     class UIRect : public UIObject, public Node2D
     {
     public:
+		UIRect () {}
+
+		virtual ~UIRect () {}
+
+		I32 & Width ()
+		{
+			return m_Width;
+		}
+
+		const I32 & Width () const
+		{
+			return m_Width;
+		}
+
+		I32 & Height ()
+		{
+			return m_Height;
+		}
+
+		const I32 & Height () const
+		{
+			return m_Height;
+		}
+
+	protected:
+		I32 m_Width;
+		I32 m_Height;
 
     private:
-        virtual Node2D::ElementType & Rotation () override;
-        virtual Node2D::ElementType & Scale () override;
+
 
     };
 

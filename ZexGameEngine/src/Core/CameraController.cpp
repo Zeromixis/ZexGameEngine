@@ -14,6 +14,7 @@ namespace ZGE
         // Add ActionMap
         ActionSignalPtr signal = std::make_shared< ActionSignal > ();
         signal->connect ( boost::bind ( &CameraController::OnInput, this, _1 ) );
+
         std::map< U32, U32 > actionMap;
         actionMap[ RotateLeftRight ] = MA_X;
         actionMap[ RotateUpDown ]    = MA_Y;
@@ -23,7 +24,7 @@ namespace ZGE
         actionMap[ Right ]           = KA_D;
 
 		// Register ActionMap
-        //InputManager::GetInstance ()->AddActionMap ( actionMap, signal );
+        InputManager::GetInstance ()->AddActionMap ( actionMap, signal );
     }
 
     CameraController::CameraController ( const CameraController& rhs )
