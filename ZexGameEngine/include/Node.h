@@ -46,6 +46,19 @@ namespace ZGE
 			return m_Position;
 		}
 
+		const ElementType GlobalPosition () const
+		{
+			ElementType result = Position ();
+			NodeBase *parent = Parent ();
+			while ( nullptr != parent )
+			{
+				result += parent->Position ();
+				parent = parent->Parent ();
+			}
+			return result;
+		}
+
+		/*
 		ElementType & Rotation ()
 		{
 			return m_Rotation;
@@ -55,6 +68,19 @@ namespace ZGE
 		{
 			return m_Rotation;
 		}
+
+		const ElementType GlobalRotation () const
+		{
+			ElementType result = Rotation ();
+			NodeBase *parent = Parent ();
+			while ( nullptr != parent )
+			{
+				result += parent->Rotation ();
+				parent = parent->Parent ();
+			}
+			return result;
+		}
+		*/
 
 		ElementType & Scale ()
 		{
@@ -66,12 +92,27 @@ namespace ZGE
 			return m_Scale;
 		}
 
+		const ElementType GlobalScale () const
+		{
+			ElementType result = Scale ();
+			NodeBase *parent = Parent ();
+			while ( nullptr != parent )
+			{
+				result *= parent->Scale ();
+				parent = parent->Parent ();
+			}
+			return result;
+		}
+
 	protected:
 		NodeBase*				m_Parent;
 		ElementType				m_Position;
-		ElementType				m_Rotation;
+		//ElementType				m_Rotation;
 		ElementType				m_Scale;
 		std::set< NodeBase * >  m_Childs;
+
+		// Maybe be used in the future.
+		//bool					m_Dirty;
     };
 
     typedef NodeBase< Vector2f > Node2D;

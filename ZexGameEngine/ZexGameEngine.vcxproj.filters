@@ -123,7 +123,13 @@
     <ClInclude Include="include\UI\UIObject.h">
       <Filter>头文件\UI</Filter>
     </ClInclude>
-    <ClInclude Include="include\UI\UIRect.h">
+    <ClInclude Include="include\UI\UIComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\UI\UIEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\UI\UIRoot.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
