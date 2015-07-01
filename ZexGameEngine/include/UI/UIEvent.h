@@ -8,8 +8,20 @@ namespace ZGE
 {
 	struct UIEvent
 	{
-		UIEvent ();
+        UIEvent ()
+            : m_IsCatched ( true )
+        {
+            
+        }
+
 		virtual ~UIEvent ();
+
+        void Catch () { m_IsCatched = true; }
+
+        bool IsCatched () const { return m_IsCatched; }
+
+    private:
+        bool m_IsCatched;
 	};
 
 	struct UIMouseEvent : public UIEvent

@@ -28,7 +28,7 @@ namespace ZGE
 
 		std::array< bool, 3 > m_ButtonState;
 
-        std::array< bool, ACTIONUMS > m_Action;
+        std::array< bool, MOUSEACTION_NUM > m_Action;
     };
 
     class WInputKeyboard : public InputKeyboard
@@ -47,7 +47,7 @@ namespace ZGE
 
         HANDLE m_Device;
 
-        std::array< bool, ACTIONUMS > m_Action;
+        std::array< bool, KEYBOARDACTION_NUM > m_Action;
     };
 }
 

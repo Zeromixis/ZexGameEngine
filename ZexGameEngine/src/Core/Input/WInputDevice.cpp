@@ -1,6 +1,7 @@
 #include "Core/Input/WInputDevice.h"
 #include <iostream>
 #include <xutility>
+#include "Core/Input/InputDeviceStatus.h"
 
 namespace ZGE
 {

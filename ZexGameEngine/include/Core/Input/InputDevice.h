@@ -6,7 +6,6 @@
 #include "External/boost/signals2.hpp"
 #include "DataDef.h"
 #include "Math/Vector.h"
-#include "Core/Input/InputDeviceStatus.h"
 
 namespace ZGE
 {
@@ -22,6 +21,10 @@ namespace ZGE
         KA_ACTIONEND,
     };
 
+    #define KEYBOARDACTION_TO_INDEX(action) ( action - KA_ACTIONSTART - 1 )
+
+    #define KEYBOARDACTION_NUM ( KA_ACTIONEND - KA_ACTIONSTART - 1 )
+
     enum MouseAction
     {
         MA_ACTIONSTART = 0x100,
@@ -34,6 +37,10 @@ namespace ZGE
 
         MA_ACTIONEND,
     };
+
+    #define MOUSEACTION_TO_INDEX(action) ( action - MA_ACTIONSTART - 1 )
+
+    #define MOUSEACTION_NUM ( MA_ACTIONEND - MA_ACTIONSTART - 1 )
 
     struct InputDeviceStatus;
 
@@ -68,27 +75,10 @@ namespace ZGE
 
     };
 
-    struct InputDeviceStatus
-    {
-        virtual ~InputDeviceStatus ()
-        {
-
-        }
-
-        virtual InputDevice::InputDeviceType DeviceType () const = 0;
-    };
-
-
-
     class InputMouse : public InputDevice
     {
     public:
-        enum { ACTIONUMS = MouseAction::MA_ACTIONEND - MouseAction::MA_ACTIONSTART - 1 };
-
-		InputMouse ()
-		{
-			m_Status.reset ( new InputMouseStatus );
-		}
+        InputMouse ();
 
         virtual ~InputMouse () {};
 
@@ -122,34 +112,41 @@ namespace ZGE
             return m_Actions[ m_Index ][ MA_MBUTTON - MA_ACTIONSTART - 1 ];
         }
 
-        bool IsButtonDown ( const MouseAction& action ) const
+        bool IsButtonDown ( const MouseAction &action ) const
         {
             I32 i = action - MouseAction::MA_ACTIONSTART - 1;
             return m_Actions[ m_Index ][ i ];
         }
 
-        bool IsButtonUp ( const MouseAction& action ) const
+        bool IsButtonJustDown ( const MouseAction &action ) const
+        {
+            I32 i = action - MouseAction::MA_ACTIONSTART - 1;
+            return ( m_Actions[ m_Index ][ i ] && !m_Actions[ !m_Index ][ i ] );
+        }
+
+        bool IsButtonUp ( const MouseAction &action ) const
         {
             I32 i = action - MouseAction::MA_ACTIONSTART - 1;
             return !m_Actions[ m_Index ][ i ];
+        }
+
+        bool IsButtonJustUp ( const MouseAction &action ) const
+        {
+            I32 i = action - MouseAction::MA_ACTIONSTART - 1;
+            return ( !m_Actions[ m_Index ][ i ] && m_Actions[ !m_Index ][ i ] );
         }
 
     protected:
         Vector3i m_Offset;
 
         // L, R, M
-        std::array< std::array< bool, ACTIONUMS >, 2 > m_Actions;
+        std::array< std::array< bool, MOUSEACTION_NUM >, 2 > m_Actions;
     };
 
     class InputKeyboard : public InputDevice
     {
     public:
-        enum { ACTIONUMS = KeyboardAction::KA_ACTIONEND - KeyboardAction::KA_ACTIONSTART - 1 };
-
-		InputKeyboard ()
-		{
-			m_Status.reset ( new InputKeyboard );
-		}
+        InputKeyboard ();
 
         virtual ~InputKeyboard () {};
 
@@ -158,44 +155,34 @@ namespace ZGE
             return InputDevice::IDT_KEYBOARD;
         }
 
-        bool IsKeyDown ( const KeyboardAction& action ) const
+        bool IsKeyDown ( const KeyboardAction &action ) const
         {
             I32 i = action - KeyboardAction::KA_ACTIONSTART - 1;
             return m_Actions[ m_Index ][ i ];
         }
 
-        bool IsKeyUp ( const KeyboardAction& action ) const
+        bool IsKeyJustDown ( const KeyboardAction &action ) const
+        {
+            I32 i = action - KeyboardAction::KA_ACTIONSTART - 1;
+            return ( m_Actions[ m_Index ][ i ] && !m_Actions[ !m_Index ][ i ] );
+        }
+
+        bool IsKeyUp ( const KeyboardAction &action ) const
         {
             I32 i = action - KeyboardAction::KA_ACTIONSTART - 1;
             return !m_Actions[ m_Index ][ i ];
         }
 
+        bool IsKeyJustUp ( const KeyboardAction &action ) const
+        {
+            I32 i = action - KeyboardAction::KA_ACTIONSTART - 1;
+            return ( !m_Actions[ m_Index ][ i ] && m_Actions[ !m_Index ][ i ] );
+        }
+
     protected:
         // W, S, A, D
-        std::array< std::array< bool, ACTIONUMS >, 2 > m_Actions;
+        std::array< std::array< bool, KEYBOARDACTION_NUM >, 2 > m_Actions;
 
-    };
-
-
-    struct InputMouseStatus : public InputDeviceStatus
-    {
-        Vector3i Offset;
-        std::array< bool, InputMouse::ACTIONUMS > Action;
-
-        virtual InputDevice::InputDeviceType DeviceType ( ) const
-        {
-            return InputDevice::IDT_MOUSE;
-        }
-    };
-
-    struct InputKeyboardStatus : public InputDeviceStatus
-    {
-        std::array< bool, InputKeyboard::ACTIONUMS > Action;
-
-        virtual InputDevice::InputDeviceType DeviceType () const
-        {
-            return InputDevice::IDT_KEYBOARD;
-        }
     };
 }
 

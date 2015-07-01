@@ -189,6 +189,7 @@
     <ClCompile Include="src\RenderEngine\RenderEngine.cpp" />
     <ClCompile Include="src\RenderEngine\ShaderObject.cpp" />
     <ClCompile Include="src\Timer.cpp" />
+    <ClCompile Include="src\UI\UIRoot.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

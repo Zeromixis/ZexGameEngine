@@ -124,13 +124,13 @@
       <Filter>头文件\UI</Filter>
     </ClInclude>
     <ClInclude Include="include\UI\UIComponent.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\UI</Filter>
     </ClInclude>
     <ClInclude Include="include\UI\UIEvent.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\UI</Filter>
     </ClInclude>
     <ClInclude Include="include\UI\UIRoot.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="src\Core\ArrayBuffer.cpp">
       <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\UIRoot.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

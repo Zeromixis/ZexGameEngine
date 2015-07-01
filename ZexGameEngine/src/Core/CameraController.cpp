@@ -1,4 +1,5 @@
 #include "Core/CameraController.h"
+#include "Core/Input/InputDeviceStatus.h"
 
 namespace ZGE
 {
@@ -24,7 +25,7 @@ namespace ZGE
         actionMap[ Right ]           = KA_D;
 
 		// Register ActionMap
-        InputManager::GetInstance ()->AddActionMap ( actionMap, signal );
+        //InputManager::GetInstance ()->AddActionMap ( actionMap, signal );
     }
 
     CameraController::CameraController ( const CameraController& rhs )
@@ -94,11 +95,12 @@ namespace ZGE
     {
         const F32 length = 0.1f;
         const InputMouseStatus *status = dynamic_cast< const InputMouseStatus * >( action.second.get ( ) );
+   
         switch ( action.first )
         {
         case RotateLeftRight :
             // If Right Mouse Button is pressed
-            if ( status->Action[ MA_RBUTTON - MA_ACTIONSTART - 1 ] )
+            if ( status->Action[ MOUSEACTION_TO_INDEX ( MA_RBUTTON ) ] )
             {
                 Rotate ( 0.0f, 1.0f, 0.0f, length / 5.0f * status->Offset.x () );
             }
@@ -106,7 +108,7 @@ namespace ZGE
             break;
         case RotateUpDown :
             // If Right Mouse Button is pressed
-            if ( status->Action[ MA_RBUTTON - MA_ACTIONSTART - 1 ] )
+            if ( status->Action[ MOUSEACTION_TO_INDEX ( MA_RBUTTON ) ] )
             {
                 Rotate ( 1.0f, 0.0f, 0.0f, length / 5.0f * status->Offset.y () );
             }
@@ -128,5 +130,4 @@ namespace ZGE
             break;
         }
     }
-
 }

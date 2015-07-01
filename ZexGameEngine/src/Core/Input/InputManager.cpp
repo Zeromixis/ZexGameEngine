@@ -15,11 +15,11 @@ namespace ZGE
 
         UINT numDevices;
 
-        GetRawInputDeviceList ( nullptr, &numDevices, sizeof( RAWINPUTDEVICELIST ) );
+        GetRawInputDeviceList ( nullptr, &numDevices, sizeof ( RAWINPUTDEVICELIST ) );
 
         PRAWINPUTDEVICELIST rawInputDeviceList = new RAWINPUTDEVICELIST[ numDevices ];
 
-        GetRawInputDeviceList ( rawInputDeviceList, &numDevices, sizeof( RAWINPUTDEVICELIST ) );
+        GetRawInputDeviceList ( rawInputDeviceList, &numDevices, sizeof ( RAWINPUTDEVICELIST ) );
 
         RAWINPUTDEVICE rawInputDevice;
         rawInputDevice.usUsagePage = HID_USAGE_PAGE_GENERIC;
@@ -135,43 +135,74 @@ namespace ZGE
     }
 
     void InputManager::Update ()
-    {      
+    {
+        m_IsBlocked = false;
+
         for ( auto device : m_Devices )
         {
             device->Update ();
         }
 
-        for ( auto &action : m_ActionMaps )
+        for ( auto beginIter = m_ActionMaps.begin (); beginIter != m_ActionMaps.end (); )
         {
-            const std::map< U32, U32 > &actionMap = action.first;
-            for ( auto &element : actionMap )
+            auto endIter = std::find_if ( beginIter, m_ActionMaps.end (),
+                [ &beginIter ] ( const ActionTuple& a ) -> bool
             {
-                if ( element.second > KA_ACTIONSTART && element.second < KA_ACTIONEND )
+                if ( std::get< 2 > ( *beginIter ) != std::get< 2 > ( a ) )
                 {
-                    for ( auto device : m_Devices )
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+                );
+
+            for ( auto iter = beginIter; iter != endIter; ++iter )
+            {
+                const std::map< U32, U32 > &actionMap = std::get< 0 > ( *iter );
+                for ( auto &element : actionMap )
+                {
+                    if ( element.second > KA_ACTIONSTART && element.second < KA_ACTIONEND )
                     {
-                        if ( device->DeviceType () == InputDevice::IDT_KEYBOARD )
+                        for ( auto device : m_Devices )
                         {
-                            device->OnActionMap ( actionMap, action.second );
+                            if ( device->DeviceType () == InputDevice::IDT_KEYBOARD )
+                            {
+                                device->OnActionMap ( actionMap, std::get< 1 > ( *iter ) );
+                            }
                         }
                     }
-                }
-                else if ( element.second > MA_ACTIONSTART && element.second < MA_ACTIONEND )
-                {
-                    for ( auto device : m_Devices )
+                    else if ( element.second > MA_ACTIONSTART && element.second < MA_ACTIONEND )
                     {
-                        if ( device->DeviceType () == InputDevice::IDT_MOUSE )
+                        for ( auto device : m_Devices )
                         {
-                            device->OnActionMap ( actionMap, action.second );
+                            if ( device->DeviceType () == InputDevice::IDT_MOUSE )
+                            {
+                                device->OnActionMap ( actionMap, std::get< 1 > ( *iter ) );
+                            }
                         }
                     }
                 }
             }
-        } 
+
+            beginIter = endIter;
+            if ( true == m_IsBlocked )
+            {
+                break;
+            }
+        }
     }
 
-    void InputManager::AddActionMap ( std::map< U32, U32 > actionMap, ActionSignalPtr actionSignal )
+    void InputManager::AddActionMap ( std::map< U32, U32 > actionMap, ActionSignalPtr actionSignal, int priority )
     {
-        m_ActionMaps.push_back ( std::make_pair ( actionMap, actionSignal ) );
+        m_ActionMaps.push_back ( std::make_tuple ( actionMap, actionSignal, priority ) );
+        std::stable_sort ( m_ActionMaps.begin (), m_ActionMaps.end (),
+        [] ( const ActionTuple &lhs, const ActionTuple &rhs ) -> bool
+        {
+            return std::get< 2 > ( lhs ) < std::get< 2 > ( rhs );
+        }
+            );
     }
 }

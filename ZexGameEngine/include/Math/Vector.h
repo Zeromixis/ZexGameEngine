@@ -26,7 +26,7 @@ namespace ZGE
         boost::dividable2< Vector< T, N >, T,
         boost::equality_comparable< Vector< T, N > > > > > > > > > >
     {
-        BOOST_STATIC_ASSERT ( N != 0 );
+        BOOST_STATIC_ASSERT ( N > 0 );
         friend class VectorHelper;
     public:
         typedef T value_type;
@@ -38,14 +38,21 @@ namespace ZGE
             m_VecArray.fill ( T ( 0 ) );
         }
 
-        template < typename... Args >
-        explicit Vector ( const Args&... args )
+        template < typename xArg >
+        explicit Vector ( const xArg &x )
+        {
+            m_VecArray[ 0 ] = x;
+        }
+
+        template < typename xArg, typename... Args >
+        explicit Vector ( const xArg &x, const Args&... args )
         {
             /*
             m_VecArray[ 0 ] = val;
             VectorHelper::RecursiveAssignValue ( *this, 1, std::forward< Args > ( args )... );
             */
-            VectorHelper::AssignValue ( *this, 1, args... );
+            m_VecArray[ 0 ] = x;
+            VectorHelper::RecursiveAssignValue ( *this, 1, args... );
         }
         
         ~Vector ()

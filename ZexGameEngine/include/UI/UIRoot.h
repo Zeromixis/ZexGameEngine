@@ -18,8 +18,7 @@ namespace ZGE
         virtual ~UIRoot ();
 
     private:
-        // I think UIEvent must be first to deal.
-        void OnInputEvent ( const InputAction& inputAction );
+        void OnInputEvent ( const InputAction &inputAction );
 	};
 	
 

@@ -58,7 +58,6 @@ namespace ZGE
 			return result;
 		}
 
-		/*
 		ElementType & Rotation ()
 		{
 			return m_Rotation;
@@ -80,7 +79,6 @@ namespace ZGE
 			}
 			return result;
 		}
-		*/
 
 		ElementType & Scale ()
 		{
@@ -104,10 +102,20 @@ namespace ZGE
 			return result;
 		}
 
+        std::set< NodeBase * > & Childs ()
+        {
+            return m_Childs;
+        }
+
+        const std::set< NodeBase * > & Childs () const
+        {
+            return m_Childs;
+        }
+
 	protected:
 		NodeBase*				m_Parent;
 		ElementType				m_Position;
-		//ElementType				m_Rotation;
+		ElementType				m_Rotation;
 		ElementType				m_Scale;
 		std::set< NodeBase * >  m_Childs;
 
