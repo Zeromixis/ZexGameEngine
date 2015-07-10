@@ -4,9 +4,9 @@
 
 namespace ZGE
 {
-	ArrayBuffer::ArrayBuffer ( U32 size, ArrayBufferUsage usage )
+	ArrayBuffer::ArrayBuffer ( U32 byteSize, ArrayBufferUsage usage )
 		: m_BufferId ( 0 )
-		, m_Size ( size )
+		, m_Size ( byteSize )
 		, m_Usage ( usage )
 	{
 		glGenBuffers ( 1, &m_BufferId );
@@ -48,7 +48,7 @@ namespace ZGE
 		glBufferData ( TARGET, m_Size, m_DataPtr, m_Usage );
 	}
 
-	const U32& ArrayBuffer::BufferId ()
+	const U32& ArrayBuffer::BufferHandle ()
 	{
 		return m_BufferId;
 	}

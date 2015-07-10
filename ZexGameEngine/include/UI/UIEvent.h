@@ -1,7 +1,7 @@
 #ifndef _UI_UIEVENT_H_
 #define _UI_UIEVENT_H_
 
-#include "DataDef.h"
+#include "CorePrerequisites.h"
 #include "Math/Vector.h"
 
 namespace ZGE

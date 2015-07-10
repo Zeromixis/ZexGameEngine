@@ -3,7 +3,7 @@
 #if _WIN32
 
 #include <windows.h>
-#include "DataDef.h"
+#include "CorePrerequisites.h"
 #include <memory>
 #include "App/WindowWin.h"
 #include "App/Context.h"
@@ -35,8 +35,8 @@ int WINAPI WinMain ( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         }
         else
         {
+            TimeManager::GetInstance ()->Update ();
             InputManager::GetInstance ()->Update ();
-			TimeManager::GetInstance ()->Update ();
             Context::GetInstance ()->GetRenderEngine ()->Refresh ();
         }
     }

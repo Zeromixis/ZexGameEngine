@@ -2,7 +2,7 @@
 #define _CLOCK_H_
 
 #include "Pattern/Singleton.h"
-#include "DataDef.h"
+#include "CorePrerequisites.h"
 #include "Timer.h"
 
 namespace ZGE

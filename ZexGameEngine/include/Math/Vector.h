@@ -2,7 +2,7 @@
 #define _MATH_VECTOR_H_
 
 #include <array>
-#include "DataDef.h"
+#include "CorePrerequisites.h"
 #include "boost/operators.hpp"
 #include "boost/static_assert.hpp"
 #include <assert.h>
@@ -32,6 +32,7 @@ namespace ZGE
         typedef T value_type;
 
         enum { ElemNum = N };
+        enum { ElemSize = sizeof ( T ) };
 
         Vector ()
         {
@@ -40,12 +41,14 @@ namespace ZGE
 
         template < typename xArg >
         explicit Vector ( const xArg &x )
+            : Vector ()
         {
             m_VecArray[ 0 ] = x;
         }
 
         template < typename xArg, typename... Args >
         explicit Vector ( const xArg &x, const Args&... args )
+            : Vector ()
         {
             /*
             m_VecArray[ 0 ] = val;

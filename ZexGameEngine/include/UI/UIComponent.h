@@ -22,7 +22,10 @@ namespace ZGE
 
         }
 
-        virtual ~UIComponent ();
+        virtual ~UIComponent ()
+        {
+
+        }
 
         Vector2f & Position ()
         {

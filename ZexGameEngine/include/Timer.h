@@ -1,7 +1,7 @@
 #ifndef _TIMER_H_
 #define _TIMER_H_
 
-#include "DataDef.h"
+#include "CorePrerequisites.h"
 
 namespace ZGE
 {
@@ -12,12 +12,12 @@ namespace ZGE
         Timer ( bool isAutoStart );
         ~Timer ();
 
-        bool IsStopped ();
+        bool IsStopped () const;
         void Start ();
         void Stop ();
         void Reset ();
 
-        F64 GetElapsedTimeMS ();
+        const F64 GetElapsedTimeMS () const ;
 
     private:
         U64 m_StartTick;

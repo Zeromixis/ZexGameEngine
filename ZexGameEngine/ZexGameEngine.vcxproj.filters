@@ -54,9 +54,6 @@
     <ClInclude Include="include\Clock.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\DataDef.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Node.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -131,6 +128,12 @@
     </ClInclude>
     <ClInclude Include="include\UI\UIRoot.h">
       <Filter>头文件\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CorePrerequisites.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Test\RenderTextTest.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

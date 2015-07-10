@@ -27,11 +27,6 @@ namespace ZGE
 			return m_Uuid;
 		}
 
-		static bool operator == ( const UIObject &lhs, const UIObject &rhs )
-		{
-			return lhs.Uuid () == rhs.Uuid ();
-		}
-
 		static UIObject * FindUIObjectByUUID ( const boost::uuids::uuid &uuid )
 		{
 			UIObject *object = nullptr;
@@ -50,6 +45,11 @@ namespace ZGE
 
 		static std::map< boost::uuids::uuid, UIObject * > ObjectMap;
 	};
+
+    static bool operator == ( const UIObject &lhs, const UIObject &rhs )
+    {
+        return lhs.Uuid () == rhs.Uuid ();
+    }
 
 	std::map< boost::uuids::uuid, UIObject * > UIObject::ObjectMap;
 }

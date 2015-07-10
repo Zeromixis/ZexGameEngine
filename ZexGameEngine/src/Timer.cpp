@@ -22,7 +22,7 @@ namespace ZGE
 
     }
 
-    ZGE::F64 Timer::GetElapsedTimeMS ()
+    const ZGE::F64 Timer::GetElapsedTimeMS () const
     {
         if ( m_IsStart )
         {
@@ -37,7 +37,7 @@ namespace ZGE
         }
     }
 
-    bool Timer::IsStopped ()
+    bool Timer::IsStopped () const
     {
         return !m_IsStart;
     }

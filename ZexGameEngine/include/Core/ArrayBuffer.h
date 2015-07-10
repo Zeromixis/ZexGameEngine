@@ -2,7 +2,7 @@
 #define _CORE_VERTEXBUFFER_H_
 
 #include <memory>
-#include "DataDef.h"
+#include "CorePrerequisites.h"
 #include "External/boost/noncopyable.hpp"
 
 
@@ -19,15 +19,15 @@ namespace ZGE
 
 		//VertexBuffer ();
 
-		ArrayBuffer ( U32 size, ArrayBufferUsage usage );
+		ArrayBuffer ( U32 byteSize, ArrayBufferUsage usage );
 
 		~ArrayBuffer ();
 
 		//std::shared_ptr< void >& DataPointer ();
 
-		const U32& BufferId ();
+		const U32& BufferHandle ();
 
-		void CopyData ( void *src, U32 size );
+		void CopyData ( void *src, U32 byteSize );
 
 		void TransferData ();
 

@@ -1,7 +1,7 @@
 #ifndef _CORE_CAMERA_H_
 #define _CORE_CAMERA_H_
 
-#include "DataDef.h"
+#include "CorePrerequisites.h"
 #include "Math/Vector.h"
 #include "Math/Matrix.h"
 #include "Util.h"

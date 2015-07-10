@@ -7,8 +7,17 @@
 
 namespace ZGE
 {
-#define ZGE_UNICODE 1
-#if ZGE_UNICODE
+#ifdef _WIN32
+
+    #ifdef _UNICODE
+        #define ZGE_UNICODE
+    #else
+
+    #endif // _UNICODE
+
+#endif // _WIN32
+
+#ifdef ZGE_UNICODE
     typedef std::wstring String;
 #else
     typedef std::string String;

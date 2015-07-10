@@ -9,6 +9,11 @@ namespace ZGE
         m_Width = Context::GetInstance ()->GetWindowPtr ()->Width ();
     }
 
+    UIRoot::~UIRoot ()
+    {
+
+    }
+
     void UIRoot::OnInputEvent ( const InputAction &inputAction )
     {
 

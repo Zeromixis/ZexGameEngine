@@ -31,7 +31,7 @@ namespace ZGE
 			return m_Parent;
 		}
 
-		const NodeBase *& Parent () const
+        const NodeBase * const & Parent () const
 		{
 			return m_Parent;
 		}

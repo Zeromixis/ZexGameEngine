@@ -1,7 +1,7 @@
 #ifndef _MATRIX_H_
 #define _MATRIX_H_
 
-#include "DataDef.h"
+#include "CorePrerequisites.h"
 #include "Vector.h"
 
 
@@ -150,7 +150,8 @@ namespace ZGE
     };
 
     template < typename T >
-    class Matrix44 : public Matrix< T, 4, 4 >
+    class Matrix44 
+        : public Matrix< T, 4, 4 >
     {
     public:
         Matrix44 () 
@@ -179,6 +180,19 @@ namespace ZGE
             for ( size_t i = 0; i < 4 * 4; ++i )
             {
                 *( &m_Mat[ 0 ][ 0 ] + i ) = rhs[ i ];
+            }
+        }
+
+        void operator *= ( const Matrix44 &rhs )
+        {
+            for ( int i = 0; i < Row; ++i )
+            {
+                for ( int j = 0; j < Col; ++j )
+                {
+                    auto lhsRowVector = this->RowVector ( i );
+                    auto rhsColVector = rhs.ColVector ( j );
+                    ( *this ) ( i, j ) = Dot ( lhsRowVector, rhsColVector );
+                }
             }
         }
 

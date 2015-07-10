@@ -5,105 +5,11 @@
 #include <functional>
 #include "Test/LightningTest.h"
 
+
 namespace ZGE
 {
     RenderEngine::RenderEngine ()
     {
-		lightningTest.GenerateRandomPoints ();
-//         glGenVertexArrays ( 1, &m_VertexArray );
-//         glBindVertexArray ( m_VertexArray );
-// 
-// 
-//         // Bind Position Data
-// //         F32 positionData[] =
-// //         {
-// //             -0.8f, -0.8f, 0.5f,
-// //             0.8f, -0.8f, 0.5f,
-// //             0.0f, 0.8f, 0.5f,
-// //         };
-// 
-// 		F32 *positionData = new F32[ lightningTest.m_Points.size () * 3 ];
-// 		for ( size_t i = 0; i < lightningTest.m_Points.size (); ++i )
-// 		{
-// 			positionData[ i * 3 ] = lightningTest.m_Points[ i ].x ();
-// 			positionData[ i * 3 + 1 ] = lightningTest.m_Points[ i ].y ();
-// 			positionData[ i * 3 + 2 ] = lightningTest.m_Points[ i ].z ();
-// 		}
-// 
-//         glGenBuffers ( 1, &m_VertexBuffer );
-//         glBindBuffer ( GL_ARRAY_BUFFER, m_VertexBuffer );
-// 		glBufferData ( GL_ARRAY_BUFFER, lightningTest.m_Points.size () * 3 * 4, positionData, GL_STATIC_DRAW );
-// 
-// //         // Bind Color Data
-// //         F32 colorData[] =
-// //         {
-// //             1.0f, 0.0f, 0.0f,
-// //             0.0f, 1.0f, 0.0f, 
-// //             0.0f, 0.0f, 1.0f,
-// //         };
-// // 
-// //         glGenBuffers ( 1, &m_ColorBuffer );
-// //         glBindBuffer ( GL_ARRAY_BUFFER, m_ColorBuffer );
-// //         glBufferData ( GL_ARRAY_BUFFER, sizeof( colorData ), colorData, GL_STATIC_DRAW );
-// 
-// 
-// 		// Bind Tex Data
-// 		F32 *texData = new F32[ lightningTest.m_Points.size () * 2 ];
-// 		for ( size_t i = 0; i < lightningTest.m_Points.size (); ++i )
-// 		{
-// 			//positionData[ i ] = lightningTest.m_Points[ i ].x ();
-// 			if ( i % 2 == 0 )
-// 			{
-// 				texData[ i * 2 ] = 0.0f;
-// 			}
-// 			else
-// 			{
-// 				texData[ i * 2] = 1.0f;
-// 			}
-// 			texData[ i * 2 + 1 ] = 0.0f;
-// 		}
-// 
-// 		glGenBuffers ( 1, &m_TexCoordBuffer );
-// 		glBindBuffer ( GL_ARRAY_BUFFER, m_TexCoordBuffer );
-// 		glBufferData ( GL_ARRAY_BUFFER, lightningTest.m_Points.size () * 2 * 4, texData, GL_STATIC_DRAW );
-// 
-//         glEnableVertexAttribArray ( 0 );
-//         glBindBuffer ( GL_ARRAY_BUFFER, m_VertexBuffer );
-//         glVertexAttribPointer 
-//         (
-//             0,
-//             3,
-//             GL_FLOAT,
-//             GL_FALSE,
-//             0,
-//             0
-//         );
-// 
-// 		glEnableVertexAttribArray ( 1 );
-// 		glBindBuffer ( GL_ARRAY_BUFFER, m_TexCoordBuffer );
-// 		glVertexAttribPointer
-// 		(
-// 			1,
-// 			2,
-// 			GL_FLOAT,
-// 			GL_FALSE,
-// 			0,
-// 			0
-// 		);
-
-//         glEnableVertexAttribArray ( 1 );
-//         glBindBuffer ( GL_ARRAY_BUFFER, m_ColorBuffer );
-//         glVertexAttribPointer
-//         (
-//             1,
-//             3,
-//             GL_FLOAT,
-//             GL_FALSE,
-//             0,
-//             0
-//         );
-
-
         //Init Shader
         m_Shader = std::shared_ptr< ShaderObject > ( new ShaderObject ( ) );
         
@@ -124,6 +30,18 @@ namespace ZGE
         myCamera->SetView ( Vector3f ( 0.0f, 0.0f, -8.0f ), Vector3f ( 0.0f, 0.0f, 0.0f ) );
 
         m_CameraController = std::make_shared< CameraController > ( myCamera );
+
+        glProvokingVertex ( GL_FIRST_VERTEX_CONVENTION );
+
+        /*
+        glMatrixLoadIdentityEXT ( GL_PROJECTION );
+        glMatrixScalefEXT ( GL_PROJECTION, 1, -1, 0 );          // y方向取反
+        glMatrixTranslatefEXT ( GL_PROJECTION, 0.5f / window->Width (), 0.5f / window->Height (), 0 ); // 调整到D3D9的话还需要偏移0.5个像素
+        */
+
+        // The Triangle is clock-wise ( like DirectX )
+        glFrontFace ( GL_CW );
+        
     }
 
     RenderEngine::~RenderEngine ()
@@ -146,8 +64,8 @@ namespace ZGE
 		GLint textureUniform = glGetUniformLocation ( m_Shader->GLSLProgram (), "tex1D" );
 		glUniform1i ( textureUniform, 0 );
 
-		//glEnable ( GL_TEXTURE_1D );
-		lightningTest.Draw ();
+		// glEnable ( GL_TEXTURE_1D );
+		// lightningTest.Draw ();
 
         Context::GetInstance ()->GetWindowPtr ()->SwapBuffer ();
     }
@@ -160,6 +78,12 @@ namespace ZGE
     void RenderEngine::SetCamera ( const Camera &camera )
     {
         m_Camera = camera;
+    }
+
+    void RenderEngine::RenderChar ( U32 charCode, Vector2f position )
+    {
+
+        
     }
 
 }

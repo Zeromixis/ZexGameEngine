@@ -53,7 +53,7 @@ namespace ZGE
 			m_pTexCoordBuffer->CopyData ( texData, m_Points.size () * 2 * 4 );
 			m_pTexCoordBuffer->TransferData ();
 
-			glBindBuffer ( GL_ARRAY_BUFFER, m_pVertexBuffer->BufferId () );
+			glBindBuffer ( GL_ARRAY_BUFFER, m_pVertexBuffer->BufferHandle () );
 			glEnableVertexAttribArray ( 0 );
 			glVertexAttribPointer
 			(
@@ -65,7 +65,7 @@ namespace ZGE
 				0
 			);
 
-			glBindBuffer ( GL_ARRAY_BUFFER, m_pTexCoordBuffer->BufferId () );
+			glBindBuffer ( GL_ARRAY_BUFFER, m_pTexCoordBuffer->BufferHandle () );
 			glEnableVertexAttribArray ( 1 );
 			glVertexAttribPointer
 			(
@@ -257,8 +257,8 @@ namespace ZGE
 				glBindTexture ( GL_TEXTURE_1D, m_LightingTexture );
 				glLineWidth ( 4 );
 				//glDrawArrays ( GL_LINES, 0, m_Points.size () );
-				glDrawElements ( GL_LINES, indices.size (), GL_UNSIGNED_INT, &indices[ 0 ] );
-				glLineWidth ( 1 );
+                glDrawElements ( GL_LINES, indices.size (), GL_UNSIGNED_INT, &indices[ 0 ] );
+                glLineWidth ( 1 );
 			}
 			else if ( m_Timer.GetElapsedTimeMS () - m_NowTime >= 6000.0f )
 			{

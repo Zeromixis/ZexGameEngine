@@ -4,7 +4,7 @@
 #include <array>
 #include <map>
 #include "External/boost/signals2.hpp"
-#include "DataDef.h"
+#include "CorePrerequisites.h"
 #include "Math/Vector.h"
 
 namespace ZGE

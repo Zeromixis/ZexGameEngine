@@ -1,7 +1,7 @@
 #ifndef _WINDOW_H_
 #define _WINDOW_H_
 
-#include "DataDef.h"
+#include "CorePrerequisites.h"
 
 namespace ZGE
 {

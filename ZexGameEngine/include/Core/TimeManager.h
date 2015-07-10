@@ -13,17 +13,17 @@ namespace ZGE
 	public:
 		~TimeManager ();
 
-		F32 Fps ()
+		const F32 & Fps () const
 		{
 			return m_Fps;
 		}
 
-		F32 FrameTimeMS ()
+		const F32 & FrameTimeMS () const
 		{
 			return m_FrameTime;
 		}
 
-		F64 RunningTimeMS ()
+		const F64 RunningTimeMS () const
 		{
 			m_RunningTimer.GetElapsedTimeMS ();
 		}
