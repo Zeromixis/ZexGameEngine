@@ -131,6 +131,13 @@ namespace ZGE
 
 
             // Init Shader
+            std::wstring vertexShaderPath = L"Shader/TextVS.vp";
+            std::wstring vertexShaderSource = LoadShaderSourceFromFile ( vertexShaderPath );
+            m_VertexShader.AttachShader ( ShaderObject::Vertex, ConvertWStringToString ( vertexShaderSource ) );
+
+            std::wstring fragmentShaderPath = L"Shader/TextFS.fp";
+            std::wstring fragmentShaderSource = LoadShaderSourceFromFile ( fragmentShaderPath );
+            m_FragmentShader.AttachShader ( ShaderObject::ShaderType::Fragment, ConvertWStringToString ( fragmentShaderSource ) );
 
 
         }

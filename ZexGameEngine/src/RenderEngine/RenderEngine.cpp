@@ -13,11 +13,11 @@ namespace ZGE
         //Init Shader
         m_Shader = std::shared_ptr< ShaderObject > ( new ShaderObject ( ) );
         
-        std::wstring vertexShaderPath = L"vertex.vp";
+        std::wstring vertexShaderPath = L"Shader/vertex.vp";
         std::wstring vertexShaderSource = LoadShaderSourceFromFile ( vertexShaderPath );        
         m_Shader->AttachShader ( ShaderObject::ShaderType::Vertex, ConvertWStringToString ( vertexShaderSource ) );
 
-        std::wstring fragmentShaderPath = L"frag.fp";
+        std::wstring fragmentShaderPath = L"Shader/frag.fp";
         std::wstring fragmentShaderSource = LoadShaderSourceFromFile ( fragmentShaderPath );
         m_Shader->AttachShader ( ShaderObject::ShaderType::Fragment, ConvertWStringToString ( fragmentShaderSource ) );
 
