@@ -9,20 +9,7 @@
 namespace ZGE
 {
     RenderEngine::RenderEngine ()
-    {
-        //Init Shader
-        m_Shader = std::shared_ptr< ShaderObject > ( new ShaderObject ( ) );
-        
-        std::wstring vertexShaderPath = L"Shader/vertex.vp";
-        std::wstring vertexShaderSource = LoadShaderSourceFromFile ( vertexShaderPath );        
-        m_Shader->AttachShader ( ShaderObject::ShaderType::Vertex, ConvertWStringToString ( vertexShaderSource ) );
-
-        std::wstring fragmentShaderPath = L"Shader/frag.fp";
-        std::wstring fragmentShaderSource = LoadShaderSourceFromFile ( fragmentShaderPath );
-        m_Shader->AttachShader ( ShaderObject::ShaderType::Fragment, ConvertWStringToString ( fragmentShaderSource ) );
-
-        m_Shader->LinkProgram ();
-
+	{
         Camera *myCamera = new Camera ();
         auto window = Context::GetInstance ()->GetWindowPtr ();
         F32 cameraAspect = ( F32 )( window->Width () ) / window->Height ();
@@ -41,6 +28,8 @@ namespace ZGE
 
         // The Triangle is clock-wise ( like DirectX )
         glFrontFace ( GL_CW );
+
+		renderTextTest = new RenderTextTest;
         
     }
 
@@ -51,21 +40,29 @@ namespace ZGE
 
     void RenderEngine::Refresh ()
     {
-        glClearColor ( 0.0f, 0.0f, 0.0f, 1.0f );
-        glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-        m_Shader->Bind ();
-		
-        GLuint mvpMatrixLoc = glGetUniformLocation ( m_Shader->GLSLProgram (), "mvpMatrix" );
-        auto modelMatrix = Float44::Identity ();
-        auto viewMatrix = m_CameraController->GetCamera()->ViewMatrix();
-        auto projMatrix = m_CameraController->GetCamera()->ProjMatrix();
-        auto mvpMatrix = modelMatrix * viewMatrix * projMatrix;
-        glUniformMatrix4fv ( mvpMatrixLoc, 1, GL_FALSE, static_cast< GLfloat * >( &mvpMatrix[ 0 ] ) );
-		GLint textureUniform = glGetUniformLocation ( m_Shader->GLSLProgram (), "tex1D" );
-		glUniform1i ( textureUniform, 0 );
+		glClearColor ( 0.0f, 0.0f, 0.0f, 1.0f );
+		glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+
+//         m_Shader->Bind ();
+// 		
+//         GLuint mvpMatrixLoc = glGetUniformLocation ( m_Shader->GLSLProgram (), "mvpMatrix" );
+//         auto modelMatrix = Float44::Identity ();
+//         auto viewMatrix = m_CameraController->GetCamera()->ViewMatrix();
+//         auto projMatrix = m_CameraController->GetCamera()->ProjMatrix();
+//         auto mvpMatrix = modelMatrix * viewMatrix * projMatrix;
+//         glUniformMatrix4fv ( mvpMatrixLoc, 1, GL_FALSE, static_cast< GLfloat * >( &mvpMatrix[ 0 ] ) );
+// 		GLint textureUniform = glGetUniformLocation ( m_Shader->GLSLProgram (), "tex1D" );
+// 		glUniform1i ( textureUniform, 0 );
+
+
 
 		// glEnable ( GL_TEXTURE_1D );
 		// lightningTest.Draw ();
+
+		renderTextTest->OnPreDraw ();
+		renderTextTest->OnDraw ();
+		renderTextTest->OnPostDraw ();
 
         Context::GetInstance ()->GetWindowPtr ()->SwapBuffer ();
     }

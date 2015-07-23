@@ -37,7 +37,7 @@ namespace ZGE
 		return m_Size;
 	}
 
-	void ArrayBuffer::CopyData ( void *src, U32 size )
+	void ArrayBuffer::SetData ( void *src, U32 size )
 	{
 		memcpy ( m_DataPtr, src, size );
 	}
@@ -48,7 +48,7 @@ namespace ZGE
 		glBufferData ( TARGET, m_Size, m_DataPtr, m_Usage );
 	}
 
-	const U32& ArrayBuffer::BufferHandle ()
+	const U32& ArrayBuffer::Handle ()
 	{
 		return m_BufferId;
 	}

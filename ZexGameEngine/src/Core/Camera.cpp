@@ -57,17 +57,19 @@ namespace ZGE
 
         // Set Projection Matrix
 
-        typedef Float44::value_type valType;
-        const valType h ( 1.0f / tan ( m_Fov / 2.0f ) );
-        const valType w ( h / m_Aspect );
-        const valType q ( m_FarPlane / ( m_FarPlane - m_NearPlane ) );
-        m_ProjMat = Float44
-        (
-            w, 0, 0,                0,
-            0, h, 0,                0,
-            0, 0, q,                1,
-            0, 0, -m_NearPlane * q, 0
-        );
+//         typedef Float44::value_type valType;
+//         const valType h ( 1.0f / tan ( m_Fov / 2.0f ) );
+//         const valType w ( h / m_Aspect );
+//         const valType q ( m_FarPlane / ( m_FarPlane - m_NearPlane ) );
+//         m_ProjMat = Float44
+//         (
+//             w, 0, 0,                0,
+//             0, h, 0,                0,
+//             0, 0, q,                1,
+//             0, 0, -m_NearPlane * q, 0
+//         );
+
+		m_ProjMat = PerspectiveFovLH ( m_Fov, m_Aspect, m_NearPlane, m_FarPlane );
 
         // OpenGL adjust
         m_ProjMat *= Float44

@@ -25,9 +25,9 @@ namespace ZGE
 
 		//std::shared_ptr< void >& DataPointer ();
 
-		const U32& BufferHandle ();
+		const U32& Handle ();
 
-		void CopyData ( void *src, U32 byteSize );
+		void SetData ( void *src, U32 byteSize );
 
 		void TransferData ();
 

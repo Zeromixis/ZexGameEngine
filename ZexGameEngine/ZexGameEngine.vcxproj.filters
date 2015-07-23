@@ -179,5 +179,8 @@
     <ClCompile Include="src\UI\UIRoot.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\Test\RenderTextTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

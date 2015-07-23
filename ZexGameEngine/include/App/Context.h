@@ -8,6 +8,8 @@
 
 namespace ZGE
 {
+	class RenderEngine;
+
     class Context : public Singleton< Context >
     {
         friend class Singleton< Context >;

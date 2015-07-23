@@ -140,10 +140,7 @@ namespace ZGE
             return resultMatrix;
         }
 
-        Matrix< T, Col, Row >& Transpose () const
-        {
-            Matrix< T, Col, Row > transposeMatrix;
-        }
+
 
     protected:
         Vector< Vector< T, Col >, Row > m_Mat;
@@ -162,10 +159,10 @@ namespace ZGE
 
         Matrix44
         (
-            T e00, T e01, T e02, T e03,
-            T e10, T e11, T e12, T e13,
-            T e20, T e21, T e22, T e23,
-            T e30, T e31, T e32, T e33
+            const T& e00, const T& e01, const T& e02, const T& e03,
+            const T& e10, const T& e11, const T& e12, const T& e13,
+            const T& e20, const T& e21, const T& e22, const T& e23,
+            const T& e30, const T& e31, const T& e32, const T& e33
         )
         : Matrix ()
         {
@@ -224,13 +221,13 @@ namespace ZGE
     typedef Matrix44< F32 > Float44;
 
     template < typename T >
-    bool Equal ( T const & lhs, T const & rhs )
+    bool Equal ( const T& lhs, const T& rhs )
     {
         return ( lhs == rhs );
     }
 
     template < typename T >
-    T Determinant ( Matrix44< T > const& rhs )
+	T Determinant ( const Matrix44< T >& rhs )
     {
         T const _3142_3241 ( rhs ( 2, 0 ) * rhs ( 3, 1 ) - rhs ( 2, 1 ) * rhs ( 3, 0 ) );
         T const _3143_3341 ( rhs ( 2, 0 ) * rhs ( 3, 2 ) - rhs ( 2, 2 ) * rhs ( 3, 0 ) );
@@ -246,7 +243,7 @@ namespace ZGE
     }
 
     template < typename T >
-    Matrix44< T > Inverse ( Matrix44< T > const& rhs )
+	Matrix44< T > Inverse ( const Matrix44< T >& rhs )
     {
         T const _2132_2231 ( rhs ( 1, 0 ) * rhs ( 2, 1 ) - rhs ( 1, 1 ) * rhs ( 2, 0 ) );
         T const _2133_2331 ( rhs ( 1, 0 ) * rhs ( 2, 2 ) - rhs ( 1, 2 ) * rhs ( 2, 0 ) );
@@ -302,6 +299,62 @@ namespace ZGE
         }
     }
 
+	template< typename T, size_t Row, size_t Col >
+	Matrix< T, Col, Row >& Transpose ( const Matrix< T, Row, Col >& rhs )
+	{
+		Matrix< T, Col, Row > ret;
+		for ( size_t i = 0; i < ret.Row; ++i )
+		{
+			for ( size_t j = 0; j < ret.Col; ++j )
+			{
+				ret ( i, j ) = rhs ( j, i );
+			}
+		}
+		return ret;
+	}
+
+	template < typename T >
+	Matrix44< T > OrthoLH ( const T& width, const T& height, const T& zNearPlane, const T& zFarPlane )
+	{
+		return Matrix44< T > 
+			(
+				2 / width,	0,			0,											0,
+				0,			2 / height, 0,											0,
+				0,			0,			1 / ( zFarPlane - zNearPlane ),				0,
+				0,			0,			zNearPlane / ( zNearPlane - zFarPlane ),	1
+			);
+	}
+
+	template < typename T >
+	Matrix44< T > OrthoOffCenterLH ( const T& left, const T& right, const T& bottom, const T& top, const T& zNearPlane, const T& zFarPlane )
+	{
+		const T q ( T ( 1 ) / ( zFarPlane - zNearPlane ) );
+		const T invWidth ( T ( 1 ) / ( right - left ) );
+		const T invHeight ( T ( 1 ) / ( top - bottom ) );
+
+		return Matrix44< T > 
+			(
+				invWidth + invWidth,			0,								0,					0,
+				0,								invHeight + invHeight,			0,					0,
+				0,								0,								q,					0,
+				-( left + right ) * invWidth,	-( top + bottom ) * invHeight,	-zNearPlane * q,	1
+			);
+	}
+
+	template < typename T >
+	Matrix44< T > PerspectiveFovLH ( const T& fov, const T& aspect, const T& zNearPlane, const T& zFarPlane )
+	{
+		const T h ( T ( 1 ) / tan ( fov / T ( 2 ) ) );
+		const T w ( h / aspect );
+		const T q ( zFarPlane / ( zFarPlane - zNearPlane ) );
+		return Matrix44< T >
+			(
+				w,	0,	0,					0,
+				0,	h,	0,					0,
+				0,	0,	q,					1,
+				0,	0,	-zNearPlane * q,	0
+			);
+	}
 
 } 
 

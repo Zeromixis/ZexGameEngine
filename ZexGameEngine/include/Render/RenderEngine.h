@@ -2,21 +2,19 @@
 #define _RENDER_RENDERENGINE_H_
 
 #include <memory>
-#include "Render/ShaderObject.h"
 #include "CorePrerequisites.h"
-#include "glloader/glloader.h"
+#include "Render/ShaderObject.h"
 #include "Core/Camera.h"
 #include "Core/CameraController.h"
 #include "Test/LightningTest.h"
 #include "Test/RenderTextTest.h"
 
-#include "External/freetype/include/ft2build.h"
-#include FT_FREETYPE_H
-
 namespace ZGE
 {
-    // Test OpenGL Render temporarily
-    
+	struct RenderTextTest;
+
+	// Test OpenGL Render temporarily
+
     class RenderEngine
     {
     public:
@@ -50,7 +48,7 @@ namespace ZGE
         GLuint m_ColorBuffer;
 
 		LightningTest lightningTest;
-
+		RenderTextTest *renderTextTest;
 
 
     };
