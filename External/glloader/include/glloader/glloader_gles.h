@@ -77,6 +77,14 @@ extern "C"
 #define GLES_ANGLE_program_binary 1
 #endif
 
+#ifndef GLES_ANGLE_robust_resource_initialization
+#define GLES_ANGLE_robust_resource_initialization 1
+#endif
+
+#ifndef GLES_ANGLE_texture_compression_dxt1
+#define GLES_ANGLE_texture_compression_dxt1 1
+#endif
+
 #ifndef GLES_ANGLE_texture_compression_dxt3
 #define GLES_ANGLE_texture_compression_dxt3 1
 #endif
@@ -87,6 +95,10 @@ extern "C"
 
 #ifndef GLES_ANGLE_texture_usage
 #define GLES_ANGLE_texture_usage 1
+#endif
+
+#ifndef GL_EXT_timer_query
+#define GL_EXT_timer_query 1
 #endif
 
 #ifndef GLES_ANGLE_translated_shader_source
@@ -165,6 +177,10 @@ extern "C"
 #define GLES_EXT_blend_minmax 1
 #endif
 
+#ifndef GLES_EXT_buffer_storage
+#define GLES_EXT_buffer_storage 1
+#endif
+
 #ifndef GLES_EXT_color_buffer_float
 #define GLES_EXT_color_buffer_float 1
 #endif
@@ -213,6 +229,10 @@ extern "C"
 #define GLES_EXT_draw_instanced 1
 #endif
 
+#ifndef GLES_EXT_float_blend
+#define GLES_EXT_float_blend 1
+#endif
+
 #ifndef GLES_EXT_frag_depth
 #define GLES_EXT_frag_depth 1
 #endif
@@ -253,12 +273,20 @@ extern "C"
 #define GLES_EXT_occlusion_query_boolean 1
 #endif
 
+#ifndef GLES_EXT_post_depth_coverage
+#define GLES_EXT_post_depth_coverage 1
+#endif
+
 #ifndef GLES_EXT_primitive_bounding_box
 #define GLES_EXT_primitive_bounding_box 1
 #endif
 
 #ifndef GLES_EXT_pvrtc_sRGB
 #define GLES_EXT_pvrtc_sRGB 1
+#endif
+
+#ifndef GLES_EXT_raster_multisample
+#define GLES_EXT_raster_multisample 1
 #endif
 
 #ifndef GLES_EXT_read_format_bgra
@@ -305,6 +333,10 @@ extern "C"
 #define GLES_EXT_shadow_samplers 1
 #endif
 
+#ifndef GLES_EXT_sparse_texture
+#define GLES_EXT_sparse_texture 1
+#endif
+
 #ifndef GLES_EXT_sRGB
 #define GLES_EXT_sRGB 1
 #endif
@@ -345,6 +377,10 @@ extern "C"
 #define GLES_EXT_texture_filter_anisotropic 1
 #endif
 
+#ifndef GLES_EXT_texture_filter_minmax
+#define GLES_EXT_texture_filter_minmax 1
+#endif
+
 #ifndef GLES_EXT_texture_format_BGRA8888
 #define GLES_EXT_texture_format_BGRA8888 1
 #endif
@@ -365,6 +401,14 @@ extern "C"
 #define GLES_EXT_texture_sRGB_decode 1
 #endif
 
+#ifndef GLES_EXT_texture_sRGB_R8
+#define GLES_EXT_texture_sRGB_R8 1
+#endif
+
+#ifndef GLES_EXT_texture_sRGB_RG8
+#define GLES_EXT_texture_sRGB_RG8 1
+#endif
+
 #ifndef GLES_EXT_texture_storage
 #define GLES_EXT_texture_storage 1
 #endif
@@ -379,6 +423,10 @@ extern "C"
 
 #ifndef GLES_EXT_unpack_subimage
 #define GLES_EXT_unpack_subimage 1
+#endif
+
+#ifndef GLES_EXT_YUV_target
+#define GLES_EXT_YUV_target 1
 #endif
 
 #ifndef GLES_FJ_shader_binary_GCCSO
@@ -433,6 +481,10 @@ extern "C"
 #define GLES_KHR_debug 1
 #endif
 
+#ifndef GLES_KHR_no_error
+#define GLES_KHR_no_error 1
+#endif
+
 #ifndef GLES_KHR_robustness
 #define GLES_KHR_robustness 1
 #endif
@@ -463,6 +515,10 @@ extern "C"
 
 #ifndef GLES_NV_conditional_render
 #define GLES_NV_conditional_render 1
+#endif
+
+#ifndef GLES_NV_conservative_raster
+#define GLES_NV_conservative_raster 1
 #endif
 
 #ifndef GLES_NV_copy_buffer
@@ -505,8 +561,24 @@ extern "C"
 #define GLES_NV_fence 1
 #endif
 
+#ifndef GLES_NV_fill_rectangle
+#define GLES_NV_fill_rectangle 1
+#endif
+
+#ifndef GLES_NV_fragment_coverage_to_color
+#define GLES_NV_fragment_coverage_to_color 1
+#endif
+
+#ifndef GLES_NV_fragment_shader_interlock
+#define GLES_NV_fragment_shader_interlock 1
+#endif
+
 #ifndef GLES_NV_framebuffer_blit
 #define GLES_NV_framebuffer_blit 1
+#endif
+
+#ifndef GLES_NV_framebuffer_mixed_samples
+#define GLES_NV_framebuffer_mixed_samples 1
 #endif
 
 #ifndef GLES_NV_framebuffer_multisample
@@ -515,6 +587,10 @@ extern "C"
 
 #ifndef GLES_NV_generate_mipmap_sRGB
 #define GLES_NV_generate_mipmap_sRGB 1
+#endif
+
+#ifndef GLES_NV_geometry_shader_passthrough
+#define GLES_NV_geometry_shader_passthrough 1
 #endif
 
 #ifndef GLES_NV_image_formats
@@ -541,8 +617,16 @@ extern "C"
 #define GLES_NV_path_rendering 1
 #endif
 
+#ifndef GLES_NV_path_rendering_shared_edge
+#define GLES_NV_path_rendering_shared_edge 1
+#endif
+
 #ifndef GLES_NV_pixel_buffer_object
 #define GLES_NV_pixel_buffer_object 1
+#endif
+
+#ifndef GLES_NV_polygon_mode
+#define GLES_NV_polygon_mode 1
 #endif
 
 #ifndef GLES_NV_read_buffer
@@ -559,6 +643,14 @@ extern "C"
 
 #ifndef GLES_NV_read_stencil
 #define GLES_NV_read_stencil 1
+#endif
+
+#ifndef GLES_NV_sample_locations
+#define GLES_NV_sample_locations 1
+#endif
+
+#ifndef GLES_NV_sample_mask_override_coverage
+#define GLES_NV_sample_mask_override_coverage 1
 #endif
 
 #ifndef GLES_NV_shader_noperspective_interpolation
@@ -605,6 +697,10 @@ extern "C"
 #define GLES_NV_viewport_array 1
 #endif
 
+#ifndef GLES_NV_viewport_array2
+#define GLES_NV_viewport_array2 1
+#endif
+
 #ifndef GLES_OES_blend_equation_separate
 #define GLES_OES_blend_equation_separate 1
 #endif
@@ -629,6 +725,10 @@ extern "C"
 #define GLES_OES_compressed_paletted_texture 1
 #endif
 
+#ifndef GLES_OES_copy_image
+#define GLES_OES_copy_image 1
+#endif
+
 #ifndef GLES_OES_depth24
 #define GLES_OES_depth24 1
 #endif
@@ -645,6 +745,14 @@ extern "C"
 #define GLES_OES_depth_texture_cube_map 1
 #endif
 
+#ifndef GLES_OES_draw_buffers_indexed
+#define GLES_OES_draw_buffers_indexed 1
+#endif
+
+#ifndef GLES_OES_draw_elements_base_vertex
+#define GLES_OES_draw_elements_base_vertex 1
+#endif
+
 #ifndef GLES_OES_draw_texture
 #define GLES_OES_draw_texture 1
 #endif
@@ -655,6 +763,10 @@ extern "C"
 
 #ifndef GLES_OES_EGL_image_external
 #define GLES_OES_EGL_image_external 1
+#endif
+
+#ifndef GLES_OES_EGL_image_external_essl3
+#define GLES_OES_EGL_image_external_essl3 1
 #endif
 
 #ifndef GLES_OES_element_index_uint
@@ -681,8 +793,16 @@ extern "C"
 #define GLES_OES_framebuffer_object 1
 #endif
 
+#ifndef GLES_OES_geometry_shader
+#define GLES_OES_geometry_shader 1
+#endif
+
 #ifndef GLES_OES_get_program_binary
 #define GLES_OES_get_program_binary 1
+#endif
+
+#ifndef GLES_OES_gpu_shader5
+#define GLES_OES_gpu_shader5 1
 #endif
 
 #ifndef GLES_OES_mapbuffer
@@ -707,6 +827,10 @@ extern "C"
 
 #ifndef GLES_OES_point_sprite
 #define GLES_OES_point_sprite 1
+#endif
+
+#ifndef GLES_OES_primitive_bounding_box
+#define GLES_OES_primitive_bounding_box 1
 #endif
 
 #ifndef GLES_OES_query_matrix
@@ -739,6 +863,10 @@ extern "C"
 
 #ifndef GL_OES_shader_image_atomic
 #define GL_OES_shader_image_atomic 1
+#endif
+
+#ifndef GLES_OES_shader_io_blocks
+#define GLES_OES_shader_io_blocks 1
 #endif
 
 #ifndef GL_OES_shader_multisample_interpolation
@@ -777,8 +905,20 @@ extern "C"
 #define GLES_OES_surfaceless_context 1
 #endif
 
+#ifndef GLES_OES_tessellation_shader
+#define GLES_OES_tessellation_shader 1
+#endif
+
 #ifndef GLES_OES_texture_3D
 #define GLES_OES_texture_3D 1
+#endif
+
+#ifndef GLES_OES_texture_border_clamp
+#define GLES_OES_texture_border_clamp 1
+#endif
+
+#ifndef GLES_OES_texture_buffer
+#define GLES_OES_texture_buffer 1
 #endif
 
 #ifndef GLES_OES_texture_compression_astc
@@ -787,6 +927,10 @@ extern "C"
 
 #ifndef GLES_OES_texture_cube_map
 #define GLES_OES_texture_cube_map 1
+#endif
+
+#ifndef GLES_OES_texture_cube_map_array
+#define GLES_OES_texture_cube_map_array 1
 #endif
 
 #ifndef GLES_OES_texture_env_crossbar
@@ -825,6 +969,10 @@ extern "C"
 #define GL_OES_texture_storage_multisample_2d_array 1
 #endif
 
+#ifndef GLES_OES_texture_view
+#define GLES_OES_texture_view 1
+#endif
+
 #ifndef GLES_OES_vertex_array_object
 #define GLES_OES_vertex_array_object 1
 #endif
@@ -835,6 +983,14 @@ extern "C"
 
 #ifndef GLES_OES_vertex_type_10_10_10_2
 #define GLES_OES_vertex_type_10_10_10_2 1
+#endif
+
+#ifndef GLES_OVR_multiview
+#define GLES_OVR_multiview 1
+#endif
+
+#ifndef GLES_OVR_multiview2
+#define GLES_OVR_multiview2 1
 #endif
 
 #ifndef GLES_QCOM_binning_control
@@ -984,6 +1140,19 @@ extern "C"
 
 #endif
 
+#ifdef GLES_ANGLE_robust_resource_initialization
+
+#define GL_CONTEXT_ROBUST_RESOURCE_INITIALIZATION_ANGLE 0x93A7
+
+#endif
+
+#ifdef GLES_ANGLE_texture_compression_dxt1
+
+#define GL_COMPRESSED_RGB_S3TC_DXT1_ANGLE 0x83F0
+#define GL_COMPRESSED_RGBA_S3TC_DXT1_ANGLE 0x83F1
+
+#endif
+
 #ifdef GLES_ANGLE_texture_compression_dxt3
 
 #define GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE 0x83F2
@@ -1000,6 +1169,17 @@ extern "C"
 
 #define GL_TEXTURE_USAGE_ANGLE 0x93A2
 #define GL_FRAMEBUFFER_ATTACHMENT_ANGLE 0x93A3
+
+#endif
+
+#ifdef GL_EXT_timer_query
+
+#define GL_QUERY_COUNTER_BITS_ANGLE 0x8864
+#define GL_CURRENT_QUERY_ANGLE 0x8865
+#define GL_QUERY_RESULT_ANGLE 0x8866
+#define GL_QUERY_RESULT_AVAILABLE_ANGLE 0x8867
+#define GL_TIME_ELAPSED_ANGLE 0x88BF
+#define GL_TIMESTAMP_ANGLE 0x8E28
 
 #endif
 
@@ -1124,6 +1304,20 @@ extern "C"
 #define GL_MIN_EXT 0x8007
 #define GL_MAX_EXT 0x8008
 #define GL_FUNC_ADD_EXT 0x8006
+
+#endif
+
+#ifdef GLES_EXT_buffer_storage
+
+#define GL_MAP_READ_BIT 0x0001
+#define GL_MAP_WRITE_BIT 0x0002
+#define GL_MAP_PERSISTENT_BIT_EXT 0x0040
+#define GL_MAP_COHERENT_BIT_EXT 0x0080
+#define GL_DYNAMIC_STORAGE_BIT_EXT 0x0100
+#define GL_CLIENT_STORAGE_BIT_EXT 0x0200
+#define GL_BUFFER_IMMUTABLE_STORAGE_EXT 0x821F
+#define GL_BUFFER_STORAGE_FLAGS_EXT 0x8220
+#define GL_CLIENT_MAPPED_BUFFER_BARRIER_BIT_EXT 0x00004000
 
 #endif
 
@@ -1288,6 +1482,17 @@ extern "C"
 
 #endif
 
+#ifdef GLES_EXT_raster_multisample
+
+#define GL_RASTER_MULTISAMPLE_EXT 0x9327
+#define GL_RASTER_SAMPLES_EXT 0x9328
+#define GL_MAX_RASTER_SAMPLES_EXT 0x9329
+#define GL_RASTER_FIXED_SAMPLE_LOCATIONS_EXT 0x932A
+#define GL_MULTISAMPLE_RASTERIZATION_ALLOWED_EXT 0x932B
+#define GL_EFFECTIVE_RASTER_SAMPLES_EXT 0x932C
+
+#endif
+
 #ifdef GLES_EXT_read_format_bgra
 
 #define GL_UNSIGNED_SHORT_4_4_4_4_REV_EXT 0x8365
@@ -1351,6 +1556,27 @@ extern "C"
 #define GL_TEXTURE_COMPARE_MODE_EXT 0x884C
 #define GL_TEXTURE_COMPARE_FUNC_EXT 0x884D
 #define GL_COMPARE_REF_TO_TEXTURE_EXT 0x884E
+
+#endif
+
+#ifdef GLES_EXT_sparse_texture
+
+#define GL_TEXTURE_SPARSE_EXT 0x91A6
+#define GL_VIRTUAL_PAGE_SIZE_INDEX_EXT 0x91A7
+#define GL_NUM_SPARSE_LEVELS_EXT 0x91AA
+#define GL_NUM_VIRTUAL_PAGE_SIZES_EXT 0x91A8
+#define GL_VIRTUAL_PAGE_SIZE_X_EXT 0x9195
+#define GL_VIRTUAL_PAGE_SIZE_Y_EXT 0x9196
+#define GL_VIRTUAL_PAGE_SIZE_Z_EXT 0x9197
+#define GL_TEXTURE_2D 0x0DE1
+#define GL_TEXTURE_2D_ARRAY 0x8C1A
+#define GL_TEXTURE_CUBE_MAP 0x8513
+#define GL_TEXTURE_CUBE_MAP_ARRAY_OES 0x9009
+#define GL_TEXTURE_3D 0x806F
+#define GL_MAX_SPARSE_TEXTURE_SIZE_EXT 0x9198
+#define GL_MAX_SPARSE_3D_TEXTURE_SIZE_EXT 0x9199
+#define GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS_EXT 0x919A
+#define GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_EXT 0x91A9
 
 #endif
 
@@ -1491,6 +1717,13 @@ extern "C"
 
 #endif
 
+#ifdef GLES_EXT_texture_filter_minmax
+
+#define GL_TEXTURE_REDUCTION_MODE_EXT 0x9366
+#define GL_WEIGHTED_AVERAGE_EXT 0x9367
+
+#endif
+
 #ifdef GLES_EXT_texture_format_BGRA8888
 
 #define GL_BGRA_EXT 0x80E1
@@ -1529,6 +1762,18 @@ extern "C"
 #define GL_TEXTURE_SRGB_DECODE_EXT 0x8A48
 #define GL_DECODE_EXT 0x8A49
 #define GL_SKIP_DECODE_EXT 0x8A4A
+
+#endif
+
+#ifdef GLES_EXT_texture_sRGB_R8
+
+#define GL_SR8_EXT 0x8FBD
+
+#endif
+
+#ifdef GLES_EXT_texture_sRGB_RG8
+
+#define GL_SRG8_EXT 0x8FBE
 
 #endif
 
@@ -1573,6 +1818,12 @@ extern "C"
 #define GL_UNPACK_ROW_LENGTH 0x0CF2
 #define GL_UNPACK_SKIP_ROWS 0x0CF3
 #define GL_UNPACK_SKIP_PIXELS 0x0CF4
+
+#endif
+
+#ifdef GLES_EXT_YUV_target
+
+#define GL_SAMPLER_EXTERNAL_2D_Y2Y_EXT 0x8BE7
 
 #endif
 
@@ -1706,46 +1957,52 @@ extern "C"
 
 #ifdef GLES_KHR_debug
 
-#define GL_DEBUG_OUTPUT_SYNCHRONOUS_KHR 0x8242
-#define GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_KHR 0x8243
-#define GL_DEBUG_CALLBACK_FUNCTION_KHR 0x8244
-#define GL_DEBUG_CALLBACK_USER_PARAM_KHR 0x8245
-#define GL_DEBUG_SOURCE_API_KHR 0x8246
-#define GL_DEBUG_SOURCE_WINDOW_SYSTEM_KHR 0x8247
-#define GL_DEBUG_SOURCE_SHADER_COMPILER_KHR 0x8248
-#define GL_DEBUG_SOURCE_THIRD_PARTY_KHR 0x8249
-#define GL_DEBUG_SOURCE_APPLICATION_KHR 0x824A
-#define GL_DEBUG_SOURCE_OTHER_KHR 0x824B
-#define GL_DEBUG_TYPE_ERROR_KHR 0x824C
-#define GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_KHR 0x824D
-#define GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR_KHR 0x824E
-#define GL_DEBUG_TYPE_PORTABILITY_KHR 0x824F
-#define GL_DEBUG_TYPE_PERFORMANCE_KHR 0x8250
-#define GL_DEBUG_TYPE_OTHER_KHR 0x8251
-#define GL_DEBUG_TYPE_MARKER_KHR 0x8268
-#define GL_DEBUG_TYPE_PUSH_GROUP_KHR 0x8269
-#define GL_DEBUG_TYPE_POP_GROUP_KHR 0x826A
-#define GL_DEBUG_SEVERITY_NOTIFICATION_KHR 0x826B
-#define GL_MAX_DEBUG_GROUP_STACK_DEPTH_KHR 0x826C
-#define GL_DEBUG_GROUP_STACK_DEPTH_KHR 0x826D
-#define GL_BUFFER_KHR 0x82E0
-#define GL_SHADER_KHR 0x82E1
-#define GL_PROGRAM_KHR 0x82E2
-#define GL_QUERY_KHR 0x82E3
-#define GL_PROGRAM_PIPELINE_KHR 0x82E4
-#define GL_SAMPLER_KHR 0x82E6
-#define GL_DISPLAY_LIST_KHR 0x82E7
-#define GL_MAX_LABEL_LENGTH_KHR 0x82E8
-#define GL_MAX_DEBUG_MESSAGE_LENGTH_KHR 0x9143
-#define GL_MAX_DEBUG_LOGGED_MESSAGES_KHR 0x9144
-#define GL_DEBUG_LOGGED_MESSAGES_KHR 0x9145
-#define GL_DEBUG_SEVERITY_HIGH_KHR 0x9146
-#define GL_DEBUG_SEVERITY_MEDIUM_KHR 0x9147
-#define GL_DEBUG_SEVERITY_LOW_KHR 0x9148
-#define GL_DEBUG_OUTPUT_KHR 0x92E0
-#define GL_CONTEXT_FLAG_DEBUG_BIT_KHR 0x00000002
-#define GL_STACK_UNDERFLOW_KHR 0x0504
-#define GL_STACK_OVERFLOW_KHR 0x0503
+#define GL_DEBUG_OUTPUT 0x92E0
+#define GL_DEBUG_OUTPUT_SYNCHRONOUS 0x8242
+#define GL_CONTEXT_FLAG_DEBUG_BIT 0x00000002
+#define GL_MAX_DEBUG_MESSAGE_LENGTH 0x9143
+#define GL_MAX_DEBUG_LOGGED_MESSAGES 0x9144
+#define GL_DEBUG_LOGGED_MESSAGES 0x9145
+#define GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH 0x8243
+#define GL_MAX_DEBUG_GROUP_STACK_DEPTH 0x826C
+#define GL_DEBUG_GROUP_STACK_DEPTH 0x826D
+#define GL_MAX_LABEL_LENGTH 0x82E8
+#define GL_DEBUG_CALLBACK_FUNCTION 0x8244
+#define GL_DEBUG_CALLBACK_USER_PARAM 0x8245
+#define GL_DEBUG_SOURCE_API 0x8246
+#define GL_DEBUG_SOURCE_WINDOW_SYSTEM 0x8247
+#define GL_DEBUG_SOURCE_SHADER_COMPILER 0x8248
+#define GL_DEBUG_SOURCE_THIRD_PARTY 0x8249
+#define GL_DEBUG_SOURCE_APPLICATION 0x824A
+#define GL_DEBUG_SOURCE_OTHER 0x824B
+#define GL_DEBUG_TYPE_ERROR 0x824C
+#define GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR 0x824D
+#define GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR 0x824E
+#define GL_DEBUG_TYPE_PORTABILITY 0x824F
+#define GL_DEBUG_TYPE_PERFORMANCE 0x8250
+#define GL_DEBUG_TYPE_OTHER 0x8251
+#define GL_DEBUG_TYPE_MARKER 0x8268
+#define GL_DEBUG_TYPE_PUSH_GROUP 0x8269
+#define GL_DEBUG_TYPE_POP_GROUP 0x826A
+#define GL_DEBUG_SEVERITY_HIGH 0x9146
+#define GL_DEBUG_SEVERITY_MEDIUM 0x9147
+#define GL_DEBUG_SEVERITY_LOW 0x9148
+#define GL_DEBUG_SEVERITY_NOTIFICATION 0x826B
+#define GL_STACK_UNDERFLOW 0x0504
+#define GL_STACK_OVERFLOW 0x0503
+#define GL_BUFFER 0x82E0
+#define GL_SHADER 0x82E1
+#define GL_PROGRAM 0x82E2
+#define GL_QUERY 0x82E3
+#define GL_PROGRAM_PIPELINE 0x82E4
+#define GL_SAMPLER 0x82E6
+#define GL_DISPLAY_LIST 0x82E7
+
+#endif
+
+#ifdef GLES_KHR_no_error
+
+#define GL_CONTEXT_FLAG_NO_ERROR_BIT_KHR 0x00000008
 
 #endif
 
@@ -1873,6 +2130,15 @@ extern "C"
 
 #endif
 
+#ifdef GLES_NV_conservative_raster
+
+#define GL_CONSERVATIVE_RASTERIZATION_NV 0x9346
+#define GL_SUBPIXEL_PRECISION_BIAS_X_BITS_NV 0x9347
+#define GL_SUBPIXEL_PRECISION_BIAS_Y_BITS_NV 0x9348
+#define GL_MAX_SUBPIXEL_PRECISION_BIAS_BITS_NV 0x9349
+
+#endif
+
 #ifdef GLES_NV_copy_buffer
 
 #define GL_COPY_READ_BUFFER_NV 0x8F36
@@ -1970,12 +2236,38 @@ extern "C"
 
 #endif
 
+#ifdef GLES_NV_fill_rectangle
+
+#define GL_FILL_RECTANGLE_NV 0x933C
+
+#endif
+
+#ifdef GLES_NV_fragment_coverage_to_color
+
+#define GL_FRAGMENT_COVERAGE_TO_COLOR_NV 0x92DD
+#define GL_FRAGMENT_COVERAGE_COLOR_NV 0x92DE
+
+#endif
+
 #ifdef GLES_NV_framebuffer_blit
 
 #define GL_READ_FRAMEBUFFER_NV 0x8CA8
 #define GL_DRAW_FRAMEBUFFER_NV 0x8CA9
 #define GL_DRAW_FRAMEBUFFER_BINDING_NV GL_FRAMEBUFFER_BINDING
 #define GL_READ_FRAMEBUFFER_BINDING_NV 0x8CAA
+
+#endif
+
+#ifdef GLES_NV_framebuffer_mixed_samples
+
+#define GL_COVERAGE_MODULATION_TABLE_NV 0x9331
+#define GL_COLOR_SAMPLES_NV 0x8E20
+#define GL_DEPTH_SAMPLES_NV 0x932D
+#define GL_STENCIL_SAMPLES_NV 0x932E
+#define GL_MIXED_DEPTH_SAMPLES_SUPPORTED_NV 0x932F
+#define GL_MIXED_STENCIL_SAMPLES_SUPPORTED_NV 0x9330
+#define GL_COVERAGE_MODULATION_NV 0x9332
+#define GL_COVERAGE_MODULATION_TABLE_SIZE_NV 0x9333
 
 #endif
 
@@ -2160,6 +2452,12 @@ extern "C"
 
 #endif
 
+#ifdef GLES_NV_path_rendering_shared_edge
+
+#define GL_SHARED_EDGE_NV 0xC0
+
+#endif
+
 #ifdef GLES_NV_pixel_buffer_object
 
 #define GL_PIXEL_PACK_BUFFER_NV 0x88EB
@@ -2169,9 +2467,33 @@ extern "C"
 
 #endif
 
+#ifdef GLES_NV_polygon_mode
+
+#define GL_POLYGON_MODE_NV 0x0B40
+#define GL_POLYGON_OFFSET_POINT_NV 0x2A01
+#define GL_POLYGON_OFFSET_LINE_NV 0x2A02
+#define GL_POINT_NV 0x1B00
+#define GL_LINE_NV 0x1B01
+#define GL_FILL_NV 0x1B02
+
+#endif
+
 #ifdef GLES_NV_read_buffer
 
 #define GL_READ_BUFFER_NV 0x0C02
+
+#endif
+
+#ifdef GLES_NV_sample_locations
+
+#define GL_SAMPLE_LOCATION_SUBPIXEL_BITS_NV 0x933D
+#define GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_NV 0x933E
+#define GL_SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_NV 0x933F
+#define GL_PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_NV 0x9340
+#define GL_SAMPLE_LOCATION_NV 0x8E50
+#define GL_PROGRAMMABLE_SAMPLE_LOCATION_NV 0x9341
+#define GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_NV 0x9342
+#define GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_NV 0x9343
 
 #endif
 
@@ -2379,6 +2701,44 @@ extern "C"
 
 #endif
 
+#ifdef GLES_OES_geometry_shader
+
+#define GL_GEOMETRY_SHADER_OES 0x8DD9
+#define GL_GEOMETRY_SHADER_BIT_OES 0x00000004
+#define GL_GEOMETRY_VERTICES_OUT_OES 0x8DDA
+#define GL_GEOMETRY_INPUT_TYPE_OES 0x8DDB
+#define GL_GEOMETRY_OUTPUT_TYPE_OES 0x8DDC
+#define GL_GEOMETRY_SHADER_INVOCATIONS_OES 0x887F
+#define GL_LAYER_PROVOKING_VERTEX_OES 0x825E
+#define GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_OES 0x8DDF
+#define GL_MAX_GEOMETRY_UNIFORM_BLOCKS_OES 0x8A2C
+#define GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS_OES 0x8A32
+#define GL_MAX_GEOMETRY_INPUT_COMPONENTS_OES 0x9123
+#define GL_MAX_GEOMETRY_OUTPUT_COMPONENTS_OES 0x9124
+#define GL_MAX_GEOMETRY_OUTPUT_VERTICES_OES 0x8DE0
+#define GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_OES 0x8DE1
+#define GL_MAX_GEOMETRY_SHADER_INVOCATIONS_OES 0x8E5A
+#define GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_OES 0x8C29
+#define GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS_OES 0x92CF
+#define GL_MAX_GEOMETRY_ATOMIC_COUNTERS_OES 0x92D5
+#define GL_MAX_GEOMETRY_IMAGE_UNIFORMS_OES 0x90CD
+#define GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS_OES 0x90D7
+#define GL_FIRST_VERTEX_CONVENTION_OES 0x8E4D
+#define GL_LAST_VERTEX_CONVENTION_OES 0x8E4E
+#define GL_UNDEFINED_VERTEX_OES 0x8260
+#define GL_PRIMITIVES_GENERATED_OES 0x8C87
+#define GL_LINES_ADJACENCY_OES 0x000A
+#define GL_LINE_STRIP_ADJACENCY_OES 0x000B
+#define GL_TRIANGLES_ADJACENCY_OES 0x000C
+#define GL_TRIANGLE_STRIP_ADJACENCY_OES 0x000D
+#define GL_FRAMEBUFFER_DEFAULT_LAYERS_OES 0x9312
+#define GL_MAX_FRAMEBUFFER_LAYERS_OES 0x9317
+#define GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_OES 0x8DA8
+#define GL_FRAMEBUFFER_ATTACHMENT_LAYERED_OES 0x8DA7
+#define GL_REFERENCED_BY_GEOMETRY_SHADER_OES 0x9309
+
+#endif
+
 #ifdef GLES_OES_get_program_binary
 
 #define GL_PROGRAM_BINARY_LENGTH_OES 0x8741
@@ -2443,6 +2803,12 @@ extern "C"
 
 #define GL_POINT_SPRITE_OES 0x8861
 #define GL_COORD_REPLACE_OES 0x8862
+
+#endif
+
+#ifdef GLES_OES_primitive_bounding_box
+
+#define GL_PRIMITIVE_BOUNDING_BOX_OES 0x92BE
 
 #endif
 
@@ -2523,12 +2889,86 @@ extern "C"
 
 #endif
 
+#ifdef GLES_OES_tessellation_shader
+
+#define GL_PATCHES_OES 0x000E
+#define GL_PATCH_VERTICES_OES 0x8E72
+#define GL_TESS_CONTROL_OUTPUT_VERTICES_OES 0x8E75
+#define GL_TESS_GEN_MODE_OES 0x8E76
+#define GL_TESS_GEN_SPACING_OES 0x8E77
+#define GL_TESS_GEN_VERTEX_ORDER_OES 0x8E78
+#define GL_TESS_GEN_POINT_MODE_OES 0x8E79
+#define GL_ISOLINES_OES 0x8E7A
+#define GL_QUADS_OES 0x0007
+#define GL_FRACTIONAL_ODD_OES 0x8E7B
+#define GL_FRACTIONAL_EVEN_OES 0x8E7C
+#define GL_MAX_PATCH_VERTICES_OES 0x8E7D
+#define GL_MAX_TESS_GEN_LEVEL_OES 0x8E7E
+#define GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS_OES 0x8E7F
+#define GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS_OES 0x8E80
+#define GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS_OES 0x8E81
+#define GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS_OES 0x8E82
+#define GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS_OES 0x8E83
+#define GL_MAX_TESS_PATCH_COMPONENTS_OES 0x8E84
+#define GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS_OES 0x8E85
+#define GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS_OES 0x8E86
+#define GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS_OES 0x8E89
+#define GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS_OES 0x8E8A
+#define GL_MAX_TESS_CONTROL_INPUT_COMPONENTS_OES 0x886C
+#define GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS_OES 0x886D
+#define GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS_OES 0x8E1E
+#define GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS_OES 0x8E1F
+#define GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS_OES 0x92CD
+#define GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS_OES 0x92CE
+#define GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS_OES 0x92D3
+#define GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS_OES 0x92D4
+#define GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS_OES 0x90CB
+#define GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS_OES 0x90CC
+#define GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS_OES 0x90D8
+#define GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS_OES 0x90D9
+#define GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED_OES 0x8221
+#define GL_IS_PER_PATCH_OES 0x92E7
+#define GL_REFERENCED_BY_TESS_CONTROL_SHADER_OES 0x9307
+#define GL_REFERENCED_BY_TESS_EVALUATION_SHADER_OES 0x9308
+#define GL_TESS_EVALUATION_SHADER_OES 0x8E87
+#define GL_TESS_CONTROL_SHADER_OES 0x8E88
+#define GL_TESS_CONTROL_SHADER_BIT_OES 0x00000008
+#define GL_TESS_EVALUATION_SHADER_BIT_OES 0x00000010
+
+#endif
+
 #ifdef GLES_OES_texture_3D
 
 #define GL_TEXTURE_3D_OES 0x806F
 #define GL_TEXTURE_WRAP_R_OES 0x8072
 #define GL_MAX_3D_TEXTURE_SIZE_OES 0x8073
 #define GL_TEXTURE_BINDING_3D_OES 0x806A
+
+#endif
+
+#ifdef GLES_OES_texture_border_clamp
+
+#define GL_TEXTURE_BORDER_COLOR_OES 0x1004
+#define GL_CLAMP_TO_BORDER_OES 0x812D
+
+#endif
+
+#ifdef GLES_OES_texture_buffer
+
+#define GL_TEXTURE_BUFFER_OES 0x8C2A
+#define GL_TEXTURE_BUFFER_BINDING_OES 0x8C2A
+#define GL_MAX_TEXTURE_BUFFER_SIZE_OES 0x8C2B
+#define GL_TEXTURE_BINDING_BUFFER_OES 0x8C2C
+#define GL_TEXTURE_BUFFER_DATA_STORE_BINDING_OES 0x8C2D
+#define GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT_OES 0x919F
+#define GL_SAMPLER_BUFFER_OES 0x8DC2
+#define GL_INT_SAMPLER_BUFFER_OES 0x8DD0
+#define GL_UNSIGNED_INT_SAMPLER_BUFFER_OES 0x8DD8
+#define GL_IMAGE_BUFFER_OES 0x9051
+#define GL_INT_IMAGE_BUFFER_OES 0x905C
+#define GL_UNSIGNED_INT_IMAGE_BUFFER_OES 0x9067
+#define GL_TEXTURE_BUFFER_OFFSET_OES 0x919D
+#define GL_TEXTURE_BUFFER_SIZE_OES 0x919E
 
 #endif
 
@@ -2575,6 +3015,19 @@ extern "C"
 
 #endif
 
+#ifdef GLES_OES_texture_cube_map_array
+
+#define GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_OES 0x900A
+#define GL_SAMPLER_CUBE_MAP_ARRAY_OES 0x900C
+#define GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_OES 0x900D
+#define GL_INT_SAMPLER_CUBE_MAP_ARRAY_OES 0x900E
+#define GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_OES 0x900F
+#define GL_IMAGE_CUBE_MAP_ARRAY_OES 0x9054
+#define GL_INT_IMAGE_CUBE_MAP_ARRAY_OES 0x905F
+#define GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_OES 0x906A
+
+#endif
+
 #ifdef GLES_OES_texture_float
 
 #define GL_FLOAT 0x1406
@@ -2610,6 +3063,16 @@ extern "C"
 
 #endif
 
+#ifdef GLES_OES_texture_view
+
+#define GL_TEXTURE_VIEW_MIN_LEVEL_OES 0x82DB
+#define GL_TEXTURE_VIEW_NUM_LEVELS_OES 0x82DC
+#define GL_TEXTURE_VIEW_MIN_LAYER_OES 0x82DD
+#define GL_TEXTURE_VIEW_NUM_LAYERS_OES 0x82DE
+#define GL_TEXTURE_IMMUTABLE_LEVELS_OES 0x82DF
+
+#endif
+
 #ifdef GLES_OES_vertex_array_object
 
 #define GL_VERTEX_ARRAY_BINDING_OES 0x85B5
@@ -2625,6 +3088,15 @@ extern "C"
 
 #define GL_UNSIGNED_INT_10_10_10_2_OES 0x8DF6
 #define GL_INT_10_10_10_2_OES 0x8DF7
+
+#endif
+
+#ifdef GLES_OVR_multiview
+
+#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR 0x9630
+#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR 0x9632
+#define GL_MAX_VIEWS_OVR 0x9631
+#define GL_FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR 0x9633
 
 #endif
 
@@ -2739,7 +3211,6 @@ extern "C"
 #define GL_FRONT_AND_BACK 0x0408
 #define GL_FOG 0x0B60
 #define GL_LIGHTING 0x0B50
-#define GL_TEXTURE_2D 0x0DE1
 #define GL_CULL_FACE 0x0B44
 #define GL_ALPHA_TEST 0x0BC0
 #define GL_BLEND 0x0BE2
@@ -2765,8 +3236,6 @@ extern "C"
 #define GL_INVALID_ENUM 0x0500
 #define GL_INVALID_VALUE 0x0501
 #define GL_INVALID_OPERATION 0x0502
-#define GL_STACK_OVERFLOW 0x0503
-#define GL_STACK_UNDERFLOW 0x0504
 #define GL_OUT_OF_MEMORY 0x0505
 #define GL_EXP 0x0800
 #define GL_EXP2 0x0801
@@ -3081,7 +3550,6 @@ extern "C"
 #define GL_CURRENT_PROGRAM 0x8B8D
 #define GL_INCR_WRAP 0x8507
 #define GL_DECR_WRAP 0x8508
-#define GL_TEXTURE_CUBE_MAP 0x8513
 #define GL_TEXTURE_BINDING_CUBE_MAP 0x8514
 #define GL_TEXTURE_CUBE_MAP_POSITIVE_X 0x8515
 #define GL_TEXTURE_CUBE_MAP_NEGATIVE_X 0x8516
@@ -3176,7 +3644,6 @@ extern "C"
 #define GL_TEXTURE_BINDING_3D 0x806A
 #define GL_UNPACK_SKIP_IMAGES 0x806D
 #define GL_UNPACK_IMAGE_HEIGHT 0x806E
-#define GL_TEXTURE_3D 0x806F
 #define GL_TEXTURE_WRAP_R 0x8072
 #define GL_MAX_3D_TEXTURE_SIZE 0x8073
 #define GL_UNSIGNED_INT_2_10_10_10_REV 0x8368
@@ -3249,7 +3716,6 @@ extern "C"
 #define GL_MIN_PROGRAM_TEXEL_OFFSET 0x8904
 #define GL_MAX_PROGRAM_TEXEL_OFFSET 0x8905
 #define GL_MAX_VARYING_COMPONENTS 0x8B4B
-#define GL_TEXTURE_2D_ARRAY 0x8C1A
 #define GL_TEXTURE_BINDING_2D_ARRAY 0x8C1D
 #define GL_R11F_G11F_B10F 0x8C3A
 #define GL_UNSIGNED_INT_10F_11F_11F_REV 0x8C3B
@@ -3344,8 +3810,6 @@ extern "C"
 #define GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE 0x8D56
 #define GL_MAX_SAMPLES 0x8D57
 #define GL_HALF_FLOAT 0x140B
-#define GL_MAP_READ_BIT 0x0001
-#define GL_MAP_WRITE_BIT 0x0002
 #define GL_MAP_INVALIDATE_RANGE_BIT 0x0004
 #define GL_MAP_INVALIDATE_BUFFER_BIT 0x0008
 #define GL_MAP_FLUSH_EXPLICIT_BIT 0x0010
@@ -3645,6 +4109,13 @@ extern "C"
 
 #endif
 
+#ifdef GL_EXT_timer_query
+
+typedef GLint64 GLint64EXT;
+typedef GLuint64 GLuint64EXT;
+
+#endif
+
 #ifdef GLES_APPLE_sync
 
 typedef struct __GLsync* GLsync;
@@ -3653,7 +4124,7 @@ typedef struct __GLsync* GLsync;
 
 #ifdef GLES_KHR_debug
 
-typedef void (GLLOADER_APIENTRY *GLDEBUGPROCKHR)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam);
+typedef void (GLLOADER_APIENTRY *GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam);
 
 #endif
 
@@ -3735,6 +4206,34 @@ extern GLLOADER_API glDrawElementsInstancedANGLEFUNC glDrawElementsInstancedANGL
 
 #endif
 
+#ifdef GL_EXT_timer_query
+
+typedef void (GLLOADER_APIENTRY *glGenQueriesANGLEFUNC)(GLsizei n, GLuint* ids);
+typedef void (GLLOADER_APIENTRY *glDeleteQueriesANGLEFUNC)(GLsizei n, const GLuint* ids);
+typedef GLboolean (GLLOADER_APIENTRY *glIsQueryANGLEFUNC)(GLuint id);
+typedef void (GLLOADER_APIENTRY *glBeginQueryANGLEFUNC)(GLenum target, GLuint id);
+typedef void (GLLOADER_APIENTRY *glEndQueryANGLEFUNC)(GLenum target);
+typedef void (GLLOADER_APIENTRY *glQueryCounterANGLEFUNC)(GLuint id, GLenum target);
+typedef void (GLLOADER_APIENTRY *glGetQueryivANGLEFUNC)(GLenum target, GLenum pname, GLint* params);
+typedef void (GLLOADER_APIENTRY *glGetQueryObjectivANGLEFUNC)(GLuint id, GLenum pname, GLint* params);
+typedef void (GLLOADER_APIENTRY *glGetQueryObjectuivANGLEFUNC)(GLuint id, GLenum pname, GLuint* params);
+typedef void (GLLOADER_APIENTRY *glGetQueryObjecti64vANGLEFUNC)(GLuint id, GLenum pname, GLint64* params);
+typedef void (GLLOADER_APIENTRY *glGetQueryObjectui64vANGLEFUNC)(GLuint id, GLenum pname, GLuint64* params);
+
+extern GLLOADER_API glGenQueriesANGLEFUNC glGenQueriesANGLE;
+extern GLLOADER_API glDeleteQueriesANGLEFUNC glDeleteQueriesANGLE;
+extern GLLOADER_API glIsQueryANGLEFUNC glIsQueryANGLE;
+extern GLLOADER_API glBeginQueryANGLEFUNC glBeginQueryANGLE;
+extern GLLOADER_API glEndQueryANGLEFUNC glEndQueryANGLE;
+extern GLLOADER_API glQueryCounterANGLEFUNC glQueryCounterANGLE;
+extern GLLOADER_API glGetQueryivANGLEFUNC glGetQueryivANGLE;
+extern GLLOADER_API glGetQueryObjectivANGLEFUNC glGetQueryObjectivANGLE;
+extern GLLOADER_API glGetQueryObjectuivANGLEFUNC glGetQueryObjectuivANGLE;
+extern GLLOADER_API glGetQueryObjecti64vANGLEFUNC glGetQueryObjecti64vANGLE;
+extern GLLOADER_API glGetQueryObjectui64vANGLEFUNC glGetQueryObjectui64vANGLE;
+
+#endif
+
 #ifdef GLES_ANGLE_translated_shader_source
 
 typedef void (GLLOADER_APIENTRY *glGetTranslatedShaderSourceANGLEFUNC)(GLuint shader, GLsizei bufsize, GLsizei* length, GLchar* source);
@@ -3796,6 +4295,16 @@ extern GLLOADER_API glDrawElementsInstancedBaseVertexBaseInstanceEXTFUNC glDrawE
 typedef void (GLLOADER_APIENTRY *glBlendEquationEXTFUNC)(GLenum mode);
 
 extern GLLOADER_API glBlendEquationEXTFUNC glBlendEquationEXT;
+
+#endif
+
+#ifdef GLES_EXT_buffer_storage
+
+typedef void (GLLOADER_APIENTRY *glBufferStorageEXTFUNC)(GLenum target, GLsizeiptr size, void const * data, GLbitfield flags);
+typedef void (GLLOADER_APIENTRY *glNamedBufferStorageEXTFUNC)(GLuint buffer, GLsizeiptr size, void const * data, GLbitfield flags);
+
+extern GLLOADER_API glBufferStorageEXTFUNC glBufferStorageEXT;
+extern GLLOADER_API glNamedBufferStorageEXTFUNC glNamedBufferStorageEXT;
 
 #endif
 
@@ -4001,6 +4510,14 @@ extern GLLOADER_API glPrimitiveBoundingBoxEXTFUNC glPrimitiveBoundingBoxEXT;
 
 #endif
 
+#ifdef GLES_EXT_raster_multisample
+
+typedef void (GLLOADER_APIENTRY *glRasterSamplesEXTFUNC)(GLuint samples, GLboolean fixedsamplelocations);
+
+extern GLLOADER_API glRasterSamplesEXTFUNC glRasterSamplesEXT;
+
+#endif
+
 #ifdef GLES_EXT_robustness
 
 typedef GLenum (GLLOADER_APIENTRY *glGetGraphicsResetStatusEXTFUNC)();
@@ -4081,6 +4598,16 @@ extern GLLOADER_API glGetProgramPipelineInfoLogEXTFUNC glGetProgramPipelineInfoL
 
 #endif
 
+#ifdef GLES_EXT_sparse_texture
+
+typedef void (GLLOADER_APIENTRY *glTexPageCommitmentEXTFUNC)(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
+typedef void (GLLOADER_APIENTRY *glTexturePageCommitmentEXTFUNC)(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
+
+extern GLLOADER_API glTexPageCommitmentEXTFUNC glTexPageCommitmentEXT;
+extern GLLOADER_API glTexturePageCommitmentEXTFUNC glTexturePageCommitmentEXT;
+
+#endif
+
 #ifdef GLES_EXT_tessellation_shader
 
 typedef void (GLLOADER_APIENTRY *glPatchParameteriEXTFUNC)(GLenum pname, GLint value);
@@ -4095,27 +4622,29 @@ typedef void (GLLOADER_APIENTRY *glTexParameterIivEXTFUNC)(GLenum target, GLenum
 typedef void (GLLOADER_APIENTRY *glTexParameterIuivEXTFUNC)(GLenum target, GLenum pname, GLuint* params);
 typedef void (GLLOADER_APIENTRY *glGetTexParameterIivEXTFUNC)(GLenum target, GLenum pname, GLint* params);
 typedef void (GLLOADER_APIENTRY *glGetTexParameterIuivEXTFUNC)(GLenum target, GLenum pname, GLuint* params);
-typedef void (GLLOADER_APIENTRY *glSamplerParameterIivFUNC)(GLuint sampler, GLenum pname, const GLint* param);
-typedef void (GLLOADER_APIENTRY *glSamplerParameterIuivFUNC)(GLuint sampler, GLenum pname, const GLuint* param);
-typedef void (GLLOADER_APIENTRY *glGetSamplerParameterIivFUNC)(GLuint sampler, GLenum pname, GLint* params);
-typedef void (GLLOADER_APIENTRY *glGetSamplerParameterIuivFUNC)(GLuint sampler, GLenum pname, GLuint* params);
+typedef void (GLLOADER_APIENTRY *glSamplerParameterIivEXTFUNC)(GLuint sampler, GLenum pname, const GLint* param);
+typedef void (GLLOADER_APIENTRY *glSamplerParameterIuivEXTFUNC)(GLuint sampler, GLenum pname, const GLuint* param);
+typedef void (GLLOADER_APIENTRY *glGetSamplerParameterIivEXTFUNC)(GLuint sampler, GLenum pname, GLint* params);
+typedef void (GLLOADER_APIENTRY *glGetSamplerParameterIuivEXTFUNC)(GLuint sampler, GLenum pname, GLuint* params);
 
 extern GLLOADER_API glTexParameterIivEXTFUNC glTexParameterIivEXT;
 extern GLLOADER_API glTexParameterIuivEXTFUNC glTexParameterIuivEXT;
 extern GLLOADER_API glGetTexParameterIivEXTFUNC glGetTexParameterIivEXT;
 extern GLLOADER_API glGetTexParameterIuivEXTFUNC glGetTexParameterIuivEXT;
-extern GLLOADER_API glSamplerParameterIivFUNC glSamplerParameterIiv;
-extern GLLOADER_API glSamplerParameterIuivFUNC glSamplerParameterIuiv;
-extern GLLOADER_API glGetSamplerParameterIivFUNC glGetSamplerParameterIiv;
-extern GLLOADER_API glGetSamplerParameterIuivFUNC glGetSamplerParameterIuiv;
+extern GLLOADER_API glSamplerParameterIivEXTFUNC glSamplerParameterIivEXT;
+extern GLLOADER_API glSamplerParameterIuivEXTFUNC glSamplerParameterIuivEXT;
+extern GLLOADER_API glGetSamplerParameterIivEXTFUNC glGetSamplerParameterIivEXT;
+extern GLLOADER_API glGetSamplerParameterIuivEXTFUNC glGetSamplerParameterIuivEXT;
 
 #endif
 
 #ifdef GLES_EXT_texture_buffer
 
 typedef void (GLLOADER_APIENTRY *glTexBufferEXTFUNC)(GLenum target, GLenum internalformat, GLuint buffer);
+typedef void (GLLOADER_APIENTRY *glTexBufferRangeEXTFUNC)(GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size);
 
 extern GLLOADER_API glTexBufferEXTFUNC glTexBufferEXT;
+extern GLLOADER_API glTexBufferRangeEXTFUNC glTexBufferRangeEXT;
 
 #endif
 
@@ -4201,27 +4730,29 @@ extern GLLOADER_API glBlendBarrierKHRFUNC glBlendBarrierKHR;
 
 #ifdef GLES_KHR_debug
 
-typedef void (GLLOADER_APIENTRY *glDebugMessageControlKHRFUNC)(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
-typedef void (GLLOADER_APIENTRY *glDebugMessageInsertKHRFUNC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* buf);
-typedef void (GLLOADER_APIENTRY *glDebugMessageCallbackKHRFUNC)(GLDEBUGPROCKHR callback, const GLvoid* userParam);
-typedef GLuint (GLLOADER_APIENTRY *glGetDebugMessageLogKHRFUNC)(GLuint count, GLsizei bufsize, GLenum* sources, GLenum* types, GLuint* ids, GLenum* severities, GLsizei* lengths, GLchar* messageLog);
-typedef void (GLLOADER_APIENTRY *glPushDebugGroupKHRFUNC)(GLenum source, GLuint id, GLsizei length, const GLchar* message);
-typedef void (GLLOADER_APIENTRY *glPopDebugGroupKHRFUNC)();
-typedef void (GLLOADER_APIENTRY *glObjectLabelKHRFUNC)(GLenum identifier, GLuint name, GLsizei length, const GLchar* label);
-typedef void (GLLOADER_APIENTRY *glGetObjectLabelKHRFUNC)(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei* length, GLchar* label);
-typedef void (GLLOADER_APIENTRY *glObjectPtrLabelKHRFUNC)(const GLvoid* ptr, GLsizei length, const GLchar* label);
-typedef void (GLLOADER_APIENTRY *glGetObjectPtrLabelKHRFUNC)(const GLvoid* ptr, GLsizei bufSize, GLsizei* length, GLchar* label);
+typedef void (GLLOADER_APIENTRY *glDebugMessageControlFUNC)(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
+typedef void (GLLOADER_APIENTRY *glDebugMessageInsertFUNC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* buf);
+typedef void (GLLOADER_APIENTRY *glDebugMessageCallbackFUNC)(GLDEBUGPROC callback, const GLvoid* userParam);
+typedef GLuint (GLLOADER_APIENTRY *glGetDebugMessageLogFUNC)(GLuint count, GLsizei bufsize, GLenum* sources, GLenum* types, GLuint* ids, GLenum* severities, GLsizei* lengths, GLchar* messageLog);
+typedef void (GLLOADER_APIENTRY *glGetPointervFUNC)(GLenum pname, void** params);
+typedef void (GLLOADER_APIENTRY *glPushDebugGroupFUNC)(GLenum source, GLuint id, GLsizei length, const GLchar* message);
+typedef void (GLLOADER_APIENTRY *glPopDebugGroupFUNC)();
+typedef void (GLLOADER_APIENTRY *glObjectLabelFUNC)(GLenum identifier, GLuint name, GLsizei length, const GLchar* label);
+typedef void (GLLOADER_APIENTRY *glGetObjectLabelFUNC)(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei* length, GLchar* label);
+typedef void (GLLOADER_APIENTRY *glObjectPtrLabelFUNC)(const GLvoid* ptr, GLsizei length, const GLchar* label);
+typedef void (GLLOADER_APIENTRY *glGetObjectPtrLabelFUNC)(const GLvoid* ptr, GLsizei bufSize, GLsizei* length, GLchar* label);
 
-extern GLLOADER_API glDebugMessageControlKHRFUNC glDebugMessageControlKHR;
-extern GLLOADER_API glDebugMessageInsertKHRFUNC glDebugMessageInsertKHR;
-extern GLLOADER_API glDebugMessageCallbackKHRFUNC glDebugMessageCallbackKHR;
-extern GLLOADER_API glGetDebugMessageLogKHRFUNC glGetDebugMessageLogKHR;
-extern GLLOADER_API glPushDebugGroupKHRFUNC glPushDebugGroupKHR;
-extern GLLOADER_API glPopDebugGroupKHRFUNC glPopDebugGroupKHR;
-extern GLLOADER_API glObjectLabelKHRFUNC glObjectLabelKHR;
-extern GLLOADER_API glGetObjectLabelKHRFUNC glGetObjectLabelKHR;
-extern GLLOADER_API glObjectPtrLabelKHRFUNC glObjectPtrLabelKHR;
-extern GLLOADER_API glGetObjectPtrLabelKHRFUNC glGetObjectPtrLabelKHR;
+extern GLLOADER_API glDebugMessageControlFUNC glDebugMessageControl;
+extern GLLOADER_API glDebugMessageInsertFUNC glDebugMessageInsert;
+extern GLLOADER_API glDebugMessageCallbackFUNC glDebugMessageCallback;
+extern GLLOADER_API glGetDebugMessageLogFUNC glGetDebugMessageLog;
+extern GLLOADER_API glGetPointervFUNC glGetPointerv;
+extern GLLOADER_API glPushDebugGroupFUNC glPushDebugGroup;
+extern GLLOADER_API glPopDebugGroupFUNC glPopDebugGroup;
+extern GLLOADER_API glObjectLabelFUNC glObjectLabel;
+extern GLLOADER_API glGetObjectLabelFUNC glGetObjectLabel;
+extern GLLOADER_API glObjectPtrLabelFUNC glObjectPtrLabel;
+extern GLLOADER_API glGetObjectPtrLabelFUNC glGetObjectPtrLabel;
 
 #endif
 
@@ -4303,6 +4834,14 @@ extern GLLOADER_API glEndConditionalRenderNVFUNC glEndConditionalRenderNV;
 
 #endif
 
+#ifdef GLES_NV_conservative_raster
+
+typedef void (GLLOADER_APIENTRY *glSubpixelPrecisionBiasNVFUNC)(GLuint xbits, GLuint ybits);
+
+extern GLLOADER_API glSubpixelPrecisionBiasNVFUNC glSubpixelPrecisionBiasNV;
+
+#endif
+
 #ifdef GLES_NV_copy_buffer
 
 typedef void (GLLOADER_APIENTRY *glCopyBufferSubDataNVFUNC)(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size);
@@ -4367,11 +4906,31 @@ extern GLLOADER_API glSetFenceNVFUNC glSetFenceNV;
 
 #endif
 
+#ifdef GLES_NV_fragment_coverage_to_color
+
+typedef void (GLLOADER_APIENTRY *glFragmentCoverageColorNVFUNC)(GLuint color);
+
+extern GLLOADER_API glFragmentCoverageColorNVFUNC glFragmentCoverageColorNV;
+
+#endif
+
 #ifdef GLES_NV_framebuffer_blit
 
 typedef void (GLLOADER_APIENTRY *glBlitFramebufferNVFUNC)(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
 
 extern GLLOADER_API glBlitFramebufferNVFUNC glBlitFramebufferNV;
+
+#endif
+
+#ifdef GLES_NV_framebuffer_mixed_samples
+
+typedef void (GLLOADER_APIENTRY *glCoverageModulationTableNVFUNC)(GLsizei n, GLfloat const * v);
+typedef void (GLLOADER_APIENTRY *glGetCoverageModulationTableNVFUNC)(GLsizei bufsize, GLfloat* v);
+typedef void (GLLOADER_APIENTRY *glCoverageModulationNVFUNC)(GLenum components);
+
+extern GLLOADER_API glCoverageModulationTableNVFUNC glCoverageModulationTableNV;
+extern GLLOADER_API glGetCoverageModulationTableNVFUNC glGetCoverageModulationTableNV;
+extern GLLOADER_API glCoverageModulationNVFUNC glCoverageModulationNV;
 
 #endif
 
@@ -4521,11 +5080,31 @@ extern GLLOADER_API glPointAlongPathNVFUNC glPointAlongPathNV;
 
 #endif
 
+#ifdef GLES_NV_polygon_mode
+
+typedef void (GLLOADER_APIENTRY *glPolygonModeNVFUNC)(GLenum face, GLenum mode);
+
+extern GLLOADER_API glPolygonModeNVFUNC glPolygonModeNV;
+
+#endif
+
 #ifdef GLES_NV_read_buffer
 
 typedef void (GLLOADER_APIENTRY *glReadBufferNVFUNC)(GLenum mode);
 
 extern GLLOADER_API glReadBufferNVFUNC glReadBufferNV;
+
+#endif
+
+#ifdef GLES_NV_sample_locations
+
+typedef void (GLLOADER_APIENTRY *glFramebufferSampleLocationsfvNVFUNC)(GLenum target, GLuint start, GLsizei count, GLfloat const * v);
+typedef void (GLLOADER_APIENTRY *glNamedFramebufferSampleLocationsfvNVFUNC)(GLuint framebuffer, GLuint start, GLsizei count, GLfloat const * v);
+typedef void (GLLOADER_APIENTRY *glResolveDepthValuesNVFUNC)();
+
+extern GLLOADER_API glFramebufferSampleLocationsfvNVFUNC glFramebufferSampleLocationsfvNV;
+extern GLLOADER_API glNamedFramebufferSampleLocationsfvNVFUNC glNamedFramebufferSampleLocationsfvNV;
+extern GLLOADER_API glResolveDepthValuesNVFUNC glResolveDepthValuesNV;
 
 #endif
 
@@ -4648,6 +5227,50 @@ extern GLLOADER_API glMultiTexCoord1bvOESFUNC glMultiTexCoord1bvOES;
 extern GLLOADER_API glMultiTexCoord2bvOESFUNC glMultiTexCoord2bvOES;
 extern GLLOADER_API glMultiTexCoord3bvOESFUNC glMultiTexCoord3bvOES;
 extern GLLOADER_API glMultiTexCoord4bvOESFUNC glMultiTexCoord4bvOES;
+
+#endif
+
+#ifdef GLES_OES_copy_image
+
+typedef void (GLLOADER_APIENTRY *glCopyImageSubDataOESFUNC)(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth);
+
+extern GLLOADER_API glCopyImageSubDataOESFUNC glCopyImageSubDataOES;
+
+#endif
+
+#ifdef GLES_OES_draw_buffers_indexed
+
+typedef void (GLLOADER_APIENTRY *glEnableiOESFUNC)(GLenum target, GLuint index);
+typedef void (GLLOADER_APIENTRY *glDisableiOESFUNC)(GLenum target, GLuint index);
+typedef void (GLLOADER_APIENTRY *glBlendEquationiOESFUNC)(GLuint buf, GLenum mode);
+typedef void (GLLOADER_APIENTRY *glBlendEquationSeparateiOESFUNC)(GLuint buf, GLenum modeRGB, GLenum modeAlpha);
+typedef void (GLLOADER_APIENTRY *glBlendFunciOESFUNC)(GLuint buf, GLenum src, GLenum dst);
+typedef void (GLLOADER_APIENTRY *glBlendFuncSeparateiOESFUNC)(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
+typedef void (GLLOADER_APIENTRY *glColorMaskiOESFUNC)(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a);
+typedef GLboolean (GLLOADER_APIENTRY *glIsEnablediOESFUNC)(GLenum target, GLuint index);
+
+extern GLLOADER_API glEnableiOESFUNC glEnableiOES;
+extern GLLOADER_API glDisableiOESFUNC glDisableiOES;
+extern GLLOADER_API glBlendEquationiOESFUNC glBlendEquationiOES;
+extern GLLOADER_API glBlendEquationSeparateiOESFUNC glBlendEquationSeparateiOES;
+extern GLLOADER_API glBlendFunciOESFUNC glBlendFunciOES;
+extern GLLOADER_API glBlendFuncSeparateiOESFUNC glBlendFuncSeparateiOES;
+extern GLLOADER_API glColorMaskiOESFUNC glColorMaskiOES;
+extern GLLOADER_API glIsEnablediOESFUNC glIsEnablediOES;
+
+#endif
+
+#ifdef GLES_OES_draw_elements_base_vertex
+
+typedef void (GLLOADER_APIENTRY *glDrawElementsBaseVertexOESFUNC)(GLenum mode, GLsizei count, GLenum type, const GLvoid* indices, GLint basevertex);
+typedef void (GLLOADER_APIENTRY *glDrawRangeElementsBaseVertexOESFUNC)(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid* indices, GLint basevertex);
+typedef void (GLLOADER_APIENTRY *glDrawElementsInstancedBaseVertexOESFUNC)(GLenum mode, GLsizei count, GLenum type, const GLvoid* indices, GLsizei instancecount, GLint basevertex);
+typedef void (GLLOADER_APIENTRY *glMultiDrawElementsBaseVertexOESFUNC)(GLenum mode, const GLsizei* count, GLenum type, const GLvoid** indices, GLsizei drawcount, const GLint* basevertex);
+
+extern GLLOADER_API glDrawElementsBaseVertexOESFUNC glDrawElementsBaseVertexOES;
+extern GLLOADER_API glDrawRangeElementsBaseVertexOESFUNC glDrawRangeElementsBaseVertexOES;
+extern GLLOADER_API glDrawElementsInstancedBaseVertexOESFUNC glDrawElementsInstancedBaseVertexOES;
+extern GLLOADER_API glMultiDrawElementsBaseVertexOESFUNC glMultiDrawElementsBaseVertexOES;
 
 #endif
 
@@ -4921,6 +5544,14 @@ extern GLLOADER_API glGenerateMipmapOESFUNC glGenerateMipmapOES;
 
 #endif
 
+#ifdef GLES_OES_geometry_shader
+
+typedef void (GLLOADER_APIENTRY *glFramebufferTextureOESFUNC)(GLenum target, GLenum attachment, GLuint texture, GLint level);
+
+extern GLLOADER_API glFramebufferTextureOESFUNC glFramebufferTextureOES;
+
+#endif
+
 #ifdef GLES_OES_get_program_binary
 
 typedef void (GLLOADER_APIENTRY *glGetProgramBinaryOESFUNC)(GLuint program, GLsizei bufSize, GLsizei* length, GLenum* binaryFormat, void* binary);
@@ -4962,6 +5593,14 @@ extern GLLOADER_API glWeightPointerOESFUNC glWeightPointerOES;
 typedef void (GLLOADER_APIENTRY *glPointSizePointerOESFUNC)(GLenum type, GLsizei stride, const GLvoid* pointer);
 
 extern GLLOADER_API glPointSizePointerOESFUNC glPointSizePointerOES;
+
+#endif
+
+#ifdef GLES_OES_primitive_bounding_box
+
+typedef void (GLLOADER_APIENTRY *glPrimitiveBoundingBoxOESFUNC)(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW);
+
+extern GLLOADER_API glPrimitiveBoundingBoxOESFUNC glPrimitiveBoundingBoxOES;
 
 #endif
 
@@ -5017,6 +5656,14 @@ extern GLLOADER_API glClearDepthfOESFUNC glClearDepthfOES;
 
 #endif
 
+#ifdef GLES_OES_tessellation_shader
+
+typedef void (GLLOADER_APIENTRY *glPatchParameteriOESFUNC)(GLenum pname, GLint value);
+
+extern GLLOADER_API glPatchParameteriOESFUNC glPatchParameteriOES;
+
+#endif
+
 #ifdef GLES_OES_texture_3D
 
 typedef void (GLLOADER_APIENTRY *glTexImage3DOESFUNC)(GLenum target, GLint level, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid* pixels);
@@ -5032,6 +5679,38 @@ extern GLLOADER_API glCopyTexSubImage3DOESFUNC glCopyTexSubImage3DOES;
 extern GLLOADER_API glCompressedTexImage3DOESFUNC glCompressedTexImage3DOES;
 extern GLLOADER_API glCompressedTexSubImage3DOESFUNC glCompressedTexSubImage3DOES;
 extern GLLOADER_API glFramebufferTexture3DOESFUNC glFramebufferTexture3DOES;
+
+#endif
+
+#ifdef GLES_OES_texture_border_clamp
+
+typedef void (GLLOADER_APIENTRY *glTexParameterIivOESFUNC)(GLenum target, GLenum pname, GLint* params);
+typedef void (GLLOADER_APIENTRY *glTexParameterIuivOESFUNC)(GLenum target, GLenum pname, GLuint* params);
+typedef void (GLLOADER_APIENTRY *glGetTexParameterIivOESFUNC)(GLenum target, GLenum pname, GLint* params);
+typedef void (GLLOADER_APIENTRY *glGetTexParameterIuivOESFUNC)(GLenum target, GLenum pname, GLuint* params);
+typedef void (GLLOADER_APIENTRY *glSamplerParameterIivOESFUNC)(GLuint sampler, GLenum pname, const GLint* param);
+typedef void (GLLOADER_APIENTRY *glSamplerParameterIuivOESFUNC)(GLuint sampler, GLenum pname, const GLuint* param);
+typedef void (GLLOADER_APIENTRY *glGetSamplerParameterIivOESFUNC)(GLuint sampler, GLenum pname, GLint* params);
+typedef void (GLLOADER_APIENTRY *glGetSamplerParameterIuivOESFUNC)(GLuint sampler, GLenum pname, GLuint* params);
+
+extern GLLOADER_API glTexParameterIivOESFUNC glTexParameterIivOES;
+extern GLLOADER_API glTexParameterIuivOESFUNC glTexParameterIuivOES;
+extern GLLOADER_API glGetTexParameterIivOESFUNC glGetTexParameterIivOES;
+extern GLLOADER_API glGetTexParameterIuivOESFUNC glGetTexParameterIuivOES;
+extern GLLOADER_API glSamplerParameterIivOESFUNC glSamplerParameterIivOES;
+extern GLLOADER_API glSamplerParameterIuivOESFUNC glSamplerParameterIuivOES;
+extern GLLOADER_API glGetSamplerParameterIivOESFUNC glGetSamplerParameterIivOES;
+extern GLLOADER_API glGetSamplerParameterIuivOESFUNC glGetSamplerParameterIuivOES;
+
+#endif
+
+#ifdef GLES_OES_texture_buffer
+
+typedef void (GLLOADER_APIENTRY *glTexBufferOESFUNC)(GLenum target, GLenum internalformat, GLuint buffer);
+typedef void (GLLOADER_APIENTRY *glTexBufferRangeOESFUNC)(GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size);
+
+extern GLLOADER_API glTexBufferOESFUNC glTexBufferOES;
+extern GLLOADER_API glTexBufferRangeOESFUNC glTexBufferRangeOES;
 
 #endif
 
@@ -5061,6 +5740,14 @@ extern GLLOADER_API glTexImage3DMultisampleOESFUNC glTexImage3DMultisampleOES;
 
 #endif
 
+#ifdef GLES_OES_texture_view
+
+typedef void (GLLOADER_APIENTRY *glTextureViewOESFUNC)(GLuint texture, GLenum target, GLuint origtexture, GLenum internalformat, GLuint minlevel, GLuint numlevels, GLuint minlayer, GLuint numlayers);
+
+extern GLLOADER_API glTextureViewOESFUNC glTextureViewOES;
+
+#endif
+
 #ifdef GLES_OES_vertex_array_object
 
 typedef void (GLLOADER_APIENTRY *glBindVertexArrayOESFUNC)(GLuint array);
@@ -5072,6 +5759,14 @@ extern GLLOADER_API glBindVertexArrayOESFUNC glBindVertexArrayOES;
 extern GLLOADER_API glDeleteVertexArraysOESFUNC glDeleteVertexArraysOES;
 extern GLLOADER_API glGenVertexArraysOESFUNC glGenVertexArraysOES;
 extern GLLOADER_API glIsVertexArrayOESFUNC glIsVertexArrayOES;
+
+#endif
+
+#ifdef GLES_OVR_multiview
+
+typedef void (GLLOADER_APIENTRY *glFramebufferTextureMultiviewOVRFUNC)(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint baseViewIndex, GLsizei numViews);
+
+extern GLLOADER_API glFramebufferTextureMultiviewOVRFUNC glFramebufferTextureMultiviewOVR;
 
 #endif
 
@@ -5378,7 +6073,6 @@ typedef void (GLLOADER_APIENTRY *glGenBuffersFUNC)(GLsizei n, GLuint* buffers);
 typedef void (GLLOADER_APIENTRY *glGetFixedvFUNC)(GLenum pname, GLfixed* params);
 typedef void (GLLOADER_APIENTRY *glGetLightxvFUNC)(GLenum light, GLenum pname, GLfixed* params);
 typedef void (GLLOADER_APIENTRY *glGetMaterialxvFUNC)(GLenum face, GLenum pname, GLfixed* params);
-typedef void (GLLOADER_APIENTRY *glGetPointervFUNC)(GLenum pname, GLvoid ** params);
 typedef void (GLLOADER_APIENTRY *glGetTexEnvivFUNC)(GLenum target, GLenum pname, GLint* params);
 typedef void (GLLOADER_APIENTRY *glGetTexEnvxvFUNC)(GLenum target, GLenum pname, GLfixed* params);
 typedef void (GLLOADER_APIENTRY *glGetTexParameterivFUNC)(GLenum target, GLenum pname, GLint* params);
@@ -5415,7 +6109,6 @@ extern GLLOADER_API glGenBuffersFUNC glGenBuffers;
 extern GLLOADER_API glGetFixedvFUNC glGetFixedv;
 extern GLLOADER_API glGetLightxvFUNC glGetLightxv;
 extern GLLOADER_API glGetMaterialxvFUNC glGetMaterialxv;
-extern GLLOADER_API glGetPointervFUNC glGetPointerv;
 extern GLLOADER_API glGetTexEnvivFUNC glGetTexEnviv;
 extern GLLOADER_API glGetTexEnvxvFUNC glGetTexEnvxv;
 extern GLLOADER_API glGetTexParameterivFUNC glGetTexParameteriv;
@@ -5974,9 +6667,12 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_ANGLE_framebuffer_multisampleFUNC
 typedef char (GLLOADER_APIENTRY *glloader_GLES_ANGLE_instanced_arraysFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_ANGLE_pack_reverse_row_orderFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_ANGLE_program_binaryFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_ANGLE_robust_resource_initializationFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_ANGLE_texture_compression_dxt1FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_ANGLE_texture_compression_dxt3FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_ANGLE_texture_compression_dxt5FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_ANGLE_texture_usageFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GL_EXT_timer_queryFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_ANGLE_translated_shader_sourceFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_APPLE_clip_distanceFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_APPLE_color_buffer_packed_floatFUNC)();
@@ -5996,6 +6692,7 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_ARM_shader_framebuffer_fetch_dept
 typedef char (GLLOADER_APIENTRY *glloader_GLES_DMP_program_binaryFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_base_instanceFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_blend_minmaxFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_buffer_storageFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_color_buffer_floatFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_color_buffer_half_floatFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_compressed_ETC1_RGB8_sub_textureFUNC)();
@@ -6008,6 +6705,7 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_draw_buffersFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_draw_buffers_indexedFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_draw_elements_base_vertexFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_draw_instancedFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_float_blendFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_frag_depthFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_geometry_shaderFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_gpu_shader5FUNC)();
@@ -6018,8 +6716,10 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_multiview_draw_buffersFUNC)()
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_multi_draw_arraysFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_multi_draw_indirectFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_occlusion_query_booleanFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_post_depth_coverageFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_primitive_bounding_boxFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_pvrtc_sRGBFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_raster_multisampleFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_read_format_bgraFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_render_snormFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_robustnessFUNC)();
@@ -6031,6 +6731,7 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_shader_io_blocksFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_shader_pixel_local_storageFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_shader_texture_lodFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_shadow_samplersFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_sparse_textureFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_sRGBFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_sRGB_write_controlFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_tessellation_shaderFUNC)();
@@ -6041,15 +6742,19 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_compression_latcFUNC)
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_compression_s3tcFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_cube_map_arrayFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_filter_anisotropicFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_filter_minmaxFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_format_BGRA8888FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_lod_biasFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_norm16FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_rgFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_sRGB_decodeFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_sRGB_R8FUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_sRGB_RG8FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_storageFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_type_2_10_10_10_REVFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_texture_viewFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_unpack_subimageFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_EXT_YUV_targetFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_FJ_shader_binary_GCCSOFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_IMG_multisampled_render_to_textureFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_IMG_program_binaryFUNC)();
@@ -6063,6 +6768,7 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_INTEL_performance_queryFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_KHR_blend_equation_advancedFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_KHR_context_flush_controlFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_KHR_debugFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_KHR_no_errorFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_KHR_robustnessFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_KHR_robust_buffer_access_behaviorFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_KHR_texture_compression_astc_ldrFUNC)();
@@ -6071,6 +6777,7 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_bgrFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_bindless_textureFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_blend_equation_advancedFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_conditional_renderFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_conservative_rasterFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_copy_bufferFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_coverage_sampleFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_depth_nonlinearFUNC)();
@@ -6081,20 +6788,29 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_EGL_stream_consumer_externalFU
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_explicit_attrib_locationFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_fbo_color_attachmentsFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_fenceFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_fill_rectangleFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_fragment_coverage_to_colorFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_fragment_shader_interlockFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_framebuffer_blitFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_framebuffer_mixed_samplesFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_framebuffer_multisampleFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_generate_mipmap_sRGBFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_geometry_shader_passthroughFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_image_formatsFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_instanced_arraysFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_internalformat_sample_queryFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_non_square_matricesFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_packed_floatFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_path_renderingFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_path_rendering_shared_edgeFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_pixel_buffer_objectFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_polygon_modeFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_read_bufferFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_read_depthFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_read_depth_stencilFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_read_stencilFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_sample_locationsFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_sample_mask_override_coverageFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_shader_noperspective_interpolationFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_shadow_samplers_arrayFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_shadow_samplers_cubeFUNC)();
@@ -6106,32 +6822,40 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_texture_compression_s3tcFUNC)(
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_texture_compression_s3tc_updateFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_texture_npot_2D_mipmapFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_viewport_arrayFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_NV_viewport_array2FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_blend_equation_separateFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_blend_func_separateFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_blend_subtractFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_byte_coordinatesFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_compressed_ETC1_RGB8_textureFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_compressed_paletted_textureFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_copy_imageFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_depth24FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_depth32FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_depth_textureFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_depth_texture_cube_mapFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_draw_buffers_indexedFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_draw_elements_base_vertexFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_draw_textureFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_EGL_imageFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_EGL_image_externalFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_EGL_image_external_essl3FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_element_index_uintFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_extended_matrix_paletteFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_fbo_render_mipmapFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_fixed_pointFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_fragment_precision_highFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_framebuffer_objectFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_geometry_shaderFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_get_program_binaryFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_gpu_shader5FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_mapbufferFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_matrix_getFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_matrix_paletteFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_packed_depth_stencilFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_point_size_arrayFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_point_spriteFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_primitive_bounding_boxFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_query_matrixFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_read_formatFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_required_internalformatFUNC)();
@@ -6140,6 +6864,7 @@ typedef char (GLLOADER_APIENTRY *glloader_GL_OES_sample_shadingFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_OES_sample_variablesFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_shader_binaryFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_OES_shader_image_atomicFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_shader_io_blocksFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_OES_shader_multisample_interpolationFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_shader_sourceFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_single_precisionFUNC)();
@@ -6149,9 +6874,13 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_stencil4FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_stencil8FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_stencil_wrapFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_surfaceless_contextFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_tessellation_shaderFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_3DFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_border_clampFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_bufferFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_compression_astcFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_cube_mapFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_cube_map_arrayFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_env_crossbarFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_floatFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_float_linearFUNC)();
@@ -6161,9 +6890,12 @@ typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_mirrored_repeatFUNC)(
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_npotFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_OES_texture_stencil8FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_OES_texture_storage_multisample_2d_arrayFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_texture_viewFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_vertex_array_objectFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_vertex_half_floatFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_OES_vertex_type_10_10_10_2FUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OVR_multiviewFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GLES_OVR_multiview2FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_QCOM_binning_controlFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_QCOM_driver_controlFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GLES_QCOM_extended_getFUNC)();
@@ -6191,9 +6923,12 @@ extern GLLOADER_API glloader_GLES_ANGLE_framebuffer_multisampleFUNC glloader_GLE
 extern GLLOADER_API glloader_GLES_ANGLE_instanced_arraysFUNC glloader_GLES_ANGLE_instanced_arrays;
 extern GLLOADER_API glloader_GLES_ANGLE_pack_reverse_row_orderFUNC glloader_GLES_ANGLE_pack_reverse_row_order;
 extern GLLOADER_API glloader_GLES_ANGLE_program_binaryFUNC glloader_GLES_ANGLE_program_binary;
+extern GLLOADER_API glloader_GLES_ANGLE_robust_resource_initializationFUNC glloader_GLES_ANGLE_robust_resource_initialization;
+extern GLLOADER_API glloader_GLES_ANGLE_texture_compression_dxt1FUNC glloader_GLES_ANGLE_texture_compression_dxt1;
 extern GLLOADER_API glloader_GLES_ANGLE_texture_compression_dxt3FUNC glloader_GLES_ANGLE_texture_compression_dxt3;
 extern GLLOADER_API glloader_GLES_ANGLE_texture_compression_dxt5FUNC glloader_GLES_ANGLE_texture_compression_dxt5;
 extern GLLOADER_API glloader_GLES_ANGLE_texture_usageFUNC glloader_GLES_ANGLE_texture_usage;
+extern GLLOADER_API glloader_GL_EXT_timer_queryFUNC glloader_GL_EXT_timer_query;
 extern GLLOADER_API glloader_GLES_ANGLE_translated_shader_sourceFUNC glloader_GLES_ANGLE_translated_shader_source;
 extern GLLOADER_API glloader_GLES_APPLE_clip_distanceFUNC glloader_GLES_APPLE_clip_distance;
 extern GLLOADER_API glloader_GLES_APPLE_color_buffer_packed_floatFUNC glloader_GLES_APPLE_color_buffer_packed_float;
@@ -6213,6 +6948,7 @@ extern GLLOADER_API glloader_GLES_ARM_shader_framebuffer_fetch_depth_stencilFUNC
 extern GLLOADER_API glloader_GLES_DMP_program_binaryFUNC glloader_GLES_DMP_program_binary;
 extern GLLOADER_API glloader_GLES_EXT_base_instanceFUNC glloader_GLES_EXT_base_instance;
 extern GLLOADER_API glloader_GLES_EXT_blend_minmaxFUNC glloader_GLES_EXT_blend_minmax;
+extern GLLOADER_API glloader_GLES_EXT_buffer_storageFUNC glloader_GLES_EXT_buffer_storage;
 extern GLLOADER_API glloader_GLES_EXT_color_buffer_floatFUNC glloader_GLES_EXT_color_buffer_float;
 extern GLLOADER_API glloader_GLES_EXT_color_buffer_half_floatFUNC glloader_GLES_EXT_color_buffer_half_float;
 extern GLLOADER_API glloader_GLES_EXT_compressed_ETC1_RGB8_sub_textureFUNC glloader_GLES_EXT_compressed_ETC1_RGB8_sub_texture;
@@ -6225,6 +6961,7 @@ extern GLLOADER_API glloader_GLES_EXT_draw_buffersFUNC glloader_GLES_EXT_draw_bu
 extern GLLOADER_API glloader_GLES_EXT_draw_buffers_indexedFUNC glloader_GLES_EXT_draw_buffers_indexed;
 extern GLLOADER_API glloader_GLES_EXT_draw_elements_base_vertexFUNC glloader_GLES_EXT_draw_elements_base_vertex;
 extern GLLOADER_API glloader_GLES_EXT_draw_instancedFUNC glloader_GLES_EXT_draw_instanced;
+extern GLLOADER_API glloader_GLES_EXT_float_blendFUNC glloader_GLES_EXT_float_blend;
 extern GLLOADER_API glloader_GLES_EXT_frag_depthFUNC glloader_GLES_EXT_frag_depth;
 extern GLLOADER_API glloader_GLES_EXT_geometry_shaderFUNC glloader_GLES_EXT_geometry_shader;
 extern GLLOADER_API glloader_GLES_EXT_gpu_shader5FUNC glloader_GLES_EXT_gpu_shader5;
@@ -6235,8 +6972,10 @@ extern GLLOADER_API glloader_GLES_EXT_multiview_draw_buffersFUNC glloader_GLES_E
 extern GLLOADER_API glloader_GLES_EXT_multi_draw_arraysFUNC glloader_GLES_EXT_multi_draw_arrays;
 extern GLLOADER_API glloader_GLES_EXT_multi_draw_indirectFUNC glloader_GLES_EXT_multi_draw_indirect;
 extern GLLOADER_API glloader_GLES_EXT_occlusion_query_booleanFUNC glloader_GLES_EXT_occlusion_query_boolean;
+extern GLLOADER_API glloader_GLES_EXT_post_depth_coverageFUNC glloader_GLES_EXT_post_depth_coverage;
 extern GLLOADER_API glloader_GLES_EXT_primitive_bounding_boxFUNC glloader_GLES_EXT_primitive_bounding_box;
 extern GLLOADER_API glloader_GLES_EXT_pvrtc_sRGBFUNC glloader_GLES_EXT_pvrtc_sRGB;
+extern GLLOADER_API glloader_GLES_EXT_raster_multisampleFUNC glloader_GLES_EXT_raster_multisample;
 extern GLLOADER_API glloader_GLES_EXT_read_format_bgraFUNC glloader_GLES_EXT_read_format_bgra;
 extern GLLOADER_API glloader_GLES_EXT_render_snormFUNC glloader_GLES_EXT_render_snorm;
 extern GLLOADER_API glloader_GLES_EXT_robustnessFUNC glloader_GLES_EXT_robustness;
@@ -6248,6 +6987,7 @@ extern GLLOADER_API glloader_GLES_EXT_shader_io_blocksFUNC glloader_GLES_EXT_sha
 extern GLLOADER_API glloader_GLES_EXT_shader_pixel_local_storageFUNC glloader_GLES_EXT_shader_pixel_local_storage;
 extern GLLOADER_API glloader_GLES_EXT_shader_texture_lodFUNC glloader_GLES_EXT_shader_texture_lod;
 extern GLLOADER_API glloader_GLES_EXT_shadow_samplersFUNC glloader_GLES_EXT_shadow_samplers;
+extern GLLOADER_API glloader_GLES_EXT_sparse_textureFUNC glloader_GLES_EXT_sparse_texture;
 extern GLLOADER_API glloader_GLES_EXT_sRGBFUNC glloader_GLES_EXT_sRGB;
 extern GLLOADER_API glloader_GLES_EXT_sRGB_write_controlFUNC glloader_GLES_EXT_sRGB_write_control;
 extern GLLOADER_API glloader_GLES_EXT_tessellation_shaderFUNC glloader_GLES_EXT_tessellation_shader;
@@ -6258,15 +6998,19 @@ extern GLLOADER_API glloader_GLES_EXT_texture_compression_latcFUNC glloader_GLES
 extern GLLOADER_API glloader_GLES_EXT_texture_compression_s3tcFUNC glloader_GLES_EXT_texture_compression_s3tc;
 extern GLLOADER_API glloader_GLES_EXT_texture_cube_map_arrayFUNC glloader_GLES_EXT_texture_cube_map_array;
 extern GLLOADER_API glloader_GLES_EXT_texture_filter_anisotropicFUNC glloader_GLES_EXT_texture_filter_anisotropic;
+extern GLLOADER_API glloader_GLES_EXT_texture_filter_minmaxFUNC glloader_GLES_EXT_texture_filter_minmax;
 extern GLLOADER_API glloader_GLES_EXT_texture_format_BGRA8888FUNC glloader_GLES_EXT_texture_format_BGRA8888;
 extern GLLOADER_API glloader_GLES_EXT_texture_lod_biasFUNC glloader_GLES_EXT_texture_lod_bias;
 extern GLLOADER_API glloader_GLES_EXT_texture_norm16FUNC glloader_GLES_EXT_texture_norm16;
 extern GLLOADER_API glloader_GLES_EXT_texture_rgFUNC glloader_GLES_EXT_texture_rg;
 extern GLLOADER_API glloader_GLES_EXT_texture_sRGB_decodeFUNC glloader_GLES_EXT_texture_sRGB_decode;
+extern GLLOADER_API glloader_GLES_EXT_texture_sRGB_R8FUNC glloader_GLES_EXT_texture_sRGB_R8;
+extern GLLOADER_API glloader_GLES_EXT_texture_sRGB_RG8FUNC glloader_GLES_EXT_texture_sRGB_RG8;
 extern GLLOADER_API glloader_GLES_EXT_texture_storageFUNC glloader_GLES_EXT_texture_storage;
 extern GLLOADER_API glloader_GLES_EXT_texture_type_2_10_10_10_REVFUNC glloader_GLES_EXT_texture_type_2_10_10_10_REV;
 extern GLLOADER_API glloader_GLES_EXT_texture_viewFUNC glloader_GLES_EXT_texture_view;
 extern GLLOADER_API glloader_GLES_EXT_unpack_subimageFUNC glloader_GLES_EXT_unpack_subimage;
+extern GLLOADER_API glloader_GLES_EXT_YUV_targetFUNC glloader_GLES_EXT_YUV_target;
 extern GLLOADER_API glloader_GLES_FJ_shader_binary_GCCSOFUNC glloader_GLES_FJ_shader_binary_GCCSO;
 extern GLLOADER_API glloader_GLES_IMG_multisampled_render_to_textureFUNC glloader_GLES_IMG_multisampled_render_to_texture;
 extern GLLOADER_API glloader_GLES_IMG_program_binaryFUNC glloader_GLES_IMG_program_binary;
@@ -6280,6 +7024,7 @@ extern GLLOADER_API glloader_GLES_INTEL_performance_queryFUNC glloader_GLES_INTE
 extern GLLOADER_API glloader_GLES_KHR_blend_equation_advancedFUNC glloader_GLES_KHR_blend_equation_advanced;
 extern GLLOADER_API glloader_GLES_KHR_context_flush_controlFUNC glloader_GLES_KHR_context_flush_control;
 extern GLLOADER_API glloader_GLES_KHR_debugFUNC glloader_GLES_KHR_debug;
+extern GLLOADER_API glloader_GLES_KHR_no_errorFUNC glloader_GLES_KHR_no_error;
 extern GLLOADER_API glloader_GLES_KHR_robustnessFUNC glloader_GLES_KHR_robustness;
 extern GLLOADER_API glloader_GLES_KHR_robust_buffer_access_behaviorFUNC glloader_GLES_KHR_robust_buffer_access_behavior;
 extern GLLOADER_API glloader_GLES_KHR_texture_compression_astc_ldrFUNC glloader_GLES_KHR_texture_compression_astc_ldr;
@@ -6288,6 +7033,7 @@ extern GLLOADER_API glloader_GLES_NV_bgrFUNC glloader_GLES_NV_bgr;
 extern GLLOADER_API glloader_GLES_NV_bindless_textureFUNC glloader_GLES_NV_bindless_texture;
 extern GLLOADER_API glloader_GLES_NV_blend_equation_advancedFUNC glloader_GLES_NV_blend_equation_advanced;
 extern GLLOADER_API glloader_GLES_NV_conditional_renderFUNC glloader_GLES_NV_conditional_render;
+extern GLLOADER_API glloader_GLES_NV_conservative_rasterFUNC glloader_GLES_NV_conservative_raster;
 extern GLLOADER_API glloader_GLES_NV_copy_bufferFUNC glloader_GLES_NV_copy_buffer;
 extern GLLOADER_API glloader_GLES_NV_coverage_sampleFUNC glloader_GLES_NV_coverage_sample;
 extern GLLOADER_API glloader_GLES_NV_depth_nonlinearFUNC glloader_GLES_NV_depth_nonlinear;
@@ -6298,20 +7044,29 @@ extern GLLOADER_API glloader_GLES_NV_EGL_stream_consumer_externalFUNC glloader_G
 extern GLLOADER_API glloader_GLES_NV_explicit_attrib_locationFUNC glloader_GLES_NV_explicit_attrib_location;
 extern GLLOADER_API glloader_GLES_NV_fbo_color_attachmentsFUNC glloader_GLES_NV_fbo_color_attachments;
 extern GLLOADER_API glloader_GLES_NV_fenceFUNC glloader_GLES_NV_fence;
+extern GLLOADER_API glloader_GLES_NV_fill_rectangleFUNC glloader_GLES_NV_fill_rectangle;
+extern GLLOADER_API glloader_GLES_NV_fragment_coverage_to_colorFUNC glloader_GLES_NV_fragment_coverage_to_color;
+extern GLLOADER_API glloader_GLES_NV_fragment_shader_interlockFUNC glloader_GLES_NV_fragment_shader_interlock;
 extern GLLOADER_API glloader_GLES_NV_framebuffer_blitFUNC glloader_GLES_NV_framebuffer_blit;
+extern GLLOADER_API glloader_GLES_NV_framebuffer_mixed_samplesFUNC glloader_GLES_NV_framebuffer_mixed_samples;
 extern GLLOADER_API glloader_GLES_NV_framebuffer_multisampleFUNC glloader_GLES_NV_framebuffer_multisample;
 extern GLLOADER_API glloader_GLES_NV_generate_mipmap_sRGBFUNC glloader_GLES_NV_generate_mipmap_sRGB;
+extern GLLOADER_API glloader_GLES_NV_geometry_shader_passthroughFUNC glloader_GLES_NV_geometry_shader_passthrough;
 extern GLLOADER_API glloader_GLES_NV_image_formatsFUNC glloader_GLES_NV_image_formats;
 extern GLLOADER_API glloader_GLES_NV_instanced_arraysFUNC glloader_GLES_NV_instanced_arrays;
 extern GLLOADER_API glloader_GLES_NV_internalformat_sample_queryFUNC glloader_GLES_NV_internalformat_sample_query;
 extern GLLOADER_API glloader_GLES_NV_non_square_matricesFUNC glloader_GLES_NV_non_square_matrices;
 extern GLLOADER_API glloader_GLES_NV_packed_floatFUNC glloader_GLES_NV_packed_float;
 extern GLLOADER_API glloader_GLES_NV_path_renderingFUNC glloader_GLES_NV_path_rendering;
+extern GLLOADER_API glloader_GLES_NV_path_rendering_shared_edgeFUNC glloader_GLES_NV_path_rendering_shared_edge;
 extern GLLOADER_API glloader_GLES_NV_pixel_buffer_objectFUNC glloader_GLES_NV_pixel_buffer_object;
+extern GLLOADER_API glloader_GLES_NV_polygon_modeFUNC glloader_GLES_NV_polygon_mode;
 extern GLLOADER_API glloader_GLES_NV_read_bufferFUNC glloader_GLES_NV_read_buffer;
 extern GLLOADER_API glloader_GLES_NV_read_depthFUNC glloader_GLES_NV_read_depth;
 extern GLLOADER_API glloader_GLES_NV_read_depth_stencilFUNC glloader_GLES_NV_read_depth_stencil;
 extern GLLOADER_API glloader_GLES_NV_read_stencilFUNC glloader_GLES_NV_read_stencil;
+extern GLLOADER_API glloader_GLES_NV_sample_locationsFUNC glloader_GLES_NV_sample_locations;
+extern GLLOADER_API glloader_GLES_NV_sample_mask_override_coverageFUNC glloader_GLES_NV_sample_mask_override_coverage;
 extern GLLOADER_API glloader_GLES_NV_shader_noperspective_interpolationFUNC glloader_GLES_NV_shader_noperspective_interpolation;
 extern GLLOADER_API glloader_GLES_NV_shadow_samplers_arrayFUNC glloader_GLES_NV_shadow_samplers_array;
 extern GLLOADER_API glloader_GLES_NV_shadow_samplers_cubeFUNC glloader_GLES_NV_shadow_samplers_cube;
@@ -6323,32 +7078,40 @@ extern GLLOADER_API glloader_GLES_NV_texture_compression_s3tcFUNC glloader_GLES_
 extern GLLOADER_API glloader_GLES_NV_texture_compression_s3tc_updateFUNC glloader_GLES_NV_texture_compression_s3tc_update;
 extern GLLOADER_API glloader_GLES_NV_texture_npot_2D_mipmapFUNC glloader_GLES_NV_texture_npot_2D_mipmap;
 extern GLLOADER_API glloader_GLES_NV_viewport_arrayFUNC glloader_GLES_NV_viewport_array;
+extern GLLOADER_API glloader_GLES_NV_viewport_array2FUNC glloader_GLES_NV_viewport_array2;
 extern GLLOADER_API glloader_GLES_OES_blend_equation_separateFUNC glloader_GLES_OES_blend_equation_separate;
 extern GLLOADER_API glloader_GLES_OES_blend_func_separateFUNC glloader_GLES_OES_blend_func_separate;
 extern GLLOADER_API glloader_GLES_OES_blend_subtractFUNC glloader_GLES_OES_blend_subtract;
 extern GLLOADER_API glloader_GLES_OES_byte_coordinatesFUNC glloader_GLES_OES_byte_coordinates;
 extern GLLOADER_API glloader_GLES_OES_compressed_ETC1_RGB8_textureFUNC glloader_GLES_OES_compressed_ETC1_RGB8_texture;
 extern GLLOADER_API glloader_GLES_OES_compressed_paletted_textureFUNC glloader_GLES_OES_compressed_paletted_texture;
+extern GLLOADER_API glloader_GLES_OES_copy_imageFUNC glloader_GLES_OES_copy_image;
 extern GLLOADER_API glloader_GLES_OES_depth24FUNC glloader_GLES_OES_depth24;
 extern GLLOADER_API glloader_GLES_OES_depth32FUNC glloader_GLES_OES_depth32;
 extern GLLOADER_API glloader_GLES_OES_depth_textureFUNC glloader_GLES_OES_depth_texture;
 extern GLLOADER_API glloader_GLES_OES_depth_texture_cube_mapFUNC glloader_GLES_OES_depth_texture_cube_map;
+extern GLLOADER_API glloader_GLES_OES_draw_buffers_indexedFUNC glloader_GLES_OES_draw_buffers_indexed;
+extern GLLOADER_API glloader_GLES_OES_draw_elements_base_vertexFUNC glloader_GLES_OES_draw_elements_base_vertex;
 extern GLLOADER_API glloader_GLES_OES_draw_textureFUNC glloader_GLES_OES_draw_texture;
 extern GLLOADER_API glloader_GLES_OES_EGL_imageFUNC glloader_GLES_OES_EGL_image;
 extern GLLOADER_API glloader_GLES_OES_EGL_image_externalFUNC glloader_GLES_OES_EGL_image_external;
+extern GLLOADER_API glloader_GLES_OES_EGL_image_external_essl3FUNC glloader_GLES_OES_EGL_image_external_essl3;
 extern GLLOADER_API glloader_GLES_OES_element_index_uintFUNC glloader_GLES_OES_element_index_uint;
 extern GLLOADER_API glloader_GLES_OES_extended_matrix_paletteFUNC glloader_GLES_OES_extended_matrix_palette;
 extern GLLOADER_API glloader_GLES_OES_fbo_render_mipmapFUNC glloader_GLES_OES_fbo_render_mipmap;
 extern GLLOADER_API glloader_GLES_OES_fixed_pointFUNC glloader_GLES_OES_fixed_point;
 extern GLLOADER_API glloader_GLES_OES_fragment_precision_highFUNC glloader_GLES_OES_fragment_precision_high;
 extern GLLOADER_API glloader_GLES_OES_framebuffer_objectFUNC glloader_GLES_OES_framebuffer_object;
+extern GLLOADER_API glloader_GLES_OES_geometry_shaderFUNC glloader_GLES_OES_geometry_shader;
 extern GLLOADER_API glloader_GLES_OES_get_program_binaryFUNC glloader_GLES_OES_get_program_binary;
+extern GLLOADER_API glloader_GLES_OES_gpu_shader5FUNC glloader_GLES_OES_gpu_shader5;
 extern GLLOADER_API glloader_GLES_OES_mapbufferFUNC glloader_GLES_OES_mapbuffer;
 extern GLLOADER_API glloader_GLES_OES_matrix_getFUNC glloader_GLES_OES_matrix_get;
 extern GLLOADER_API glloader_GLES_OES_matrix_paletteFUNC glloader_GLES_OES_matrix_palette;
 extern GLLOADER_API glloader_GLES_OES_packed_depth_stencilFUNC glloader_GLES_OES_packed_depth_stencil;
 extern GLLOADER_API glloader_GLES_OES_point_size_arrayFUNC glloader_GLES_OES_point_size_array;
 extern GLLOADER_API glloader_GLES_OES_point_spriteFUNC glloader_GLES_OES_point_sprite;
+extern GLLOADER_API glloader_GLES_OES_primitive_bounding_boxFUNC glloader_GLES_OES_primitive_bounding_box;
 extern GLLOADER_API glloader_GLES_OES_query_matrixFUNC glloader_GLES_OES_query_matrix;
 extern GLLOADER_API glloader_GLES_OES_read_formatFUNC glloader_GLES_OES_read_format;
 extern GLLOADER_API glloader_GLES_OES_required_internalformatFUNC glloader_GLES_OES_required_internalformat;
@@ -6357,6 +7120,7 @@ extern GLLOADER_API glloader_GL_OES_sample_shadingFUNC glloader_GL_OES_sample_sh
 extern GLLOADER_API glloader_GL_OES_sample_variablesFUNC glloader_GL_OES_sample_variables;
 extern GLLOADER_API glloader_GLES_OES_shader_binaryFUNC glloader_GLES_OES_shader_binary;
 extern GLLOADER_API glloader_GL_OES_shader_image_atomicFUNC glloader_GL_OES_shader_image_atomic;
+extern GLLOADER_API glloader_GLES_OES_shader_io_blocksFUNC glloader_GLES_OES_shader_io_blocks;
 extern GLLOADER_API glloader_GL_OES_shader_multisample_interpolationFUNC glloader_GL_OES_shader_multisample_interpolation;
 extern GLLOADER_API glloader_GLES_OES_shader_sourceFUNC glloader_GLES_OES_shader_source;
 extern GLLOADER_API glloader_GLES_OES_single_precisionFUNC glloader_GLES_OES_single_precision;
@@ -6366,9 +7130,13 @@ extern GLLOADER_API glloader_GLES_OES_stencil4FUNC glloader_GLES_OES_stencil4;
 extern GLLOADER_API glloader_GLES_OES_stencil8FUNC glloader_GLES_OES_stencil8;
 extern GLLOADER_API glloader_GLES_OES_stencil_wrapFUNC glloader_GLES_OES_stencil_wrap;
 extern GLLOADER_API glloader_GLES_OES_surfaceless_contextFUNC glloader_GLES_OES_surfaceless_context;
+extern GLLOADER_API glloader_GLES_OES_tessellation_shaderFUNC glloader_GLES_OES_tessellation_shader;
 extern GLLOADER_API glloader_GLES_OES_texture_3DFUNC glloader_GLES_OES_texture_3D;
+extern GLLOADER_API glloader_GLES_OES_texture_border_clampFUNC glloader_GLES_OES_texture_border_clamp;
+extern GLLOADER_API glloader_GLES_OES_texture_bufferFUNC glloader_GLES_OES_texture_buffer;
 extern GLLOADER_API glloader_GLES_OES_texture_compression_astcFUNC glloader_GLES_OES_texture_compression_astc;
 extern GLLOADER_API glloader_GLES_OES_texture_cube_mapFUNC glloader_GLES_OES_texture_cube_map;
+extern GLLOADER_API glloader_GLES_OES_texture_cube_map_arrayFUNC glloader_GLES_OES_texture_cube_map_array;
 extern GLLOADER_API glloader_GLES_OES_texture_env_crossbarFUNC glloader_GLES_OES_texture_env_crossbar;
 extern GLLOADER_API glloader_GLES_OES_texture_floatFUNC glloader_GLES_OES_texture_float;
 extern GLLOADER_API glloader_GLES_OES_texture_float_linearFUNC glloader_GLES_OES_texture_float_linear;
@@ -6378,9 +7146,12 @@ extern GLLOADER_API glloader_GLES_OES_texture_mirrored_repeatFUNC glloader_GLES_
 extern GLLOADER_API glloader_GLES_OES_texture_npotFUNC glloader_GLES_OES_texture_npot;
 extern GLLOADER_API glloader_GL_OES_texture_stencil8FUNC glloader_GL_OES_texture_stencil8;
 extern GLLOADER_API glloader_GL_OES_texture_storage_multisample_2d_arrayFUNC glloader_GL_OES_texture_storage_multisample_2d_array;
+extern GLLOADER_API glloader_GLES_OES_texture_viewFUNC glloader_GLES_OES_texture_view;
 extern GLLOADER_API glloader_GLES_OES_vertex_array_objectFUNC glloader_GLES_OES_vertex_array_object;
 extern GLLOADER_API glloader_GLES_OES_vertex_half_floatFUNC glloader_GLES_OES_vertex_half_float;
 extern GLLOADER_API glloader_GLES_OES_vertex_type_10_10_10_2FUNC glloader_GLES_OES_vertex_type_10_10_10_2;
+extern GLLOADER_API glloader_GLES_OVR_multiviewFUNC glloader_GLES_OVR_multiview;
+extern GLLOADER_API glloader_GLES_OVR_multiview2FUNC glloader_GLES_OVR_multiview2;
 extern GLLOADER_API glloader_GLES_QCOM_binning_controlFUNC glloader_GLES_QCOM_binning_control;
 extern GLLOADER_API glloader_GLES_QCOM_driver_controlFUNC glloader_GLES_QCOM_driver_control;
 extern GLLOADER_API glloader_GLES_QCOM_extended_getFUNC glloader_GLES_QCOM_extended_get;

@@ -3,7 +3,7 @@
 
 #include <string>
 #include <windows.h>
-#include "External/glloader/glloader.h"
+#include "glloader/glloader.h"
 
 namespace ZGE
 {

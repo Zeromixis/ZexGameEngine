@@ -49,12 +49,44 @@ extern "C"
 #define EGL_ANGLE_d3d_share_handle_client_buffer 1
 #endif
 
+#ifndef EGL_ANGLE_device_d3d
+#define EGL_ANGLE_device_d3d 1
+#endif
+
+#ifndef EGL_ANGLE_direct3d_display
+#define EGL_ANGLE_direct3d_display 1
+#endif
+
+#ifndef EGL_ANGLE_platform_angle
+#define EGL_ANGLE_platform_angle 1
+#endif
+
+#ifndef EGL_ANGLE_platform_angle_d3d
+#define EGL_ANGLE_platform_angle_d3d 1
+#endif
+
+#ifndef EGL_ANGLE_platform_angle_opengl
+#define EGL_ANGLE_platform_angle_opengl 1
+#endif
+
 #ifndef EGL_ANGLE_query_surface_pointer
 #define EGL_ANGLE_query_surface_pointer 1
 #endif
 
+#ifndef EGL_ANGLE_robust_resource_initialization
+#define EGL_ANGLE_robust_resource_initialization 1
+#endif
+
+#ifndef EGL_ANGLE_software_display
+#define EGL_ANGLE_software_display 1
+#endif
+
 #ifndef EGL_ANGLE_surface_d3d_texture_2d_share_handle
 #define EGL_ANGLE_surface_d3d_texture_2d_share_handle 1
+#endif
+
+#ifndef EGL_ANGLE_window_fixed_size
+#define EGL_ANGLE_window_fixed_size 1
 #endif
 
 #ifndef EGL_ARM_pixmap_multisample_discard
@@ -81,8 +113,16 @@ extern "C"
 #define EGL_EXT_device_drm 1
 #endif
 
+#ifndef EGL_EXT_device_enumeration
+#define EGL_EXT_device_enumeration 1
+#endif
+
 #ifndef EGL_EXT_device_openwf
 #define EGL_EXT_device_openwf 1
+#endif
+
+#ifndef EGL_EXT_device_query
+#define EGL_EXT_device_query 1
 #endif
 
 #ifndef EGL_EXT_image_dma_buf_import
@@ -125,6 +165,10 @@ extern "C"
 #define EGL_EXT_swap_buffers_with_damage 1
 #endif
 
+#ifndef EGL_EXT_yuv_surface
+#define EGL_EXT_yuv_surface 1
+#endif
+
 #ifndef EGL_HI_clientpixmap
 #define EGL_HI_clientpixmap 1
 #endif
@@ -151,6 +195,10 @@ extern "C"
 
 #ifndef EGL_KHR_create_context
 #define EGL_KHR_create_context 1
+#endif
+
+#ifndef EGL_KHR_create_context_no_error
+#define EGL_KHR_create_context_no_error 1
 #endif
 
 #ifndef EGL_KHR_fence_sync
@@ -259,6 +307,10 @@ extern "C"
 
 #ifndef EGL_MESA_drm_image
 #define EGL_MESA_drm_image 1
+#endif
+
+#ifndef EGL_MESA_image_dma_buf_export
+#define EGL_MESA_image_dma_buf_export 1
 #endif
 
 #ifndef EGL_MESA_platform_gbm
@@ -382,8 +434,69 @@ extern "C"
 
 #endif
 
+#ifdef EGL_ANGLE_device_d3d
+
+#define EGL_D3D9_DEVICE_ANGLE 0x33A0
+#define EGL_D3D11_DEVICE_ANGLE 0x33A1
+
+#endif
+
+#ifdef EGL_ANGLE_direct3d_display
+
+#define EGL_D3D11_ELSE_D3D9_DISPLAY_ANGLE (EGLNativeDisplayType)-2
+#define EGL_D3D11_ONLY_DISPLAY_ANGLE (EGLNativeDisplayType)-3
+
+#endif
+
+#ifdef EGL_ANGLE_platform_angle
+
+#define EGL_PLATFORM_ANGLE_ANGLE 0x3202
+#define EGL_PLATFORM_ANGLE_TYPE_ANGLE 0x3203
+#define EGL_PLATFORM_ANGLE_MAX_VERSION_MAJOR_ANGLE 0x3204
+#define EGL_PLATFORM_ANGLE_MAX_VERSION_MINOR_ANGLE 0x3205
+#define EGL_PLATFORM_ANGLE_TYPE_DEFAULT_ANGLE 0x3206
+
+#endif
+
+#ifdef EGL_ANGLE_platform_angle_d3d
+
+#define EGL_PLATFORM_ANGLE_TYPE_D3D9_ANGLE 0x3207
+#define EGL_PLATFORM_ANGLE_TYPE_D3D11_ANGLE 0x3208
+#define EGL_PLATFORM_ANGLE_DEVICE_TYPE_ANGLE 0x3209
+#define EGL_PLATFORM_ANGLE_ENABLE_AUTOMATIC_TRIM_ANGLE 0x320F
+#define EGL_PLATFORM_ANGLE_DEVICE_TYPE_HARDWARE_ANGLE 0x320A
+#define EGL_PLATFORM_ANGLE_DEVICE_TYPE_WARP_ANGLE 0x320B
+#define EGL_PLATFORM_ANGLE_DEVICE_TYPE_REFERENCE_ANGLE 0x320C
+
+#endif
+
+#ifdef EGL_ANGLE_platform_angle_opengl
+
+#define EGL_PLATFORM_ANGLE_TYPE_OPENGL_ANGLE 0x320D
+#define EGL_PLATFORM_ANGLE_TYPE_OPENGLES_ANGLE 0x320E
+
+#endif
+
+#ifdef EGL_ANGLE_robust_resource_initialization
+
+#define EGL_CONTEXT_OPENGL_ROBUST_RESOURCE_INITIALIZATION_ANGLE 0x320F
+
+#endif
+
+#ifdef EGL_ANGLE_software_display
+
+#define EGL_SOFTWARE_DISPLAY_ANGLE (EGLNativeDisplayType)-1
+
+#endif
+
 #ifdef EGL_ANGLE_surface_d3d_texture_2d_share_handle
 
+
+#endif
+
+#ifdef EGL_ANGLE_window_fixed_size
+
+#define EGL_FIXED_SIZE_ANGLE 0x3201
 
 #endif
 
@@ -430,6 +543,11 @@ extern "C"
 #define EGL_OPENWF_DEVICE_ID_EXT 0x3237
 #define EGL_OPENWF_PIPELINE_ID_EXT 0x3238
 #define EGL_OPENWF_PORT_ID_EXT 0x3239
+
+#endif
+
+#ifdef EGL_EXT_device_query
+
 
 #endif
 
@@ -501,6 +619,36 @@ extern "C"
 
 #endif
 
+#ifdef EGL_EXT_yuv_surface
+
+#define EGL_YUV_ORDER_EXT 0x3301
+#define EGL_YUV_NUMBER_OF_PLANES_EXT 0x3311
+#define EGL_YUV_SUBSAMPLE_EXT 0x3312
+#define EGL_YUV_DEPTH_RANGE_EXT 0x3317
+#define EGL_YUV_CSC_STANDARD_EXT 0x330A
+#define EGL_YUV_PLANE_BPP_EXT 0x331A
+#define EGL_YUV_BUFFER_EXT 0x3300
+#define EGL_YUV_ORDER_YUV_EXT 0x3302
+#define EGL_YUV_ORDER_YVU_EXT 0x3303
+#define EGL_YUV_ORDER_YUYV_EXT 0x3304
+#define EGL_YUV_ORDER_UYVY_EXT 0x3305
+#define EGL_YUV_ORDER_YVYU_EXT 0x3306
+#define EGL_YUV_ORDER_VYUY_EXT 0x3307
+#define EGL_YUV_ORDER_AYUV_EXT 0x3308
+#define EGL_YUV_SUBSAMPLE_4_2_0_EXT 0x3313
+#define EGL_YUV_SUBSAMPLE_4_2_2_EXT 0x3314
+#define EGL_YUV_SUBSAMPLE_4_4_4_EXT 0x3315
+#define EGL_YUV_DEPTH_RANGE_LIMITED_EXT 0x3318
+#define EGL_YUV_DEPTH_RANGE_FULL_EXT 0x3319
+#define EGL_YUV_CSC_STANDARD_601_EXT 0x330B
+#define EGL_YUV_CSC_STANDARD_709_EXT 0x330C
+#define EGL_YUV_CSC_STANDARD_2020_EXT 0x330D
+#define EGL_YUV_PLANE_BPP_0_EXT 0x331B
+#define EGL_YUV_PLANE_BPP_8_EXT 0x331C
+#define EGL_YUV_PLANE_BPP_10_EXT 0x331D
+
+#endif
+
 #ifdef EGL_HI_colorformats
 
 #define EGL_COLOR_FORMAT_HI 0x8F70
@@ -555,6 +703,12 @@ extern "C"
 #define EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR 0x00000001
 #define EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR 0x00000002
 #define EGL_OPENGL_ES3_BIT_KHR 0x00000040
+
+#endif
+
+#ifdef EGL_KHR_create_context_no_error
+
+#define EGL_CONTEXT_OPENGL_NO_ERROR_KHR 0x31B3
 
 #endif
 
@@ -1044,6 +1198,11 @@ typedef intptr_t EGLAttrib;
 
 #endif
 
+#ifdef EGL_EXT_device_query
+
+
+#endif
+
 #ifdef EGL_EXT_output_base
 
 typedef void* EGLOutputLayerEXT;
@@ -1184,6 +1343,12 @@ extern GLLOADER_API eglQueryDeviceAttribEXTFUNC eglQueryDeviceAttribEXT;
 extern GLLOADER_API eglQueryDeviceStringEXTFUNC eglQueryDeviceStringEXT;
 extern GLLOADER_API eglQueryDevicesEXTFUNC eglQueryDevicesEXT;
 extern GLLOADER_API eglQueryDisplayAttribEXTFUNC eglQueryDisplayAttribEXT;
+
+#endif
+
+#ifdef EGL_EXT_device_query
+
+
 
 #endif
 
@@ -1391,6 +1556,16 @@ extern GLLOADER_API eglExportDRMImageMESAFUNC eglExportDRMImageMESA;
 
 #endif
 
+#ifdef EGL_MESA_image_dma_buf_export
+
+typedef EGLBoolean (GLLOADER_APIENTRY *eglExportDMABUFImageQueryMESAFUNC)(EGLDisplay dpy, EGLImageKHR image, EGLint* fourcc, EGLint* num_planes, EGLuint64KHR* modifiers);
+typedef EGLBoolean (GLLOADER_APIENTRY *eglExportDMABUFImageMESAFUNC)(EGLDisplay dpy, EGLImageKHR image, EGLint* fds, EGLint* strides, EGLint* offsets);
+
+extern GLLOADER_API eglExportDMABUFImageQueryMESAFUNC eglExportDMABUFImageQueryMESA;
+extern GLLOADER_API eglExportDMABUFImageMESAFUNC eglExportDMABUFImageMESA;
+
+#endif
+
 #ifdef EGL_NOK_swap_region2
 
 typedef EGLBoolean (GLLOADER_APIENTRY *eglSwapBuffersRegion2NOKFUNC)(EGLDisplay dpy, EGLSurface surface, EGLint numRects, const EGLint* rects);
@@ -1569,15 +1744,25 @@ typedef char (GLLOADER_APIENTRY *glloader_EGL_ANDROID_image_native_bufferFUNC)()
 typedef char (GLLOADER_APIENTRY *glloader_EGL_ANDROID_native_fence_syncFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_ANDROID_recordableFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_ANGLE_d3d_share_handle_client_bufferFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_ANGLE_device_d3dFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_ANGLE_direct3d_displayFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_ANGLE_platform_angleFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_ANGLE_platform_angle_d3dFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_ANGLE_platform_angle_openglFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_ANGLE_query_surface_pointerFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_ANGLE_robust_resource_initializationFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_ANGLE_software_displayFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_ANGLE_surface_d3d_texture_2d_share_handleFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_ANGLE_window_fixed_sizeFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_ARM_pixmap_multisample_discardFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_buffer_ageFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_client_extensionsFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_create_context_robustnessFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_device_baseFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_device_drmFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_device_enumerationFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_device_openwfFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_device_queryFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_image_dma_buf_importFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_multiview_windowFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_output_baseFUNC)();
@@ -1588,6 +1773,7 @@ typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_platform_x11FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_protected_surfaceFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_stream_consumer_egloutputFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_swap_buffers_with_damageFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_EXT_yuv_surfaceFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_HI_clientpixmapFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_HI_colorformatsFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_IMG_context_priorityFUNC)();
@@ -1595,6 +1781,7 @@ typedef char (GLLOADER_APIENTRY *glloader_EGL_KHR_cl_eventFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_KHR_cl_event2FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_KHR_config_attribsFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_KHR_create_contextFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_KHR_create_context_no_errorFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_KHR_fence_syncFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_KHR_get_all_proc_addressesFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_KHR_gl_colorspaceFUNC)();
@@ -1622,6 +1809,7 @@ typedef char (GLLOADER_APIENTRY *glloader_EGL_KHR_swap_buffers_with_damageFUNC)(
 typedef char (GLLOADER_APIENTRY *glloader_EGL_KHR_vg_parent_imageFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_KHR_wait_syncFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_MESA_drm_imageFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_EGL_MESA_image_dma_buf_exportFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_MESA_platform_gbmFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_NOK_swap_region2FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_EGL_NOK_texture_from_pixmapFUNC)();
@@ -1651,15 +1839,25 @@ extern GLLOADER_API glloader_EGL_ANDROID_image_native_bufferFUNC glloader_EGL_AN
 extern GLLOADER_API glloader_EGL_ANDROID_native_fence_syncFUNC glloader_EGL_ANDROID_native_fence_sync;
 extern GLLOADER_API glloader_EGL_ANDROID_recordableFUNC glloader_EGL_ANDROID_recordable;
 extern GLLOADER_API glloader_EGL_ANGLE_d3d_share_handle_client_bufferFUNC glloader_EGL_ANGLE_d3d_share_handle_client_buffer;
+extern GLLOADER_API glloader_EGL_ANGLE_device_d3dFUNC glloader_EGL_ANGLE_device_d3d;
+extern GLLOADER_API glloader_EGL_ANGLE_direct3d_displayFUNC glloader_EGL_ANGLE_direct3d_display;
+extern GLLOADER_API glloader_EGL_ANGLE_platform_angleFUNC glloader_EGL_ANGLE_platform_angle;
+extern GLLOADER_API glloader_EGL_ANGLE_platform_angle_d3dFUNC glloader_EGL_ANGLE_platform_angle_d3d;
+extern GLLOADER_API glloader_EGL_ANGLE_platform_angle_openglFUNC glloader_EGL_ANGLE_platform_angle_opengl;
 extern GLLOADER_API glloader_EGL_ANGLE_query_surface_pointerFUNC glloader_EGL_ANGLE_query_surface_pointer;
+extern GLLOADER_API glloader_EGL_ANGLE_robust_resource_initializationFUNC glloader_EGL_ANGLE_robust_resource_initialization;
+extern GLLOADER_API glloader_EGL_ANGLE_software_displayFUNC glloader_EGL_ANGLE_software_display;
 extern GLLOADER_API glloader_EGL_ANGLE_surface_d3d_texture_2d_share_handleFUNC glloader_EGL_ANGLE_surface_d3d_texture_2d_share_handle;
+extern GLLOADER_API glloader_EGL_ANGLE_window_fixed_sizeFUNC glloader_EGL_ANGLE_window_fixed_size;
 extern GLLOADER_API glloader_EGL_ARM_pixmap_multisample_discardFUNC glloader_EGL_ARM_pixmap_multisample_discard;
 extern GLLOADER_API glloader_EGL_EXT_buffer_ageFUNC glloader_EGL_EXT_buffer_age;
 extern GLLOADER_API glloader_EGL_EXT_client_extensionsFUNC glloader_EGL_EXT_client_extensions;
 extern GLLOADER_API glloader_EGL_EXT_create_context_robustnessFUNC glloader_EGL_EXT_create_context_robustness;
 extern GLLOADER_API glloader_EGL_EXT_device_baseFUNC glloader_EGL_EXT_device_base;
 extern GLLOADER_API glloader_EGL_EXT_device_drmFUNC glloader_EGL_EXT_device_drm;
+extern GLLOADER_API glloader_EGL_EXT_device_enumerationFUNC glloader_EGL_EXT_device_enumeration;
 extern GLLOADER_API glloader_EGL_EXT_device_openwfFUNC glloader_EGL_EXT_device_openwf;
+extern GLLOADER_API glloader_EGL_EXT_device_queryFUNC glloader_EGL_EXT_device_query;
 extern GLLOADER_API glloader_EGL_EXT_image_dma_buf_importFUNC glloader_EGL_EXT_image_dma_buf_import;
 extern GLLOADER_API glloader_EGL_EXT_multiview_windowFUNC glloader_EGL_EXT_multiview_window;
 extern GLLOADER_API glloader_EGL_EXT_output_baseFUNC glloader_EGL_EXT_output_base;
@@ -1670,6 +1868,7 @@ extern GLLOADER_API glloader_EGL_EXT_platform_x11FUNC glloader_EGL_EXT_platform_
 extern GLLOADER_API glloader_EGL_EXT_protected_surfaceFUNC glloader_EGL_EXT_protected_surface;
 extern GLLOADER_API glloader_EGL_EXT_stream_consumer_egloutputFUNC glloader_EGL_EXT_stream_consumer_egloutput;
 extern GLLOADER_API glloader_EGL_EXT_swap_buffers_with_damageFUNC glloader_EGL_EXT_swap_buffers_with_damage;
+extern GLLOADER_API glloader_EGL_EXT_yuv_surfaceFUNC glloader_EGL_EXT_yuv_surface;
 extern GLLOADER_API glloader_EGL_HI_clientpixmapFUNC glloader_EGL_HI_clientpixmap;
 extern GLLOADER_API glloader_EGL_HI_colorformatsFUNC glloader_EGL_HI_colorformats;
 extern GLLOADER_API glloader_EGL_IMG_context_priorityFUNC glloader_EGL_IMG_context_priority;
@@ -1677,6 +1876,7 @@ extern GLLOADER_API glloader_EGL_KHR_cl_eventFUNC glloader_EGL_KHR_cl_event;
 extern GLLOADER_API glloader_EGL_KHR_cl_event2FUNC glloader_EGL_KHR_cl_event2;
 extern GLLOADER_API glloader_EGL_KHR_config_attribsFUNC glloader_EGL_KHR_config_attribs;
 extern GLLOADER_API glloader_EGL_KHR_create_contextFUNC glloader_EGL_KHR_create_context;
+extern GLLOADER_API glloader_EGL_KHR_create_context_no_errorFUNC glloader_EGL_KHR_create_context_no_error;
 extern GLLOADER_API glloader_EGL_KHR_fence_syncFUNC glloader_EGL_KHR_fence_sync;
 extern GLLOADER_API glloader_EGL_KHR_get_all_proc_addressesFUNC glloader_EGL_KHR_get_all_proc_addresses;
 extern GLLOADER_API glloader_EGL_KHR_gl_colorspaceFUNC glloader_EGL_KHR_gl_colorspace;
@@ -1704,6 +1904,7 @@ extern GLLOADER_API glloader_EGL_KHR_swap_buffers_with_damageFUNC glloader_EGL_K
 extern GLLOADER_API glloader_EGL_KHR_vg_parent_imageFUNC glloader_EGL_KHR_vg_parent_image;
 extern GLLOADER_API glloader_EGL_KHR_wait_syncFUNC glloader_EGL_KHR_wait_sync;
 extern GLLOADER_API glloader_EGL_MESA_drm_imageFUNC glloader_EGL_MESA_drm_image;
+extern GLLOADER_API glloader_EGL_MESA_image_dma_buf_exportFUNC glloader_EGL_MESA_image_dma_buf_export;
 extern GLLOADER_API glloader_EGL_MESA_platform_gbmFUNC glloader_EGL_MESA_platform_gbm;
 extern GLLOADER_API glloader_EGL_NOK_swap_region2FUNC glloader_EGL_NOK_swap_region2;
 extern GLLOADER_API glloader_EGL_NOK_texture_from_pixmapFUNC glloader_EGL_NOK_texture_from_pixmap;

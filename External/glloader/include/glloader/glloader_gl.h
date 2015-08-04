@@ -1417,6 +1417,10 @@ extern "C"
 #define GL_KHR_debug 1
 #endif
 
+#ifndef GL_KHR_no_error
+#define GL_KHR_no_error 1
+#endif
+
 #ifndef GL_KHR_robustness
 #define GL_KHR_robustness 1
 #endif
@@ -1817,6 +1821,10 @@ extern "C"
 #define GL_NV_video_capture 1
 #endif
 
+#ifndef GL_NV_viewport_array2
+#define GL_NV_viewport_array2 1
+#endif
+
 #ifndef GL_OES_read_format
 #define GL_OES_read_format 1
 #endif
@@ -1831,6 +1839,14 @@ extern "C"
 
 #ifndef GL_OML_subsample
 #define GL_OML_subsample 1
+#endif
+
+#ifndef GL_OVR_multiview
+#define GL_OVR_multiview 1
+#endif
+
+#ifndef GL_OVR_multiview2
+#define GL_OVR_multiview2 1
 #endif
 
 #ifndef GL_PGI_misc_hints
@@ -6071,8 +6087,16 @@ extern "C"
 
 #ifdef GL_KHR_debug
 
+#define GL_DEBUG_OUTPUT 0x92E0
 #define GL_DEBUG_OUTPUT_SYNCHRONOUS 0x8242
+#define GL_CONTEXT_FLAG_DEBUG_BIT 0x00000002
+#define GL_MAX_DEBUG_MESSAGE_LENGTH 0x9143
+#define GL_MAX_DEBUG_LOGGED_MESSAGES 0x9144
+#define GL_DEBUG_LOGGED_MESSAGES 0x9145
 #define GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH 0x8243
+#define GL_MAX_DEBUG_GROUP_STACK_DEPTH 0x826C
+#define GL_DEBUG_GROUP_STACK_DEPTH 0x826D
+#define GL_MAX_LABEL_LENGTH 0x82E8
 #define GL_DEBUG_CALLBACK_FUNCTION 0x8244
 #define GL_DEBUG_CALLBACK_USER_PARAM 0x8245
 #define GL_DEBUG_SOURCE_API 0x8246
@@ -6090,9 +6114,12 @@ extern "C"
 #define GL_DEBUG_TYPE_MARKER 0x8268
 #define GL_DEBUG_TYPE_PUSH_GROUP 0x8269
 #define GL_DEBUG_TYPE_POP_GROUP 0x826A
+#define GL_DEBUG_SEVERITY_HIGH 0x9146
+#define GL_DEBUG_SEVERITY_MEDIUM 0x9147
+#define GL_DEBUG_SEVERITY_LOW 0x9148
 #define GL_DEBUG_SEVERITY_NOTIFICATION 0x826B
-#define GL_MAX_DEBUG_GROUP_STACK_DEPTH 0x826C
-#define GL_DEBUG_GROUP_STACK_DEPTH 0x826D
+#define GL_STACK_UNDERFLOW 0x0504
+#define GL_STACK_OVERFLOW 0x0503
 #define GL_BUFFER 0x82E0
 #define GL_SHADER 0x82E1
 #define GL_PROGRAM 0x82E2
@@ -6100,17 +6127,12 @@ extern "C"
 #define GL_PROGRAM_PIPELINE 0x82E4
 #define GL_SAMPLER 0x82E6
 #define GL_DISPLAY_LIST 0x82E7
-#define GL_MAX_LABEL_LENGTH 0x82E8
-#define GL_MAX_DEBUG_MESSAGE_LENGTH 0x9143
-#define GL_MAX_DEBUG_LOGGED_MESSAGES 0x9144
-#define GL_DEBUG_LOGGED_MESSAGES 0x9145
-#define GL_DEBUG_SEVERITY_HIGH 0x9146
-#define GL_DEBUG_SEVERITY_MEDIUM 0x9147
-#define GL_DEBUG_SEVERITY_LOW 0x9148
-#define GL_DEBUG_OUTPUT 0x92E0
-#define GL_CONTEXT_FLAG_DEBUG_BIT 0x00000002
-#define GL_STACK_UNDERFLOW 0x0504
-#define GL_STACK_OVERFLOW 0x0503
+
+#endif
+
+#ifdef GL_KHR_no_error
+
+#define GL_CONTEXT_FLAG_NO_ERROR_BIT_KHR 0x00000008
 
 #endif
 
@@ -7268,6 +7290,15 @@ extern "C"
 
 #define GL_FORMAT_SUBSAMPLE_24_24_OML 0x8982
 #define GL_FORMAT_SUBSAMPLE_244_244_OML 0x8983
+
+#endif
+
+#ifdef GL_OVR_multiview
+
+#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR 0x9630
+#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR 0x9632
+#define GL_MAX_VIEWS_OVR 0x9631
+#define GL_FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR 0x9633
 
 #endif
 
@@ -13012,6 +13043,7 @@ typedef void (GLLOADER_APIENTRY *glDebugMessageControlFUNC)(GLenum source, GLenu
 typedef void (GLLOADER_APIENTRY *glDebugMessageInsertFUNC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* buf);
 typedef void (GLLOADER_APIENTRY *glDebugMessageCallbackFUNC)(GLDEBUGPROC callback, const GLvoid* userParam);
 typedef GLuint (GLLOADER_APIENTRY *glGetDebugMessageLogFUNC)(GLuint count, GLsizei bufsize, GLenum* sources, GLenum* types, GLuint* ids, GLenum* severities, GLsizei* lengths, GLchar* messageLog);
+typedef void (GLLOADER_APIENTRY *glGetPointervFUNC)(GLenum pname, void** params);
 typedef void (GLLOADER_APIENTRY *glPushDebugGroupFUNC)(GLenum source, GLuint id, GLsizei length, const GLchar* message);
 typedef void (GLLOADER_APIENTRY *glPopDebugGroupFUNC)();
 typedef void (GLLOADER_APIENTRY *glObjectLabelFUNC)(GLenum identifier, GLuint name, GLsizei length, const GLchar* label);
@@ -13023,6 +13055,7 @@ extern GLLOADER_API glDebugMessageControlFUNC glDebugMessageControl;
 extern GLLOADER_API glDebugMessageInsertFUNC glDebugMessageInsert;
 extern GLLOADER_API glDebugMessageCallbackFUNC glDebugMessageCallback;
 extern GLLOADER_API glGetDebugMessageLogFUNC glGetDebugMessageLog;
+extern GLLOADER_API glGetPointervFUNC glGetPointerv;
 extern GLLOADER_API glPushDebugGroupFUNC glPushDebugGroup;
 extern GLLOADER_API glPopDebugGroupFUNC glPopDebugGroup;
 extern GLLOADER_API glObjectLabelFUNC glObjectLabel;
@@ -14176,6 +14209,14 @@ extern GLLOADER_API glVideoCaptureStreamParameterdvNVFUNC glVideoCaptureStreamPa
 
 #endif
 
+#ifdef GL_OVR_multiview
+
+typedef void (GLLOADER_APIENTRY *glFramebufferTextureMultiviewOVRFUNC)(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint baseViewIndex, GLsizei numViews);
+
+extern GLLOADER_API glFramebufferTextureMultiviewOVRFUNC glFramebufferTextureMultiviewOVR;
+
+#endif
+
 #ifdef GL_PGI_misc_hints
 
 typedef void (GLLOADER_APIENTRY *glHintPGIFUNC)(GLenum target, GLint mode);
@@ -15238,7 +15279,6 @@ extern GLLOADER_API glTranslatefFUNC glTranslatef;
 
 typedef void (GLLOADER_APIENTRY *glDrawArraysFUNC)(GLenum mode, GLint first, GLsizei count);
 typedef void (GLLOADER_APIENTRY *glDrawElementsFUNC)(GLenum mode, GLsizei count, GLenum type, const GLvoid* indices);
-typedef void (GLLOADER_APIENTRY *glGetPointervFUNC)(GLenum pname, GLvoid** params);
 typedef void (GLLOADER_APIENTRY *glPolygonOffsetFUNC)(GLfloat factor, GLfloat units);
 typedef void (GLLOADER_APIENTRY *glCopyTexImage1DFUNC)(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border);
 typedef void (GLLOADER_APIENTRY *glCopyTexImage2DFUNC)(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
@@ -15269,7 +15309,6 @@ typedef void (GLLOADER_APIENTRY *glPushClientAttribFUNC)(GLbitfield mask);
 
 extern GLLOADER_API glDrawArraysFUNC glDrawArrays;
 extern GLLOADER_API glDrawElementsFUNC glDrawElements;
-extern GLLOADER_API glGetPointervFUNC glGetPointerv;
 extern GLLOADER_API glPolygonOffsetFUNC glPolygonOffset;
 extern GLLOADER_API glCopyTexImage1DFUNC glCopyTexImage1D;
 extern GLLOADER_API glCopyTexImage2DFUNC glCopyTexImage2D;
@@ -16384,6 +16423,7 @@ typedef char (GLLOADER_APIENTRY *glloader_GL_INTEL_texture_scissorFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_KHR_blend_equation_advancedFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_KHR_context_flush_controlFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_KHR_debugFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GL_KHR_no_errorFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_KHR_robustnessFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_KHR_robust_buffer_access_behaviorFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_KHR_texture_compression_astc_ldrFUNC)();
@@ -16484,10 +16524,13 @@ typedef char (GLLOADER_APIENTRY *glloader_GL_NV_vertex_program2_optionFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_NV_vertex_program3FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_NV_vertex_program4FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_NV_video_captureFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GL_NV_viewport_array2FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_OES_read_formatFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_OML_interlaceFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_OML_resampleFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_OML_subsampleFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GL_OVR_multiviewFUNC)();
+typedef char (GLLOADER_APIENTRY *glloader_GL_OVR_multiview2FUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_PGI_misc_hintsFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_PGI_vertex_hintsFUNC)();
 typedef char (GLLOADER_APIENTRY *glloader_GL_REND_screen_coordinatesFUNC)();
@@ -16929,6 +16972,7 @@ extern GLLOADER_API glloader_GL_INTEL_texture_scissorFUNC glloader_GL_INTEL_text
 extern GLLOADER_API glloader_GL_KHR_blend_equation_advancedFUNC glloader_GL_KHR_blend_equation_advanced;
 extern GLLOADER_API glloader_GL_KHR_context_flush_controlFUNC glloader_GL_KHR_context_flush_control;
 extern GLLOADER_API glloader_GL_KHR_debugFUNC glloader_GL_KHR_debug;
+extern GLLOADER_API glloader_GL_KHR_no_errorFUNC glloader_GL_KHR_no_error;
 extern GLLOADER_API glloader_GL_KHR_robustnessFUNC glloader_GL_KHR_robustness;
 extern GLLOADER_API glloader_GL_KHR_robust_buffer_access_behaviorFUNC glloader_GL_KHR_robust_buffer_access_behavior;
 extern GLLOADER_API glloader_GL_KHR_texture_compression_astc_ldrFUNC glloader_GL_KHR_texture_compression_astc_ldr;
@@ -17029,10 +17073,13 @@ extern GLLOADER_API glloader_GL_NV_vertex_program2_optionFUNC glloader_GL_NV_ver
 extern GLLOADER_API glloader_GL_NV_vertex_program3FUNC glloader_GL_NV_vertex_program3;
 extern GLLOADER_API glloader_GL_NV_vertex_program4FUNC glloader_GL_NV_vertex_program4;
 extern GLLOADER_API glloader_GL_NV_video_captureFUNC glloader_GL_NV_video_capture;
+extern GLLOADER_API glloader_GL_NV_viewport_array2FUNC glloader_GL_NV_viewport_array2;
 extern GLLOADER_API glloader_GL_OES_read_formatFUNC glloader_GL_OES_read_format;
 extern GLLOADER_API glloader_GL_OML_interlaceFUNC glloader_GL_OML_interlace;
 extern GLLOADER_API glloader_GL_OML_resampleFUNC glloader_GL_OML_resample;
 extern GLLOADER_API glloader_GL_OML_subsampleFUNC glloader_GL_OML_subsample;
+extern GLLOADER_API glloader_GL_OVR_multiviewFUNC glloader_GL_OVR_multiview;
+extern GLLOADER_API glloader_GL_OVR_multiview2FUNC glloader_GL_OVR_multiview2;
 extern GLLOADER_API glloader_GL_PGI_misc_hintsFUNC glloader_GL_PGI_misc_hints;
 extern GLLOADER_API glloader_GL_PGI_vertex_hintsFUNC glloader_GL_PGI_vertex_hints;
 extern GLLOADER_API glloader_GL_REND_screen_coordinatesFUNC glloader_GL_REND_screen_coordinates;

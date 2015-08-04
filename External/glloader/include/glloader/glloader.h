@@ -59,8 +59,11 @@
 #define _GLLOADER_H
 
 #include <stddef.h>
+#if defined(__APPLE__) || defined(__APPLE_CC__)
+	#include <TargetConditionals.h>
+#endif
 
-#ifdef GLLOADER_GLES_SUPPORT
+#if defined(GLLOADER_GLES_SUPPORT) && !TARGET_OS_IPHONE
 #include <KHR/khrplatform.h>
 #endif
 
@@ -83,7 +86,11 @@
 
 #else
 #define GLLOADER_GLES
-#define GLLOADER_EGL
+#if TARGET_OS_IPHONE
+	#define GLLOADER_EAGL
+#else
+	#define GLLOADER_EGL
+#endif
 #endif
 
 #ifndef GLLOADER_GLES
@@ -125,7 +132,7 @@ typedef struct ANativeWindow*           EGLNativeWindowType;
 typedef struct egl_native_pixmap_t*     EGLNativePixmapType;
 typedef void*                           EGLNativeDisplayType;
 
-#elif (defined(__unix__) || defined(linux) || defined(__linux) || defined(__linux__))
+#elif (defined(__unix__) || defined(linux) || defined(__linux) || defined(__linux__)) || ((defined(__APPLE__) || defined(__APPLE_CC__)) && defined(GLLOADER_EGL))
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -203,6 +210,7 @@ typedef EGLNativeWindowType  NativeWindowType;
 #endif
 
 #if defined(_MSC_VER)
+	#pragma warning(disable: 4055) // Allow casting from a void* to a function pointer.
 	#define GLLOADER_HAS_DECLSPEC
 #elif defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
 	#if !defined(__GNUC__) && !defined(GLLOADER_HAS_DECLSPEC)
