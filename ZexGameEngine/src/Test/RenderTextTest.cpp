@@ -80,8 +80,6 @@ namespace ZGE
 			}
 		}
 
-		delete[] texData;
-
 		glGenTextures ( 1, &m_CharTexture );
 		glTexImage2D
 			(
@@ -95,6 +93,8 @@ namespace ZGE
 			GL_UNSIGNED_BYTE,               // data type
 			texData                         // source
 			);
+
+		delete[] texData;
 
 		// Vertex and Texcoord Binding
 
@@ -152,6 +152,9 @@ namespace ZGE
 			GL_FALSE,
 			static_cast< GLfloat * >( &orthoMatrix[ 0 ] )
 			);
+
+		GLint textureUniform = glGetUniformLocation ( m_Shader.GLSLProgram (), "tex2D" );
+		glUniform1i ( textureUniform, 0 );
 
 	}
 

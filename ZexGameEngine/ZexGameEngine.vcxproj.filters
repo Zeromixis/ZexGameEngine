@@ -49,6 +49,9 @@
     <Filter Include="头文件\UI">
       <UniqueIdentifier>{a20ca48b-306f-4525-a5b4-21bd8a0468b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Test">
+      <UniqueIdentifier>{2f53b70f-c1d4-4beb-9c84-d0cf407407c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Clock.h">
@@ -133,7 +136,7 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\Test\RenderTextTest.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +183,7 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Test\RenderTextTest.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\Test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

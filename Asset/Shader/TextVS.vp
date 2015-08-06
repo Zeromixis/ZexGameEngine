@@ -1,0 +1,12 @@
+#version 400
+in vec2 InVertexPosition;
+in vec2 InVertexTexCoord;
+out vec2 outVaryingTexCoord;
+
+uniform mat4 orthoMatrix;
+
+void main ()
+{
+	outVaryingTexCoord = InVertexTexCoord;
+	gl_Position = orthoMatrix * vec4 ( InVertexPosition );
+}
