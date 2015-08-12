@@ -466,12 +466,15 @@ namespace ZGE
     typedef Vector4< I32 > Vector4I;
     typedef Vector4< F32 > Vector4f;
     */
-    typedef Vector <I32, 2 > Vector2i;
+    typedef Vector< I32, 2 > Vector2i;
     typedef Vector< F32, 2 > Vector2f;
+	typedef Vector< U32, 2 > Vector2u;
     typedef Vector< I32, 3 > Vector3i;
     typedef Vector< F32, 3 > Vector3f;
+	typedef Vector< U32, 3 > Vector3u;
     typedef Vector< I32, 4 > Vector4i;
     typedef Vector< F32, 4 > Vector4f;
+	typedef Vector< U32, 4 > Vector4u;
 }
 
 #endif

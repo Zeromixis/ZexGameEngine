@@ -145,6 +145,7 @@ namespace ZGE
 
         for ( auto beginIter = m_ActionMaps.begin (); beginIter != m_ActionMaps.end (); )
         {
+			// Find the end iter of this round. ( When the Prority diff it will stop. )
             auto endIter = std::find_if ( beginIter, m_ActionMaps.end (),
                 [ &beginIter ] ( const ActionTuple& a ) -> bool
             {
@@ -197,6 +198,7 @@ namespace ZGE
 
     void InputManager::AddActionMap ( std::map< U32, U32 > actionMap, ActionSignalPtr actionSignal, int priority )
     {
+		// Sort by priority.
         m_ActionMaps.push_back ( std::make_tuple ( actionMap, actionSignal, priority ) );
         std::stable_sort ( m_ActionMaps.begin (), m_ActionMaps.end (),
         [] ( const ActionTuple &lhs, const ActionTuple &rhs ) -> bool

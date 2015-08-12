@@ -13,6 +13,13 @@ namespace ZGE
 	{
 		friend class Singleton < UIRoot >;
     public:
+		enum
+		{
+			UIEVENT_MOUSE,
+			UIEVENT_KEYBOARD,
+		};
+
+
         UIRoot ();
 
         virtual ~UIRoot ();

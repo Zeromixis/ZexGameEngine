@@ -19,7 +19,12 @@ namespace ZGE
 
     struct InputMouseStatus : public InputDeviceStatus
     {
+		Vector2i AbsPos;
+
+		Vector2i ClientPos;
+
         Vector3i Offset;
+
         std::array< bool, MOUSEACTION_NUM > Action;
 
         virtual InputDevice::InputDeviceType DeviceType () const

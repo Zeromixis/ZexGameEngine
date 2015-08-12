@@ -65,7 +65,7 @@ namespace ZGE
 
         virtual void Update () = 0;
 
-		// First type is Self-defined Enum, Second type is Engine-defined Enum.
+		// First type is Self-Defined Enum, Second type is Engine-Defined Enum.
         virtual void OnActionMap ( const std::map< U32, U32 > &actionMap, const ActionSignalPtr &signal ) = 0;
 
     protected:
@@ -87,15 +87,20 @@ namespace ZGE
             return InputDevice::IDT_MOUSE;
         }
 
-        I32 X () const
-        {
-            return m_Offset.x ();
-        }
+		Vector2i Offset () const
+		{
+			return Vector2i ( m_Offset );
+		}
 
-        I32 Y () const
-        {
-            return m_Offset.y ();
-        }
+		Vector2i ClientPos () const
+		{
+			return m_ClientPos;
+		}
+
+		Vector2i AbsPos () const
+		{
+			return m_AbsPos;
+		}
 
         bool LeftButton () const
         {
@@ -138,6 +143,8 @@ namespace ZGE
 
     protected:
         Vector3i m_Offset;
+		Vector2i m_ClientPos;
+		Vector2i m_AbsPos;
 
         // L, R, M
         std::array< std::array< bool, MOUSEACTION_NUM >, 2 > m_Actions;

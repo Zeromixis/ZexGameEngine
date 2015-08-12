@@ -2,13 +2,14 @@
 #include <iostream>
 #include <xutility>
 #include "Core/Input/InputDeviceStatus.h"
+#include "App/Context.h"
 
 namespace ZGE
 {
     WInputMouse::WInputMouse ( HWND hwnd, HANDLE device ) :
         m_Hwnd ( hwnd ),
         m_Device ( device ),
-        m_OffsetState ( 0, 0, 0 )
+        //m_OffsetState ( 0, 0, 0 )
     {
         m_Action.fill ( false );
 		m_ButtonState.fill ( false );
@@ -41,9 +42,23 @@ namespace ZGE
 
             if ( MOUSE_MOVE_RELATIVE == ( rawInput->data.mouse.usFlags & 1UL ) )
             {
-                m_OffsetState.x () = rawInput->data.mouse.lLastX;
-                m_OffsetState.y () = rawInput->data.mouse.lLastY;
+                m_Offset.x () = rawInput->data.mouse.lLastX;
+                m_Offset.y () = rawInput->data.mouse.lLastY;
             }
+
+			POINT point;
+			if ( GetCursorPos ( &point ) )
+			{
+				m_AbsPos.x () = point.x;
+				m_AbsPos.y () = point.y;
+
+				WindowWin *windowWin = static_cast < WindowWin * > ( Context::GetInstance ()->GetWindowPtr ().get () );
+				if ( ScreenToClient ( windowWin->Hwnd (), &point ) )
+				{
+					m_ClientPos.x () = point.x;
+					m_ClientPos.y () = point.y;
+				}
+			}
         }
     }
 
@@ -53,17 +68,19 @@ namespace ZGE
 		InputMouseStatus *status = static_cast< InputMouseStatus * > ( m_Status.get () );
 		status->Action = m_Actions[ m_Index ];
 		status->Offset = m_Offset;
+		status->AbsPos = m_AbsPos;
+		status->ClientPos = m_ClientPos;
 		
         // Check ActionMap
         for ( auto element : actionMap )
         {
             // Check if it is the Mouse Action
-            if ( element.second > MA_ACTIONSTART && element.second < MA_ACTIONEND )
+            if ( element.first > MA_ACTIONSTART && element.first < MA_ACTIONEND )
             {
-				if ( IsButtonDown ( static_cast< MouseAction >( element.second ) ) || IsButtonUp ( static_cast< MouseAction >( element.second ) ) )
+				if ( IsButtonDown ( static_cast< MouseAction >( element.first ) ) || IsButtonJustUp ( static_cast< MouseAction >( element.first ) ) )
                 {
                     InputAction inputAction;
-                    inputAction.first = element.first;
+                    inputAction.first = element.second;
                     inputAction.second = m_Status;
                     ( *signal )( inputAction );
                 }
@@ -77,8 +94,8 @@ namespace ZGE
 		std::copy ( m_ButtonState.begin (), m_ButtonState.end (), m_Action.begin() + 2 );
         m_Index = !m_Index;
         m_Actions[ m_Index ] = m_Action;
-        m_Offset = m_OffsetState;
-        m_OffsetState = Vector3i ( 0, 0, 0 );
+        //m_Offset = m_OffsetState;
+        //m_OffsetState = Vector3i ( 0, 0, 0 );
     }
 
     WInputKeyboard::WInputKeyboard ( HWND hwnd, HANDLE device ) :
@@ -118,12 +135,13 @@ namespace ZGE
         for ( auto element : actionMap )
         {
             // Check if it is the Mouse Action
-            if ( element.second > KA_ACTIONSTART && element.second < KA_ACTIONEND )
+            if ( element.first > KA_ACTIONSTART && element.first < KA_ACTIONEND )
             {
-				if ( IsKeyDown ( static_cast< KeyboardAction >( element.second ) ) || IsKeyUp ( static_cast< KeyboardAction >( element.second ) ) )
+				// Only be trigged when Key is down or JustUp
+				if ( IsKeyDown ( static_cast< KeyboardAction >( element.first ) ) || IsKeyJustUp ( static_cast< KeyboardAction >( element.first ) ) )
                 {
                     InputAction inputAction;
-                    inputAction.first = element.first;
+                    inputAction.first = element.second;
                     inputAction.second = m_Status;
                     ( *signal )( inputAction );
                 }

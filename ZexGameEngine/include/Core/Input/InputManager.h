@@ -35,7 +35,7 @@ namespace ZGE
 
         void OnRawInput ( const Window &window, HRAWINPUT rawInput );
 
-		// ActionMap first type is Self-Defined Enum, second type is Engine-Defined Key Enum.
+		// ActionMap first type is Engine-Defined Key Enum, second type is Self-Defined Enum.
         void AddActionMap ( std::map< U32, U32 > actionMap, ActionSignalPtr actionSignal, int priority );
 
         void BlockPropagate () { m_IsBlocked = true; }

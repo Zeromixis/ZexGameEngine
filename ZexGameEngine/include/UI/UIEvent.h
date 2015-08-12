@@ -16,12 +16,18 @@ namespace ZGE
 
 		virtual ~UIEvent ();
 
-        void Catch () { m_IsCatched = true; }
+        void Catch () 
+		{ 
+			m_IsCatched = true; 
+		}
 
-        bool IsCatched () const { return m_IsCatched; }
+        bool IsCatched () const
+		{ 
+			return m_IsCatched; 
+		}
 
     private:
-        bool m_IsCatched;
+        mutable bool m_IsCatched;
 	};
 
 	struct UIMouseEvent : public UIEvent

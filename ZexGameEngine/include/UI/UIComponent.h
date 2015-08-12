@@ -89,6 +89,18 @@ namespace ZGE
 			return m_Enabled;
 		}
 
+		void SetSize ( U32 width, U32 height )
+		{
+			m_Width = width;
+			m_Height = height;
+		}
+
+		void SetSize ( const Vector2u &vec )
+		{
+			m_Width = vec.x ();
+			m_Height = vec.y ();
+		}
+
 		UIComponent * ComponentAt ( Vector2f localPos ) const
 		{
 			for ( auto &node : m_Node.Childs () )
