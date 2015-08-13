@@ -6,6 +6,7 @@
 namespace ZGE
 {
     UIRoot::UIRoot ()
+		: m_NowComp ( nullptr )
     {
         m_Node.Position () = Vector2f ( 0.0f, 0.0f );
 		m_Width = Context::GetInstance ()->GetWindowPtr ()->Width ();
@@ -22,7 +23,7 @@ namespace ZGE
 		ActionSignalPtr signal = std::make_shared< ActionSignal > ();
 		signal->connect ( boost::bind ( &UIRoot::OnInputEvent, this, _1 ) );
 
-		InputManager::GetInstance ()->AddActionMap ( actionMap, signal, 0 );
+		// InputManager::GetInstance ()->AddActionMap ( actionMap, signal, 0 );
     }
 
     UIRoot::~UIRoot ()
@@ -37,11 +38,58 @@ namespace ZGE
 		case UIEVENT_MOUSE:
 		{
 			const InputMouseStatus *status = dynamic_cast< const InputMouseStatus * >( inputAction.second.get () );
-			Vector2i pos = status->ClientPos;
+			Vector2f localPos = status->ClientPos;
+			UIComponent *parent = this;
+			UIComponent *child = nullptr;
+
+			// Search destination component.
+			while ( true )
+			{
+				child = parent->ComponentAt ( localPos );
+				if ( nullptr != child && child->Enabled () )
+				{
+					parent = child;
+					child = nullptr;
+					localPos = localPos - child->Position ();
+				}
+				else
+				{
+					break;
+				}
+			}
+			if ( nullptr != parent )
+			{
+				UIComponent *dstComp = parent;
+
+				// Deal with enter and exit
+				if ( dstComp != m_NowComp )
+				{
+					if ( nullptr != m_NowComp )
+					{
+						UIMouseEvent mouseExitEvent;
+						mouseExitEvent.EType = UIMouseEvent::MOUSE_EXIT;
+						m_NowComp->OnUIEvent ( &mouseExitEvent );
+
+						UIMouseEvent mouseEnterEvent;
+						mouseEnterEvent.EType = UIMouseEvent::MOUSE_ENTER;
+						dstComp->OnUIEvent ( &mouseEnterEvent );
+					}
+				}
+
+				// Deal with press and release
+				
 
 
+				m_NowComp = dstComp;
+
+			}
+			else
+			{
+
+			}
 
 
+			
 			break;
 		}
 		case UIEVENT_KEYBOARD:

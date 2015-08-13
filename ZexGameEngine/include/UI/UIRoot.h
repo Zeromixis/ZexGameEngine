@@ -26,6 +26,8 @@ namespace ZGE
 
     private:
         void OnInputEvent ( const InputAction &inputAction );
+
+		UIComponent *m_NowComp;
 	};
 	
 
