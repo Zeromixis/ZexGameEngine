@@ -1,5 +1,4 @@
 #include "Core/CameraController.h"
-#include "Core/Input/InputDeviceStatus.h"
 
 namespace ZGE
 {
@@ -94,23 +93,23 @@ namespace ZGE
     void CameraController::OnInput ( const InputAction& action )
     {
         const F32 length = 0.1f;
-        const InputMouseStatus *status = dynamic_cast< const InputMouseStatus * >( action.second.get ( ) );
+        const InputMouse *mouse = dynamic_cast< const InputMouse * >( action.second );
    
         switch ( action.first )
         {
         case RotateLeftRight :
             // If Right Mouse Button is pressed
-            if ( status->Action[ MOUSEACTION_TO_INDEX ( MA_RBUTTON ) ] )
+            if ( mouse->IsButtonDown( MA_RBUTTON ) )
             {
-                Rotate ( 0.0f, 1.0f, 0.0f, length / 5.0f * status->Offset.x () );
+                Rotate ( 0.0f, 1.0f, 0.0f, length / 5.0f * mouse->Offset ().x () );
             }
 
             break;
         case RotateUpDown :
             // If Right Mouse Button is pressed
-            if ( status->Action[ MOUSEACTION_TO_INDEX ( MA_RBUTTON ) ] )
+            if ( mouse->IsButtonDown ( MA_RBUTTON ) )
             {
-                Rotate ( 1.0f, 0.0f, 0.0f, length / 5.0f * status->Offset.y () );
+                Rotate ( 1.0f, 0.0f, 0.0f, length / 5.0f * mouse->Offset ().y () );
             }
 
             break;

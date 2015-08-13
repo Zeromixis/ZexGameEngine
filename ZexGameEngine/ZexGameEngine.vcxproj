@@ -157,7 +157,6 @@
     <ClInclude Include="include\Core\Camera.h" />
     <ClInclude Include="include\Core\CameraController.h" />
     <ClInclude Include="include\Core\Input\InputDevice.h" />
-    <ClInclude Include="include\Core\Input\InputDeviceStatus.h" />
     <ClInclude Include="include\Core\Input\InputManager.h" />
     <ClInclude Include="include\Core\Input\WInputDevice.h" />
     <ClInclude Include="include\Core\TimeManager.h" />
@@ -185,7 +184,6 @@
     <ClCompile Include="src\Clock.cpp" />
     <ClCompile Include="src\Core\Camera.cpp" />
     <ClCompile Include="src\Core\CameraController.cpp" />
-    <ClCompile Include="src\Core\Input\InputDevice.cpp" />
     <ClCompile Include="src\Core\Input\InputManager.cpp" />
     <ClCompile Include="src\Core\Input\WInputDevice.cpp" />
     <ClCompile Include="src\Core\TimeManager.cpp" />

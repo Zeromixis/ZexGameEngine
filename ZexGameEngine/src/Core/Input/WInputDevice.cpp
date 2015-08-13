@@ -1,14 +1,13 @@
 #include "Core/Input/WInputDevice.h"
 #include <iostream>
 #include <xutility>
-#include "Core/Input/InputDeviceStatus.h"
 #include "App/Context.h"
 
 namespace ZGE
 {
-    WInputMouse::WInputMouse ( HWND hwnd, HANDLE device ) :
-        m_Hwnd ( hwnd ),
-        m_Device ( device ),
+    WInputMouse::WInputMouse ( HWND hwnd, HANDLE device ) 
+		: m_Hwnd ( hwnd )
+        , m_Device ( device )
         //m_OffsetState ( 0, 0, 0 )
     {
         m_Action.fill ( false );
@@ -65,12 +64,6 @@ namespace ZGE
 
     void WInputMouse::OnActionMap ( const std::map< U32, U32 > &actionMap, const ActionSignalPtr &signal )
     {
-		InputMouseStatus *status = static_cast< InputMouseStatus * > ( m_Status.get () );
-		status->Action = m_Actions[ m_Index ];
-		status->Offset = m_Offset;
-		status->AbsPos = m_AbsPos;
-		status->ClientPos = m_ClientPos;
-		
         // Check ActionMap
         for ( auto element : actionMap )
         {
@@ -81,7 +74,7 @@ namespace ZGE
                 {
                     InputAction inputAction;
                     inputAction.first = element.second;
-                    inputAction.second = m_Status;
+					inputAction.second = this;
                     ( *signal )( inputAction );
                 }
             }
@@ -90,7 +83,6 @@ namespace ZGE
 
     void WInputMouse::Update ()
     {
-        m_Status.reset ();
 		std::copy ( m_ButtonState.begin (), m_ButtonState.end (), m_Action.begin() + 2 );
         m_Index = !m_Index;
         m_Actions[ m_Index ] = m_Action;
@@ -105,7 +97,12 @@ namespace ZGE
         m_Action.fill ( false );
     }
 
-    void WInputKeyboard::OnRawInput ( const RAWINPUT *rawInput )
+	WInputKeyboard::~WInputKeyboard ()
+	{
+
+	}
+
+	void WInputKeyboard::OnRawInput ( const RAWINPUT *rawInput )
     {
         if ( rawInput->header.hDevice == m_Device && m_Hwnd == GetForegroundWindow () )
         {
@@ -128,9 +125,6 @@ namespace ZGE
 
     void WInputKeyboard::OnActionMap ( const std::map< U32, U32 > &actionMap, const ActionSignalPtr &signal )
     {
-		InputKeyboardStatus *status = static_cast< InputKeyboardStatus * > ( m_Status.get () );
-		status->Action = m_Actions[ m_Index ];
-
         // Check ActionMap
         for ( auto element : actionMap )
         {
@@ -142,7 +136,7 @@ namespace ZGE
                 {
                     InputAction inputAction;
                     inputAction.first = element.second;
-                    inputAction.second = m_Status;
+                    inputAction.second = this;
                     ( *signal )( inputAction );
                 }
             }

@@ -1,6 +1,5 @@
 #include "UI/UIRoot.h"
 #include "App/Context.h"
-#include "Core/Input/InputDeviceStatus.h"
 
 
 namespace ZGE
@@ -37,8 +36,8 @@ namespace ZGE
 		{
 		case UIEVENT_MOUSE:
 		{
-			const InputMouseStatus *status = dynamic_cast< const InputMouseStatus * >( inputAction.second.get () );
-			Vector2f localPos = status->ClientPos;
+			const InputMouse *mouse = dynamic_cast< const InputMouse * > ( inputAction.second );
+			Vector2f localPos = mouse->ClientPos ();
 			UIComponent *parent = this;
 			UIComponent *child = nullptr;
 
@@ -77,9 +76,43 @@ namespace ZGE
 				}
 
 				// Deal with press and release
-				
+				for ( MouseAction action = MA_LBUTTON; action < MA_ACTIONEND; )
+				{
+					bool breakFlag = false;
+					if ( mouse->IsButtonDown ( action ) )
+					{
+						UIMouseEvent mousePressEvent;
+						mousePressEvent.EType = UIMouseEvent::MOUSE_PRESS;
+						dstComp->OnUIEvent ( &mousePressEvent );
+						breakFlag = true;
+					}
+					if ( mouse->IsButtonJustUp ( action ) )
+					{
+						UIMouseEvent mouseReleaseEvent;
+						mouseReleaseEvent.EType = UIMouseEvent::MOUSE_RELEASE;
+						dstComp->OnUIEvent ( &mouseReleaseEvent );
+						breakFlag = true;
+					}
+					if ( breakFlag )
+					{
+						break;
+					}
+					else
+					{
+						int t = ( int )action;
+						t += 1;
+						action = ( MouseAction )t;
+					}
+				}
 
-
+				// Deal with Move
+				if ( mouse->Offset () != Vector2i ( 0, 0 ) )
+				{
+					UIMouseEvent mouseMoveEvent;
+					mouseMoveEvent.Position = mouseMoveEvent.Position;
+					mouseMoveEvent.EType = UIMouseEvent::MOUSE_MOVE;
+					dstComp->OnUIEvent ( &mouseMoveEvent );
+				}
 				m_NowComp = dstComp;
 
 			}

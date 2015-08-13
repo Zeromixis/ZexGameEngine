@@ -36,6 +36,8 @@ namespace ZGE
     public:
         WInputKeyboard ( HWND hwnd, HANDLE device );
 
+		virtual ~WInputKeyboard ();
+
         virtual void OnRawInput ( const RAWINPUT *rawInput );
 
         virtual void OnActionMap ( const std::map< U32, U32 > &actionMap, const ActionSignalPtr &signal );

@@ -99,9 +99,6 @@
     <ClInclude Include="include\Render\ShaderObject.h">
       <Filter>头文件\Render</Filter>
     </ClInclude>
-    <ClInclude Include="include\Core\Input\InputDeviceStatus.h">
-      <Filter>头文件\Core\Input</Filter>
-    </ClInclude>
     <ClInclude Include="include\Test\LightningTest.h">
       <Filter>头文件\Test</Filter>
     </ClInclude>
@@ -151,9 +148,6 @@
     </ClCompile>
     <ClCompile Include="src\Core\CameraController.cpp">
       <Filter>源文件\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Input\InputDevice.cpp">
-      <Filter>源文件\Core\Input</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Input\InputManager.cpp">
       <Filter>源文件\Core\Input</Filter>

@@ -42,9 +42,9 @@ namespace ZGE
 
     #define MOUSEACTION_NUM ( MA_ACTIONEND - MA_ACTIONSTART - 1 )
 
-    struct InputDeviceStatus;
+	class InputDevice;
 
-    typedef std::pair< U32, std::shared_ptr< const InputDeviceStatus > > InputAction;
+    typedef std::pair< U32, const InputDevice * > InputAction;
 
     typedef boost::signals2::signal< void ( const InputAction & action ) > ActionSignal;
 
@@ -59,7 +59,7 @@ namespace ZGE
             IDT_MOUSE,
         };
 
-        virtual ~InputDevice () {};
+		virtual ~InputDevice () {};
 
         virtual InputDeviceType DeviceType () const = 0;
 
@@ -70,17 +70,14 @@ namespace ZGE
 
     protected:
         bool m_Index;
-
-        std::shared_ptr< InputDeviceStatus > m_Status;
-
     };
 
     class InputMouse : public InputDevice
     {
     public:
-        InputMouse ();
+		InputMouse () {};
 
-        virtual ~InputMouse () {};
+		virtual ~InputMouse () {};
 
         virtual InputDeviceType DeviceType () const
         {
@@ -153,9 +150,9 @@ namespace ZGE
     class InputKeyboard : public InputDevice
     {
     public:
-        InputKeyboard ();
+		InputKeyboard () {};
 
-        virtual ~InputKeyboard () {};
+		virtual ~InputKeyboard () {};
 
         virtual InputDeviceType DeviceType () const
         {

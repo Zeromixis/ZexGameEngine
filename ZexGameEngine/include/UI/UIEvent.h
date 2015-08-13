@@ -14,7 +14,7 @@ namespace ZGE
             
         }
 
-		virtual ~UIEvent ();
+		virtual ~UIEvent () {};
 
         void Catch () 
 		{ 
