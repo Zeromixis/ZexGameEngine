@@ -71,7 +71,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>.\;$(ProjectDir)/include;$(SolutionDir);$(SolutionDir)/External;$(SolutionDir)/External/glloader/include;$(SolutionDir)/External/freetype/include;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)/src;$(SourcePath)</SourcePath>
-    <OutDir>$(SolutionDir)\Exec\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\Bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -80,7 +80,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\Exec\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\Bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

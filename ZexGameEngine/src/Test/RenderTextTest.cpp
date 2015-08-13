@@ -3,14 +3,16 @@
 namespace ZGE
 {
 
-	const Vector2f RenderTextTest::DrawPosition = Vector2f ( 100.0f, 100.0f );
+	const Vector2f RenderTextTest::DrawPosition = Vector2f ( 0.0f, 0.0f );
 
 	RenderTextTest::RenderTextTest ()
 	{
 		WindowWin *windowWin = dynamic_cast< WindowWin * > ( Context::GetInstance ()->GetWindowPtr ().get () );
 
+		FT_Error error;
 		FT_Init_FreeType ( &m_FTLibrary );
-		FT_New_Face ( m_FTLibrary, "Font/calibri.ttf", 0, &m_FTFace );
+		FT_New_Face ( m_FTLibrary, "Font/arial.ttf", 0, &m_FTFace );
+
 		FT_Set_Char_Size
 			(
 			m_FTFace,
@@ -20,13 +22,15 @@ namespace ZGE
 			::GetDeviceCaps ( windowWin->Hdc (), LOGPIXELSY )
 			);
 
+		// auto x = Context::GetInstance ()->GetWindowPtr ()->Height ();
 		FT_Vector pen;
-		pen.x = DrawPosition.x ();
-		pen.y = DrawPosition.y ();
+		pen.x = DrawPosition.x () * 64;
+		pen.y = DrawPosition.y () * 64;
 
 		FT_Set_Transform ( m_FTFace, 0, &pen );
 
-		FT_Load_Char ( m_FTFace, 'Z', FT_LOAD_RENDER );
+		FT_Load_Char ( m_FTFace, 'A', FT_LOAD_RENDER );
+		// FT_Render_Glyph ( m_FTFace->glyph, FT_RENDER_MODE_NORMAL );
 		auto slot = m_FTFace->glyph;
 		FT_Bitmap bitmap = slot->bitmap;
 
@@ -35,12 +39,15 @@ namespace ZGE
 
 		// Init Vertex Data
 
+		auto drawX = DrawPosition.x () + slot->bitmap_left;
+		auto drawY = DrawPosition.y () + ( m_FTFace->size->metrics.ascender >> 6 )- slot->bitmap_top;
+
 		// Position Data
 
-		Vector2f leftTop = Vector2f ( slot->bitmap_left, slot->bitmap_top );
-		Vector2f rightTop = Vector2f ( leftTop.x () + slot->metrics.width, leftTop.y () );
-		Vector2f leftBottom = Vector2f ( leftTop.x (), leftTop.y () - slot->metrics.height );
-		Vector2f rightBottom = Vector2f ( leftBottom.x () + slot->metrics.width, leftBottom.y () );
+		Vector2f leftTop = Vector2f ( drawX, drawY );
+		Vector2f rightTop = Vector2f ( leftTop.x () + slot->bitmap.width, leftTop.y () );
+		Vector2f leftBottom = Vector2f ( leftTop.x (), leftTop.y () + slot->bitmap.rows );
+		Vector2f rightBottom = Vector2f ( rightTop.x (), rightTop.y () + slot->bitmap.rows );
 
 		std::vector < Vector2f > vertexs;
 		vertexs.push_back ( leftTop );
@@ -70,14 +77,15 @@ namespace ZGE
 		U32 *texData = new U32[ bitmap.width * bitmap.rows ];
 		for ( size_t i = 0; i < bitmap.width * bitmap.rows; ++i )
 		{
-			if ( bitmap.buffer[ i ] >= 128 )
-			{
-				texData[ i ] = 255 | 0 << 8 | 0 << 16 | 255 << 24;
-			}
-			else
-			{
-				texData[ i ] = 0;
-			}
+// 			if ( bitmap.buffer[ i ] >= 128 )
+// 			{
+// 				texData[ i ] = 255 | 0 << 8 | 0 << 16 | 255 << 24;
+// 			}
+// 			else
+// 			{
+// 				texData[ i ] = 0;
+// 			}
+			texData[ i ] = bitmap.buffer[ i ];
 		}
 
 		glGenTextures ( 1, &m_CharTexture );
