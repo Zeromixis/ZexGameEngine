@@ -189,9 +189,9 @@ namespace ZGE
             }
         }
 
-        bool operator == ( const Vector& rhs )
+        bool operator == ( const Vector& rhs ) const
         {
-            if ( this->ElemNum != rhs.elemNum )
+            if ( this->ElemNum != rhs.ElemNum )
                 return false;
 
             for ( int i = 0; i < ElemNum; ++i )

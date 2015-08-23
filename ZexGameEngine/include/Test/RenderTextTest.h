@@ -21,14 +21,12 @@ namespace ZGE
 
         void OnPreDraw ()
         {
-			glClearColor ( 0.0f, 0.0f, 0.0f, 1.0f );
-			glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
             glBindTexture ( GL_TEXTURE_2D, m_CharTexture );
             glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+			glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
             glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
             glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
             glDisable ( GL_CULL_FACE );
-
 			glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferHandle ); 
         }
 
@@ -38,14 +36,16 @@ namespace ZGE
 			glDrawElements
 			(
 				GL_TRIANGLES,
-				2,
+				6,
 				GL_UNSIGNED_INT,
 				nullptr
 			);
+			auto error = glGetError ();
 		}
         
         void OnPostDraw ()
         {
+			m_Shader.UnBind ();
 			glEnable ( GL_CULL_FACE );
         }
 

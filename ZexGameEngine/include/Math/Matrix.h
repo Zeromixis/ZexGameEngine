@@ -316,13 +316,16 @@ namespace ZGE
 	template < typename T >
 	Matrix44< T > OrthoLH ( const T& width, const T& height, const T& zNearPlane, const T& zFarPlane )
 	{
-		return Matrix44< T > 
-			(
-				2 / width,	0,			0,											0,
-				0,			2 / height, 0,											0,
-				0,			0,			1 / ( zFarPlane - zNearPlane ),				0,
-				0,			0,			zNearPlane / ( zNearPlane - zFarPlane ),	1
-			);
+// 		return Matrix44< T > 
+// 			(
+// 				2 / width,	0,			0,											0,
+// 				0,			2 / height, 0,											0,
+// 				0,			0,			1 / ( zFarPlane - zNearPlane ),				0,
+// 				0,			0,			zNearPlane / ( zNearPlane - zFarPlane ),	1
+// 			);
+		const T w_2 ( width / 2 );
+		const T h_2 ( height / 2 );
+		return OrthoOffCenterLH ( -w_2, w_2, -h_2, h_2, zNearPlane, zFarPlane );
 	}
 
 	template < typename T >

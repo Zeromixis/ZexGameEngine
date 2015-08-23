@@ -1,6 +1,7 @@
 #include "Render/ShaderObject.h"
 #include <assert.h>
 #include <iostream>
+#include <vector>
 
 
 namespace ZGE
@@ -40,6 +41,18 @@ namespace ZGE
 		if ( !isCompiled )
 		{
 			std::cout << "Shader Compile failed!" << std::endl;
+			GLsizei logSize = 0;
+			glGetShaderiv ( shader, GL_INFO_LOG_LENGTH, &logSize );
+
+			std::vector< GLchar > errorlog ( logSize );
+			glGetShaderInfoLog ( shader, logSize, &logSize, &errorlog[ 0 ] );
+
+			std::string errorStr ( errorlog.begin (), errorlog.end () );
+			std::cout << errorStr << std::endl;
+
+			glDeleteShader ( shader );
+
+			return;
 			//throw new std::exception ();
 		}
 

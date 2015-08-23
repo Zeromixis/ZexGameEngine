@@ -8,5 +8,5 @@ uniform mat4 orthoMatrix;
 void main ()
 {
 	outVaryingTexCoord = InVertexTexCoord;
-	gl_Position = orthoMatrix * vec4 ( InVertexPosition );
+	gl_Position = orthoMatrix * vec4 ( InVertexPosition, 0, 1 );
 }

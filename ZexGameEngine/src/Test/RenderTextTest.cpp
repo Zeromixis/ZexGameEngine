@@ -11,7 +11,7 @@ namespace ZGE
 
 		FT_Error error;
 		FT_Init_FreeType ( &m_FTLibrary );
-		FT_New_Face ( m_FTLibrary, "Font/arial.ttf", 0, &m_FTFace );
+		FT_New_Face ( m_FTLibrary, "Font/msyh.ttf", 0, &m_FTFace );
 
 		FT_Set_Char_Size
 			(
@@ -62,10 +62,10 @@ namespace ZGE
 		// Texcoord Data
 
 		std::vector < Vector2f > texcoords;
-		texcoords.push_back ( Vector2f ( 0.0f, 1.0f ) );
-		texcoords.push_back ( Vector2f ( 1.0f, 1.0f ) );
 		texcoords.push_back ( Vector2f ( 0.0f, 0.0f ) );
 		texcoords.push_back ( Vector2f ( 1.0f, 0.0f ) );
+		texcoords.push_back ( Vector2f ( 0.0f, 1.0f ) );
+		texcoords.push_back ( Vector2f ( 1.0f, 1.0f ) );
 
 		m_TexcoordBuffer = new ArrayBuffer ( texcoords.size () * 2 * 4, ArrayBuffer::ArrayBufferUsage::STATIC );
 		m_TexcoordBuffer->SetData ( &texcoords[ 0 ], texcoords.size () * 2 * 4 );
@@ -77,18 +77,19 @@ namespace ZGE
 		U32 *texData = new U32[ bitmap.width * bitmap.rows ];
 		for ( size_t i = 0; i < bitmap.width * bitmap.rows; ++i )
 		{
-// 			if ( bitmap.buffer[ i ] >= 128 )
-// 			{
-// 				texData[ i ] = 255 | 0 << 8 | 0 << 16 | 255 << 24;
-// 			}
-// 			else
-// 			{
-// 				texData[ i ] = 0;
-// 			}
-			texData[ i ] = bitmap.buffer[ i ];
+			//texData[ i ] = bitmap.buffer[ i ];
+			if ( bitmap.buffer[ i ] >= 128 )
+			{
+				texData[ i ] = 255 << 24 | 255 << 16 | 0 << 8 | 255;
+			}
+			else
+			{
+				texData[ i ] = 0;
+			}
 		}
 
 		glGenTextures ( 1, &m_CharTexture );
+		glBindTexture ( GL_TEXTURE_2D, m_CharTexture );
 		glTexImage2D
 			(
 			GL_TEXTURE_2D,                  // target
@@ -135,7 +136,7 @@ namespace ZGE
 
 		glGenBuffers ( 1, &m_IndexBufferHandle );
 		glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferHandle );
-		glBufferData ( GL_ELEMENT_ARRAY_BUFFER, indexList.size (), &indexList[ 0 ], GL_STATIC_DRAW );
+		glBufferData ( GL_ELEMENT_ARRAY_BUFFER, indexList.size () * sizeof ( GLuint ), &indexList[ 0 ], GL_STATIC_DRAW );
 
 
 		// Init Shader
@@ -149,10 +150,13 @@ namespace ZGE
 
 		m_Shader.LinkProgram ();
 
+		m_Shader.Bind ();
+
 		auto orthoMatrixLoc = glGetUniformLocation ( m_Shader.GLSLProgram (), "orthoMatrix" );
 		auto window = Context::GetInstance ()->GetWindowPtr ();
-		auto orthoMatrix = OrthoLH< F32 > ( window->Width (), window->Height (), 0.0f, 1.0f );
-		Transpose ( orthoMatrix );
+		//auto orthoMatrix = OrthoLH< F32 > ( window->Width (), window->Height (), 0.0f, 1.0f );
+		auto orthoMatrix = OrthoOffCenterLH< F32 > ( 0, window->Width (), window->Height (), 0.0f, 0.0f, 1.0f );
+		// Transpose ( orthoMatrix );
 		glUniformMatrix4fv
 			(
 			orthoMatrixLoc,
@@ -160,9 +164,9 @@ namespace ZGE
 			GL_FALSE,
 			static_cast< GLfloat * >( &orthoMatrix[ 0 ] )
 			);
-
 		GLint textureUniform = glGetUniformLocation ( m_Shader.GLSLProgram (), "tex2D" );
 		glUniform1i ( textureUniform, 0 );
+		m_Shader.UnBind ();
 
 	}
 
