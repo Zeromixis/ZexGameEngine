@@ -30,7 +30,8 @@ namespace ZGE
         glFrontFace ( GL_CW );
 
 		renderTextTest = new RenderTextTest;
-        
+
+		// InitFontRender ();
     }
 
     RenderEngine::~RenderEngine ()
@@ -77,10 +78,46 @@ namespace ZGE
         m_Camera = camera;
     }
 
-    void RenderEngine::RenderChar ( U32 charCode, Vector2f position )
-    {
+	void RenderEngine::RenderText ( const std::wstring & text, const Vector2i & position, const Vector3f & color, U32 size )
+	{
+		WindowWin *windowWin = dynamic_cast< WindowWin * > ( Context::GetInstance ()->GetWindowPtr ().get () );
 
-        
-    }
+		FT_Set_Char_Size
+		(
+			m_FTFace,
+			0,
+			size * 64,
+			::GetDeviceCaps ( windowWin->Hdc (), LOGPIXELSX ),
+			::GetDeviceCaps ( windowWin->Hdc (), LOGPIXELSY )
+		);
+
+		Vector2i drawPosition = position;
+
+
+		for ( auto &iChar : text )
+		{
+			FT_Vector pen;
+			pen.x = drawPosition.x () * 64;
+			pen.y = drawPosition.y () * 64;
+			FT_Set_Transform ( m_FTFace, 0, &pen );
+
+			FT_Load_Char ( m_FTFace, iChar, FT_LOAD_RENDER );
+
+			auto slot = m_FTFace->glyph;
+			FT_Bitmap bitmap = slot->bitmap;
+
+
+
+			// Step Add DrawPosition.
+		}
+
+
+	}
+
+	void RenderEngine::InitFontRender ()
+	{
+		FT_Init_FreeType ( &m_FTLibrary );
+		FT_New_Face ( m_FTLibrary, "Font/msyh.ttf", 0, &m_FTFace );
+	}
 
 }

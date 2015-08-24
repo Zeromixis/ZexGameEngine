@@ -9,7 +9,6 @@ namespace ZGE
 	{
 		WindowWin *windowWin = dynamic_cast< WindowWin * > ( Context::GetInstance ()->GetWindowPtr ().get () );
 
-		FT_Error error;
 		FT_Init_FreeType ( &m_FTLibrary );
 		FT_New_Face ( m_FTLibrary, "Font/msyh.ttf", 0, &m_FTFace );
 
@@ -138,7 +137,6 @@ namespace ZGE
 		glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferHandle );
 		glBufferData ( GL_ELEMENT_ARRAY_BUFFER, indexList.size () * sizeof ( GLuint ), &indexList[ 0 ], GL_STATIC_DRAW );
 
-
 		// Init Shader
 		std::wstring vertexShaderPath = L"Shader/TextVS.vp";
 		std::wstring vertexShaderSource = LoadShaderSourceFromFile ( vertexShaderPath );
@@ -167,7 +165,6 @@ namespace ZGE
 		GLint textureUniform = glGetUniformLocation ( m_Shader.GLSLProgram (), "tex2D" );
 		glUniform1i ( textureUniform, 0 );
 		m_Shader.UnBind ();
-
 	}
 
 }

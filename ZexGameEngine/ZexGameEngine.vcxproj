@@ -154,6 +154,7 @@
     <ClInclude Include="include\App\Window.h" />
     <ClInclude Include="include\App\WindowWin.h" />
     <ClInclude Include="include\Clock.h" />
+    <ClInclude Include="include\Core\Asset\AssetManager.h" />
     <ClInclude Include="include\Core\Camera.h" />
     <ClInclude Include="include\Core\CameraController.h" />
     <ClInclude Include="include\Core\Input\InputDevice.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="include\Node.h" />
     <ClInclude Include="include\Pattern\Observer.h" />
     <ClInclude Include="include\Pattern\Singleton.h" />
+    <ClInclude Include="include\Pattern\TagObject.h" />
     <ClInclude Include="include\Render\RenderEngine.h" />
     <ClInclude Include="include\Render\ShaderObject.h" />
     <ClInclude Include="include\Test\LightningTest.h" />

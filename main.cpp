@@ -15,6 +15,7 @@ int WINAPI WinMain ( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 {
     using namespace ZGE;
     WindowWin *window = new ZGE::WindowWin ( ZGE::String ( L"ZexGameEngine" ) );
+
     Context::GetInstance ()->SetWindowPtr ( window );
     Context::GetInstance ()->SetRenderEngine ( new RenderEngine () );
 

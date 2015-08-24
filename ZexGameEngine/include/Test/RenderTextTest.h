@@ -27,6 +27,7 @@ namespace ZGE
             glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
             glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
             glDisable ( GL_CULL_FACE );
+			glBindBuffer ( GL_ARRAY_BUFFER, m_VertexBuffer->Handle () );
 			glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferHandle ); 
         }
 
@@ -40,7 +41,6 @@ namespace ZGE
 				GL_UNSIGNED_INT,
 				nullptr
 			);
-			auto error = glGetError ();
 		}
         
         void OnPostDraw ()

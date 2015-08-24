@@ -102,9 +102,6 @@
     <ClInclude Include="include\Test\LightningTest.h">
       <Filter>头文件\Test</Filter>
     </ClInclude>
-    <ClInclude Include="include\Core\TimeManager.h">
-      <Filter>头文件\Core</Filter>
-    </ClInclude>
     <ClInclude Include="include\Core\ArrayBuffer.h">
       <Filter>头文件\Core</Filter>
     </ClInclude>
@@ -134,6 +131,15 @@
     </ClInclude>
     <ClInclude Include="include\Test\RenderTextTest.h">
       <Filter>头文件\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\TimeManager.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Asset\AssetManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Pattern\TagObject.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

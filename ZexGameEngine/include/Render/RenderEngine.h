@@ -8,6 +8,9 @@
 #include "Core/CameraController.h"
 #include "Test/LightningTest.h"
 #include "Test/RenderTextTest.h"
+#include "External/freetype/include/ft2build.h"
+#include FT_FREETYPE_H
+
 
 namespace ZGE
 {
@@ -28,6 +31,8 @@ namespace ZGE
 
         void SetCamera ( const Camera &camera );
 
+		void RenderText ( const std::wstring & text, const Vector2i & position, const Vector3f & color, U32 size );
+
 		const std::shared_ptr< ShaderObject > GetShader () const
 		{
 			return m_Shader;
@@ -40,6 +45,9 @@ namespace ZGE
         Camera m_Camera;
 
     private:
+		void InitFontRender ();
+
+
         std::shared_ptr < ShaderObject > m_Shader;
 
         GLuint m_VertexArray;
@@ -49,6 +57,9 @@ namespace ZGE
 
 		LightningTest lightningTest;
 		RenderTextTest *renderTextTest;
+
+		FT_Library m_FTLibrary;
+		FT_Face    m_FTFace;
 
 
     };
