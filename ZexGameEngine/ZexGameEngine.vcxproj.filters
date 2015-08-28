@@ -141,6 +141,15 @@
     <ClInclude Include="include\Pattern\TagObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Core\Asset\AssetLoader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Asset\AssetHandle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Asset\Asset.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">

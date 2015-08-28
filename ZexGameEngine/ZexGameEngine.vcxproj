@@ -154,6 +154,9 @@
     <ClInclude Include="include\App\Window.h" />
     <ClInclude Include="include\App\WindowWin.h" />
     <ClInclude Include="include\Clock.h" />
+    <ClInclude Include="include\Core\Asset\Asset.h" />
+    <ClInclude Include="include\Core\Asset\AssetHandle.h" />
+    <ClInclude Include="include\Core\Asset\AssetLoader.h" />
     <ClInclude Include="include\Core\Asset\AssetManager.h" />
     <ClInclude Include="include\Core\Camera.h" />
     <ClInclude Include="include\Core\CameraController.h" />
