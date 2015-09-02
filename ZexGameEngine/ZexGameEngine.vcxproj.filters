@@ -150,6 +150,12 @@
     <ClInclude Include="include\Core\Asset\Asset.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Core\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Font.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">

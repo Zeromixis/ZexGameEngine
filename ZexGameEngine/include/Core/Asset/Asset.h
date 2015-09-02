@@ -12,52 +12,31 @@ namespace ZGE
 		: public TagObject
 	{
 	public:
-		enum AssetState
+		enum State
 		{
 			IS_LOAD = 0,
 			ON_DISK,
 			ON_RAM,
 			
-			OTHER_STATUS_BEGIN,
+			DERIVED_STATE_BEGIN,
 		};
 
 		Asset ()
 			: TagObject ()
-			, m_Size { 0 }
+			, Size { 0 }
 		{
 			
 		}
 
 		virtual ~Asset () {}
 
-		const std::wstring & Name () const
-		{
-			return m_Name;
-		}
+		std::wstring Name;
 
-		const size_t & Size () const
-		{
-			return m_Size;
-		}
+		U64 Size;
 
-		const std::wstring & Path () const
-		{
-			return m_Path;
-		}
+		std::wstring Path;
 
-		bool CheckStatus ( U16 statePos ) const
-		{
-			return m_Flags[ statePos ];
-		}
-
-	protected:
-		std::wstring m_Name;
-
-		size_t m_Size;
-
-		std::wstring m_Path;
-
-		std::bitset< 32 > m_Flags;
+		std::bitset< 32 > Flags;
 	};
 }
 

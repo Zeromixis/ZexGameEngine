@@ -163,6 +163,7 @@
     <ClInclude Include="include\Core\Input\InputDevice.h" />
     <ClInclude Include="include\Core\Input\InputManager.h" />
     <ClInclude Include="include\Core\Input\WInputDevice.h" />
+    <ClInclude Include="include\Core\Texture.h" />
     <ClInclude Include="include\Core\TimeManager.h" />
     <ClInclude Include="include\Core\ArrayBuffer.h" />
     <ClInclude Include="include\CorePrerequisites.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="include\Render\ShaderObject.h" />
     <ClInclude Include="include\Test\LightningTest.h" />
     <ClInclude Include="include\Test\RenderTextTest.h" />
+    <ClInclude Include="include\Core\Font.h" />
     <ClInclude Include="include\Timer.h" />
     <ClInclude Include="include\UI\UIComponent.h" />
     <ClInclude Include="include\UI\UIEvent.h" />
