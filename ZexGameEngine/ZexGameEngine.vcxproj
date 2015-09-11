@@ -156,8 +156,10 @@
     <ClInclude Include="include\Clock.h" />
     <ClInclude Include="include\Core\Asset\Asset.h" />
     <ClInclude Include="include\Core\Asset\AssetHandle.h" />
-    <ClInclude Include="include\Core\Asset\AssetLoader.h" />
     <ClInclude Include="include\Core\Asset\AssetManager.h" />
+    <ClInclude Include="include\Core\Asset\Entity.h" />
+    <ClInclude Include="include\Core\Asset\Property.h" />
+    <ClInclude Include="include\Core\Asset\PropertyLoader.h" />
     <ClInclude Include="include\Core\Camera.h" />
     <ClInclude Include="include\Core\CameraController.h" />
     <ClInclude Include="include\Core\Input\InputDevice.h" />
@@ -170,6 +172,7 @@
     <ClInclude Include="include\Math\Matrix.h" />
     <ClInclude Include="include\Math\Vector.h" />
     <ClInclude Include="include\Node.h" />
+    <ClInclude Include="include\Pattern\ClassTag.h" />
     <ClInclude Include="include\Pattern\Observer.h" />
     <ClInclude Include="include\Pattern\Singleton.h" />
     <ClInclude Include="include\Pattern\TagObject.h" />

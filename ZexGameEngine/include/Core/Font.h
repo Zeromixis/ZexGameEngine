@@ -34,11 +34,11 @@ namespace ZGE
 
 	static FontLibrary FONT_LIBRARY;
 
-	class FontAsset
-		: public Asset
+	class Font
+		: public Property
 	{
 	public:
-		FontAsset ( const std::string &path, const I32 &charSize )
+		Font ( const std::string &path, const I32 &charSize )
 		{
 			WindowWin *windowWin = dynamic_cast< WindowWin * > ( Context::GetInstance ()->GetWindowPtr ().get () );
 
@@ -51,20 +51,20 @@ namespace ZGE
 				(
 					m_FTFace,
 					0,
-					13 * 64,
+					CharSize * 64,
 					::GetDeviceCaps ( windowWin->Hdc (), LOGPIXELSX ),
 					::GetDeviceCaps ( windowWin->Hdc (), LOGPIXELSY )
 				);
 		}
 
-		virtual ~FontAsset ()
+		virtual ~Font ()
 		{
 			FT_Done_Face ( m_FTFace );
 		}
 
-		Texture TextTextureOut ( const std::wstring &text )
+		TextureProperty TextTextureOut ( const std::wstring &text )
 		{
-
+			
 		}
 
 		I32 CharSize;
@@ -73,8 +73,6 @@ namespace ZGE
 		FT_Face m_FTFace;
 		
 	};
-
-	typedef AssetHandle< FontAsset > Font;
 
 
 }

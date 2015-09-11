@@ -1,23 +1,21 @@
 #ifndef _CORE_TEXTURE_H_
 #define _CORE_TEXTURE_H_
 
-#include "Core/Asset/Asset.h"
-#include "Core/Asset/AssetHandle.h"
+#include "Core/Asset/Property.h"
 
 
 namespace ZGE
 {
-	class TextureAsset
-		: public Asset
+	struct Texture
+		: public Property
 	{
-	public:
 		enum Format
 		{
 			L8,
 			R8G8B8A8,
 		};
 
-		TextureAsset ()
+		Texture ()
 			: TexData ( nullptr )
 			, Width ( 0 )
 			, Height ( 0 )
@@ -26,7 +24,7 @@ namespace ZGE
 
 		}
 
-		virtual ~TextureAsset ()
+		virtual ~Texture ()
 		{
 			delete[] TexData;
 		}
@@ -38,10 +36,9 @@ namespace ZGE
 		U32 Height;
 
 		U8 *TexData;
-
 	};
 
-	typedef AssetHandle< TextureAsset > Texture;
+	typedef PropertyHandle< Texture > TextureProperty;
 }
 
 

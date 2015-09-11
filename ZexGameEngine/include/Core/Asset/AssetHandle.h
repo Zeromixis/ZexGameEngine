@@ -75,6 +75,11 @@ namespace ZGE
 			return m_AssetObject != nullptr;
 		}
 
+		T* Get () const
+		{
+			return m_AssetObject.get ();
+		}
+
 		bool IsUnique () const
 		{
 			return m_AssetObject.unique ();

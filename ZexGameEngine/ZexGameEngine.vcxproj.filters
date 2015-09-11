@@ -141,9 +141,6 @@
     <ClInclude Include="include\Pattern\TagObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\Core\Asset\AssetLoader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Core\Asset\AssetHandle.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -154,6 +151,18 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\Core\Font.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Asset\Entity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Asset\Property.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Pattern\ClassTag.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Asset\PropertyLoader.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
