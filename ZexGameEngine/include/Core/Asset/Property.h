@@ -2,34 +2,37 @@
 #define _CORE_ASSET_PROPERTY_H_
 
 #include <memory>
-#include "Pattern/TagObject.h"
+#include "Pattern/Object.h"
 #include "External/boost/core/noncopyable.hpp"
 
 namespace ZGE
 {
 	struct Property
-		: public TagObject
+		: public Object
 		, private boost::noncopyable
 	{
-		virtual ~Property () {}
+		virtual ~Property () 
+        {
+
+        }
 
 	protected:
 		Property ()
-			: TagObject ()
+			: Object ()
 		{
 
 		}
 	};
 	
 	template
-		<
-		typename T,
-		class = std::enable_if < std::is_convertible< T, Property >, void >::type
-		>
+    <
+        typename T,
+        typename = typename std::enable_if< std::is_convertible< T, Property >::value >::type
+    >
 	using PropertyHandle = std::shared_ptr< T >;
 
 	template< typename TargetClass, typename SourceClass >
-	static PropertyHandle< TargetClass > property_cast ( PropertyHandle< SourceClass > &handle )
+	static PropertyHandle< TargetClass > Property_Cast ( PropertyHandle< SourceClass > &handle )
 	{
 		if ( nullptr != dynamic_cast< TargetClass > ( handle.get () ) )
 		{

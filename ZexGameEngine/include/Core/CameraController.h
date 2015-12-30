@@ -65,6 +65,8 @@ namespace ZGE
 
     private:
         void OnInput ( const InputAction& action );
+
+        ActionSignalPtr m_Signal;
     };
 }
 

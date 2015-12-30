@@ -41,7 +41,7 @@ namespace ZGE
         }
 
     protected:
-        HINSTANCE m_HInstance;
+        HINSTANCE m_hInstance;
         HWND m_Hwnd;
         HDC m_Hdc;
         RawInputEvent m_RawInputEvent;

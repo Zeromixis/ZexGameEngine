@@ -47,6 +47,8 @@ namespace ZGE
         {
 			m_Shader.UnBind ();
 			glEnable ( GL_CULL_FACE );
+            glBindBuffer ( GL_ARRAY_BUFFER, 0 );
+            glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, 0 );
         }
 
         // Text render test
@@ -56,8 +58,8 @@ namespace ZGE
         GLuint m_CharTexture;
         GLuint m_VertexArray;
 
-        ArrayBuffer *m_VertexBuffer;
-        ArrayBuffer *m_TexcoordBuffer;
+        ArrayBuffer< GL_ARRAY_BUFFER > *m_VertexBuffer;
+        ArrayBuffer< GL_ARRAY_BUFFER > *m_TexcoordBuffer;
 
 		ShaderObject m_Shader;
 

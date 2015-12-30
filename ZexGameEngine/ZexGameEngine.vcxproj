@@ -69,7 +69,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>.\;$(ProjectDir)/include;$(SolutionDir);$(SolutionDir)/External;$(SolutionDir)/External/glloader/include;$(SolutionDir)/External/freetype/include;$(IncludePath)</IncludePath>
+    <IncludePath>.\;$(ProjectDir)/include;$(SolutionDir);$(SolutionDir)/External;$(SolutionDir)/External/glloader/include;$(SolutionDir)/External/freetype/include;$(SolutionDir)/External/FBXSDK/;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)/src;$(SourcePath)</SourcePath>
     <OutDir>$(SolutionDir)\Bin\$(Configuration)\</OutDir>
   </PropertyGroup>
@@ -97,7 +97,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glloader_vc140_d.lib;Opengl32.lib;freetype26d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glloader_vc140_d.lib;Opengl32.lib;freetype26d.lib;libfbxsdk-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
@@ -172,12 +172,15 @@
     <ClInclude Include="include\Math\Matrix.h" />
     <ClInclude Include="include\Math\Vector.h" />
     <ClInclude Include="include\Node.h" />
-    <ClInclude Include="include\Pattern\ClassTag.h" />
     <ClInclude Include="include\Pattern\Observer.h" />
     <ClInclude Include="include\Pattern\Singleton.h" />
-    <ClInclude Include="include\Pattern\TagObject.h" />
+    <ClInclude Include="include\Pattern\Object.h" />
+    <ClInclude Include="include\PropertyLoader\FBXLoader.h" />
+    <ClInclude Include="include\Property\Mesh.h" />
+    <ClInclude Include="include\Property\Vertex.h" />
     <ClInclude Include="include\Render\RenderEngine.h" />
     <ClInclude Include="include\Render\ShaderObject.h" />
+    <ClInclude Include="include\Test\FBXTest.h" />
     <ClInclude Include="include\Test\LightningTest.h" />
     <ClInclude Include="include\Test\RenderTextTest.h" />
     <ClInclude Include="include\Core\Font.h" />
@@ -198,8 +201,10 @@
     <ClCompile Include="src\Core\Input\WInputDevice.cpp" />
     <ClCompile Include="src\Core\TimeManager.cpp" />
     <ClCompile Include="src\Core\ArrayBuffer.cpp" />
+    <ClCompile Include="src\PropertyLoader\FBXLoader.cpp" />
     <ClCompile Include="src\RenderEngine\RenderEngine.cpp" />
     <ClCompile Include="src\RenderEngine\ShaderObject.cpp" />
+    <ClCompile Include="src\Test\FBXTest.cpp" />
     <ClCompile Include="src\Test\RenderTextTest.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\UI\UIRoot.cpp" />

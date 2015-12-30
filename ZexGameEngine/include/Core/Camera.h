@@ -8,8 +8,8 @@
 
 namespace ZGE
 {
-
     class Camera
+        : public Object
     {
     public:
         Camera ();

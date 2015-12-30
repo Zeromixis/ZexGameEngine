@@ -9,6 +9,8 @@
 #include "App/Context.h"
 #include "Math/Matrix.h"
 #include "Core/TimeManager.h"
+#include "External/boost/signals2.hpp"
+#include "PropertyLoader/FBXLoader.h"
 
 
 int WINAPI WinMain ( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdWindow )

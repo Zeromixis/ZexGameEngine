@@ -11,14 +11,17 @@
 #ifndef BOOST_INTERPROCESS_WIN32_API_HPP
 #define BOOST_INTERPROCESS_WIN32_API_HPP
 
-#if defined(_MSC_VER)
+#ifndef BOOST_CONFIG_HPP
+#  include <boost/config.hpp>
+#endif
+#
+#if defined(BOOST_HAS_PRAGMA_ONCE)
 #  pragma once
 #endif
 
 #include <boost/interprocess/detail/config_begin.hpp>
 #include <boost/interprocess/detail/workaround.hpp>
 #include <boost/date_time/filetime_functions.hpp>
-#include <boost/predef/platform.h>
 #include <cstddef>
 #include <cstring>
 #include <cstdlib>
@@ -27,7 +30,6 @@
 #include <boost/assert.hpp>
 #include <string>
 #include <vector>
-#include <memory>
 
 #ifdef BOOST_USE_WINDOWS_H
 #include <windows.h>
@@ -36,7 +38,6 @@
 #include <Shlobj.h>
 #endif
 
-#if BOOST_PLAT_WINDOWS_DESKTOP
 #if defined(_MSC_VER)
 #  pragma once
 #  pragma comment( lib, "Advapi32.lib" )
@@ -44,7 +45,6 @@
 #  pragma comment( lib, "Ole32.lib" )
 #  pragma comment( lib, "Psapi.lib" )
 #  pragma comment( lib, "Shell32.lib" )   //SHGetSpecialFolderPathA
-#endif
 #endif
 
 #if defined (BOOST_INTERPROCESS_WINDOWS)
@@ -59,6 +59,12 @@
 // Declaration of Windows structures or typedefs if BOOST_USE_WINDOWS_H is used
 //
 //////////////////////////////////////////////////////////////////////////////
+
+//Ignore -pedantic errors here (anonymous structs, etc.)
+#if defined(BOOST_GCC) && (BOOST_GCC >= 40600)
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-pedantic"
+#endif
 
 namespace boost  {
 namespace interprocess  {
@@ -98,7 +104,7 @@ struct decimal
             unsigned long Lo32;
             unsigned long Mid32;
         };
-        unsigned __int64 Lo64;
+        ::boost::ulong_long_type Lo64;
     };
 };
 
@@ -743,8 +749,8 @@ union system_timeofday_information
       __int64 liExpTimeZoneBias;
       unsigned long uCurrentTimeZoneId;
       unsigned long dwReserved;
-      unsigned __int64 ullBootTimeBias;
-      unsigned __int64 ullSleepTimeBias;
+      ::boost::ulong_long_type ullBootTimeBias;
+      ::boost::ulong_long_type ullSleepTimeBias;
    } data;
    unsigned char Reserved1[sizeof(data_t)];
 };
@@ -879,7 +885,6 @@ extern "C" __declspec(dllimport) void * __stdcall CreateSemaphoreA(interprocess_
 extern "C" __declspec(dllimport) int __stdcall ReleaseSemaphore(void *, long, long *);
 extern "C" __declspec(dllimport) void * __stdcall OpenSemaphoreA(unsigned long, int, const char *);
 extern "C" __declspec(dllimport) void * __stdcall CreateFileMappingA (void *, interprocess_security_attributes*, unsigned long, unsigned long, unsigned long, const char *);
-extern "C" __declspec(dllimport) void * __stdcall CreateFileMappingW (void *, interprocess_security_attributes*, unsigned long, unsigned long, unsigned long, const wchar_t *);
 extern "C" __declspec(dllimport) void * __stdcall MapViewOfFileEx (void *, unsigned long, unsigned long, unsigned long, std::size_t, void*);
 extern "C" __declspec(dllimport) void * __stdcall OpenFileMappingA (unsigned long, int, const char *);
 extern "C" __declspec(dllimport) void * __stdcall CreateFileA (const char *, unsigned long, unsigned long, struct interprocess_security_attributes*, unsigned long, unsigned long, void *);
@@ -915,7 +920,6 @@ extern "C" __declspec(dllimport) int   __stdcall FreeLibrary(hmodule);
 extern "C" __declspec(dllimport) farproc_t __stdcall GetProcAddress(void *, const char*);
 extern "C" __declspec(dllimport) hmodule __stdcall GetModuleHandleA(const char*);
 extern "C" __declspec(dllimport) void *__stdcall GetFileInformationByHandle(void *, interprocess_by_handle_file_information*);
-extern "C" __declspec(dllimport) int __stdcall MultiByteToWideChar(unsigned long, unsigned long, const char*, int, wchar_t*, int);
 
 //Advapi32.dll
 extern "C" __declspec(dllimport) long __stdcall RegOpenKeyExA(hkey, const char *, unsigned long, unsigned long, hkey*);
@@ -1134,8 +1138,6 @@ static const unsigned long security_descriptor_revision = 1;
 const unsigned long max_record_buffer_size = 0x10000L;   // 64K
 const unsigned long max_path = 260;
 
-const unsigned long cp_acp = 0;           // default to ANSI code page
-
 //Keys
 static const  hkey hkey_local_machine = (hkey)(unsigned long*)(long)(0x80000002);
 static unsigned long key_query_value    = 0x0001;
@@ -1307,12 +1309,10 @@ class interprocess_all_access_security
    interprocess_all_access_security()
       : initialized(false)
    {
-#if BOOST_PLAT_WINDOWS_DESKTOP
       if(!InitializeSecurityDescriptor(&sd, security_descriptor_revision))
          return;
       if(!SetSecurityDescriptorDacl(&sd, true, 0, false))
          return;
-#endif
       sa.lpSecurityDescriptor = &sd;
       sa.nLength = sizeof(interprocess_security_attributes);
       sa.bInheritHandle = false;
@@ -1320,32 +1320,21 @@ class interprocess_all_access_security
    }
 
    interprocess_security_attributes *get_attributes()
-#if BOOST_PLAT_WINDOWS_DESKTOP
    {  return &sa; }
-#else
-   {  return NULL; }
-#endif
 };
 
-inline void * create_file_mapping (void * handle, unsigned long access, unsigned __int64 file_offset, const char * name, interprocess_security_attributes *psec)
+inline void * create_file_mapping (void * handle, unsigned long access, ::boost::ulong_long_type file_offset, const char * name, interprocess_security_attributes *psec)
 {
    const unsigned long high_size(file_offset >> 32), low_size((boost::uint32_t)file_offset);
-#if BOOST_PLAT_WINDOWS_DESKTOP
    return CreateFileMappingA (handle, psec, access, high_size, low_size, name);
-#else
-   int const wcs_len = MultiByteToWideChar(cp_acp, 0, name, static_cast<int>(strlen(name)), 0, 0);
-   std::vector<wchar_t> wname(wcs_len + 1);
-   MultiByteToWideChar(cp_acp, 0, name, static_cast<int>(strlen(name)), &wname[0], wcs_len);
-   return CreateFileMappingW (handle, psec, access, high_size, low_size, &wname[0]);
-#endif
 }
 
 inline void * open_file_mapping (unsigned long access, const char *name)
 {  return OpenFileMappingA (access, 0, name);   }
 
-inline void *map_view_of_file_ex(void *handle, unsigned long file_access, unsigned __int64 offset, std::size_t numbytes, void *base_addr)
+inline void *map_view_of_file_ex(void *handle, unsigned long file_access, ::boost::ulong_long_type offset, std::size_t numbytes, void *base_addr)
 {
-   const unsigned long offset_low  = (unsigned long)(offset & ((unsigned __int64)0xFFFFFFFF));
+   const unsigned long offset_low  = (unsigned long)(offset & ((::boost::ulong_long_type)0xFFFFFFFF));
    const unsigned long offset_high = offset >> 32;
    return MapViewOfFileEx(handle, file_access, offset_high, offset_low, numbytes, base_addr);
 }
@@ -1546,7 +1535,7 @@ struct function_address_holder
    }
 
    public:
-   static void *get(const unsigned int id)
+   static farproc_t get(const unsigned int id)
    {
       BOOST_ASSERT(id < (unsigned int)NumFunction);
       for(unsigned i = 0; FunctionStates[id] < 2; ++i){
@@ -1562,7 +1551,7 @@ struct function_address_holder
             sleep_tick();
          }
       }
-      return reinterpret_cast<void*>(FunctionAddresses[id]);
+      return FunctionAddresses[id];
    }
 };
 
@@ -2351,6 +2340,10 @@ inline unsigned long get_tick_count()
 }  //namespace winapi
 }  //namespace interprocess
 }  //namespace boost
+
+#if defined(BOOST_GCC) && (BOOST_GCC >= 40600)
+#  pragma GCC diagnostic pop
+#endif
 
 #include <boost/interprocess/detail/config_end.hpp>
 

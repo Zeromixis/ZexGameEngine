@@ -32,7 +32,7 @@ namespace ZGE
         // Open the console for debug info output
         OpenConsole ();
 
-        m_HInstance = GetModuleHandle ( nullptr );
+        m_hInstance = GetModuleHandle ( nullptr );
         LPCWSTR szClassName = L"ZexGameEngine";
         LPCWSTR windowName = name.c_str ();
         HWND hwnd;
@@ -43,7 +43,7 @@ namespace ZGE
         wc.lpfnWndProc      = WndProc;
         wc.cbClsExtra       = 0;
         wc.cbWndExtra       = sizeof ( this );
-        wc.hInstance        = m_HInstance;
+        wc.hInstance        = m_hInstance;
         wc.hIcon            = nullptr;
         wc.hCursor          = LoadCursor ( nullptr, IDC_ARROW );
         wc.hbrBackground    = static_cast< HBRUSH >( ::GetStockObject ( BLACK_BRUSH ) );
@@ -58,7 +58,7 @@ namespace ZGE
             CW_USEDEFAULT,
             nullptr,
             nullptr,
-            m_HInstance,
+            m_hInstance,
             nullptr
             );
 
@@ -113,7 +113,7 @@ namespace ZGE
             CW_USEDEFAULT,
             nullptr,
             nullptr,
-            m_HInstance,
+            m_hInstance,
             nullptr
         );
 

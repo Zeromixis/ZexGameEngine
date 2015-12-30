@@ -7,6 +7,7 @@
 namespace ZGE
 {
 	class Entity
+        : public Object
 	{
 	public:
 		Entity ();

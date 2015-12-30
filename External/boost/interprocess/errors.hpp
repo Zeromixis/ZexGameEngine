@@ -24,7 +24,11 @@
 #ifndef BOOST_INTERPROCESS_ERRORS_HPP
 #define BOOST_INTERPROCESS_ERRORS_HPP
 
-#if defined(_MSC_VER)
+#ifndef BOOST_CONFIG_HPP
+#  include <boost/config.hpp>
+#endif
+#
+#if defined(BOOST_HAS_PRAGMA_ONCE)
 #  pragma once
 #endif
 
@@ -63,7 +67,6 @@ inline int system_error_code() // artifact of POSIX and WINDOWS error reporting
 #if defined (BOOST_INTERPROCESS_WINDOWS)
 inline void fill_system_message(int sys_err_code, std::string &str)
 {
-#if BOOST_PLAT_WINDOWS_DESKTOP
    void *lpMsgBuf;
    winapi::format_message(
       winapi::format_message_allocate_buffer |
@@ -78,21 +81,6 @@ inline void fill_system_message(int sys_err_code, std::string &str)
    );
    str += static_cast<const char*>(lpMsgBuf);
    winapi::local_free( lpMsgBuf ); // free the buffer
-#else
-   char buf[256];
-   void *lpMsgBuf = buf;
-   winapi::format_message(
-      winapi::format_message_from_system |
-      winapi::format_message_ignore_inserts,
-      0,
-      sys_err_code,
-      winapi::make_lang_id(winapi::lang_neutral, winapi::sublang_default), // Default language
-      reinterpret_cast<char *>(&lpMsgBuf),
-      sizeof(buf),
-      0
-   );
-   str += static_cast<const char*>(lpMsgBuf);
-#endif
    while ( str.size()
       && (str[str.size()-1] == '\n' || str[str.size()-1] == '\r') )
       str.erase( str.size()-1 );

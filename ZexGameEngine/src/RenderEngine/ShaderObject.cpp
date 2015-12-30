@@ -74,7 +74,7 @@ namespace ZGE
 		}
     }
 
-    GLuint ShaderObject::GLSLProgram () const
+    GLuint ShaderObject::Program () const
     {
         return m_GLSLProgram;
     }

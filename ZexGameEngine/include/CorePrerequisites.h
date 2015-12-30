@@ -4,6 +4,7 @@
 #include <string>
 #include <windows.h>
 #include "glloader/glloader.h"
+#include "Pattern/Object.h"
 
 namespace ZGE
 {

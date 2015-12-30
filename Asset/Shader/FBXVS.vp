@@ -1,0 +1,14 @@
+#version 330
+in vec3 In_Position;
+in vec3 In_Normal;
+in vec2 In_UV;
+
+out vec2 UV;
+
+uniform mat4 mvpMatrix;
+
+void main ()
+{
+    gl_Position = mvpMatrix * vec4 ( In_Position, 1.0 );
+    UV = In_UV;
+}

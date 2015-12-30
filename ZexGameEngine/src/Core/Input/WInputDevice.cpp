@@ -68,12 +68,12 @@ namespace ZGE
         for ( auto element : actionMap )
         {
             // Check if it is the Mouse Action
-            if ( element.first > MA_ACTIONSTART && element.first < MA_ACTIONEND )
+            if ( element.second > MA_ACTIONSTART && element.second < MA_ACTIONEND )
             {
-				if ( IsButtonDown ( static_cast< MouseAction >( element.first ) ) || IsButtonJustUp ( static_cast< MouseAction >( element.first ) ) )
+				if ( IsButtonDown ( static_cast< MouseAction >( element.second ) ) || IsButtonJustUp ( static_cast< MouseAction >( element.second ) ) )
                 {
                     InputAction inputAction;
-                    inputAction.first = element.second;
+                    inputAction.first = element.first;
 					inputAction.second = this;
                     ( *signal )( inputAction );
                 }
@@ -128,14 +128,14 @@ namespace ZGE
         // Check ActionMap
         for ( auto element : actionMap )
         {
-            // Check if it is the Mouse Action
-            if ( element.first > KA_ACTIONSTART && element.first < KA_ACTIONEND )
+            // Check if it is the Keyboard Action
+            if ( element.second > KA_ACTIONSTART && element.second < KA_ACTIONEND )
             {
 				// Only be trigged when Key is down or JustUp
-				if ( IsKeyDown ( static_cast< KeyboardAction >( element.first ) ) || IsKeyJustUp ( static_cast< KeyboardAction >( element.first ) ) )
+				if ( IsKeyDown ( static_cast< KeyboardAction >( element.second ) ) || IsKeyJustUp ( static_cast< KeyboardAction >( element.second ) ) )
                 {
                     InputAction inputAction;
-                    inputAction.first = element.second;
+                    inputAction.first = element.first;
                     inputAction.second = this;
                     ( *signal )( inputAction );
                 }

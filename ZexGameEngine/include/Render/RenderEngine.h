@@ -9,6 +9,7 @@
 #include "Test/LightningTest.h"
 #include "Test/RenderTextTest.h"
 #include "External/freetype/include/ft2build.h"
+#include "Test/FBXTest.h"
 #include FT_FREETYPE_H
 
 
@@ -57,6 +58,7 @@ namespace ZGE
 
 		LightningTest lightningTest;
 		RenderTextTest *renderTextTest;
+        FBXTest *m_FbxTest;
 
 		FT_Library m_FTLibrary;
 		FT_Face    m_FTFace;

@@ -4,7 +4,7 @@
 #include <memory>
 #include <xutility>
 #include "External/boost/operators.hpp"
-#include "Pattern/TagObject.h"
+#include "Pattern/Object.h"
 #include "AssetLoader.h"
 
 namespace ZGE

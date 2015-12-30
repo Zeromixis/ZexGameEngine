@@ -29,9 +29,9 @@ namespace ZGE
 			}
 
 			
-			m_pVertexBuffer = new ArrayBuffer ( m_Points.size () * 3 * 4, ArrayBuffer::ArrayBufferUsage::STATIC );
-			m_pVertexBuffer->SetData ( positionData, m_Points.size () * 3 * 4 );
-			m_pVertexBuffer->TransferData ();
+			m_pVertexBuffer = new ArrayBuffer< GL_ARRAY_BUFFER > ( m_Points.size () * 3 * 4, ArrayBufferUsage::STATIC );
+			m_pVertexBuffer->CopyData ( positionData, m_Points.size () * 3 * 4 );
+			m_pVertexBuffer->SendData ();
 			
 
 			// Bind Tex Data
@@ -49,9 +49,9 @@ namespace ZGE
 				texData[ i * 2 + 1 ] = 0.0f;
 			}
 
-			m_pTexCoordBuffer = new ArrayBuffer ( m_Points.size () * 2 * 4, ArrayBuffer::ArrayBufferUsage::STATIC );
-			m_pTexCoordBuffer->SetData ( texData, m_Points.size () * 2 * 4 );
-			m_pTexCoordBuffer->TransferData ();
+			m_pTexCoordBuffer = new ArrayBuffer< GL_ARRAY_BUFFER > ( m_Points.size () * 2 * 4, ArrayBufferUsage::STATIC );
+			m_pTexCoordBuffer->CopyData ( texData, m_Points.size () * 2 * 4 );
+			m_pTexCoordBuffer->SendData ();
 
 			glBindBuffer ( GL_ARRAY_BUFFER, m_pVertexBuffer->Handle () );
 			glEnableVertexAttribArray ( 0 );
@@ -270,8 +270,8 @@ namespace ZGE
 		bool isFirst;
 		std::vector< Vector3f > m_Points;
 		GLuint m_VertexArray;
-		ArrayBuffer *m_pVertexBuffer;
-		ArrayBuffer *m_pTexCoordBuffer;
+		ArrayBuffer< GL_ARRAY_BUFFER > *m_pVertexBuffer;
+		ArrayBuffer< GL_ARRAY_BUFFER > *m_pTexCoordBuffer;
 		
 		
 		GLuint m_LightingTexture;

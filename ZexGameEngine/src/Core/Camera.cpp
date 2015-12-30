@@ -50,25 +50,12 @@ namespace ZGE
 
     void Camera::SetProj ( F32 fov, F32 aspect, F32 nearPlane, F32 farPlane )
     {
-        m_Fov = fov;
-        m_Aspect = aspect;
+        m_Fov       = fov;
+        m_Aspect    = aspect;
         m_NearPlane = nearPlane;
-        m_FarPlane = farPlane;
+        m_FarPlane  = farPlane;
 
         // Set Projection Matrix
-
-//         typedef Float44::value_type valType;
-//         const valType h ( 1.0f / tan ( m_Fov / 2.0f ) );
-//         const valType w ( h / m_Aspect );
-//         const valType q ( m_FarPlane / ( m_FarPlane - m_NearPlane ) );
-//         m_ProjMat = Float44
-//         (
-//             w, 0, 0,                0,
-//             0, h, 0,                0,
-//             0, 0, q,                1,
-//             0, 0, -m_NearPlane * q, 0
-//         );
-
 		m_ProjMat = PerspectiveFovLH ( m_Fov, m_Aspect, m_NearPlane, m_FarPlane );
 
         // OpenGL adjust

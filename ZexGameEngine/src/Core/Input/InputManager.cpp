@@ -207,4 +207,17 @@ namespace ZGE
         }
             );
     }
+
+    void InputManager::RemoveActionMap ( ActionSignalPtr actionSignal )
+    {
+        for ( auto iter = m_ActionMaps.begin (); iter != m_ActionMaps.end (); ++iter )
+        {
+            if ( std::get< 1 > ( *iter ) == actionSignal )
+            {
+                iter = m_ActionMaps.erase ( iter );
+                break;
+            }
+        }
+    }
+
 }

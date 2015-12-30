@@ -3,6 +3,7 @@
 
 #include "CorePrerequisites.h"
 #include "Vector.h"
+#include <algorithm>
 
 
 namespace ZGE
@@ -128,19 +129,23 @@ namespace ZGE
                 {
                     auto lhsRowVector = this->RowVector ( i );
                     auto rhsColVector = rhs.ColVector ( j );
-//                     auto resultVector = lhsRowVector * rhsColVector;
-//                     T result ( 0 );
-//                     for ( int m = 0; m < resultVector.elemNum; ++m )
-//                     {
-//                         result += resultVector[ m ];
-//                     }
                     resultMatrix ( i, j ) = Dot ( lhsRowVector, rhsColVector );
                 }
             }
             return resultMatrix;
         }
 
-
+        void Transpose ()
+        {
+            assert ( Row == Col );
+            for ( auto i = 0; i < Row; ++i )
+            {
+                for ( auto j = i; j < Col; ++j )
+                {
+                    std::swap ( ( *this ) ( i, j ), ( *this ) ( j, i ) );
+                }
+            }
+        }
 
     protected:
         Vector< Vector< T, Col >, Row > m_Mat;
@@ -316,13 +321,6 @@ namespace ZGE
 	template < typename T >
 	Matrix44< T > OrthoLH ( const T& width, const T& height, const T& zNearPlane, const T& zFarPlane )
 	{
-// 		return Matrix44< T > 
-// 			(
-// 				2 / width,	0,			0,											0,
-// 				0,			2 / height, 0,											0,
-// 				0,			0,			1 / ( zFarPlane - zNearPlane ),				0,
-// 				0,			0,			zNearPlane / ( zNearPlane - zFarPlane ),	1
-// 			);
 		const T w_2 ( width / 2 );
 		const T h_2 ( height / 2 );
 		return OrthoOffCenterLH ( -w_2, w_2, -h_2, h_2, zNearPlane, zFarPlane );

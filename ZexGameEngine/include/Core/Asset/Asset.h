@@ -3,19 +3,19 @@
 
 #include <bitset>
 #include "CorePrerequisites.h"
-#include "Pattern/TagObject.h"
+#include "Pattern/Object.h"
 #include "External/boost/core/noncopyable.hpp"
 
 
 namespace ZGE
 {
 	class Asset
-		: public TagObject
+		: public Object
 		, private boost::noncopyable
 	{
 	public:
 		Asset ()
-			: TagObject ()
+			: Object ()
 		{
 
 		}

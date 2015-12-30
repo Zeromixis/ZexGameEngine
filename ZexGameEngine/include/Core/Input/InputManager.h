@@ -38,6 +38,8 @@ namespace ZGE
 		// ActionMap first type is Engine-Defined Key Enum, second type is Self-Defined Enum.
         void AddActionMap ( std::map< U32, U32 > actionMap, ActionSignalPtr actionSignal, int priority );
 
+        void RemoveActionMap ( ActionSignalPtr actionSignal );
+
         void BlockPropagate () { m_IsBlocked = true; }
 
     protected:

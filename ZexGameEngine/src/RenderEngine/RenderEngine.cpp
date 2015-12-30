@@ -10,13 +10,13 @@ namespace ZGE
 {
     RenderEngine::RenderEngine ()
 	{
-        Camera *myCamera = new Camera ();
-        auto window = Context::GetInstance ()->GetWindowPtr ();
-        F32 cameraAspect = ( F32 )( window->Width () ) / window->Height ();
-        myCamera->SetProj ( PI / 4, cameraAspect, 0.1f, 1000.0f );
-        myCamera->SetView ( Vector3f ( 0.0f, 0.0f, -8.0f ), Vector3f ( 0.0f, 0.0f, 0.0f ) );
-
-        m_CameraController = std::make_shared< CameraController > ( myCamera );
+//         Camera *myCamera = new Camera ();
+//         auto window = Context::GetInstance ()->GetWindowPtr ();
+//         F32 cameraAspect = ( F32 )( window->Width () ) / window->Height ();
+//         myCamera->SetProj ( PI / 4, cameraAspect, 0.1f, 1000.0f );
+//         myCamera->SetView ( Vector3f ( 0.0f, 0.0f, -8.0f ), Vector3f ( 0.0f, 0.0f, 0.0f ) );
+// 
+//         m_CameraController = std::make_shared< CameraController > ( myCamera );
 
         glProvokingVertex ( GL_FIRST_VERTEX_CONVENTION );
 
@@ -29,7 +29,8 @@ namespace ZGE
         // The Triangle is clock-wise ( like DirectX )
         glFrontFace ( GL_CW );
 
-		renderTextTest = new RenderTextTest;
+		//renderTextTest = new RenderTextTest;
+        m_FbxTest = new FBXTest;
 
 		// InitFontRender ();
     }
@@ -61,10 +62,14 @@ namespace ZGE
 		// glEnable ( GL_TEXTURE_1D );
 		// lightningTest.Draw ();
 
-		renderTextTest->OnPreDraw ();
-		renderTextTest->OnDraw ();
-		renderTextTest->OnPostDraw ();
+// 		renderTextTest->OnPreDraw ();
+// 		renderTextTest->OnDraw ();
+// 		renderTextTest->OnPostDraw ();
 
+        m_FbxTest->OnPreDraw ();
+        m_FbxTest->OnDraw ();
+        m_FbxTest->OnPostDraw ();
+        
         Context::GetInstance ()->GetWindowPtr ()->SwapBuffer ();
     }
 
@@ -81,6 +86,8 @@ namespace ZGE
 	void RenderEngine::RenderText ( const std::wstring & text, const Vector2i & position, const Vector3f & color, U32 size )
 	{
 		WindowWin *windowWin = dynamic_cast< WindowWin * > ( Context::GetInstance ()->GetWindowPtr ().get () );
+
+		//std::underlying_type<  >
 
 		FT_Set_Char_Size
 		(

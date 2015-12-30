@@ -8,36 +8,71 @@
 
 namespace ZGE
 {
-	class ArrayBuffer : boost::noncopyable
+    enum ArrayBufferUsage
+    {
+        STATIC = GL_STATIC_DRAW,
+        DYNAMIC = GL_DYNAMIC_DRAW,
+    };
+
+    template< int BindTarget >
+	class ArrayBuffer 
+        : private boost::noncopyable
 	{
 	public:
-		enum ArrayBufferUsage
-		{
-			STATIC  = GL_STATIC_DRAW,
-			DYNAMIC = GL_DYNAMIC_DRAW,
-		};
+        enum
+        {
+            TARGET = BindTarget,
+        };
 
-		//VertexBuffer ();
+        ArrayBuffer ()
+            : m_BufferId ( 0 )
+            , m_Size ( 0 )
+            , m_Usage ( STATIC )
+        {
 
-		ArrayBuffer ( U32 byteSize, ArrayBufferUsage usage );
+        }
 
-		~ArrayBuffer ();
+        ArrayBuffer ( U32 byteSize, ArrayBufferUsage usage )
+            : m_BufferId ( 0 )
+            , m_Size ( byteSize )
+            , m_Usage ( usage )
+        {
+            glGenBuffers ( 1, &m_BufferId );
 
-		//std::shared_ptr< void >& DataPointer ();
+            assert ( m_Size > 0 );
 
-		const U32& Handle ();
+            m_DataPtr = new U8[ m_Size ];
+        }
 
-		void SetData ( void *src, U32 byteSize );
+        ~ArrayBuffer ()
+        {
+            if ( 0 != m_BufferId )
+            {
+                glDeleteBuffers ( 1, &m_BufferId );
+            }
+            delete[] m_DataPtr;
+        }
 
-		void TransferData ();
+        const U32& Handle ()
+        {
+            return m_BufferId;
+        }
 
-		U32 Size ();
+        void CopyData ( void *src, U32 byteSize )
+        {
+            memcpy ( m_DataPtr, src, byteSize );
+        }
 
-	protected:
-		enum
-		{ 
-			TARGET = GL_ARRAY_BUFFER, 
-		};
+        void SendData ()
+        {
+            glBindBuffer ( TARGET, m_BufferId );
+            glBufferData ( TARGET, m_Size, m_DataPtr, m_Usage );
+        }
+
+        U32 Size ()
+        {
+            return m_Size;
+        }
 
 	private:
 		U32 m_BufferId;

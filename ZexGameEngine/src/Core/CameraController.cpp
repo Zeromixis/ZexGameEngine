@@ -12,8 +12,8 @@ namespace ZGE
         m_Camera = std::shared_ptr< Camera >( camera );
 
         // Add ActionMap
-        ActionSignalPtr signal = std::make_shared< ActionSignal > ();
-        signal->connect ( boost::bind ( &CameraController::OnInput, this, _1 ) );
+        m_Signal = std::make_shared< ActionSignal > ();
+        m_Signal->connect ( boost::bind ( &CameraController::OnInput, this, _1 ) );
 
         std::map< U32, U32 > actionMap;
         actionMap[ RotateLeftRight ] = MA_X;
@@ -24,7 +24,7 @@ namespace ZGE
         actionMap[ Right ]           = KA_D;
 
 		// Register ActionMap
-        //InputManager::GetInstance ()->AddActionMap ( actionMap, signal );
+        InputManager::GetInstance ()->AddActionMap ( actionMap, m_Signal, 0 );
     }
 
     CameraController::CameraController ( const CameraController& rhs )
@@ -34,7 +34,7 @@ namespace ZGE
 
     CameraController::~CameraController ()
     {
-
+        InputManager::GetInstance ()->RemoveActionMap ( m_Signal );
     }
 
     void CameraController::Move ( F32 x, F32 y, F32 z )
@@ -101,7 +101,9 @@ namespace ZGE
             // If Right Mouse Button is pressed
             if ( mouse->IsButtonDown( MA_RBUTTON ) )
             {
-                Rotate ( 0.0f, 1.0f, 0.0f, length / 5.0f * mouse->Offset ().x () );
+                auto cameraUpVec = m_Camera->UpVector ();
+                Normalize ( cameraUpVec );
+                Rotate ( cameraUpVec.x (), cameraUpVec.y (), cameraUpVec.z (), length / 5.0f * mouse->Offset ().x () / 20.0f );
             }
 
             break;
@@ -109,7 +111,9 @@ namespace ZGE
             // If Right Mouse Button is pressed
             if ( mouse->IsButtonDown ( MA_RBUTTON ) )
             {
-                Rotate ( 1.0f, 0.0f, 0.0f, length / 5.0f * mouse->Offset ().y () );
+                auto cameraRightVec = m_Camera->RightVector ();
+                Normalize ( cameraRightVec );
+                Rotate ( cameraRightVec.x (), cameraRightVec.y (), cameraRightVec.z (), length / 5.0f * mouse->Offset ().y () / 20.0f );
             }
 
             break;

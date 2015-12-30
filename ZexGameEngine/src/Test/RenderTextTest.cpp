@@ -54,9 +54,9 @@ namespace ZGE
 		vertexs.push_back ( leftBottom );
 		vertexs.push_back ( rightBottom );
 
-		m_VertexBuffer = new ArrayBuffer ( vertexs.size () * 2 * 4, ArrayBuffer::ArrayBufferUsage::STATIC );
-		m_VertexBuffer->SetData ( &vertexs[ 0 ], vertexs.size () * 2 * 4 );
-		m_VertexBuffer->TransferData ();
+		m_VertexBuffer = new ArrayBuffer< GL_ARRAY_BUFFER > ( vertexs.size () * 2 * 4, ArrayBufferUsage::STATIC );
+		m_VertexBuffer->CopyData ( &vertexs[ 0 ], vertexs.size () * 2 * 4 );
+		m_VertexBuffer->SendData ();
 
 		// Texcoord Data
 
@@ -66,9 +66,9 @@ namespace ZGE
 		texcoords.push_back ( Vector2f ( 0.0f, 1.0f ) );
 		texcoords.push_back ( Vector2f ( 1.0f, 1.0f ) );
 
-		m_TexcoordBuffer = new ArrayBuffer ( texcoords.size () * 2 * 4, ArrayBuffer::ArrayBufferUsage::STATIC );
-		m_TexcoordBuffer->SetData ( &texcoords[ 0 ], texcoords.size () * 2 * 4 );
-		m_TexcoordBuffer->TransferData ();
+		m_TexcoordBuffer = new ArrayBuffer< GL_ARRAY_BUFFER > ( texcoords.size () * 2 * 4, ArrayBufferUsage::STATIC );
+		m_TexcoordBuffer->CopyData ( &texcoords[ 0 ], texcoords.size () * 2 * 4 );
+		m_TexcoordBuffer->SendData ();
 
 
 		// Texture Data
@@ -150,7 +150,7 @@ namespace ZGE
 
 		m_Shader.Bind ();
 
-		auto orthoMatrixLoc = glGetUniformLocation ( m_Shader.GLSLProgram (), "orthoMatrix" );
+		auto orthoMatrixLoc = glGetUniformLocation ( m_Shader.Program (), "orthoMatrix" );
 		auto window = Context::GetInstance ()->GetWindowPtr ();
 		//auto orthoMatrix = OrthoLH< F32 > ( window->Width (), window->Height (), 0.0f, 1.0f );
 		auto orthoMatrix = OrthoOffCenterLH< F32 > ( 0, window->Width (), window->Height (), 0.0f, 0.0f, 1.0f );
@@ -162,7 +162,7 @@ namespace ZGE
 			GL_FALSE,
 			static_cast< GLfloat * >( &orthoMatrix[ 0 ] )
 			);
-		GLint textureUniform = glGetUniformLocation ( m_Shader.GLSLProgram (), "tex2D" );
+		GLint textureUniform = glGetUniformLocation ( m_Shader.Program (), "tex2D" );
 		glUniform1i ( textureUniform, 0 );
 		m_Shader.UnBind ();
 	}

@@ -16,12 +16,13 @@ namespace ZGE
         };
 
         ShaderObject ();
+
         ~ShaderObject ();
 
         void AttachShader ( ShaderType shaderType, const std::string& sourceCode );
         void LinkProgram ();
 
-        GLuint GLSLProgram () const;
+        GLuint Program () const;
 
         void Bind ();
         void UnBind ();

@@ -138,9 +138,6 @@
     <ClInclude Include="include\Core\Asset\AssetManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\Pattern\TagObject.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Core\Asset\AssetHandle.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -159,10 +156,22 @@
     <ClInclude Include="include\Core\Asset\Property.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\Pattern\ClassTag.h">
+    <ClInclude Include="include\Core\Asset\PropertyLoader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\Core\Asset\PropertyLoader.h">
+    <ClInclude Include="include\Pattern\Object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Property\Mesh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Property\Vertex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PropertyLoader\FBXLoader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Test\FBXTest.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -208,6 +217,12 @@
     </ClCompile>
     <ClCompile Include="src\Test\RenderTextTest.cpp">
       <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PropertyLoader\FBXLoader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Test\FBXTest.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
