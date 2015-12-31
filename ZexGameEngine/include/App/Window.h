@@ -1,7 +1,7 @@
 #ifndef _WINDOW_H_
 #define _WINDOW_H_
 
-#include "CorePrerequisites.h"
+#include "ZGEDecl.h"
 
 namespace ZGE
 {
@@ -43,7 +43,7 @@ namespace ZGE
         }
 
     protected:
-        Window ( const String& name ) : m_Name ( name )
+        Window ( const std::wstring& name ) : m_Name ( name )
         {
             m_Left      = 0;
             m_Top       = 0;
@@ -55,7 +55,7 @@ namespace ZGE
 
         virtual void OnSize ( U32 width, U32 height ) = 0;
 
-        String m_Name;
+        std::wstring m_Name;
         I32 m_Left;
         I32 m_Top;
         U32 m_Width;

@@ -3,6 +3,8 @@
 
 #ifdef _WIN32
 
+#include "ZGEDecl.h"
+
 #include <windows.h>
 #include "Window.h"
 #include "boost/signals2.hpp"
@@ -12,7 +14,7 @@ namespace ZGE
     class WindowWin : public Window
     {
     public:
-        WindowWin ( const String& name );
+        WindowWin ( const std::wstring& name );
         virtual ~WindowWin () {};
         
         LRESULT MsgProc ( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam );

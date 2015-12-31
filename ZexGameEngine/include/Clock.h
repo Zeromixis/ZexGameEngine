@@ -1,8 +1,9 @@
 #ifndef _CLOCK_H_
 #define _CLOCK_H_
 
+#include "ZGEDecl.h"
+
 #include "Pattern/Singleton.h"
-#include "CorePrerequisites.h"
 #include "Timer.h"
 
 namespace ZGE

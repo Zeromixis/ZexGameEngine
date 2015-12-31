@@ -1,8 +1,8 @@
 #ifndef _CORE_ASSET_PROPERTY_H_
 #define _CORE_ASSET_PROPERTY_H_
 
-#include <memory>
-#include "Pattern/Object.h"
+#include "ZGEDecl.h"
+
 #include "External/boost/core/noncopyable.hpp"
 
 namespace ZGE

@@ -1,14 +1,16 @@
 #ifndef _CORE_CAMERACONTROLLER_H_
 #define _CORE_CAMERACONTROLLER_H_
 
+#include "ZGEDecl.h"
+
 #include "Core/Camera.h"
-#include <memory>
 #include "Input/InputDevice.h"
 #include "Core/Input/InputManager.h"
 
 namespace ZGE
 {
     class CameraController
+        : public Object
     {
     public:
         enum

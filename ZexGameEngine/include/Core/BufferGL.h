@@ -1,8 +1,8 @@
 #ifndef _CORE_VERTEXBUFFER_H_
 #define _CORE_VERTEXBUFFER_H_
 
-#include <memory>
-#include "CorePrerequisites.h"
+#include "ZGEDecl.h"
+
 #include "External/boost/noncopyable.hpp"
 
 
@@ -15,7 +15,7 @@ namespace ZGE
     };
 
     template< int BindTarget >
-	class ArrayBuffer 
+	class BufferGL 
         : private boost::noncopyable
 	{
 	public:
@@ -24,7 +24,7 @@ namespace ZGE
             TARGET = BindTarget,
         };
 
-        ArrayBuffer ()
+        BufferGL ()
             : m_BufferId ( 0 )
             , m_Size ( 0 )
             , m_Usage ( STATIC )
@@ -32,7 +32,7 @@ namespace ZGE
 
         }
 
-        ArrayBuffer ( U32 byteSize, ArrayBufferUsage usage )
+        BufferGL ( U32 byteSize, ArrayBufferUsage usage )
             : m_BufferId ( 0 )
             , m_Size ( byteSize )
             , m_Usage ( usage )
@@ -44,7 +44,7 @@ namespace ZGE
             m_DataPtr = new U8[ m_Size ];
         }
 
-        ~ArrayBuffer ()
+        ~BufferGL ()
         {
             if ( 0 != m_BufferId )
             {

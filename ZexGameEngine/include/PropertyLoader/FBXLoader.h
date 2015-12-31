@@ -1,7 +1,10 @@
 #ifndef _PROPERTYLOADER_FBXLOADER_H_
 #define _PROPERTYLOADER_FBXLOADER_H_
 
+#include "ZGEDecl.h"
+
 #include "External/FBXSDK/fbxsdk.h"
+
 #include "Core/Asset/PropertyLoader.h"
 #include "Property/Mesh.h"
 #include "Pattern/Singleton.h"

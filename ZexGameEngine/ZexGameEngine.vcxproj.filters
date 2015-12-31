@@ -102,9 +102,6 @@
     <ClInclude Include="include\Test\LightningTest.h">
       <Filter>头文件\Test</Filter>
     </ClInclude>
-    <ClInclude Include="include\Core\ArrayBuffer.h">
-      <Filter>头文件\Core</Filter>
-    </ClInclude>
     <ClInclude Include="include\Util.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -126,23 +123,11 @@
     <ClInclude Include="include\UI\UIRoot.h">
       <Filter>头文件\UI</Filter>
     </ClInclude>
-    <ClInclude Include="include\CorePrerequisites.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Test\RenderTextTest.h">
       <Filter>头文件\Test</Filter>
     </ClInclude>
     <ClInclude Include="include\Core\TimeManager.h">
       <Filter>头文件\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Core\Asset\AssetManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Core\Asset\AssetHandle.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Core\Asset\Asset.h">
-      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\Core\Texture.h">
       <Filter>头文件</Filter>
@@ -159,9 +144,6 @@
     <ClInclude Include="include\Core\Asset\PropertyLoader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\Pattern\Object.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Property\Mesh.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -173,6 +155,24 @@
     </ClInclude>
     <ClInclude Include="include\Test\FBXTest.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Render\ShaderCode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Render\ShaderProgram.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ZGEDecl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ZGEDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\BufferGL.h">
+      <Filter>头文件\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,12 +194,6 @@
     <ClCompile Include="src\Core\Input\WInputDevice.cpp">
       <Filter>源文件\Core\Input</Filter>
     </ClCompile>
-    <ClCompile Include="src\RenderEngine\RenderEngine.cpp">
-      <Filter>源文件\RenderEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\RenderEngine\ShaderObject.cpp">
-      <Filter>源文件\RenderEngine</Filter>
-    </ClCompile>
     <ClCompile Include="src\Clock.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -207,9 +201,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\TimeManager.cpp">
-      <Filter>源文件\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\ArrayBuffer.cpp">
       <Filter>源文件\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\UI\UIRoot.cpp">
@@ -222,6 +213,21 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Test\FBXTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\RenderEngine.cpp">
+      <Filter>源文件\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\ShaderObject.cpp">
+      <Filter>源文件\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\ShaderCode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\BufferGL.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\ShaderProgram.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

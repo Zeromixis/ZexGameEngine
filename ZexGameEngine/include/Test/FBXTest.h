@@ -5,7 +5,7 @@
 #include "Render/ShaderObject.h"
 #include "Core/Camera.h"
 #include "Core/CameraController.h"
-#include "Core/ArrayBuffer.h"
+#include "Core/BufferGL.h"
 
 namespace ZGE
 {
@@ -36,10 +36,10 @@ namespace ZGE
         GLuint m_TextureObject;
 
     private:
-        ArrayBuffer< GL_ARRAY_BUFFER > *m_PositionBuffer;
-        ArrayBuffer< GL_ARRAY_BUFFER > *m_NormalBuffer;
-        ArrayBuffer< GL_ARRAY_BUFFER > *m_UVBuffer;
-        ArrayBuffer< GL_ELEMENT_ARRAY_BUFFER > *m_IndexBuffer;
+        BufferGL< GL_ARRAY_BUFFER > *m_PositionBuffer;
+        BufferGL< GL_ARRAY_BUFFER > *m_NormalBuffer;
+        BufferGL< GL_ARRAY_BUFFER > *m_UVBuffer;
+        BufferGL< GL_ELEMENT_ARRAY_BUFFER > *m_IndexBuffer;
 
 
 

@@ -1,7 +1,8 @@
 #ifndef _CORE_ASSET_ENTITY_H_
 #define _CORE_ASSET_ENTITY_H_
 
-#include <set>
+#include "ZGEDecl.h"
+
 #include "Property.h"
 
 namespace ZGE

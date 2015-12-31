@@ -54,7 +54,7 @@ namespace ZGE
 		vertexs.push_back ( leftBottom );
 		vertexs.push_back ( rightBottom );
 
-		m_VertexBuffer = new ArrayBuffer< GL_ARRAY_BUFFER > ( vertexs.size () * 2 * 4, ArrayBufferUsage::STATIC );
+		m_VertexBuffer = new BufferGL< GL_ARRAY_BUFFER > ( vertexs.size () * 2 * 4, ArrayBufferUsage::STATIC );
 		m_VertexBuffer->CopyData ( &vertexs[ 0 ], vertexs.size () * 2 * 4 );
 		m_VertexBuffer->SendData ();
 
@@ -66,7 +66,7 @@ namespace ZGE
 		texcoords.push_back ( Vector2f ( 0.0f, 1.0f ) );
 		texcoords.push_back ( Vector2f ( 1.0f, 1.0f ) );
 
-		m_TexcoordBuffer = new ArrayBuffer< GL_ARRAY_BUFFER > ( texcoords.size () * 2 * 4, ArrayBufferUsage::STATIC );
+		m_TexcoordBuffer = new BufferGL< GL_ARRAY_BUFFER > ( texcoords.size () * 2 * 4, ArrayBufferUsage::STATIC );
 		m_TexcoordBuffer->CopyData ( &texcoords[ 0 ], texcoords.size () * 2 * 4 );
 		m_TexcoordBuffer->SendData ();
 

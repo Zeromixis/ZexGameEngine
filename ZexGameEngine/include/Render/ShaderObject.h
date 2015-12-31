@@ -1,8 +1,7 @@
 #ifndef _RENDER_SHADEROBJECT_H_
 #define _RENDER_SHADEROBJECT_H_
 
-#include <string>
-#include "glloader/glloader.h"
+#include "ZGEDecl.h"
 
 namespace ZGE
 {

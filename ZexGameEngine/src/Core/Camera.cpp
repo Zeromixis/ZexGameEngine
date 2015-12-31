@@ -1,5 +1,4 @@
 #include "Core/Camera.h"
-#include <cmath>
 
 namespace ZGE
 {

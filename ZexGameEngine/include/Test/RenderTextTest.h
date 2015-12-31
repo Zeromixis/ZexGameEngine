@@ -58,8 +58,8 @@ namespace ZGE
         GLuint m_CharTexture;
         GLuint m_VertexArray;
 
-        ArrayBuffer< GL_ARRAY_BUFFER > *m_VertexBuffer;
-        ArrayBuffer< GL_ARRAY_BUFFER > *m_TexcoordBuffer;
+        BufferGL< GL_ARRAY_BUFFER > *m_VertexBuffer;
+        BufferGL< GL_ARRAY_BUFFER > *m_TexcoordBuffer;
 
 		ShaderObject m_Shader;
 

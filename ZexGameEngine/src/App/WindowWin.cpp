@@ -27,7 +27,7 @@ namespace ZGE
         return result;
     }
 
-    WindowWin::WindowWin ( const String& name ) : Window ( name )
+    WindowWin::WindowWin ( const std::wstring& name ) : Window ( name )
     {
         // Open the console for debug info output
         OpenConsole ();

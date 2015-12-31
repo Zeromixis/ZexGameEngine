@@ -1,10 +1,8 @@
-#include <iostream>
-
 #if _WIN32
 
 #include <windows.h>
-#include "CorePrerequisites.h"
-#include <memory>
+#include "ZGEDecl.h"
+
 #include "App/WindowWin.h"
 #include "App/Context.h"
 #include "Math/Matrix.h"
@@ -16,7 +14,7 @@
 int WINAPI WinMain ( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdWindow )
 {
     using namespace ZGE;
-    WindowWin *window = new ZGE::WindowWin ( ZGE::String ( L"ZexGameEngine" ) );
+    WindowWin *window = new ZGE::WindowWin ( std::wstring ( L"ZexGameEngine" ) );
 
     Context::GetInstance ()->SetWindowPtr ( window );
     Context::GetInstance ()->SetRenderEngine ( new RenderEngine () );

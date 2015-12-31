@@ -1,6 +1,6 @@
 #include "Test/FBXTest.h"
 #include "PropertyLoader/FBXLoader.h"
-#include "Core/ArrayBuffer.h"
+#include "Core/BufferGL.h"
 #include "Util.h"
 #include "App/Context.h"
 
@@ -20,11 +20,11 @@ namespace ZGE
         auto &vertices = m_FBXMesh.GetVerticesRef ();
         auto &indices = m_FBXMesh.GetVertexIndicesRef ();
 
-        m_PositionBuffer = new ArrayBuffer< GL_ARRAY_BUFFER > { vertices.size () * sizeof ( Vector3f ), ArrayBufferUsage::STATIC };
-        m_NormalBuffer = new ArrayBuffer< GL_ARRAY_BUFFER > { vertices.size () * sizeof ( Vector3f ), ArrayBufferUsage::STATIC };
-        m_UVBuffer = new ArrayBuffer< GL_ARRAY_BUFFER > { vertices.size () * sizeof ( Vector2f ), ArrayBufferUsage::STATIC };
+        m_PositionBuffer = new BufferGL< GL_ARRAY_BUFFER > { vertices.size () * sizeof ( Vector3f ), ArrayBufferUsage::STATIC };
+        m_NormalBuffer = new BufferGL< GL_ARRAY_BUFFER > { vertices.size () * sizeof ( Vector3f ), ArrayBufferUsage::STATIC };
+        m_UVBuffer = new BufferGL< GL_ARRAY_BUFFER > { vertices.size () * sizeof ( Vector2f ), ArrayBufferUsage::STATIC };
 
-        m_IndexBuffer = new ArrayBuffer< GL_ELEMENT_ARRAY_BUFFER > { indices.size () * sizeof ( U32 ), ArrayBufferUsage::STATIC };
+        m_IndexBuffer = new BufferGL< GL_ELEMENT_ARRAY_BUFFER > { indices.size () * sizeof ( U32 ), ArrayBufferUsage::STATIC };
 
         auto positions = new Vector3f[ vertices.size () ];
         auto normals = new Vector3f[ vertices.size () ];

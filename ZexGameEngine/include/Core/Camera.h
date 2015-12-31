@@ -1,10 +1,10 @@
 #ifndef _CORE_CAMERA_H_
 #define _CORE_CAMERA_H_
 
-#include "CorePrerequisites.h"
+#include "ZGEDecl.h"
+
 #include "Math/Vector.h"
 #include "Math/Matrix.h"
-#include "Util.h"
 
 namespace ZGE
 {

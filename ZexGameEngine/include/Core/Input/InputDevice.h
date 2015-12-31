@@ -1,10 +1,10 @@
 #ifndef _CORE_INPUT_INPUTDEVICE_H_
 #define _CORE_INPUT_INPUTDEVICE_H_
 
-#include <array>
-#include <map>
+#include "ZGEDecl.h"
+
 #include "External/boost/signals2.hpp"
-#include "CorePrerequisites.h"
+
 #include "Math/Vector.h"
 
 namespace ZGE

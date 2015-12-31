@@ -1,10 +1,12 @@
 #ifndef _TEST_LIGHTNING_TEST_H_
 #define _TEST_LIGHTNING_TEST_H_
 
-#include <vector>
+#include "ZGEDecl.h"
+
+#include "Core/BufferGL.h"
 #include "Math/Vector.h"
-#include "../Timer.h"
-#include "Core/ArrayBuffer.h"
+#include "Timer.h"
+
 
 namespace ZGE
 {
@@ -29,7 +31,7 @@ namespace ZGE
 			}
 
 			
-			m_pVertexBuffer = new ArrayBuffer< GL_ARRAY_BUFFER > ( m_Points.size () * 3 * 4, ArrayBufferUsage::STATIC );
+			m_pVertexBuffer = new BufferGL< GL_ARRAY_BUFFER > ( m_Points.size () * 3 * 4, ArrayBufferUsage::STATIC );
 			m_pVertexBuffer->CopyData ( positionData, m_Points.size () * 3 * 4 );
 			m_pVertexBuffer->SendData ();
 			
@@ -49,7 +51,7 @@ namespace ZGE
 				texData[ i * 2 + 1 ] = 0.0f;
 			}
 
-			m_pTexCoordBuffer = new ArrayBuffer< GL_ARRAY_BUFFER > ( m_Points.size () * 2 * 4, ArrayBufferUsage::STATIC );
+			m_pTexCoordBuffer = new BufferGL< GL_ARRAY_BUFFER > ( m_Points.size () * 2 * 4, ArrayBufferUsage::STATIC );
 			m_pTexCoordBuffer->CopyData ( texData, m_Points.size () * 2 * 4 );
 			m_pTexCoordBuffer->SendData ();
 
@@ -270,8 +272,8 @@ namespace ZGE
 		bool isFirst;
 		std::vector< Vector3f > m_Points;
 		GLuint m_VertexArray;
-		ArrayBuffer< GL_ARRAY_BUFFER > *m_pVertexBuffer;
-		ArrayBuffer< GL_ARRAY_BUFFER > *m_pTexCoordBuffer;
+		BufferGL< GL_ARRAY_BUFFER > *m_pVertexBuffer;
+		BufferGL< GL_ARRAY_BUFFER > *m_pTexCoordBuffer;
 		
 		
 		GLuint m_LightingTexture;

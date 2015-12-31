@@ -1,21 +1,25 @@
 #ifndef _MATH_VECTOR_H_
 #define _MATH_VECTOR_H_
 
-#include <array>
-#include "CorePrerequisites.h"
+#include "ZGEDecl.h"
+
 #include "boost/operators.hpp"
-#include "boost/static_assert.hpp"
-#include <assert.h>
-#include <cmath>
-#include <functional>
 
 namespace ZGE
 {
-    class VectorHelper;
-    template < typename T, size_t row, size_t col > class Matrix;
+    typedef Vector< I32, 2 > Vector2i;
+    typedef Vector< F32, 2 > Vector2f;
+    typedef Vector< U32, 2 > Vector2u;
+    typedef Vector< I32, 3 > Vector3i;
+    typedef Vector< F32, 3 > Vector3f;
+    typedef Vector< U32, 3 > Vector3u;
+    typedef Vector< I32, 4 > Vector4i;
+    typedef Vector< F32, 4 > Vector4f;
+    typedef Vector< U32, 4 > Vector4u;
 
     template< typename T, size_t N >
-    class Vector :
+    class Vector 
+        :
         boost::addable< Vector< T, N > ,
         boost::addable2< Vector< T, N >, T,
         boost::subtractable< Vector< T, N >,
@@ -25,8 +29,9 @@ namespace ZGE
         boost::dividable< Vector< T, N >,
         boost::dividable2< Vector< T, N >, T,
         boost::equality_comparable< Vector< T, N > > > > > > > > > >
+        , public Object
     {
-        BOOST_STATIC_ASSERT ( N > 0 );
+        ZGE_STATIC_ASSART( N > 0 );
         friend class VectorHelper;
     public:
         typedef T value_type;
@@ -36,6 +41,7 @@ namespace ZGE
 
         Vector ()
         {
+            /*BOOST_STATIC_ASSERT*/
             m_VecArray.fill ( T ( 0 ) );
         }
 
@@ -50,10 +56,6 @@ namespace ZGE
         explicit Vector ( const xArg &x, const Args&... args )
             : Vector ()
         {
-            /*
-            m_VecArray[ 0 ] = val;
-            VectorHelper::RecursiveAssignValue ( *this, 1, std::forward< Args > ( args )... );
-            */
             m_VecArray[ 0 ] = x;
             VectorHelper::RecursiveAssignValue ( *this, 1, args... );
         }
@@ -101,51 +103,51 @@ namespace ZGE
 
         T& x ()
         {
-            //static_assert( elemNum >= 1 );
+            ZGE_STATIC_ASSART ( ElemNum >= 1 );
             return m_VecArray[ 0 ];
         }
 
         
         const T& x () const
         {
-            //static_assert( elemNum >= 1 );
+            ZGE_STATIC_ASSART ( ElemNum >= 1 );
             return m_VecArray[ 0 ];
         }
         
 
         T& y ()
         {
-            //static_assert ( elemNum >= 2 );
+            ZGE_STATIC_ASSART ( ElemNum >= 2 );
             return m_VecArray[ 1 ];
         }
 
         const T& y () const
         {
-            //static_assert ( elemNum >= 2 );
+            ZGE_STATIC_ASSART ( ElemNum >= 2 );
             return m_VecArray[ 1 ];
         }
 
         T& z ()
         {
-            //static_assert ( elemNum >= 3 );
+            ZGE_STATIC_ASSART ( ElemNum >= 3 );
             return m_VecArray[ 2 ];
         }
 
         const T& z () const
         {
-            //static_assert ( elemNum >= 3 );
+            ZGE_STATIC_ASSART ( ElemNum >= 3 );
             return m_VecArray[ 2 ];
         }
 
         T& w ()
         {
-            //static_assert ( elemNum >= 4 );
+            ZGE_STATIC_ASSART ( ElemNum >= 4 );
             return m_VecArray[ 3 ];
         }
 
         const T& w () const
         {
-            //static_assert ( elemNum >= 4 );
+            ZGE_STATIC_ASSART ( ElemNum >= 4 );
             return m_VecArray[ 3 ];
         }
 
@@ -291,86 +293,6 @@ namespace ZGE
         std::array< T, N > m_VecArray;
     };
 
-    /*
-    template < typename T, size_t N, size_t MatrixCol >
-    static Vector< T, MatrixCol > operator * ( const Vector< T, N >& lhs, const Matrix< T, N, MatrixCol >&rhs )
-    {
-        Vector< T, MatrixCol> retrunVector;
-        for ( size_t i = 0; i < MatrixCol; ++i )
-        {
-            retrunVector[ i ] = Dot ( lhs, rhs.ColVector ( i ) );
-        }
-        return retrunVector;
-    }
-    */
-    /*
-    template< typename T >
-    class Vector3 : public Vector< T, 3 >
-    {
-    public:
-
-        Vector3 ()
-        {
-            Vector3 ( T ( 0 ), T ( 0 ), T ( 0 ) );
-        }
-
-        Vector3 ( T x, T y, T z )
-        {
-            m_VecArray[ 0 ] = x;
-            m_VecArray[ 1 ] = y;
-            m_VecArray[ 2 ] = z;
-        }
-
-        Vector3 ( const Vector3& rhs )
-        {
-            m_VecArray[ 0 ] = rhs.x ();
-            m_VecArray[ 1 ] = rhs.y ();
-            m_VecArray[ 2 ] = rhs.z ();
-        }
-
-        Vector3 ( const Vector< T, 3 >& rhs )
-        {
-            m_VecArray[ 0 ] = rhs.x ();
-            m_VecArray[ 1 ] = rhs.y ();
-            m_VecArray[ 2 ] = rhs.z ();
-        }
-    };
-
-    template< typename T >
-    class Vector4 : public Vector< T, 4 >
-    {
-    public:
-        Vector4 ( )
-        {
-            Vector4 ( T ( 0 ), T ( 0 ), T ( 0 ), T ( 0 ) );
-        }
-
-        Vector4 ( T x, T y, T z, T w )
-        {
-            m_VecArray[ 0 ] = x;
-            m_VecArray[ 1 ] = y;
-            m_VecArray[ 2 ] = z;
-            m_VecArray[ 3 ] = w;
-        }
-
-        Vector4 ( const Vector4& rhs )
-        {
-            m_VecArray[ 0 ] = rhs.x ();
-            m_VecArray[ 1 ] = rhs.y ();
-            m_VecArray[ 2 ] = rhs.z ();
-            m_VecArray[ 3 ] = rhs.w ();
-        }
-
-        Vector4 ( const Vector< T, 4 >& rhs )
-        {
-            m_VecArray[ 0 ] = rhs.x ();
-            m_VecArray[ 1 ] = rhs.y ();
-            m_VecArray[ 2 ] = rhs.z ();
-            m_VecArray[ 3 ] = rhs.w ();
-        }
-    };
-    */
-
     template< typename T, size_t N >
     static F32 Length ( const Vector< T, N >& vec )
     {
@@ -460,21 +382,7 @@ namespace ZGE
         }
     };
 
-    /*
-    typedef Vector3< I32 > Vector3I;
-    typedef Vector3< F32 > Vector3f;
-    typedef Vector4< I32 > Vector4I;
-    typedef Vector4< F32 > Vector4f;
-    */
-    typedef Vector< I32, 2 > Vector2i;
-    typedef Vector< F32, 2 > Vector2f;
-	typedef Vector< U32, 2 > Vector2u;
-    typedef Vector< I32, 3 > Vector3i;
-    typedef Vector< F32, 3 > Vector3f;
-	typedef Vector< U32, 3 > Vector3u;
-    typedef Vector< I32, 4 > Vector4i;
-    typedef Vector< F32, 4 > Vector4f;
-	typedef Vector< U32, 4 > Vector4u;
+
 }
 
 #endif

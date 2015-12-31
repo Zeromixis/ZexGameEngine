@@ -1,7 +1,8 @@
 #ifndef _CONTEXT_H_
 #define _CONTEXT_H_
 
-#include <memory>
+#include "ZGEDecl.h"
+
 #include "Pattern/Singleton.h"
 #include "Window.h"
 #include "Render/RenderEngine.h"

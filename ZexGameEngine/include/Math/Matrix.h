@@ -1,15 +1,16 @@
 #ifndef _MATRIX_H_
 #define _MATRIX_H_
 
-#include "CorePrerequisites.h"
-#include "Vector.h"
-#include <algorithm>
-
+#include "ZGEDecl.h"
+#include "Math/Vector.h"
 
 namespace ZGE
 {
+    typedef Matrix44< F32 > Float44;
+
     template < typename T, size_t row, size_t col >
     class Matrix
+        : public Object
     {
     public:
         enum { Row = row, Col = col };
@@ -65,17 +66,13 @@ namespace ZGE
         }
 
         // Get Row Vector
-
         const Vector< T, Col >& RowVector ( int row ) const
         {
             assert ( row < Row );
             return m_Mat[ row ];
         }
 
-        //////////////////////////////////////////////////////////////////////////
-
         // Get Col Vector
-
         const Vector< T, Row > ColVector ( int col ) const
         {
             Vector< T, Row > colVector;
@@ -85,8 +82,6 @@ namespace ZGE
             }
             return colVector;
         }
-
-        //////////////////////////////////////////////////////////////////////////
 
         bool operator == ( const Matrix& rhs )
         {
@@ -121,7 +116,7 @@ namespace ZGE
         template< size_t rhsRow, size_t rhsCol >
         Matrix< T, Row, rhsCol > operator * ( const Matrix< T, rhsRow, rhsCol >& rhs )
         {
-            BOOST_STATIC_ASSERT ( this->Col == rhs.Row );
+            ZGE_STATIC_ASSART ( this->Col == rhs.Row );
             Matrix< T, Row, rhsCol > resultMatrix;
             for ( int i = 0; i < Row; ++i )
             {
@@ -137,7 +132,7 @@ namespace ZGE
 
         void Transpose ()
         {
-            assert ( Row == Col );
+            ZGE_STATIC_ASSART ( Row == Col );
             for ( auto i = 0; i < Row; ++i )
             {
                 for ( auto j = i; j < Col; ++j )
@@ -222,8 +217,6 @@ namespace ZGE
             return m;
         }
     };
-
-    typedef Matrix44< F32 > Float44;
 
     template < typename T >
     bool Equal ( const T& lhs, const T& rhs )

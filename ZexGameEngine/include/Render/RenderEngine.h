@@ -1,16 +1,14 @@
 #ifndef _RENDER_RENDERENGINE_H_
 #define _RENDER_RENDERENGINE_H_
 
-#include <memory>
-#include "CorePrerequisites.h"
+#include "ZGEDecl.h"
+
 #include "Render/ShaderObject.h"
 #include "Core/Camera.h"
 #include "Core/CameraController.h"
 #include "Test/LightningTest.h"
 #include "Test/RenderTextTest.h"
-#include "External/freetype/include/ft2build.h"
 #include "Test/FBXTest.h"
-#include FT_FREETYPE_H
 
 
 namespace ZGE
@@ -66,8 +64,5 @@ namespace ZGE
 
     };
 }
-
-
-
 
 #endif
