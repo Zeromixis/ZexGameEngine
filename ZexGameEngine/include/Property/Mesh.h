@@ -1,37 +1,35 @@
 #ifndef _CORE_PROPERTY_MESH_H_
 #define _CORE_PROPERTY_MESH_H_
 
-#include <vector>
+#include "ZGEDecl.h"
+
 #include "Core/Asset/Property.h"
 #include "Property/Vertex.h"
+#include "Property/Joint.h"
+#include "Property/AnimStack.h"
+#include "Math/Matrix.h"
 
 namespace ZGE
 {
-    class Mesh
+    struct Mesh
         : public Property
-    {
-    public:
-        Mesh ()
-        {
+    {      
+        std::vector< PControlPoint > ControlPointList;
 
-        }
+        std::vector< PVertex > VertexList;
 
-        std::vector< Vertex >& GetVerticesRef ()
-        {
-            return m_Vertices;
-        }
+        std::vector< U32 > VertexIndexList;
 
-        std::vector< U32 >& GetVertexIndicesRef ()
-        {
-            return m_VectexIndices;
-        }
-            
-    protected:
-        std::vector< Vertex > m_Vertices;
+        std::vector< PJoint > JointList;
 
-        std::vector< U32 > m_VectexIndices;
+        std::vector< PAnimStack > AnimStackList;
+
+        Float44 GeometryTransformMatrix;
+
+        Float44 Mesh2WorldMatrix;
     };
-}
 
+    typedef PropertyHandle< Mesh > PMesh;
+}
 
 #endif

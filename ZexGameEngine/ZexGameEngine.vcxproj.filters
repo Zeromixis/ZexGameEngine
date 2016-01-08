@@ -129,9 +129,6 @@
     <ClInclude Include="include\Core\TimeManager.h">
       <Filter>头文件\Core</Filter>
     </ClInclude>
-    <ClInclude Include="include\Core\Texture.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Core\Font.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -173,6 +170,36 @@
     </ClInclude>
     <ClInclude Include="include\Core\BufferGL.h">
       <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Property\Joint.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Property\AnimStack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Property\AnimLayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Property\AnimCurves.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Property\AnimCurve.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Property\AnimCurveNode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Property\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Quaternion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Property\Animation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\MathFunc.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

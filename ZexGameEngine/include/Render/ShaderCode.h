@@ -11,13 +11,13 @@ namespace ZGE
 
     enum eShaderType
     {
-        NONE,
-        VERTEX_SHADER,
-        GEOMETRY_SHADER,
-        FRAGMENT_SHADER,
+        eNONE,
+        eVERTEX_SHADER,
+        eGEOMETRY_SHADER,
+        eFRAGMENT_SHADER,
     };
 
-    using PShaderCode = std::shared_ptr< ShaderCode >;
+    typedef std::shared_ptr< ShaderCode > PShaderCode;
 
     class ShaderCode
         : public Object

@@ -56,9 +56,14 @@ namespace ZGE
         return isLinked;
     }
 
-    ZGE::I32 ShaderProgram::UniformLocation ( const std::string &uniformName )
+    ZGE::I32 ShaderProgram::GetUniformLocation ( const std::string &uniformName )
     {
-        return glGetUniformLocation ( m_ProgramObject, uniformName.c_str () );
+        I32 nowUsingProgram = 0;
+        glGetIntegerv ( GL_CURRENT_PROGRAM, &nowUsingProgram );
+        glUseProgram ( m_ProgramObject );
+        I32 loc = glGetUniformLocation ( m_ProgramObject, uniformName.c_str () );
+        glUseProgram ( nowUsingProgram );
+        return loc;
     }
 
     void ShaderProgram::Uniform1i ( const I32 &uniformLoc, const I32 &value )

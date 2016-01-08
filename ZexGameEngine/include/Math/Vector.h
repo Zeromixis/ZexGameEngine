@@ -3,7 +3,9 @@
 
 #include "ZGEDecl.h"
 
-#include "boost/operators.hpp"
+#include "External/boost/operators.hpp"
+
+#include "Math/MathFunc.h"
 
 namespace ZGE
 {
@@ -17,7 +19,7 @@ namespace ZGE
     typedef Vector< F32, 4 > Vector4f;
     typedef Vector< U32, 4 > Vector4u;
 
-    template< typename T, size_t N >
+    template < typename T, size_t N >
     class Vector 
         :
         boost::addable< Vector< T, N > ,
@@ -41,7 +43,6 @@ namespace ZGE
 
         Vector ()
         {
-            /*BOOST_STATIC_ASSERT*/
             m_VecArray.fill ( T ( 0 ) );
         }
 
@@ -52,12 +53,27 @@ namespace ZGE
             m_VecArray[ 0 ] = x;
         }
 
-        template < typename xArg, typename... Args >
-        explicit Vector ( const xArg &x, const Args&... args )
+        template < typename Arg, typename... Args >
+        explicit Vector ( const Arg &x, const Args&... args )
             : Vector ()
         {
             m_VecArray[ 0 ] = x;
             VectorHelper::RecursiveAssignValue ( *this, 1, args... );
+        }
+
+        template < typename T1, size_t N, typename... Args >
+        explicit Vector ( const Vector< T1, N > &that, const Args&... args )
+        {
+            auto minAssignElemNum = std::min ( this->ElemNum, that.ElemNum );
+            int pos = 0;
+            for ( ; pos < minAssignElemNum; ++pos )
+            {
+                m_VecArray[ pos ] = that.m_VecArray[ pos ];
+            }
+            if ( pos != this->ElemNum )
+            {
+                VectorHelper::RecursiveAssignVector ( *this, minAssignElemNum, args... )
+            }
         }
         
         ~Vector ()
@@ -265,7 +281,7 @@ namespace ZGE
             Vector< T, MatrixCol> retrunVector;
             for ( size_t i = 0; i < MatrixCol; ++i )
             {
-                retrunVector[ i ] = Dot ( *this, rhs.ColVector ( i ) );
+                retrunVector[ i ] = MathFunc::Dot ( *this, rhs.ColVector ( i ) );
             }
             return retrunVector;
         }
@@ -289,69 +305,59 @@ namespace ZGE
             return *this;
         }
 
+        T Dot ( const Vector &rhs )
+        {
+            T dot = T ( 0 );
+            for ( size_t i = 0; i < N; ++i )
+            {
+                dot += ( *this )[ i ] * rhs[ i ];
+            }
+            return dot;
+        }
+
+        Vector & Cross ( const Vector &rhs )
+        {
+            ZGE_STATIC_ASSART ( N == 3 );
+
+
+            return *this;
+        }
+
+        F32 Length2 ()
+        {
+            F32 length2 = 0.0f;
+            for ( size_t i = 0; i < N; ++i )
+            {
+                length2 += m_VecArray[ i ] * m_VecArray[ i ];
+            }
+            return length2;
+        }
+
+        F32 Length ()
+        {
+            return std::sqrtf ( Length2 () );
+        }
+
+        Vector & Normalize ()
+        {
+            F32 length = Length ();
+            if ( length != 0.0f )
+            {
+                for ( size_t i = 0; i < N; ++i )
+                {
+                    m_VecArray[ i ] /= length;
+                }
+            }
+            return *this;
+        }
+
     protected:
         std::array< T, N > m_VecArray;
     };
-
-    template< typename T, size_t N >
-    static F32 Length ( const Vector< T, N >& vec )
-    {
-        F32 length = 0.0f;
-        for ( size_t i = 0; i < N; ++i )
-        {
-            length += vec[ i ] * vec[ i ];
-        }
-        return std::sqrtf ( length );
-    }
-
-    template< typename T, size_t N >
-    static Vector< T, N > Normalize ( const Vector< T, N >& vec )
-    {
-        Vector< T, N > result;
-        F32 length = Length ( vec );
-        if ( length != 0.0f )
-        {
-            for ( size_t i = 0; i < N; ++i )
-            {
-                result[ i ] = vec[ i ] / length;
-            }
-        }
-        return result;
-    }
-
-    template< typename T, size_t N >
-    static Vector< T, N > Cross ( const Vector< T, N >& lhs, const Vector< T, N >& rhs )
-    {
-        return Vector3f
-        (
-            lhs.y () * rhs.z () - lhs.z () * rhs.y (),
-            lhs.z () * rhs.x () - lhs.x () * rhs.z (),
-            lhs.x () * rhs.y () - lhs.y () * rhs.x ()
-        );
-    }
-
-    template< typename T, size_t N >
-    static T Dot ( const Vector< T, N >& lhs, const Vector< T, N >& rhs )
-    {
-        T dot = T( 0 );
-        for ( size_t i = 0; i < N; ++i )
-        {
-            dot += lhs[ i ] * rhs[ i ];
-        }
-        return dot;
-    }
-
     
     class VectorHelper
     {
     public:
-
-        template< typename T, size_t N, typename... Args >
-        static void AssignValue ( Vector< T, N >& vector, const Args&... restVal )
-        {
-            return RecursiveAssignValue ( vector, 0, restVal... );
-        }
-
         template< typename T, size_t N, typename U, typename... Args >
         static void RecursiveAssignValue ( Vector< T, N >& vector, size_t position, const U& val, const Args&... restVal )
         {
@@ -380,9 +386,43 @@ namespace ZGE
                 }
             }
         }
+
+        template < typename T, size_t NT, typename U, size_t NU, typename... Args >
+        static void RecursiveAssignVector ( Vector< T, NT > &vector, size_t position, const Vector< U, NU > &rhs, const Args &... restVal )
+        {
+            auto minAssignElemNum = std::min ( vector.ElemNum - position, rhs.ElemNum );
+            for ( int i = position; i < minAssignElemNum; ++i )
+            {
+                vector.m_VecArray[ i ] = rhs[ i - position ];
+            }
+            if ( position + minAssignElemNum < vector.ElemNum )
+            {
+                return RecursiveAssignVector ( vector, position + minAssignElemNum, restVal... );
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        template < typename T, size_t NT, typename U, size_t NU >
+        static void RecursiveAssignVector ( Vector< T, NT > &vector, size_t position, const Vector< U, NU > &rhs )
+        {
+            auto minAssignElemNum = std::min ( vector.ElemNum - position, rhs.ElemNum );
+            for ( int i = position; i < minAssignElemNum; ++i )
+            {
+                vector.m_VecArray[ i ] = rhs[ i - position ];
+            }
+            if ( position + minAssignElemNum < vector.ElemNum )
+            {
+                for ( int i = position + minAssignElemNum; i < vector.ElemNum; ++i )
+                {
+                    vector.m_VecArray[ i ] = T ( 0 );
+                }
+            }
+            return;
+        }
     };
-
-
 }
 
-#endif
+#endif // !_MATH_VECTOR_H_

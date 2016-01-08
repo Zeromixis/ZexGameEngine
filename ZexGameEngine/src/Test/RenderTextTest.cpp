@@ -1,4 +1,5 @@
 #include "Test/RenderTextTest.h"
+#include "Math/MathFunc.h"
 
 namespace ZGE
 {
@@ -153,7 +154,7 @@ namespace ZGE
 		auto orthoMatrixLoc = glGetUniformLocation ( m_Shader.Program (), "orthoMatrix" );
 		auto window = Context::GetInstance ()->GetWindowPtr ();
 		//auto orthoMatrix = OrthoLH< F32 > ( window->Width (), window->Height (), 0.0f, 1.0f );
-		auto orthoMatrix = OrthoOffCenterLH< F32 > ( 0, window->Width (), window->Height (), 0.0f, 0.0f, 1.0f );
+		auto orthoMatrix = MathFunc::OrthoOffCenterLH< F32 > ( 0, window->Width (), window->Height (), 0.0f, 0.0f, 1.0f );
 		// Transpose ( orthoMatrix );
 		glUniformMatrix4fv
 			(

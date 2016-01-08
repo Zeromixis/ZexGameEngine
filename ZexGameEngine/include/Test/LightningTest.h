@@ -123,7 +123,7 @@ namespace ZGE
 
 		void Interpolation ( const Vector3f &begin, const Vector3f &end )
 		{
-			F32 len = Length ( end - begin );
+			F32 len = ( end - begin ).Length ();
 			if ( len < 0.6f )
 			{
 				// Enough
@@ -151,7 +151,7 @@ namespace ZGE
 				{
 					verticalVec = Vector3f ( -vec.y (), vec.x (), vec.z () );
 				}
-				verticalVec = Normalize ( verticalVec );
+				verticalVec.Normalize ();
 				mid = ( rand () % 2 + 1 ) / 20.0f;
 				verticalVec *= mid;
 				newPoint += verticalVec;
@@ -167,8 +167,8 @@ namespace ZGE
 					//Vector3f _endPoint = newPoint;
 
 					double mid = ( rand () % 5 + 3 ) / 10.0f;
-					Vector3f forkPoint = begin + Normalize ( end - begin ) * mid;
-					Vector3f forkPoint2 = forkPoint + Normalize ( end - begin ) * 0.2f;
+					Vector3f forkPoint = begin + MathFunc::Normalize ( end - begin ) * mid;
+					Vector3f forkPoint2 = forkPoint + MathFunc::Normalize ( end - begin ) * 0.2f;
 					Vector3f vec = end - begin;
 					Vector3f verticalVec;
 					randNumber = rand () % 2;
@@ -180,7 +180,7 @@ namespace ZGE
 					{
 						verticalVec = Vector3f ( -vec.y (), vec.x (), vec.z () );
 					}
-					verticalVec = Normalize ( verticalVec );
+                    verticalVec.Normalize ();
 					mid = ( rand () % 2 + 1 ) / 20.0f;
 					verticalVec *= mid;
 					forkPoint2 += verticalVec;

@@ -42,9 +42,9 @@ namespace ZGE
         if ( m_Camera )
         {
             auto a = m_Camera->RightVector ();
-            Vector3f xUnit = Normalize ( m_Camera->RightVector () );
-            Vector3f yUnit = Normalize ( m_Camera->UpVector () );
-            Vector3f zUnit = Normalize ( m_Camera->ForwardVector () );
+            Vector3f xUnit = MathFunc::Normalize ( m_Camera->RightVector () );
+            Vector3f yUnit = MathFunc::Normalize ( m_Camera->UpVector () );
+            Vector3f zUnit = MathFunc::Normalize ( m_Camera->ForwardVector () );
 
             Vector3f movement = x * xUnit + y * yUnit + z * zUnit;
 
@@ -54,7 +54,7 @@ namespace ZGE
 
             Vector3f newEyePos = m_Camera->EyePos () + movement;
 
-            F32 lookAtDistance = Length ( m_Camera->LookAt () - m_Camera->EyePos () );
+            F32 lookAtDistance = ( m_Camera->LookAt () - m_Camera->EyePos () ).Length ();
 
             m_Camera->SetView ( newEyePos, m_Camera->ForwardVector () * lookAtDistance, m_Camera->UpVector () );
         }
@@ -102,7 +102,7 @@ namespace ZGE
             if ( mouse->IsButtonDown( MA_RBUTTON ) )
             {
                 auto cameraUpVec = m_Camera->UpVector ();
-                Normalize ( cameraUpVec );
+                MathFunc::Normalize ( cameraUpVec );
                 Rotate ( cameraUpVec.x (), cameraUpVec.y (), cameraUpVec.z (), length / 5.0f * mouse->Offset ().x () / 20.0f );
             }
 
@@ -112,7 +112,7 @@ namespace ZGE
             if ( mouse->IsButtonDown ( MA_RBUTTON ) )
             {
                 auto cameraRightVec = m_Camera->RightVector ();
-                Normalize ( cameraRightVec );
+                MathFunc::Normalize ( cameraRightVec );
                 Rotate ( cameraRightVec.x (), cameraRightVec.y (), cameraRightVec.z (), length / 5.0f * mouse->Offset ().y () / 20.0f );
             }
 

@@ -25,17 +25,17 @@ namespace ZGE
     {
         switch ( m_ShaderType )
         {
-        case VERTEX_SHADER:
+        case eVERTEX_SHADER:
         {
             m_ShaderObject = glCreateShader ( GL_VERTEX_SHADER );
             break;
         }
-        case GEOMETRY_SHADER:
+        case eGEOMETRY_SHADER:
         {
             m_ShaderObject = glCreateShader ( GL_GEOMETRY_SHADER );
             break;
         }
-        case FRAGMENT_SHADER:
+        case eFRAGMENT_SHADER:
         {
             m_ShaderObject = glCreateShader ( GL_FRAGMENT_SHADER );
             break;
@@ -76,7 +76,7 @@ namespace ZGE
 
     ShaderCode::ShaderCode ()
     {
-        m_ShaderType = NONE;
+        m_ShaderType = eNONE;
         m_ShaderObject = 0;
     }
 }

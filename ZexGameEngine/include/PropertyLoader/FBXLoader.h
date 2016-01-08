@@ -5,9 +5,11 @@
 
 #include "External/FBXSDK/fbxsdk.h"
 
+#include "Math/Matrix.h"
 #include "Core/Asset/PropertyLoader.h"
 #include "Property/Mesh.h"
 #include "Pattern/Singleton.h"
+#include "Property/Animation.h"
 
 namespace ZGE
 {
@@ -32,12 +34,22 @@ namespace ZGE
 
         std::string GetFBXSDKVersion ();
 
-        bool LoadFBX ( const std::string &fileName, Mesh &outMesh );
+        bool LoadFBXMeshes ( const std::string &fileName, std::vector< PMesh > &inoutMeshList );
+
+        void FbxMatrix2Float44 ( const FbxMatrix &inFbxMatrix, Float44 &outFloat44Matrix );
+
+        void FbxVector42Vector4f ( const FbxVector4 &inFbxVector4, Vector4f &outVector4f );
+
+        void FbxQuaternion2QuaternionF ( const FbxQuaternion &inFbxVector4, QuaternionF &outVector4f );
 
     protected:
-        void LoadFBXRescursive ( FbxNode *node, Mesh &outMesh );
+        bool LoadFBXAnimNode ( FbxScene *scene, const std::vector< PMesh > &meshList, std::vector< PAnimNode > &jointAnimList );
 
-        void LoadFBXMesh ( FbxNode *node, Mesh &outMesh );
+        void LoadFBXMeshesRescursive ( FbxNode *node, std::vector< PMesh > &inoutMeshList );
+
+        void ProcessMeshVertices ( FbxNode *node, PMesh &inoutMesh );
+
+        void ProcessMeshJoints ( FbxNode *node, PMesh &inoutMesh );
 
     private:
         FBXLoader ();
@@ -45,6 +57,8 @@ namespace ZGE
         void InitFBXSdkObject ();
 
         void DestroyFBXSdkObject ();
+
+        FbxAMatrix GetGeometryTransformation ( FbxNode *node );
 
 
     private:

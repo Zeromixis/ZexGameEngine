@@ -1,4 +1,5 @@
 #include "Core/Camera.h"
+#include "Math/MathFunc.h"
 
 namespace ZGE
 {
@@ -30,16 +31,16 @@ namespace ZGE
         // Set View Matrix
 
         Vector3f vUp = upVector;
-        Vector3f zAxis = Normalize ( m_LookAt - m_EyePos );
-        Vector3f xAxis = Normalize ( Cross ( vUp, zAxis ) );
-        Vector3f yAxis = Cross ( zAxis, xAxis );
+        Vector3f zAxis = MathFunc::Normalize ( m_LookAt - m_EyePos );
+        Vector3f xAxis = MathFunc::Normalize ( MathFunc::Cross ( vUp, zAxis ) );
+        Vector3f yAxis = MathFunc::Cross ( zAxis, xAxis );
 
         m_ViewMat = Float44
         (
             xAxis.x (), yAxis.x (), zAxis.x (), 0,
             xAxis.y (), yAxis.y (), zAxis.y (), 0,
             xAxis.z (), yAxis.z (), zAxis.z (), 0,
-            -Dot ( xAxis, eyePos ), -Dot ( yAxis, eyePos ), -Dot ( zAxis, eyePos ), 1
+            -MathFunc::Dot ( xAxis, eyePos ), -MathFunc::Dot ( yAxis, eyePos ), -MathFunc::Dot ( zAxis, eyePos ), 1
         );
 
         //////////////////////////////////////////////////////////////////////////
@@ -55,7 +56,7 @@ namespace ZGE
         m_FarPlane  = farPlane;
 
         // Set Projection Matrix
-		m_ProjMat = PerspectiveFovLH ( m_Fov, m_Aspect, m_NearPlane, m_FarPlane );
+		m_ProjMat = MathFunc::PerspectiveFovLH ( m_Fov, m_Aspect, m_NearPlane, m_FarPlane );
 
         // OpenGL adjust
         m_ProjMat *= Float44

@@ -20,6 +20,7 @@
 #include <xutility>
 #include <cmath>
 #include <map>
+#include <type_traits>
 #include <assert.h>
 
 #include "glloader/glloader.h"
@@ -29,6 +30,7 @@
 
 namespace ZGE
 {
+    struct Property;
     class Object;
     class ShaderCode;
     class ShaderProgram;
@@ -41,6 +43,9 @@ namespace ZGE
     class Matrix;
     template < typename T >
     class Matrix44;
+
+    template < typename T >
+    class Quaternion;
 }
 
 #endif // !_ZGE_DECL_H_

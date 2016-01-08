@@ -2,6 +2,7 @@
 #define _MATRIX_H_
 
 #include "ZGEDecl.h"
+
 #include "Math/Vector.h"
 
 namespace ZGE
@@ -14,7 +15,7 @@ namespace ZGE
     {
     public:
         enum { Row = row, Col = col };
-        enum { elemNum = Row * Col };
+        enum { ElemNum = Row * Col };
 
         typedef T value_type;
 
@@ -28,7 +29,7 @@ namespace ZGE
 
         }
 
-        Matrix ( const Matrix& rhs )
+        Matrix ( const Matrix &rhs )
         {
             if ( this != &rhs )
             {
@@ -36,7 +37,7 @@ namespace ZGE
             }
         }
 
-        Matrix& operator = ( const Matrix& rhs )
+        Matrix& operator = ( const Matrix &rhs )
         {
             if ( this != &rhs )
             {
@@ -88,31 +89,6 @@ namespace ZGE
             return m_Mat == rhs.m_Mat;
         }
 
-        /*
-        template< typename U, int rhsRow, int rhsCol, typename resultType = decltype( T * U ) >
-        auto operator * ( const Matrix< U, rhsRow, rhsCol >& rhs ) -> Matrix< resultType, Row, rhsCol >
-        {
-            BOOST_STATIC_ASSERT ( this->Col == rhs.Row );
-            Matrix< decltype( T * U ), Row, rhsCol > resultMatrix;
-            for ( int i = 0; i < Row; ++i )
-            {
-                for ( int j = 0; j < rhsCol; ++j )
-                {
-                    auto lhsRowVector = this->RowVector ( i );
-                    auto rhsColVector = rhs.ColVector ( j );
-                    auto resultVector = lhsRowVector * rhsColVector;
-                    T result ( 0 );
-                    for ( int m = 0; m < resultVector.elemNum; ++m )
-                    {
-                        result += resultVector[ m ];
-                    }
-                    resultMatrix ( i, j ) = result;
-                }
-            }
-            return resultMatrix;
-        }
-        */
-
         template< size_t rhsRow, size_t rhsCol >
         Matrix< T, Row, rhsCol > operator * ( const Matrix< T, rhsRow, rhsCol >& rhs )
         {
@@ -124,7 +100,7 @@ namespace ZGE
                 {
                     auto lhsRowVector = this->RowVector ( i );
                     auto rhsColVector = rhs.ColVector ( j );
-                    resultMatrix ( i, j ) = Dot ( lhsRowVector, rhsColVector );
+                    resultMatrix ( i, j ) = MathFunc::Dot ( lhsRowVector, rhsColVector );
                 }
             }
             return resultMatrix;
@@ -154,7 +130,7 @@ namespace ZGE
         Matrix44 () 
             : Matrix ()
         {
-
+            Matrix44 ( Identity () );
         }
 
         Matrix44
@@ -188,7 +164,7 @@ namespace ZGE
                 {
                     auto lhsRowVector = this->RowVector ( i );
                     auto rhsColVector = rhs.ColVector ( j );
-                    ( *this ) ( i, j ) = Dot ( lhsRowVector, rhsColVector );
+                    ( *this ) ( i, j ) = MathFunc::Dot ( lhsRowVector, rhsColVector );
                 }
             }
         }
@@ -217,12 +193,6 @@ namespace ZGE
             return m;
         }
     };
-
-    template < typename T >
-    bool Equal ( const T& lhs, const T& rhs )
-    {
-        return ( lhs == rhs );
-    }
 
     template < typename T >
 	T Determinant ( const Matrix44< T >& rhs )
@@ -264,7 +234,7 @@ namespace ZGE
 
 
         T const det ( Determinant ( rhs ) );
-        if ( !Equal< T > ( det, 0 ) )
+        if ( det != 0 )
         {
             T invDet ( T ( 1 ) / det );
 
@@ -296,60 +266,6 @@ namespace ZGE
             return rhs;
         }
     }
-
-	template< typename T, size_t Row, size_t Col >
-	Matrix< T, Col, Row >& Transpose ( const Matrix< T, Row, Col >& rhs )
-	{
-		Matrix< T, Col, Row > ret;
-		for ( size_t i = 0; i < ret.Row; ++i )
-		{
-			for ( size_t j = 0; j < ret.Col; ++j )
-			{
-				ret ( i, j ) = rhs ( j, i );
-			}
-		}
-		return ret;
-	}
-
-	template < typename T >
-	Matrix44< T > OrthoLH ( const T& width, const T& height, const T& zNearPlane, const T& zFarPlane )
-	{
-		const T w_2 ( width / 2 );
-		const T h_2 ( height / 2 );
-		return OrthoOffCenterLH ( -w_2, w_2, -h_2, h_2, zNearPlane, zFarPlane );
-	}
-
-	template < typename T >
-	Matrix44< T > OrthoOffCenterLH ( const T& left, const T& right, const T& bottom, const T& top, const T& zNearPlane, const T& zFarPlane )
-	{
-		const T q ( T ( 1 ) / ( zFarPlane - zNearPlane ) );
-		const T invWidth ( T ( 1 ) / ( right - left ) );
-		const T invHeight ( T ( 1 ) / ( top - bottom ) );
-
-		return Matrix44< T > 
-			(
-				invWidth + invWidth,			0,								0,					0,
-				0,								invHeight + invHeight,			0,					0,
-				0,								0,								q,					0,
-				-( left + right ) * invWidth,	-( top + bottom ) * invHeight,	-zNearPlane * q,	1
-			);
-	}
-
-	template < typename T >
-	Matrix44< T > PerspectiveFovLH ( const T& fov, const T& aspect, const T& zNearPlane, const T& zFarPlane )
-	{
-		const T h ( T ( 1 ) / tan ( fov / T ( 2 ) ) );
-		const T w ( h / aspect );
-		const T q ( zFarPlane / ( zFarPlane - zNearPlane ) );
-		return Matrix44< T >
-			(
-				w,	0,	0,					0,
-				0,	h,	0,					0,
-				0,	0,	q,					1,
-				0,	0,	-zNearPlane * q,	0
-			);
-	}
-
 } 
 
 

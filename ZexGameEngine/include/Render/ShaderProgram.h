@@ -8,7 +8,7 @@
 
 namespace ZGE
 {
-    using PShaderProgram = std::shared_ptr< ShaderProgram >;
+   typedef std::shared_ptr< ShaderProgram > PShaderProgram;
 
     class ShaderProgram
         : public Object
@@ -24,7 +24,7 @@ namespace ZGE
 
         bool Link ( std::string &outErrorStr );
 
-        I32 UniformLocation ( const std::string &uniformName );
+        I32 GetUniformLocation ( const std::string &uniformName );
 
         void Uniform1i ( const I32 &uniformLoc, const I32 &value );
 

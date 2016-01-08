@@ -15,10 +15,10 @@ namespace ZGE
         m_Camera.SetProj ( PI / 4, cameraAspect, 0.1f, 200.0f );
         m_Camera.SetView ( Vector3f ( 20.0f, 20.0f, 0.0f ), Vector3f ( 0.0f, 0.0f, 0.0f ) );
 
-        FBXLoader::GetInstance ()->LoadFBX ( "FBX/JEMINA vase.fbx", m_FBXMesh );
+        //FBXLoader::GetInstance ()->LoadFBX ( "FBX/JEMINA vase.fbx", m_FBXMesh );
 
-        auto &vertices = m_FBXMesh.GetVerticesRef ();
-        auto &indices = m_FBXMesh.GetVertexIndicesRef ();
+        auto &vertices = m_FBXMesh.VertexList;
+        auto &indices = m_FBXMesh.VertexIndexList;
 
         m_PositionBuffer = new BufferGL< GL_ARRAY_BUFFER > { vertices.size () * sizeof ( Vector3f ), ArrayBufferUsage::STATIC };
         m_NormalBuffer = new BufferGL< GL_ARRAY_BUFFER > { vertices.size () * sizeof ( Vector3f ), ArrayBufferUsage::STATIC };
@@ -34,9 +34,9 @@ namespace ZGE
         int counter = 0;
         for ( auto &vertex : vertices )
         {
-            positions[ counter ]    = vertex.Position;
-            normals[ counter ]      = vertex.Normal;
-            uvs[ counter ]          = vertex.UVPosition;
+            positions[ counter ]    = vertex->VertexControlPoint->Position;
+            normals[ counter ]      = vertex->Normal;
+            uvs[ counter ]          = vertex->UV;
             ++counter;
         }
 
@@ -219,7 +219,7 @@ namespace ZGE
 //                 0                           // VBO offset set to 0
 //                 );
 
-        for ( int lIndex = 0; lIndex < m_FBXMesh.GetVertexIndicesRef ().size () / 3; ++lIndex )
+        for ( int lIndex = 0; lIndex < m_FBXMesh.VertexIndexList.size () / 3; ++lIndex )
         {
             // Draw line loop for every triangle.
             glDrawElements ( GL_LINE_LOOP, 3, GL_UNSIGNED_INT, reinterpret_cast< const GLvoid * >( lIndex * 12 ) );
