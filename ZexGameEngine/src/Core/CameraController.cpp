@@ -2,68 +2,68 @@
 
 namespace ZGE
 {
-    CameraController::CameraController ()
-    {
-        CameraController ( nullptr );
-    }
+	CameraController::CameraController ()
+	{
+		CameraController ( nullptr );
+	}
 
-    CameraController::CameraController ( Camera *camera )
-    {
-        m_Camera = std::shared_ptr< Camera >( camera );
+	CameraController::CameraController ( Camera *camera )
+	{
+		m_Camera = std::shared_ptr< Camera >( camera );
 
-        // Add ActionMap
-        m_Signal = std::make_shared< ActionSignal > ();
-        m_Signal->connect ( boost::bind ( &CameraController::OnInput, this, _1 ) );
+		// Add ActionMap
+		m_Signal = std::make_shared< ActionSignal > ();
+		m_Signal->connect ( boost::bind ( &CameraController::OnInput, this, _1 ) );
 
-        std::map< U32, U32 > actionMap;
-        actionMap[ RotateLeftRight ] = MA_X;
-        actionMap[ RotateUpDown ]    = MA_Y;
-        actionMap[ Forward ]         = KA_W;
-        actionMap[ Back ]            = KA_S;
-        actionMap[ Left ]            = KA_A;
-        actionMap[ Right ]           = KA_D;
+		std::map< U32, U32 > actionMap;
+		actionMap[ RotateLeftRight ] = MA_X;
+		actionMap[ RotateUpDown ]    = MA_Y;
+		actionMap[ Forward ]         = KA_W;
+		actionMap[ Back ]            = KA_S;
+		actionMap[ Left ]            = KA_A;
+		actionMap[ Right ]           = KA_D;
 
 		// Register ActionMap
-        InputManager::GetInstance ()->AddActionMap ( actionMap, m_Signal, 0 );
-    }
+		InputManager::GetInstance ()->AddActionMap ( actionMap, m_Signal, 0 );
+	}
 
-    CameraController::CameraController ( const CameraController& rhs )
-    {
-        m_Camera = rhs.m_Camera;
-    }
+	CameraController::CameraController ( const CameraController& rhs )
+	{
+		m_Camera = rhs.m_Camera;
+	}
 
-    CameraController::~CameraController ()
-    {
-        InputManager::GetInstance ()->RemoveActionMap ( m_Signal );
-    }
+	CameraController::~CameraController ()
+	{
+		InputManager::GetInstance ()->RemoveActionMap ( m_Signal );
+	}
 
-    void CameraController::Move ( F32 x, F32 y, F32 z )
-    {
-        if ( m_Camera )
-        {
-            auto a = m_Camera->RightVector ();
-            Vector3f xUnit = MathFunc::Normalize ( m_Camera->RightVector () );
-            Vector3f yUnit = MathFunc::Normalize ( m_Camera->UpVector () );
-            Vector3f zUnit = MathFunc::Normalize ( m_Camera->ForwardVector () );
+	void CameraController::Move ( F32 x, F32 y, F32 z )
+	{
+		if ( m_Camera )
+		{
+			auto a = m_Camera->RightVector ();
+			Vector3f xUnit = MathFunc::Normalize ( m_Camera->RightVector () );
+			Vector3f yUnit = MathFunc::Normalize ( m_Camera->UpVector () );
+			Vector3f zUnit = MathFunc::Normalize ( m_Camera->ForwardVector () );
 
-            Vector3f movement = x * xUnit + y * yUnit + z * zUnit;
+			Vector3f movement = x * xUnit + y * yUnit + z * zUnit;
 
-            const F32 moveScaler = 1.0f;
+			const F32 moveScaler = 1.0f;
 
-            movement *= moveScaler;
+			movement *= moveScaler;
 
-            Vector3f newEyePos = m_Camera->EyePos () + movement;
+			Vector3f newEyePos = m_Camera->EyePos () + movement;
 
-            F32 lookAtDistance = ( m_Camera->LookAt () - m_Camera->EyePos () ).Length ();
+			F32 lookAtDistance = ( m_Camera->LookAt () - m_Camera->EyePos () ).Length ();
 
-            m_Camera->SetView ( newEyePos, m_Camera->ForwardVector () * lookAtDistance, m_Camera->UpVector () );
-        }
-    }
+			m_Camera->SetView ( newEyePos, m_Camera->ForwardVector () * lookAtDistance, m_Camera->UpVector () );
+		}
+	}
 
-    void CameraController::Rotate ( F32 x, F32 y, F32 z, F32 angle )
-    {
+	void CameraController::Rotate ( F32 x, F32 y, F32 z, F32 angle )
+	{
 		if ( m_Camera && angle != 0.0f )
-        {
+		{
 			F32 c = std::cosf ( angle );
 			F32 s = std::sinf ( angle );
 			F32 t = 1.0f - c;
@@ -82,55 +82,55 @@ namespace ZGE
 			vec.y () = lookAtVec.y ();
 			vec.z () = lookAtVec.z ();
 
-            //Vector3f newLookAt = static_cast< Vector4f >( m_Camera->LookAt () ) * rotateMat;
+			//Vector3f newLookAt = static_cast< Vector4f >( m_Camera->LookAt () ) * rotateMat;
 			Vector3f zzz = Vector3f ( vec * rotateMat );
 			Vector3f newLookAt = m_Camera->EyePos () + zzz;
 
 			m_Camera->SetView ( m_Camera->EyePos (), newLookAt, m_Camera->UpVector() );
-        }
-    }
+		}
+	}
 
-    void CameraController::OnInput ( const InputAction& action )
-    {
-        const F32 length = 0.1f;
-        const InputMouse *mouse = dynamic_cast< const InputMouse * >( action.second );
+	void CameraController::OnInput ( const InputAction& action )
+	{
+		const F32 length = 0.1f;
+		const InputMouse *mouse = dynamic_cast< const InputMouse * >( action.second );
    
-        switch ( action.first )
-        {
-        case RotateLeftRight :
-            // If Right Mouse Button is pressed
-            if ( mouse->IsButtonDown( MA_RBUTTON ) )
-            {
-                auto cameraUpVec = m_Camera->UpVector ();
-                MathFunc::Normalize ( cameraUpVec );
-                Rotate ( cameraUpVec.x (), cameraUpVec.y (), cameraUpVec.z (), length / 5.0f * mouse->Offset ().x () / 20.0f );
-            }
+		switch ( action.first )
+		{
+		case RotateLeftRight :
+			// If Right Mouse Button is pressed
+			if ( mouse->IsButtonDown( MA_RBUTTON ) )
+			{
+				auto cameraUpVec = m_Camera->UpVector ();
+				MathFunc::Normalize ( cameraUpVec );
+				Rotate ( cameraUpVec.x (), cameraUpVec.y (), cameraUpVec.z (), length / 5.0f * mouse->Offset ().x () / 20.0f );
+			}
 
-            break;
-        case RotateUpDown :
-            // If Right Mouse Button is pressed
-            if ( mouse->IsButtonDown ( MA_RBUTTON ) )
-            {
-                auto cameraRightVec = m_Camera->RightVector ();
-                MathFunc::Normalize ( cameraRightVec );
-                Rotate ( cameraRightVec.x (), cameraRightVec.y (), cameraRightVec.z (), length / 5.0f * mouse->Offset ().y () / 20.0f );
-            }
+			break;
+		case RotateUpDown :
+			// If Right Mouse Button is pressed
+			if ( mouse->IsButtonDown ( MA_RBUTTON ) )
+			{
+				auto cameraRightVec = m_Camera->RightVector ();
+				MathFunc::Normalize ( cameraRightVec );
+				Rotate ( cameraRightVec.x (), cameraRightVec.y (), cameraRightVec.z (), length / 5.0f * mouse->Offset ().y () / 20.0f );
+			}
 
-            break;
-        case Forward :
-            MoveForward ( length );
-            break;
-        case Back :
-            MoveBack ( length );
-            break;
-        case Left :
-            MoveLeft ( length );
-            break;
-        case Right :
-            MoveRight ( length );
-            break;
-        default:
-            break;
-        }
-    }
+			break;
+		case Forward :
+			MoveForward ( length );
+			break;
+		case Back :
+			MoveBack ( length );
+			break;
+		case Left :
+			MoveLeft ( length );
+			break;
+		case Right :
+			MoveRight ( length );
+			break;
+		default:
+			break;
+		}
+	}
 }

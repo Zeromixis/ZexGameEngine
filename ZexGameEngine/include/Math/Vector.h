@@ -20,23 +20,27 @@ namespace ZGE
     typedef Vector< U32, 4 > Vector4u;
 
     template < typename T, size_t N >
-    class Vector 
+    class Vector
         :
-        boost::addable< Vector< T, N > ,
+        boost::addable< Vector< T, N >,
         boost::addable2< Vector< T, N >, T,
         boost::subtractable< Vector< T, N >,
         boost::subtractable2< Vector< T, N >, T,
-        boost::multipliable< Vector< T, N > ,
+        boost::multipliable< Vector< T, N >,
         boost::multipliable2< Vector< T, N >, T,
         boost::dividable< Vector< T, N >,
         boost::dividable2< Vector< T, N >, T,
         boost::equality_comparable< Vector< T, N > > > > > > > > > >
         , public Object
     {
-        ZGE_STATIC_ASSART( N > 0 );
+        ZGE_STATIC_ASSART ( N > 0 );
         friend class VectorHelper;
     public:
-        typedef T value_type;
+        typedef T                               value_type;
+        typedef std::array< T, N >              VecArrayType;
+        typedef VecArrayType::iterator          iterator;
+        typedef VecArrayType::const_iterator    const_iterator;
+        typedef N                               size;
 
         enum { ElemNum = N };
         enum { ElemSize = sizeof ( T ) };
@@ -75,7 +79,7 @@ namespace ZGE
                 VectorHelper::RecursiveAssignVector ( *this, minAssignElemNum, args... )
             }
         }
-        
+
         ~Vector ()
         {
 
@@ -95,7 +99,7 @@ namespace ZGE
             {
                 m_VecArray = std::move ( rhs.m_VecArray );
             }
-            
+
         }
 
         template < typename U, size_t M >
@@ -115,6 +119,36 @@ namespace ZGE
                     m_VecArray[ i ] = rhs[ i ];
                 }
             }
+        }
+
+        iterator begin ()
+        {
+            return m_VecArray.begin ();
+        }
+
+        iterator end ()
+        {
+            return m_VecArray.end ();
+        }
+
+        const_iterator begin ()
+        {
+            return m_VecArray.begin ();
+        }
+
+        const_iterator end ()
+        {
+            return m_VecArray.end ();
+        }
+
+        const_iterator cbegin ()
+        {
+            return m_VecArray.cbegin ();
+        }
+
+        const_iterator cend ()
+        {
+            return m_VecArray.cend ();
         }
 
         T& x ()

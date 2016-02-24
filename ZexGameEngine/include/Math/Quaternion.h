@@ -20,7 +20,15 @@ namespace ZGE
         , boost::multipliable2< Quaternion< T >, T >
         , boost::equality_comparable< Quaternion< T > >
     {
+         
     public:
+        constexpr static unsigned int size = 4
+
+        typedef T                               value_type;
+        typedef Vector< T, size >               VecArrayType;
+        typedef VecArrayType::iterator          iterator;
+        typedef VecArrayType::const_iterator    const_iterator;
+
         enum { ElemNum = 4 };
 
         Quaternion ()
@@ -89,6 +97,36 @@ namespace ZGE
         const T& w () const
         {
             return m_Quat[ 3 ];
+        }
+
+        iterator begin ()
+        {
+            return m_Quat.begin ();
+        }
+
+        iterator end ()
+        {
+            return m_Quat.end ();
+        }
+
+        const_iterator begin ()
+        {
+            return m_Quat.begin ();
+        }
+
+        const_iterator end ()
+        {
+            return m_Quat.end ();
+        }
+
+        const_iterator cbegin ()
+        {
+            return m_Quat.cbegin ();
+        }
+
+        const_iterator cend ()
+        {
+            return m_Quat.cend ();
         }
 
         T& operator [] ( size_t index )
