@@ -35,7 +35,7 @@ namespace ZGE
 		}
 
 		template < typename T >
-		PropertyHandle< T > ReadProperty ()
+		PropertyHandle< T > GetProperty ()
 		{
 			for ( auto e : m_ProprotyHandleList )
 			{

@@ -22,12 +22,12 @@ namespace ZGE
     {
          
     public:
-        constexpr static unsigned int size = 4
+        constexpr static unsigned int size = 4;
 
         typedef T                               value_type;
         typedef Vector< T, size >               VecArrayType;
-        typedef VecArrayType::iterator          iterator;
-        typedef VecArrayType::const_iterator    const_iterator;
+        typedef typename VecArrayType::iterator          iterator;
+        typedef typename VecArrayType::const_iterator    const_iterator;
 
         enum { ElemNum = 4 };
 
@@ -109,15 +109,15 @@ namespace ZGE
             return m_Quat.end ();
         }
 
-        const_iterator begin ()
-        {
-            return m_Quat.begin ();
-        }
-
-        const_iterator end ()
-        {
-            return m_Quat.end ();
-        }
+//         const_iterator begin ()
+//         {
+//             return m_Quat.begin ();
+//         }
+// 
+//         const_iterator end ()
+//         {
+//             return m_Quat.end ();
+//         }
 
         const_iterator cbegin ()
         {

@@ -19,7 +19,7 @@ namespace ZGE
     typedef Vector< F32, 4 > Vector4f;
     typedef Vector< U32, 4 > Vector4u;
 
-    template < typename T, size_t N >
+    template < typename T, U32 N >
     class Vector
         :
         boost::addable< Vector< T, N >,
@@ -36,11 +36,12 @@ namespace ZGE
         ZGE_STATIC_ASSART ( N > 0 );
         friend class VectorHelper;
     public:
-        typedef T                               value_type;
-        typedef std::array< T, N >              VecArrayType;
-        typedef VecArrayType::iterator          iterator;
-        typedef VecArrayType::const_iterator    const_iterator;
-        typedef N                               size;
+        typedef T                                       value_type;
+        typedef std::array< T, N >                      VecArrayType;
+        typedef typename VecArrayType::iterator         iterator;
+        typedef typename VecArrayType::const_iterator   const_iterator;
+        //typedef N                                       size;
+        static constexpr U32 size = N;
 
         enum { ElemNum = N };
         enum { ElemSize = sizeof ( T ) };
@@ -127,16 +128,6 @@ namespace ZGE
         }
 
         iterator end ()
-        {
-            return m_VecArray.end ();
-        }
-
-        const_iterator begin ()
-        {
-            return m_VecArray.begin ();
-        }
-
-        const_iterator end ()
         {
             return m_VecArray.end ();
         }

@@ -56,6 +56,8 @@ namespace ZGE
 
         bool LoadFBXMesh ( const std::string &fileName, std::vector< PMesh > &inoutMeshList );
 
+        void FbxVector42Vector4f ( const FbxVector4 & inFbxVector4, Vector4f & outVector4f );
+
         static void FbxMatrix2Float44 ( const FbxMatrix &inFbxMatrix, Float44 &outFloat44Matrix )
         {
 
