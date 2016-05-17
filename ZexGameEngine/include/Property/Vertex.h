@@ -8,7 +8,6 @@
 namespace ZGE
 {
     struct Vertex
-        : public Property
     {
         constexpr static U32 VERTEX_LINK_JOINT_MAX_NUM = 4;
 
@@ -40,8 +39,6 @@ namespace ZGE
 
         std::vector< std::pair < U32, I32 > > JointIndexWeightPairList;
     };
-
-    typedef PropertyHandle< Vertex > PVertex;
 }
 
 #endif

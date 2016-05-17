@@ -45,7 +45,7 @@ namespace ZGE
         return m_FBXSDKVersion;
     }
 
-    bool FBXLoader::LoadFBXMesh( const std::string &fileName, std::vector< PMesh > &inoutMeshList )
+    bool FBXLoader::LoadFBXFile ( const std::string &fileName, std::vector< PMesh > &inoutMeshList )
     {
         FbxImporter *importer = FbxImporter::Create ( m_FbxManager, "" );
 
@@ -58,7 +58,7 @@ namespace ZGE
             return false;
         }
 
-        FbxScene *scene = FbxScene::Create ( m_FbxManager, "ZGE Scene" );
+        FbxScene *scene = FbxScene::Create ( m_FbxManager, "ZGE Import Scene" );
 
         auto sceneStatus = importer->Import ( scene );
 
@@ -296,7 +296,7 @@ namespace ZGE
         }
         
         inoutMesh->VertexList.resize ( polygonVertexCount );
-        inoutMesh->VertexIndexList.resize ( polygonCount * TRIGANLE_VERTEX_COUNT );
+        inoutMesh->IndexList.resize ( polygonCount * TRIGANLE_VERTEX_COUNT );
 
         // Read All Control Point
         for ( U32 i = 0; i < controlPointCount; ++i )
@@ -311,9 +311,9 @@ namespace ZGE
             // Read Position
             for ( int controlPointIndex = 0; controlPointIndex < polygonVertexCount; ++controlPointIndex )
             {
-                PVertex outMeshVertex = Property::CreateProperty< PVertex > ();
+                Vertex outMeshVertex;
 
-                FbxVector2Vector ( controlPoint[ controlPointIndex ], outMeshVertex->Position );
+                FbxVector2Vector ( controlPoint[ controlPointIndex ], outMeshVertex.Position );
 
                 if ( hasNormal )
                 {
@@ -335,7 +335,7 @@ namespace ZGE
 
                     auto normal = mesh->GetElementNormal ( 0 )->GetDirectArray ().GetAt ( normalIndex );
 
-                    FbxVector2Vector ( normal, outMeshVertex->Normal );
+                    FbxVector2Vector ( normal, outMeshVertex.Normal );
                 }
 
                 if ( hasUV )
@@ -358,7 +358,7 @@ namespace ZGE
 
                     auto uv = mesh->GetElementUV ( 0 )->GetDirectArray ().GetAt ( uvIndex );
 
-                    FbxVector2Vector ( uv, outMeshVertex->UV );
+                    FbxVector2Vector ( uv, outMeshVertex.UV );
                 }
 
                 // Read Color
@@ -382,7 +382,7 @@ namespace ZGE
 
                     auto color = mesh->GetElementVertexColor ( 0 )->GetDirectArray ().GetAt ( colorIndex );
 
-                    FbxVector2Vector ( color, outMeshVertex->Color );
+                    FbxVector2Vector ( color, outMeshVertex.Color );
                 }
 
                 inoutMesh->VertexList[ controlPointIndex ] = outMeshVertex;
@@ -396,7 +396,7 @@ namespace ZGE
             int vertexCounter = 0;
             for ( auto polygonIndex = 0; polygonIndex < polygonCount; ++polygonIndex )
             {
-                PVertex outMeshVertex = Property::CreateProperty< PVertex > ();
+                Vertex outMeshVertex;
 
                 // The material for current face.
                 int lMaterialIndex = 0;
@@ -414,34 +414,83 @@ namespace ZGE
                     auto controlPointIndex = mesh->GetPolygonVertex ( polygonIndex, triganleVertexIndex );
 
                     // Read Indices
-                    inoutMesh->VertexIndexList[ lIndexOffset + triganleVertexIndex ] = static_cast<unsigned int>( vertexCounter );
+                    inoutMesh->IndexList[ lIndexOffset + triganleVertexIndex ] = static_cast<unsigned int>( vertexCounter );
 
                     // Read Position
-                    outMeshVertex->Position.x () = controlPoint[ controlPointIndex ][ 0 ];
-                    outMeshVertex->Position.y () = controlPoint[ controlPointIndex ][ 1 ];
-                    outMeshVertex->Position.z () = controlPoint[ controlPointIndex ][ 2 ];
-                    outMeshVertex->Position.w () = controlPoint[ controlPointIndex ][ 3 ];
+                    outMeshVertex.Position.x () = controlPoint[ controlPointIndex ][ 0 ];
+                    outMeshVertex.Position.y () = controlPoint[ controlPointIndex ][ 1 ];
+                    outMeshVertex.Position.z () = controlPoint[ controlPointIndex ][ 2 ];
+                    outMeshVertex.Position.w () = controlPoint[ controlPointIndex ][ 3 ];
 
                     // Read Normal
                     if ( hasNormal )
                     {
                         FbxVector4 normal;
                         mesh->GetPolygonVertexNormal ( polygonIndex, triganleVertexIndex, normal );
-                        outMeshVertex->Normal.x () = normal[ 0 ];
-                        outMeshVertex->Normal.y () = normal[ 1 ];
-                        outMeshVertex->Normal.z () = normal[ 2 ];
-                        outMeshVertex->Normal.w () = normal[ 3 ];
+                        outMeshVertex.Normal.x () = normal[ 0 ];
+                        outMeshVertex.Normal.y () = normal[ 1 ];
+                        outMeshVertex.Normal.z () = normal[ 2 ];
+                        outMeshVertex.Normal.w () = normal[ 3 ];
                     }
                     
                     // Read UV
                     if ( hasUV )
                     {
-                        FbxVector2 uv;
-                        const char *uvName = NULL;
-                        bool isUnmappedUV;
-                        mesh->GetPolygonVertexUV ( polygonIndex, triganleVertexIndex, uvName, uv, isUnmappedUV );
-                        outMeshVertex->UV.x () = uv[ 0 ];
-                        outMeshVertex->UV.y () = uv[ 1 ];
+
+                        for (int l = 0; l < mesh->GetElementUVCount (); ++l)
+                        {
+                            FbxGeometryElementUV* leUV = mesh->GetElementUV (l);
+
+                            switch (leUV->GetMappingMode ())
+                            {
+                            default:
+                                break;
+                            case FbxGeometryElement::eByControlPoint:
+                                switch (leUV->GetReferenceMode ())
+                                {
+                                case FbxGeometryElement::eDirect:
+                                {
+                                    auto vec = leUV->GetDirectArray ().GetAt (controlPointIndex);
+                                    FbxVector2Vector (leUV->GetDirectArray ().GetAt (controlPointIndex), outMeshVertex.UV);
+                                    break;
+                                }
+                                case FbxGeometryElement::eIndexToDirect:
+                                {
+                                    int id = leUV->GetIndexArray ().GetAt (controlPointIndex);
+                                    auto vec = leUV->GetDirectArray ().GetAt (id);
+                                    FbxVector2Vector (leUV->GetDirectArray ().GetAt (id), outMeshVertex.UV);
+                                }
+                                break;
+                                default:
+                                    break; // other reference modes not shown here!
+                                }
+                                break;
+
+                            case FbxGeometryElement::eByPolygonVertex:
+                            {
+                                int lTextureUVIndex = mesh->GetTextureUVIndex (polygonIndex, triganleVertexIndex);
+                                switch (leUV->GetReferenceMode ())
+                                {
+                                case FbxGeometryElement::eDirect:
+                                case FbxGeometryElement::eIndexToDirect:
+                                {
+                                    auto vec = leUV->GetDirectArray ().GetAt (lTextureUVIndex);
+                                    FbxVector2Vector (leUV->GetDirectArray ().GetAt (lTextureUVIndex), outMeshVertex.UV);
+                                }
+                                break;
+                                default:
+                                    break; // other reference modes not shown here!
+                                }
+                            }
+                            break;
+
+                            case FbxGeometryElement::eByPolygon: // doesn't make much sense for UVs
+                            case FbxGeometryElement::eAllSame:   // doesn't make much sense for UVs
+                            case FbxGeometryElement::eNone:       // doesn't make much sense for UVs
+                                break;
+                            }
+                        }
+
                     }
 
                     if ( hasColor )
@@ -463,10 +512,10 @@ namespace ZGE
                         }
 
                         auto color = mesh->GetElementVertexColor ( 0 )->GetDirectArray ().GetAt ( colorIndex );
-                        outMeshVertex->Color.x () = color[ 0 ];
-                        outMeshVertex->Color.y () = color[ 1 ];
-                        outMeshVertex->Color.z () = color[ 2 ];
-                        outMeshVertex->Color.w () = color[ 3 ];
+                        outMeshVertex.Color.x () = color[ 0 ];
+                        outMeshVertex.Color.y () = color[ 1 ];
+                        outMeshVertex.Color.z () = color[ 2 ];
+                        outMeshVertex.Color.w () = color[ 3 ];
                     }
 
                     inoutMesh->VertexList[ vertexCounter ] = outMeshVertex;
@@ -555,7 +604,7 @@ namespace ZGE
 
                 for ( auto &vertex : controlPoint->RelatedVertexList )
                 {
-                    vertex->JointIndexWeightPairList = controlPoint->JointIndexWeightPairList;
+                    vertex.JointIndexWeightPairList = controlPoint->JointIndexWeightPairList;
                 }
             }
             break;

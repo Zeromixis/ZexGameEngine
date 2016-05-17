@@ -39,8 +39,6 @@ namespace ZGE
     class Vector;
     class VectorHelper;
 
-    template < typename T, size_t row, size_t col > 
-    class Matrix;
     template < typename T >
     class Matrix44;
 

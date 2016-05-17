@@ -59,20 +59,6 @@ namespace ZGE
             return dot;
         }
 
-        template< typename T, size_t Row, size_t Col >
-        static Matrix< T, Col, Row >& Transpose ( const Matrix< T, Row, Col >& rhs )
-        {
-            Matrix< T, Col, Row > ret;
-            for ( size_t i = 0; i < ret.Row; ++i )
-            {
-                for ( size_t j = 0; j < ret.Col; ++j )
-                {
-                    ret ( i, j ) = rhs ( j, i );
-                }
-            }
-            return ret;
-        }
-
         template < typename T >
         static Matrix44< T > OrthoLH ( const T& width, const T& height, const T& zNearPlane, const T& zFarPlane )
         {

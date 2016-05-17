@@ -48,7 +48,7 @@ namespace ZGE
 
 			Vector3f movement = x * xUnit + y * yUnit + z * zUnit;
 
-			const F32 moveScaler = 1.0f;
+			const F32 moveScaler = 0.3f;
 
 			movement *= moveScaler;
 
@@ -82,8 +82,8 @@ namespace ZGE
 			vec.y () = lookAtVec.y ();
 			vec.z () = lookAtVec.z ();
 
-			//Vector3f newLookAt = static_cast< Vector4f >( m_Camera->LookAt () ) * rotateMat;
 			Vector3f zzz = Vector3f ( vec * rotateMat );
+            Vector4f xxxxxzzz = rotateMat [0];
 			Vector3f newLookAt = m_Camera->EyePos () + zzz;
 
 			m_Camera->SetView ( m_Camera->EyePos (), newLookAt, m_Camera->UpVector() );

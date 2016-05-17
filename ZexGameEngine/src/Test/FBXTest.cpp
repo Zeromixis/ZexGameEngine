@@ -13,12 +13,16 @@ namespace ZGE
         auto window = Context::GetInstance ()->GetWindowPtr ();
         F32 cameraAspect = ( F32 )( window->Width () ) / window->Height ();
         m_Camera.SetProj ( PI / 4, cameraAspect, 0.1f, 200.0f );
-        m_Camera.SetView ( Vector3f ( 20.0f, 20.0f, 0.0f ), Vector3f ( 0.0f, 0.0f, 0.0f ) );
+        m_Camera.SetView ( Vector3f ( -20.0f, 20.0f, 0.0f ), Vector3f ( 0.0f, 0.0f, 0.0f ) );
 
-        //FBXLoader::GetInstance ()->LoadFBX ( "FBX/JEMINA vase.fbx", m_FBXMesh );
+        std::vector< PMesh > meshList;
+        
+        FBXLoader::GetInstance ()->LoadFBXFile ( "FBX/JEMINA vase.fbx", meshList );
 
-        auto &vertices = m_FBXMesh.VertexList;
-        auto &indices = m_FBXMesh.VertexIndexList;
+        m_PFBXMesh = meshList [0];
+        
+        auto &vertices = meshList[ 0 ]->VertexList;
+        auto &indices = meshList[ 0 ]->IndexList;
 
         m_PositionBuffer = new BufferGL< GL_ARRAY_BUFFER > { vertices.size () * sizeof ( Vector3f ), ArrayBufferUsage::STATIC };
         m_NormalBuffer = new BufferGL< GL_ARRAY_BUFFER > { vertices.size () * sizeof ( Vector3f ), ArrayBufferUsage::STATIC };
@@ -32,11 +36,11 @@ namespace ZGE
         auto index = new U32[ indices.size () ];
 
         int counter = 0;
-        for ( auto &vertex : vertices )
+        for (auto &vertex : vertices)
         {
-            positions[ counter ]    = vertex->VertexControlPoint->Position;
-            normals[ counter ]      = vertex->Normal;
-            uvs[ counter ]          = vertex->UV;
+            positions[ counter ]    = vertex.Position;
+            normals[ counter ]      = vertex.Normal;
+            uvs[ counter ]          = vertex.UV;
             ++counter;
         }
 
@@ -164,7 +168,7 @@ namespace ZGE
                 width,
                 height,
                 0,
-                GL_RGB,
+                GL_BGR,
                 GL_UNSIGNED_BYTE,
                 Pixels.data ()
                 );
@@ -189,7 +193,7 @@ namespace ZGE
         glEnableVertexAttribArray ( 1 );
         glEnableVertexAttribArray ( 2 );
 
-        glDisable ( GL_CULL_FACE );
+        glEnable (GL_CULL_FACE);
         glBindBuffer ( GL_ARRAY_BUFFER, m_PositionBuffer->Handle () );
         glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer->Handle () );
 
@@ -204,60 +208,46 @@ namespace ZGE
     {
 
         GLuint mvpMatrixLoc = glGetUniformLocation ( m_Shader.Program (), "mvpMatrix" );
-        auto modelMatrix = Float44::Identity ();
+        auto modelMatrix = Float44::Identity () * Float44::CreateScaleMatrix (10.0f);
         auto viewMatrix = m_CameraController->GetCamera ()->ViewMatrix ();
         auto projMatrix = m_CameraController->GetCamera ()->ProjMatrix ();
         auto mvpMatrix = modelMatrix * viewMatrix * projMatrix;
 
-        glUniformMatrix4fv ( mvpMatrixLoc, 1, GL_FALSE, static_cast< GLfloat * >( &mvpMatrix[ 0 ] ) );
+        glUniformMatrix4fv (mvpMatrixLoc, 1, GL_FALSE, static_cast<GLfloat *>(&mvpMatrix [0] [0]));
 
-//         glDrawElements
-//             (
-//                 GL_TRIANGLES,               // Element Draw Mode
-//                 m_IndexBuffer->Size (),     // Index Count
-//                 GL_UNSIGNED_INT,            // Index Type
-//                 0                           // VBO offset set to 0
-//                 );
+        auto indexBufferSize = m_IndexBuffer->Size ();
 
-        for ( int lIndex = 0; lIndex < m_FBXMesh.VertexIndexList.size () / 3; ++lIndex )
-        {
-            // Draw line loop for every triangle.
-            glDrawElements ( GL_LINE_LOOP, 3, GL_UNSIGNED_INT, reinterpret_cast< const GLvoid * >( lIndex * 12 ) );
-        }
+        glDrawElements
+            (
+                GL_TRIANGLES,               // Element Draw Mode
+                m_IndexBuffer->Size () / 4, // Index Count
+                GL_UNSIGNED_INT,            // Index Type
+                0                           // VBO offset set to 0
+                );
 
-//         int i;
-//         float lCamera[ 10 ][ 2 ] = { { 0, 5.5 }, { -3, 4.5 },
-//         { -3, 7.5 }, { -6, 10.5 }, { -23, 10.5 },
-//         { -23, -4.5 }, { -20, -7.5 }, { -3, -7.5 },
-//         { -3, -4.5 }, { 0, -5.5 } };
-// 
-//         glBegin ( GL_LINE_LOOP );
+//         glBegin ( GL_LINES );
 //         {
-//             for ( i = 0; i < 10; i++ )
-//             {
-//                 glVertex3f ( lCamera[ i ][ 0 ], lCamera[ i ][ 1 ], 4.5 );
-//             }
+//             glColor3i (255, 0, 0);
+//             glVertex3f (0.0f, 0.0f, 0.0f);
+//             glVertex3f (100.0f, 0.0f, 0.0f);
 //         }
 //         glEnd ();
 // 
-//         glBegin ( GL_LINE_LOOP );
+//         glBegin (GL_LINES);
 //         {
-//             for ( i = 0; i < 10; i++ )
-//             {
-//                 glVertex3f ( lCamera[ i ][ 0 ], lCamera[ i ][ 1 ], -4.5 );
-//             }
+//             glColor3i (0, 255, 0);
+//             glVertex3f (0.0f, 0.0f, 0.0f);
+//             glVertex3f (0.0f, 100.0f, 0.0f);
 //         }
 //         glEnd ();
 // 
-//         for ( i = 0; i < 10; i++ )
+//         glBegin (GL_LINES);
 //         {
-//             glBegin ( GL_LINES );
-//             {
-//                 glVertex3f ( lCamera[ i ][ 0 ], lCamera[ i ][ 1 ], -4.5 );
-//                 glVertex3f ( lCamera[ i ][ 0 ], lCamera[ i ][ 1 ], 4.5 );
-//             }
-//             glEnd ();
+//             glColor3i (0, 0, 255);
+//             glVertex3f (0.0f, 0.0f, 0.0f);
+//             glVertex3f (0.0f, 0.0f, 100.0f);
 //         }
+//         glEnd ();
     }
 
     void FBXTest::OnPostDraw ()
@@ -267,8 +257,9 @@ namespace ZGE
         glDisableVertexAttribArray ( 2 );
         glBindVertexArray ( 0 );
 
-        glEnable ( GL_CULL_FACE );
         glBindTexture ( GL_TEXTURE_2D, 0 );
+
+        glDisable (GL_CULL_FACE);
 
         m_Shader.UnBind ();
     }

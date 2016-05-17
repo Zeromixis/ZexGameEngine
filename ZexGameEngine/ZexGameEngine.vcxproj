@@ -210,7 +210,6 @@
     <ClCompile Include="src\Core\Input\InputManager.cpp" />
     <ClCompile Include="src\Core\Input\WInputDevice.cpp" />
     <ClCompile Include="src\Core\TimeManager.cpp" />
-    <ClCompile Include="src\Core\BufferGL.cpp" />
     <ClCompile Include="src\PropertyLoader\FBXLoader.cpp" />
     <ClCompile Include="src\Render\RenderEngine.cpp" />
     <ClCompile Include="src\Render\ShaderObject.cpp" />

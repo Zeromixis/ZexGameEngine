@@ -59,7 +59,7 @@ namespace ZGE
 		m_ProjMat = MathFunc::PerspectiveFovLH ( m_Fov, m_Aspect, m_NearPlane, m_FarPlane );
 
 		// OpenGL adjust
-		m_ProjMat *= Float44
+		m_ProjMat = m_ProjMat * Float44
 			(
 				1, 0, 0, 0,
 				0, 1, 0, 0,

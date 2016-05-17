@@ -254,9 +254,6 @@
     <ClCompile Include="src\Render\ShaderCode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\BufferGL.cpp">
-      <Filter>源文件\Core</Filter>
-    </ClCompile>
     <ClCompile Include="src\Render\ShaderProgram.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

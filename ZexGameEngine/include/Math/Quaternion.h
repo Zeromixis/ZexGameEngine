@@ -109,16 +109,6 @@ namespace ZGE
             return m_Quat.end ();
         }
 
-//         const_iterator begin ()
-//         {
-//             return m_Quat.begin ();
-//         }
-// 
-//         const_iterator end ()
-//         {
-//             return m_Quat.end ();
-//         }
-
         const_iterator cbegin ()
         {
             return m_Quat.cbegin ();
@@ -163,7 +153,7 @@ namespace ZGE
             return *this;
         }
 
-        const Quaternion & operator -=( const Quaternion &that )
+        const Quaternion & operator -= ( const Quaternion &that )
         {
             m_Quat -= that.m_Quat;
             return *this;

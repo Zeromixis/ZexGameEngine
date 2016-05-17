@@ -54,7 +54,7 @@ namespace ZGE
 		GLuint m_TexCoordBuffer;
         GLuint m_ColorBuffer;
 
-		LightningTest lightningTest;
+		//LightningTest lightningTest;
 		RenderTextTest *renderTextTest;
         FBXTest *m_FbxTest;
 

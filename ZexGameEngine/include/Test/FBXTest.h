@@ -23,7 +23,7 @@ namespace ZGE
         void OnPostDraw ();
 
     protected:
-        Mesh m_FBXMesh;
+        PMesh m_PFBXMesh;
 
         ShaderObject m_Shader;
 

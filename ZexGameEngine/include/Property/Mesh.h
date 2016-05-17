@@ -14,9 +14,9 @@ namespace ZGE
     struct Mesh
         : public Property
     {
-        std::vector< PVertex > VertexList;
+        std::vector< Vertex > VertexList;
 
-        std::vector< U32 > VertexIndexList;
+        std::vector< U32 > IndexList;
 
         std::vector< PJoint > JointList;
 

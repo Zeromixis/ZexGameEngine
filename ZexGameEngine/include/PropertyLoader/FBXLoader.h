@@ -37,7 +37,7 @@ namespace ZGE
    
        std::vector< std::pair < U32, I32 > > JointIndexWeightPairList;
 
-       std::vector< PVertex > RelatedVertexList;                        // Record which Vertex is related to this ControlPoint
+       std::vector< Vertex > RelatedVertexList;                        // Record which Vertex is related to this ControlPoint
    };
 
     using PControlPoint = PropertyHandle< ControlPoint >;
@@ -54,9 +54,9 @@ namespace ZGE
 
         std::string GetFBXSDKVersion ();
 
-        bool LoadFBXMesh ( const std::string &fileName, std::vector< PMesh > &inoutMeshList );
+        bool LoadFBXFile ( const std::string &fileName, std::vector< PMesh > &inoutMeshList );
 
-        void FbxVector42Vector4f ( const FbxVector4 & inFbxVector4, Vector4f & outVector4f );
+        void FbxVector42Vector4f ( const FbxVector4 &inFbxVector4, Vector4f &outVector4f );
 
         static void FbxMatrix2Float44 ( const FbxMatrix &inFbxMatrix, Float44 &outFloat44Matrix )
         {
