@@ -83,7 +83,6 @@ namespace ZGE
 			vec.z () = lookAtVec.z ();
 
 			Vector3f zzz = Vector3f ( vec * rotateMat );
-            Vector4f xxxxxzzz = rotateMat [0];
 			Vector3f newLookAt = m_Camera->EyePos () + zzz;
 
 			m_Camera->SetView ( m_Camera->EyePos (), newLookAt, m_Camera->UpVector() );

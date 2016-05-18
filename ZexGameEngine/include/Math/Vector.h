@@ -21,15 +21,16 @@ namespace ZGE
 
     template< typename T, U32 N >
     class Vector
-        : boost::addable< Vector< T, N > >
-        , boost::addable2< Vector< T, N >, T>
-        , boost::subtractable< Vector< T, N > >
-        , boost::subtractable2< Vector< T, N >, T>
-        , boost::multipliable< Vector< T, N > >
-        , boost::multipliable2< Vector< T, N >, T>
-        , boost::dividable< Vector< T, N > >
-        , boost::dividable2< Vector< T, N >, T >
-        , boost::equality_comparable< Vector< T, N > >
+        :
+        boost::addable< Vector< T, N >,
+        boost::addable2< Vector< T, N >, T,
+        boost::subtractable< Vector< T, N >,
+        boost::subtractable2< Vector< T, N >, T,
+        boost::multipliable< Vector< T, N >,
+        boost::multipliable2< Vector< T, N >, T,
+        boost::dividable< Vector< T, N >,
+        boost::dividable2< Vector< T, N >, T,
+        boost::equality_comparable< Vector< T, N > > > > > > > > > >
     {
         ZGE_STATIC_ASSART (N > 0);
         friend class VectorHelper;

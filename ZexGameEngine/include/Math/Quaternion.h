@@ -26,8 +26,6 @@ namespace ZGE
         typedef typename VecArrayType::iterator         iterator;
         typedef typename VecArrayType::const_iterator   const_iterator;
 
-        enum { ElemNum = 4 };
-
         Quaternion ()
         {
 

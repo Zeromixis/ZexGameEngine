@@ -213,7 +213,7 @@ namespace ZGE
         auto projMatrix = m_CameraController->GetCamera ()->ProjMatrix ();
         auto mvpMatrix = modelMatrix * viewMatrix * projMatrix;
 
-        glUniformMatrix4fv (mvpMatrixLoc, 1, GL_FALSE, static_cast<GLfloat *>(&mvpMatrix [0] [0]));
+        glUniformMatrix4fv (mvpMatrixLoc, 1, GL_FALSE, static_cast<GLfloat *>(&(mvpMatrix [0] [0])));
 
         auto indexBufferSize = m_IndexBuffer->Size ();
 
