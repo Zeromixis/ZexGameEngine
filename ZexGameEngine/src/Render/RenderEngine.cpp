@@ -2,8 +2,6 @@
 #include "App/WindowWin.h"
 #include <App/Context.h>
 #include "Util.h"
-#include <functional>
-#include "Test/LightningTest.h"
 
 
 namespace ZGE

@@ -18,7 +18,7 @@ namespace ZGE
         // This data has transformed to Global.
         Vector4f Translation;
 
-        QuaternionF Rotation;
+        Quaternion Rotation;
 
         Vector4f Scaling;
     };

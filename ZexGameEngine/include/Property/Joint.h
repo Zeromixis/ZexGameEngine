@@ -3,14 +3,12 @@
 
 #include "ZGEDecl.h"
 
-#include "Core/Asset/Property.h"
 #include "Math/Matrix.h"
 #include "Math/Vector.h"
 
 namespace ZGE
 {
     struct Joint
-        : public Property
     {
         Joint ()
         {
@@ -21,8 +19,6 @@ namespace ZGE
 
         Float44 Joint2WorldBindPoseMatrix;
     };
-
-    typedef std::shared_ptr< Joint > PJoint;
 }
 
 #endif // !_PROPERTY_JOINT_H_

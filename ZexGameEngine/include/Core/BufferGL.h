@@ -1,5 +1,4 @@
-#ifndef _CORE_VERTEXBUFFER_H_
-#define _CORE_VERTEXBUFFER_H_
+#pragma once
 
 #include "ZGEDecl.h"
 
@@ -81,5 +80,3 @@ namespace ZGE
 		U8 *m_DataPtr;
 	};
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef _ZGEDEF_H_
-#define _ZGEDEF_H_
+#pragma once
 
 #include "ZGEDecl.h"
 
@@ -26,5 +25,3 @@ namespace ZGE
 #define ZGE_STATIC_ASSART_MSG( cond, str ) static_assert ( cond, str );    // With Self-Defined String
 
 }
-
-#endif // !_ZGEDEF_H_

@@ -1,54 +1,12 @@
-#if _WIN32
-
-#include <windows.h>
 #include "ZGEDecl.h"
 
-#include "App/WindowWin.h"
-#include "App/Context.h"
-#include "Math/Matrix.h"
-#include "Core/TimeManager.h"
-#include "External/boost/signals2.hpp"
-#include "PropertyLoader/FBXLoader.h"
-
+#include "App/Game.h"
 
 int WINAPI WinMain ( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdWindow )
 {
-    using namespace ZGE;
-    WindowWin *window = new ZGE::WindowWin ( std::wstring ( L"ZexGameEngine" ) );
-
-    Context::GetInstance ()->SetWindowPtr ( window );
-    Context::GetInstance ()->SetRenderEngine ( new RenderEngine () );
-
-	// Init various Manager here.
-    InputManager::GetInstance ();
-	TimeManager::GetInstance ();
-
-    MSG msg;
-    ::PeekMessage ( &msg, window->Hwnd (), 0, 0, PM_NOREMOVE );
-    
-    while ( WM_QUIT != msg.message )
-    {
-        BOOL isGotMsg = ::PeekMessage ( &msg, window->Hwnd (), 0, 0, PM_REMOVE );
-        if ( isGotMsg )
-        {
-            ::TranslateMessage ( &msg );
-            ::DispatchMessage ( &msg );
-        }
-        else
-        {
-            TimeManager::GetInstance ()->Update ();
-            InputManager::GetInstance ()->Update ();
-            Context::GetInstance ()->GetRenderEngine ()->Refresh ();
-        }
-    }
-    return msg.wParam;
+    ZGE::Game ZexGame;
+    ZexGame.Init ();
+    ZexGame.Loop ();
+    ZexGame.Finalize ();
 }
-
-#else
-
-int main ( int argc, char* argv[] )
-{
-    return 0;
-}
-#endif
 

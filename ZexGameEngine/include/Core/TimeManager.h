@@ -7,37 +7,42 @@
 
 namespace ZGE
 {
-	class TimeManager : public Singleton < TimeManager >
-	{
-		friend class Singleton< TimeManager >;
-	public:
-		~TimeManager ();
+    class TimeManager 
+        : public Singleton<TimeManager>
+    {
+        friend class Singleton<TimeManager>;
+    public:
+        ~TimeManager ();
 
-		const F32 & Fps () const
-		{
-			return m_Fps;
-		}
+        const F32 & Fps () const
+        {
+            return m_Fps;
+        }
+        const F32 & FrameTimeMS () const
+        {
+            return m_FrameTime;
+        }
 
-		const F32 & FrameTimeMS () const
-		{
-			return m_FrameTime;
-		}
+        const F64 RunningTimeMS () const
+        {
+            m_RunningTimer.GetElapsedTimeMS ();
+        }
 
-		const F64 RunningTimeMS () const
-		{
-			m_RunningTimer.GetElapsedTimeMS ();
-		}
+        const F32 & GetDeltaTime () const;
 
-		void Update ();
+        const I64 & GetFrameCount () const;
 
-	private:
-		TimeManager ();
+        void Update ();
 
-		Timer m_RunningTimer;
-		F32 m_Fps;
-		F32 m_FrameTime;
-		F64 m_LastUpdateTime;
-	};
+        
+    private:
+        TimeManager ();
+
+        Timer m_RunningTimer;
+        F32 m_Fps;
+        F32 m_FrameTime;
+        F64 m_LastUpdateTime;
+    };
 }
 
 

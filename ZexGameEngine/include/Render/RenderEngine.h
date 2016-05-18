@@ -6,7 +6,6 @@
 #include "Render/ShaderObject.h"
 #include "Core/Camera.h"
 #include "Core/CameraController.h"
-#include "Test/LightningTest.h"
 #include "Test/RenderTextTest.h"
 #include "Test/FBXTest.h"
 
@@ -54,7 +53,6 @@ namespace ZGE
 		GLuint m_TexCoordBuffer;
         GLuint m_ColorBuffer;
 
-		//LightningTest lightningTest;
 		RenderTextTest *renderTextTest;
         FBXTest *m_FbxTest;
 

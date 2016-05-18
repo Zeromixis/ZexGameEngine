@@ -19,18 +19,17 @@ namespace ZGE
     typedef Vector<F32, 4> Vector4f;
     typedef Vector<U32, 4> Vector4u;
 
-    template < typename T, U32 N >
+    template< typename T, U32 N >
     class Vector
-        :
-        boost::addable< Vector< T, N >,
-        boost::addable2< Vector< T, N >, T,
-        boost::subtractable< Vector< T, N >,
-        boost::subtractable2< Vector< T, N >, T,
-        boost::multipliable< Vector< T, N >,
-        boost::multipliable2< Vector< T, N >, T,
-        boost::dividable< Vector< T, N >,
-        boost::dividable2< Vector< T, N >, T,
-        boost::equality_comparable< Vector< T, N > > > > > > > > > >
+        : boost::addable< Vector< T, N > >
+        , boost::addable2< Vector< T, N >, T>
+        , boost::subtractable< Vector< T, N > >
+        , boost::subtractable2< Vector< T, N >, T>
+        , boost::multipliable< Vector< T, N > >
+        , boost::multipliable2< Vector< T, N >, T>
+        , boost::dividable< Vector< T, N > >
+        , boost::dividable2< Vector< T, N >, T >
+        , boost::equality_comparable< Vector< T, N > >
     {
         ZGE_STATIC_ASSART (N > 0);
         friend class VectorHelper;
@@ -50,7 +49,7 @@ namespace ZGE
             m_VecArray.fill (T (0));
         }
 
-        template<typename Arg, typename... Args>
+        template< typename Arg, typename... Args >
         explicit Vector (const Arg &x, const Args&... args)
             : Vector ()
         {
@@ -58,7 +57,7 @@ namespace ZGE
             VectorHelper::RecursiveAssignValue (*this, 1, args...);
         }
 
-        template<typename xArg>
+        template< typename xArg >
         explicit Vector (const xArg &x)
             : Vector ()
         {
@@ -85,7 +84,7 @@ namespace ZGE
 
         }
 
-        Vector (const Vector& rhs)
+        Vector (const Vector &rhs)
         {
             if (this != &rhs)
             {
@@ -93,7 +92,7 @@ namespace ZGE
             }
         }
 
-        Vector (Vector&& rhs)
+        Vector (Vector &&rhs)
         {
             if (this != &rhs)
             {
@@ -211,13 +210,13 @@ namespace ZGE
             return *this;
         }
 
-        T & operator [] (const size_t& index)
+        T & operator [] (const size_t &index)
         {
             assert (index < ElemNum);
             return m_VecArray [index];
         }
 
-        const T & operator [] (const size_t& index) const
+        const T & operator [] (const size_t &index) const
         {
             assert (index < ElemNum);
             return m_VecArray [index];
@@ -231,7 +230,7 @@ namespace ZGE
             }
         }
 
-        bool operator == (const Vector& rhs) const
+        bool operator == (const Vector &rhs) const
         {
             if (this->ElemNum != rhs.ElemNum)
                 return false;
@@ -360,6 +359,11 @@ namespace ZGE
                 }
             }
             return *this;
+        }
+
+        Vector Rotate (const Quaternion &quat)
+        {
+            return quat * (*this) * quat.GetConjugate ();
         }
 
     protected:

@@ -14,7 +14,7 @@
 
 namespace ZGE
 {
-    template < typename T >
+    template <typename T>
     class Singleton : boost::noncopyable
     {
     public:
@@ -32,6 +32,10 @@ namespace ZGE
 			}
             return m_Instance;
         }
+
+//         virtual void Init ()        = 0;
+// 
+//         virtual void Finalize ()    = 0;
 
     protected:
         static void Destroy ()

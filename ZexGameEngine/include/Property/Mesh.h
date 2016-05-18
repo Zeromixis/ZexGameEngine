@@ -18,7 +18,7 @@ namespace ZGE
 
         std::vector< U32 > IndexList;
 
-        std::vector< PJoint > JointList;
+        std::vector< Joint > JointList;
 
         std::vector< PAnimStack > AnimStackList;
 

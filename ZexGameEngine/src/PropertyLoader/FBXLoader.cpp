@@ -101,13 +101,13 @@ namespace ZGE
         {
             for ( const auto &joint : mesh->JointList )
             {
-                FbxNode *jointNode = scene->FindNodeByName ( joint->Name.c_str () );
+                FbxNode *jointNode = scene->FindNodeByName ( joint.Name.c_str () );
 
                 if ( nullptr == jointNode )
                     continue;
 
                 PAnimNode animNode = Property::CreateProperty< PAnimNode > ();
-                animNode->Name = joint->Name;
+                animNode->Name = joint.Name;
 
                 for ( int stackIndex = 0; stackIndex < scene->GetSrcObjectCount< FbxAnimStack > (); ++stackIndex )
                 {
@@ -559,7 +559,7 @@ namespace ZGE
 
             for ( auto clusterIndex = 0; clusterIndex < nClusters; ++clusterIndex )
             {
-                PJoint joint = Property::CreateProperty< PJoint > ();
+                Joint joint;
                 auto jointIndex = inoutMesh->JointList.size ();
 
                 FbxCluster *cluster = skin->GetCluster ( clusterIndex );
@@ -578,8 +578,8 @@ namespace ZGE
                     m_ControlPointList[ cluster->GetControlPointIndices ()[ i ] ]->JointIndexWeightPairList.push_back ( indexWeightPair );
                 }
 
-                joint->Name     = jointName;
-                FbxMatrix2Float44 ( joint2WorldBindPoseAMatrix, joint->Joint2WorldBindPoseMatrix );
+                joint.Name     = jointName;
+                FbxMatrix2Float44 ( joint2WorldBindPoseAMatrix, joint.Joint2WorldBindPoseMatrix );
 
                 inoutMesh->JointList.push_back ( joint );
             }
