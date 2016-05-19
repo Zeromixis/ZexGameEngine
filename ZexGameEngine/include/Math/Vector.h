@@ -50,6 +50,12 @@ namespace ZGE
             m_VecArray.fill (T (0));
         }
 
+        constexpr Vector (const std::array< T, N > &rhs)
+            : m_VecArray (rhs)
+        {
+
+        }
+
         template< typename Arg, typename... Args >
         explicit Vector (const Arg &x, const Args&... args)
             : Vector ()
@@ -80,17 +86,10 @@ namespace ZGE
             }
         }
 
-        ~Vector ()
-        {
-
-        }
-
         Vector (const Vector &rhs)
+            : m_VecArray (rhs.m_VecArray)
         {
-            if (this != &rhs)
-            {
-                std::copy (rhs.m_VecArray.begin (), rhs.m_VecArray.end (), m_VecArray.begin ());
-            }
+
         }
 
         Vector (Vector &&rhs)
@@ -141,51 +140,50 @@ namespace ZGE
             return m_VecArray.cend ();
         }
 
-        T& x ()
+        T & x ()
+        {
+            ZGE_STATIC_ASSART (ElemNum >= 1);
+            return m_VecArray [0];
+        }
+
+        constexpr const T & x () const
         {
             ZGE_STATIC_ASSART (ElemNum >= 1);
             return m_VecArray [0];
         }
 
 
-        const T& x () const
-        {
-            ZGE_STATIC_ASSART (ElemNum >= 1);
-            return m_VecArray [0];
-        }
-
-
-        T& y ()
+        T & y ()
         {
             ZGE_STATIC_ASSART (ElemNum >= 2);
             return m_VecArray [1];
         }
 
-        const T& y () const
+        constexpr const T & y () const
         {
             ZGE_STATIC_ASSART (ElemNum >= 2);
             return m_VecArray [1];
         }
 
-        T& z ()
+        T & z ()
         {
             ZGE_STATIC_ASSART (ElemNum >= 3);
             return m_VecArray [2];
         }
 
-        const T& z () const
+        constexpr const T & z () const
         {
             ZGE_STATIC_ASSART (ElemNum >= 3);
             return m_VecArray [2];
         }
 
-        T& w ()
+        T & w ()
         {
             ZGE_STATIC_ASSART (ElemNum >= 4);
             return m_VecArray [3];
         }
 
-        const T& w () const
+        constexpr const T & w () const
         {
             ZGE_STATIC_ASSART (ElemNum >= 4);
             return m_VecArray [3];
@@ -203,7 +201,7 @@ namespace ZGE
         template < typename U, size_t M >
         Vector & operator = (const Vector< U, M > &rhs)
         {
-            BOOST_STATIC_ASSERT (M >= N);
+            ZGE_STATIC_ASSART (M >= N);
             for (size_t i = 0; i < N; ++i)
             {
                 m_VecArray [i] = rhs [i];
@@ -217,7 +215,7 @@ namespace ZGE
             return m_VecArray [index];
         }
 
-        const T & operator [] (const size_t &index) const
+        constexpr const T & operator [] (const size_t &index) const
         {
             assert (index < ElemNum);
             return m_VecArray [index];

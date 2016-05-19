@@ -25,9 +25,9 @@ namespace ZGE
 
         CameraController ();
 
-        CameraController ( Camera *camera );
+        CameraController (Camera *camera);
 
-        CameraController ( const CameraController& rhs );
+        CameraController (const CameraController& rhs);
 
         ~CameraController ();
 
@@ -38,35 +38,35 @@ namespace ZGE
             return m_Camera;
         }
 
-        void MoveForward ( F32 length )
+        void MoveForward (const F32 &length)
         {
-            Move ( 0.0f, 0.0f, length );
+            Move (0.0f, 0.0f, length);
         }
 
-        void MoveBack ( F32 length )
+        void MoveBack (const F32 &length)
         {
-            Move ( 0.0f, 0.0f, -length );
-        }
-       
-        void MoveLeft ( F32 length )
-        {
-            Move ( -length, 0.0f, 0.0f );
+            Move (0.0f, 0.0f, -length);
         }
 
-        void MoveRight ( F32 length )
+        void MoveLeft (const F32 &length)
         {
-            Move ( length, 0.0f, 0.0f );
+            Move (-length, 0.0f, 0.0f);
         }
 
-        void Move ( F32 x, F32 y, F32 z );
+        void MoveRight (const F32 &length)
+        {
+            Move (length, 0.0f, 0.0f);
+        }
 
-        void Rotate ( F32 x, F32 y, F32 z, F32 angle );
+        void Move (const F32 &x, const F32 &y, const F32 &z);
+
+        void Rotate (const F32 &x, const F32 &y, const F32 &z, const F32 &angle);
 
     protected:
         std::shared_ptr< Camera > m_Camera;
 
     private:
-        void OnInput ( const InputAction& action );
+        void OnInput (const InputAction& action);
 
         ActionSignalPtr m_Signal;
     };

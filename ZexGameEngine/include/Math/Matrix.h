@@ -9,10 +9,10 @@ namespace ZGE
 {
     typedef Matrix44< F32 > Float44;
 
-    template<typename T>
+    template< typename T >
     class Matrix44ColProxy;
 
-    template <typename T>
+    template< typename T >
     class Matrix44
     {
     public:
@@ -29,10 +29,10 @@ namespace ZGE
 
         Matrix44
         (
-            const T& e00, const T& e01, const T& e02, const T& e03,
-            const T& e10, const T& e11, const T& e12, const T& e13,
-            const T& e20, const T& e21, const T& e22, const T& e23,
-            const T& e30, const T& e31, const T& e32, const T& e33
+            const T &e00, const T &e01, const T &e02, const T &e03,
+            const T &e10, const T &e11, const T &e12, const T &e13,
+            const T &e20, const T &e21, const T &e22, const T &e23,
+            const T &e30, const T &e31, const T &e32, const T &e33
         )
         {
             m_Mat [0] [0] = e00; m_Mat [0] [1] = e01; m_Mat [0] [2] = e02; m_Mat [0] [3] = e03;
@@ -41,7 +41,7 @@ namespace ZGE
             m_Mat [3] [0] = e30; m_Mat [3] [1] = e31; m_Mat [3] [2] = e32; m_Mat [3] [3] = e33;
         }
 
-        Matrix44 (const Matrix44& rhs)
+        Matrix44 (const Matrix44 &rhs)
         {
             m_Mat [0] [0] = rhs [0] [0];
             m_Mat [0] [1] = rhs [0] [1];
@@ -61,7 +61,7 @@ namespace ZGE
             m_Mat [3] [3] = rhs [3] [3];
         }
 
-        Matrix44& operator = (const Matrix44 &rhs)
+        Matrix44 & operator = (const Matrix44 &rhs)
         {
             if (this != &rhs)
             {
@@ -70,24 +70,24 @@ namespace ZGE
             return *this;
         }
 
-        T& operator () (size_t row, size_t col)
+        T & operator () (size_t row, size_t col)
         {
             return m_Mat [row] [col];
         }
 
-        const T& operator () (size_t row, size_t col) const
+        const T & operator () (size_t row, size_t col) const
         {
             return m_Mat [row] [col];
         }
 
-        Matrix44ColProxy<T> operator [] (size_t index)
+        Matrix44ColProxy< T > operator [] (size_t index)
         {
             return Matrix44ColProxy<T> (&(m_Mat [index]));
         }
 
-        const Matrix44ColProxy<T> operator [] (size_t index) const
+        const Matrix44ColProxy< T > operator [] (size_t index) const
         {
-            return Matrix44ColProxy<T> (&(m_Mat [index]));
+            return Matrix44ColProxy< T > (&(m_Mat [index]));
         }
 
         bool operator == (const Matrix44& rhs)
@@ -96,14 +96,14 @@ namespace ZGE
         }
 
         // Get Row Vector
-        const Vector< T, COL >& RowVector (int row) const
+        const Vector< T, COL > & RowVector (const int &row) const
         {
             assert (row < ROW);
             return m_Mat [row];
         }
 
         // Get Col Vector
-        const Vector< T, ROW > ColVector (int col) const
+        const Vector< T, ROW > ColVector (const int &col) const
         {
             Vector< T, ROW > colVector;
             for (int i = 0; i < ROW; ++i)
@@ -124,7 +124,7 @@ namespace ZGE
             }
         }
 
-        static const Matrix44& Zero ()
+        static const Matrix44 & Zero ()
         {
             static const Matrix44 m
             (
@@ -136,7 +136,7 @@ namespace ZGE
             return m;
         }
 
-        static const Matrix44& Identity ()
+        static const Matrix44 & Identity ()
         {
             static const Matrix44 m
             (
@@ -200,7 +200,7 @@ namespace ZGE
         }
 
     private:
-        Matrix44ColProxy (const Vector<T, 4> *colVec)
+        Matrix44ColProxy (const Vector< T, 4 > *colVec)
             : m_ColVec (colVec)
         {
 
@@ -216,12 +216,12 @@ namespace ZGE
             m_ColVec = rhs.m_ColVec;
         }
 
-        const Vector<T, 4> *m_ColVec;
+        const Vector< T, 4 > *m_ColVec;
 
     };
 
-    template<typename TVec, typename TMat>
-    static Vector<TVec, 4> operator * (const Vector<TVec, 4> &lhs, const Matrix44<TMat> &rhs)
+    template< typename TVec, typename TMat >
+    static Vector< TVec, 4 > operator * (const Vector<TVec, 4> &lhs, const Matrix44<TMat> &rhs)
     {
         Vector<TVec, 4> returnVec;
         returnVec [0] = MathFunc::Dot (lhs, rhs.ColVector (0));
@@ -231,13 +231,13 @@ namespace ZGE
         return returnVec;
     }
 
-    template<typename T>
-    static Matrix44<T> operator * (const Matrix44<T> &lhs, const Matrix44<T> &rhs)
+    template< typename T >
+    static Matrix44< T > operator * (const Matrix44<T> &lhs, const Matrix44<T> &rhs)
     {
-        Matrix44<T> resultMatrix;
-        for (int i = 0; i < Matrix44<T>::ROW; ++i)
+        Matrix44< T > resultMatrix;
+        for (int i = 0; i < Matrix44< T >::ROW; ++i)
         {
-            for (int j = 0; j < Matrix44<T>::COL; ++j)
+            for (int j = 0; j < Matrix44< T >::COL; ++j)
             {
                 auto lhsRowVector = lhs.RowVector (i);
                 auto rhsColVector = rhs.ColVector (j);
@@ -248,7 +248,7 @@ namespace ZGE
     }
 
     template < typename T >
-    T Determinant (const Matrix44< T >& rhs)
+    T Determinant (const Matrix44< T > &rhs)
     {
         T const _3142_3241 (rhs (2, 0) * rhs (3, 1) - rhs (2, 1) * rhs (3, 0));
         T const _3143_3341 (rhs (2, 0) * rhs (3, 2) - rhs (2, 2) * rhs (3, 0));
@@ -264,7 +264,7 @@ namespace ZGE
     }
 
     template < typename T >
-    Matrix44< T > Inverse (const Matrix44< T >& rhs)
+    Matrix44< T > Inverse (const Matrix44< T > &rhs)
     {
         T const _2132_2231 (rhs (1, 0) * rhs (2, 1) - rhs (1, 1) * rhs (2, 0));
         T const _2133_2331 (rhs (1, 0) * rhs (2, 2) - rhs (1, 2) * rhs (2, 0));

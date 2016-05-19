@@ -572,7 +572,7 @@ namespace ZGE
 
                 for ( int i = 0; i < nIndices; ++i )
                 {
-                    std::pair< U32, I32 > indexWeightPair;
+                    std::pair< U32, F32 > indexWeightPair;
                     indexWeightPair.first = jointIndex;
                     indexWeightPair.second = cluster->GetControlPointWeights ()[ i ];
                     m_ControlPointList[ cluster->GetControlPointIndices ()[ i ] ]->JointIndexWeightPairList.push_back ( indexWeightPair );
@@ -594,7 +594,7 @@ namespace ZGE
                 {
                     for ( int i = 0; i < Vertex::VERTEX_LINK_JOINT_MAX_NUM - controlPoint->JointIndexWeightPairList.size (); ++i )
                     {
-                        controlPoint->JointIndexWeightPairList.push_back ( std::make_pair ( 0, 0.0f ) );
+                        controlPoint->JointIndexWeightPairList.push_back ( std::make_pair ( 0U, 0.0f ) );
                     }
                 }
                 else if ( controlPoint->JointIndexWeightPairList.size () > Vertex::VERTEX_LINK_JOINT_MAX_NUM )

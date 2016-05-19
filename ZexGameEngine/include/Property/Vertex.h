@@ -37,7 +37,7 @@ namespace ZGE
 
         Vector2f UV;
 
-        std::vector< std::pair < U32, I32 > > JointIndexWeightPairList;
+        std::vector< std::pair < U32, F32 > > JointIndexWeightPairList;
     };
 }
 

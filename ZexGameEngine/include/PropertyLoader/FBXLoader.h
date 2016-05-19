@@ -35,7 +35,7 @@ namespace ZGE
 
        }
    
-       std::vector< std::pair < U32, I32 > > JointIndexWeightPairList;
+       std::vector< std::pair < U32, F32 > > JointIndexWeightPairList;
 
        std::vector< Vertex > RelatedVertexList;                        // Record which Vertex is related to this ControlPoint
    };

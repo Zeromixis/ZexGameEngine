@@ -31,11 +31,6 @@ namespace ZGE
 
         }
 
-        ~Quaternion ()
-        {
-
-        }
-
         Quaternion (const Quaternion &that)
         {
             m_Quat = that.m_Quat;
@@ -47,29 +42,32 @@ namespace ZGE
         }
 
         Quaternion (const F32 &x, const F32 &y, const F32 &z, const F32 &w)
+            : m_Quat (x, y, z, w)
         {
-            m_Quat [0] = x;
-            m_Quat [1] = y;
-            m_Quat [2] = z;
-            m_Quat [3] = w;
+
         }
 
         template< typename U >
-        explicit Quaternion (const Vector< U, 3 > &vec)
+        explicit constexpr Quaternion (const Vector< U, 3 > &vec)
+            : m_Quat (vec, 0.0f)
         {
-            m_Quat [0] = vec [0];
-            m_Quat [1] = vec [1];
-            m_Quat [2] = vec [2];
-            m_Quat [3] = 0;
+
         }
 
         template< typename U >
-        explicit Quaternion (const Vector< U, 4 > &vec)
+        explicit constexpr Quaternion (const Vector< U, 4 > &vec)
+            : m_Quat (vec [0], vec [1], vec [2], 0.0f)
         {
-            m_Quat [0] = vec [0];
-            m_Quat [1] = vec [1];
-            m_Quat [2] = vec [2];
-            m_Quat [3] = 0;
+
+        }
+
+        template< typename U, typename R >
+        constexpr Quaternion (const Vector< U, 3 > &axis, const R &angle)
+        {
+            m_Quat [0] = axis [0] * std::sin (angle / 2.0);
+            m_Quat [1] = axis [1] * std::sin (angle / 2.0);
+            m_Quat [2] = axis [2] * std::sin (angle / 2.0);
+            m_Quat [3] = std::cos (angle / 2.0);
         }
 
         F32 & x ()
@@ -77,7 +75,7 @@ namespace ZGE
             return m_Quat [0];
         }
 
-        const F32 & x () const
+        constexpr const F32 & x () const
         {
             return m_Quat [0];
         }
@@ -87,7 +85,7 @@ namespace ZGE
             return m_Quat [1];
         }
 
-        const F32 & y () const
+        constexpr const F32 & y () const
         {
             return m_Quat [1];
         }
@@ -97,7 +95,7 @@ namespace ZGE
             return m_Quat [2];
         }
 
-        const F32 & z () const
+        constexpr const F32 & z () const
         {
             return m_Quat [2];
         }
@@ -107,7 +105,7 @@ namespace ZGE
             return m_Quat [3];
         }
 
-        const F32 & w () const
+        constexpr const F32 & w () const
         {
             return m_Quat [3];
         }
@@ -132,12 +130,12 @@ namespace ZGE
             return m_Quat.cend ();
         }
 
-        F32 & operator [] (size_t index)
+        F32 & operator [] (const size_t &index)
         {
             return m_Quat [index];
         }
 
-        const F32 & operator [] (size_t index) const
+        const F32 & operator [] (const size_t &index) const
         {
             return m_Quat [index];
         }
@@ -188,7 +186,7 @@ namespace ZGE
             auto z = q1x * q2y - q1y * q2x + q1z * q2w + q1w * q2z;
             auto w = -q1x * q2x - q1y * q2y - q1z * q2z + q1w * q2w;
 
-            m_Quat = Vector4f {x, y, z, w};
+            m_Quat = Vector4f{x, y, z, w};
 
             return *this;
         }
@@ -220,6 +218,54 @@ namespace ZGE
             return *this;
         }
 
+        template< typename U, typename R >
+        void ToAxisAngle (Vector< U, 3 > &axis, R &angle) const
+        {
+            if (w () > 1.0f)
+            {
+                *this = Normalize ();
+            }
+            angle = 2.0f * std::acos (w ());
+            auto s = std::sqrt (1 - w () * w ());
+            if (s < 0.000001f)
+            {
+                axis = m_Quat;
+            }
+            else
+            {
+                axis = m_Quat / s;
+            }
+        }
+
+        template< typename U >
+        Matrix44< U > ToMatrix44 () const
+        {
+            Matrix44 < U > retMatrix;
+            const auto xx = x () * x ();
+            const auto xy = x () * y ();
+            const auto xz = x () * z ();
+            const auto xw = x () * w ();
+            const auto yy = y () * y ();
+            const auto yz = y () * z ();
+            const auto yw = y () * w ();
+            const auto zz = z () * z ();
+            const auto zw = z () * w ();
+
+            retMatrix [0] [0] = 1 - 2 * (yy + zz);
+            retMatrix [0] [1] = 2 * (xy - zw);
+            retMatrix [0] [2] = 2 * (xz + yw);
+
+            retMatrix [1] [0] = 2 * (xy + zw);
+            retMatrix [1] [1] = 1 - 2 * (xx + zz);
+            retMatrix [1] [2] = 2 * (yz - xw);
+
+            retMatrix [2] [0] = 2 * (xz - yw);
+            retMatrix [2] [1] = 2 * (yz + xw);
+            retMatrix [2] [2] = 1 - 2 * (xx + yy);
+
+            return retMatrix;
+        }
+
         const Quaternion GetConjugate () const
         {
             return Quaternion (-x (), -y (), -z (), w ());
@@ -229,6 +275,12 @@ namespace ZGE
         {
             static const Quaternion value (0, 0, 0, 1);
             return value;
+        }
+
+        template< typename U, typename R >
+        static Quaternion FromAxisAngle (const Vector< U, 3 > &axis, const R &angle)
+        {
+            return Quaternion (axis, angle);
         }
 
     private:
