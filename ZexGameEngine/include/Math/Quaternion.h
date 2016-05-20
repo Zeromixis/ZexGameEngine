@@ -6,6 +6,7 @@
 #include "External/boost/operators.hpp"
 
 #include "Math/Vector.h"
+#include "Math/MathConst.h"
 
 namespace ZGE
 {
@@ -59,15 +60,6 @@ namespace ZGE
             : m_Quat (vec [0], vec [1], vec [2], 0.0f)
         {
 
-        }
-
-        template< typename U, typename R >
-        constexpr Quaternion (const Vector< U, 3 > &axis, const R &angle)
-        {
-            m_Quat [0] = axis [0] * std::sin (angle / 2.0);
-            m_Quat [1] = axis [1] * std::sin (angle / 2.0);
-            m_Quat [2] = axis [2] * std::sin (angle / 2.0);
-            m_Quat [3] = std::cos (angle / 2.0);
         }
 
         F32 & x ()
@@ -219,28 +211,49 @@ namespace ZGE
         }
 
         template< typename U, typename R >
-        void ToAxisAngle (Vector< U, 3 > &axis, R &angle) const
+        Quaternion & FromAxisRadian (const Vector< U, 3 > &axis, const R &radian)
         {
-            if (w () > 1.0f)
-            {
-                *this = Normalize ();
-            }
-            angle = 2.0f * std::acos (w ());
+            x () = axis.x () * std::sin (radian / 2.0);
+            y () = axis.y () * std::sin (radian / 2.0);
+            z () = axis.z () * std::sin (radian / 2.0);
+            w () = std::cos (radian / 2.0);
+            return *this;
+        }
+
+        template< typename U, typename R >
+        Quaternion & FromAxisDegree (const Vector< U, 3 > &axis, const R &degree)
+        {
+            return FromAxisRadian (axis, MathFunc::DegreeToRadian (degree));
+        }
+
+        template< typename U, typename R >
+        void ToAxisRadian (Vector< U, 3 > &axis, R &radian) const
+        {
+            Quaternion quat = *this;
+            quat.Normalize ();
+            radian = 2.0f * std::acos (w ());
             auto s = std::sqrt (1 - w () * w ());
             if (s < 0.000001f)
             {
-                axis = m_Quat;
+                axis = quat.m_Quat;
             }
             else
             {
-                axis = m_Quat / s;
+                axis = quat.m_Quat / s;
             }
         }
 
-        template< typename U >
-        Matrix44< U > ToMatrix44 () const
+        template< typename U, typename R >
+        void ToAxisDegree (Vector< U, 3 > &axis, R &degree) const
         {
-            Matrix44 < U > retMatrix;
+            R radian (0);
+            ToAxisRadian (axis, radian);
+            degree = MathFunc::RadianToDegree (radian);
+        }
+
+        Float44 ToMatrix44 () const
+        {
+            Float44 retMatrix;
             const auto xx = x () * x ();
             const auto xy = x () * y ();
             const auto xz = x () * z ();
@@ -266,6 +279,79 @@ namespace ZGE
             return retMatrix;
         }
 
+        template< typename U >
+        Quaternion & FromEulerRadian (const Vector< U, 3 > &eulerRadian)
+        {
+            const auto c1 = std::cos (eulerRadian.y () / 2);
+            const auto s1 = std::sin (eulerRadian.y () / 2);
+            const auto c2 = std::cos (eulerRadian.x () / 2);
+            const auto s2 = std::sin (eulerRadian.x () / 2);
+            const auto c3 = std::cos (eulerRadian.z () / 2);
+            const auto s3 = std::sin (eulerRadian.z () / 2);
+
+            const auto c1c2 = c1 * c2;
+            const auto s1s2 = s1 * s2;
+
+            z () = c1c2 * s3 + s1s2 * c3;
+            y () = s1 * c2 * c3 + c1 * s2 * s3;
+            x () = c1 * s2 * c3 - s1 * c2 * s3;
+            w () = c1c2 * c3 - s1s2 * s3;
+
+            return *this;
+        }
+
+        template< typename U >
+        Quaternion & FromEulerDegree (const Vector< U, 3 > &eulerDegree)
+        {
+            Vector< U, 3 > eulerRadian;
+            for (int i = 0; i < 3; ++i)
+            {
+                eulerRadian [i] = MathFunc::DegreeToRadian (eulerDegree [i]);
+            }
+            return FromEulerRadian (eulerRadian);
+        }
+
+        Vector3f ToEulerRadian () const
+        {
+            Vector3f retVec;
+            const auto sqx = x () * x ();
+            const auto sqy = y () * y ();
+            const auto sqz = z () * z ();
+            const auto sqw = w () * w ();
+
+            const auto unit = sqx + sqy + sqz + sqw;
+            const auto test = w () * x () + y () * z ();
+            if (test > 0.4999f * unit)
+            {
+                retVec.y () = 2.0f * std::atan2 (z (), w ());
+                retVec.x () = MathConst::PI * 0.5f;
+                retVec.z () = 0.0f;
+            }
+            else if (test < -0.4999f * unit)
+            {
+                retVec.y () = -2.0f * std::atan2 (z (), w ());
+                retVec.x () = -MathConst::PI * 0.5f;
+                retVec.z () = 0.0f;
+            }
+            else
+            {
+                retVec.y () = std::atan2 (2.0f * y () * w () - 2.0f * x () * z (), -sqx - sqy + sqz + sqw);
+                retVec.x () = std::asin (2.0f * test / unit);
+                retVec.z () = std::atan2 (2.0f * z () * w () - 2.0f * x () * y (), -sqx + sqy - sqz + sqw);
+            }
+            return retVec;
+        }
+
+        Vector3f ToEulerDegree () const
+        {
+            auto vec = ToEulerRadian ();
+            for (auto &e : vec)
+            {
+                e = MathFunc::RadianToDegree (e);
+            }
+            return vec;
+        }
+
         const Quaternion GetConjugate () const
         {
             return Quaternion (-x (), -y (), -z (), w ());
@@ -276,13 +362,6 @@ namespace ZGE
             static const Quaternion value (0, 0, 0, 1);
             return value;
         }
-
-        template< typename U, typename R >
-        static Quaternion FromAxisAngle (const Vector< U, 3 > &axis, const R &angle)
-        {
-            return Quaternion (axis, angle);
-        }
-
     private:
         Vector4f m_Quat;
     };

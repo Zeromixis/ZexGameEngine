@@ -41,27 +41,17 @@ namespace ZGE
             m_Mat [3] [0] = e30; m_Mat [3] [1] = e31; m_Mat [3] [2] = e32; m_Mat [3] [3] = e33;
         }
 
-        Matrix44 (const Matrix44 &rhs)
+        template< typename U >
+        Matrix44 (const Matrix44< U > &rhs)
         {
-            m_Mat [0] [0] = rhs [0] [0];
-            m_Mat [0] [1] = rhs [0] [1];
-            m_Mat [0] [2] = rhs [0] [2];
-            m_Mat [0] [3] = rhs [0] [3];
-            m_Mat [1] [0] = rhs [1] [0];
-            m_Mat [1] [1] = rhs [1] [1];
-            m_Mat [1] [2] = rhs [1] [2];
-            m_Mat [1] [3] = rhs [1] [3];
-            m_Mat [2] [0] = rhs [2] [0];
-            m_Mat [2] [1] = rhs [2] [1];
-            m_Mat [2] [2] = rhs [2] [2];
-            m_Mat [2] [3] = rhs [2] [3];
-            m_Mat [3] [0] = rhs [3] [0];
-            m_Mat [3] [1] = rhs [3] [1];
-            m_Mat [3] [2] = rhs [3] [2];
-            m_Mat [3] [3] = rhs [3] [3];
+            if (this != &rhs)
+            {
+                m_Mat = rhs.m_Mat;
+            }
         }
 
-        Matrix44 & operator = (const Matrix44 &rhs)
+        template< typename U >
+        Matrix44 & operator = (const Matrix44< U > &rhs)
         {
             if (this != &rhs)
             {
@@ -115,13 +105,12 @@ namespace ZGE
 
         void Transpose ()
         {
-            for (auto i = 0; i < ROW; ++i)
-            {
-                for (auto j = i; j < COL; ++j)
-                {
-                    std::swap ((*this) (i, j), (*this) (j, i));
-                }
-            }
+            std::swap ((*this) [0] [1], (*this) [1] [0]);
+            std::swap ((*this) [0] [2], (*this) [2] [0]);
+            std::swap ((*this) [0] [3], (*this) [3] [0]);
+            std::swap ((*this) [2] [1], (*this) [1] [2]);
+            std::swap ((*this) [3] [1], (*this) [1] [3]);
+            std::swap ((*this) [3] [2], (*this) [2] [3]);
         }
 
         static const Matrix44 & Zero ()
@@ -232,7 +221,7 @@ namespace ZGE
     }
 
     template< typename T >
-    static Matrix44< T > operator * (const Matrix44<T> &lhs, const Matrix44<T> &rhs)
+    static Matrix44< T > operator * (const Matrix44< T > &lhs, const Matrix44< T > &rhs)
     {
         Matrix44< T > resultMatrix;
         for (int i = 0; i < Matrix44< T >::ROW; ++i)

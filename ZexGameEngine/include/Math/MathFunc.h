@@ -1,10 +1,10 @@
-#ifndef _MATH_MATHFUNC_H_
-#define _MATH_MATHFUNC_H_
+#pragma once
 
 #include "ZGEDecl.h"
 
 #include "Math/Vector.h"
 #include "Math/Matrix.h"
+#include "Math/MathConst.h"
 
 
 namespace ZGE
@@ -97,8 +97,46 @@ namespace ZGE
                     0, 0, -zNearPlane * q,  0
                     );
         }
+
+        template< typename T >
+        static decltype(auto) DegreeToRadian (const T &degree)
+        {
+            return degree * MathConst::PI / T (180);
+        }
+
+        template< typename T >
+        static decltype(auto) RadianToDegree (const T &radian)
+        {
+            return radian / MathConst::PI * T (180);
+        }
+
+        template< typename U, typename R >
+        static Quaternion FromAxisDegree (const Vector< U, 3 > &axis, const R &degree)
+        {
+            Quaternion quat;
+            return quat.FromAxisDegree (axis, degree);
+        }
+
+        template< typename U, typename R >
+        static Quaternion FromAxisRadian (const Vector< U, 3 > &axis, const R &radian)
+        {
+            Quaternion quat;
+            return quat.FromAxisRadian (axis, radian);
+        }
+
+        template< typename U >
+        static Quaternion FromEulerDegree (const Vector< U, 3 > &eulerDegree)
+        {
+            Quaternion quat;
+            return quat.FromEulerDegree (eulerDegree);
+        }
+
+        template< typename U >
+        static Quaternion FromEulerRadian (const Vector< U, 3 > &eulerRadian)
+        {
+            Quaternion quat;
+            return quat.FromEulerRadian (eulerRadian);
+        }
     };
 }
-
-#endif // !_MATH_MATHFUNC_H_
 

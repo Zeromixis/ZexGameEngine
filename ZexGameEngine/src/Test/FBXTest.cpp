@@ -3,6 +3,7 @@
 #include "Core/BufferGL.h"
 #include "Util.h"
 #include "App/Context.h"
+#include "Math/MathConst.h"
 
 namespace ZGE
 {
@@ -12,7 +13,7 @@ namespace ZGE
         m_CameraController = new CameraController { &m_Camera };
         auto window = Context::GetInstance ()->GetWindowPtr ();
         F32 cameraAspect = ( F32 )( window->Width () ) / window->Height ();
-        m_Camera.SetProj ( PI / 4, cameraAspect, 0.1f, 200.0f );
+        m_Camera.SetProj ( MathConst::PI / 4, cameraAspect, 0.1f, 200.0f );
         m_Camera.SetView ( Vector3f ( -20.0f, 20.0f, 0.0f ), Vector3f ( 0.0f, 0.0f, 0.0f ) );
 
         std::vector< PMesh > meshList;

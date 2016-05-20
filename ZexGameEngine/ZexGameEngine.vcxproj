@@ -159,6 +159,7 @@
     <ClInclude Include="include\Core\Asset\PropertyLoader.h" />
     <ClInclude Include="include\Core\Camera.h" />
     <ClInclude Include="include\Core\CameraController.h" />
+    <ClInclude Include="include\Math\MathConst.h" />
     <ClInclude Include="include\Render\RenderDeviceHAL.h" />
     <ClInclude Include="include\Core\Input\InputDevice.h" />
     <ClInclude Include="include\Core\Input\InputManager.h" />
