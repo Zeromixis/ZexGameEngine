@@ -13,14 +13,12 @@ namespace ZGE
 {
     struct Mesh
         : public Property
-    {      
-        std::vector< PControlPoint > ControlPointList;
+    {
+        std::vector< Vertex > VertexList;
 
-        std::vector< PVertex > VertexList;
+        std::vector< U32 > IndexList;
 
-        std::vector< U32 > VertexIndexList;
-
-        std::vector< PJoint > JointList;
+        std::vector< Joint > JointList;
 
         std::vector< PAnimStack > AnimStackList;
 

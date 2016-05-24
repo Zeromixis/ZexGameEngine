@@ -45,7 +45,7 @@ namespace ZGE
         return m_FBXSDKVersion;
     }
 
-    bool FBXLoader::LoadFBXMeshes( const std::string &fileName, std::vector< PMesh > &inoutMeshList )
+    bool FBXLoader::LoadFBXFile ( const std::string &fileName, std::vector< PMesh > &inoutMeshList )
     {
         FbxImporter *importer = FbxImporter::Create ( m_FbxManager, "" );
 
@@ -58,7 +58,7 @@ namespace ZGE
             return false;
         }
 
-        FbxScene *scene = FbxScene::Create ( m_FbxManager, "ZGE Scene" );
+        FbxScene *scene = FbxScene::Create ( m_FbxManager, "ZGE Import Scene" );
 
         auto sceneStatus = importer->Import ( scene );
 
@@ -80,11 +80,19 @@ namespace ZGE
         FbxGeometryConverter geomertryConverter ( m_FbxManager );
         geomertryConverter.Triangulate ( scene, true );
 
-        LoadFBXMeshesRescursive ( scene->GetRootNode (), inoutMeshList );
+        LoadFBXMesh ( scene->GetRootNode (), inoutMeshList );
 
         scene->Destroy ();
         importer->Destroy ();
         return true;
+    }
+
+    void FBXLoader::FbxVector42Vector4f ( const FbxVector4 &inFbxVector4, Vector4f &outVector4f )
+    {
+        outVector4f[ 0 ] = inFbxVector4[ 0 ];
+        outVector4f[ 1 ] = inFbxVector4[ 1 ];
+        outVector4f[ 2 ] = inFbxVector4[ 2 ];
+        outVector4f[ 3 ] = inFbxVector4[ 3 ];
     }
 
     bool FBXLoader::LoadFBXAnimNode ( FbxScene *scene, const std::vector< PMesh > &meshList, std::vector< PAnimNode > &jointAnimList )
@@ -93,13 +101,13 @@ namespace ZGE
         {
             for ( const auto &joint : mesh->JointList )
             {
-                FbxNode *jointNode = scene->FindNodeByName ( joint->Name.c_str () );
+                FbxNode *jointNode = scene->FindNodeByName ( joint.Name.c_str () );
 
                 if ( nullptr == jointNode )
                     continue;
 
                 PAnimNode animNode = Property::CreateProperty< PAnimNode > ();
-                animNode->Name = joint->Name;
+                animNode->Name = joint.Name;
 
                 for ( int stackIndex = 0; stackIndex < scene->GetSrcObjectCount< FbxAnimStack > (); ++stackIndex )
                 {
@@ -122,9 +130,9 @@ namespace ZGE
                         FbxAMatrix globalTransform = jointNode->EvaluateGlobalTransform ( currTime );
 
                         animKeyFrame->Frame = frameIndex;
-                        FbxVector42Vector4f ( globalTransform.GetT (), animKeyFrame->Translation );
-                        FbxQuaternion2QuaternionF ( globalTransform.GetQ (), animKeyFrame->Rotation );
-                        FbxVector42Vector4f ( globalTransform.GetS (), animKeyFrame->Scaling );
+                        FbxVector2Vector ( globalTransform.GetT (), animKeyFrame->Translation );
+                        FbxVector2Vector ( globalTransform.GetQ (), animKeyFrame->Rotation );
+                        FbxVector2Vector ( globalTransform.GetS (), animKeyFrame->Scaling );
 
                         animData->KeyFrameList.push_back ( animKeyFrame );
                     }
@@ -139,24 +147,28 @@ namespace ZGE
         return true;
     }
 
-    void FBXLoader::LoadFBXMeshesRescursive ( FbxNode *node, std::vector< PMesh > &inoutMeshList )
+    void FBXLoader::LoadFBXMesh ( FbxNode *node, std::vector< PMesh > &inoutMeshList )
     {
         auto nodeAttr = node->GetNodeAttribute ();
         if ( nodeAttr )
         {
             if ( nodeAttr->GetAttributeType () == FbxNodeAttribute::eMesh )
             {
+                m_ControlPointList.clear ();
+
                 PMesh mesh = Property::CreateProperty< PMesh > ();
                 ProcessMeshVertices ( node, mesh );
                 ProcessMeshJoints ( node, mesh );
                 inoutMeshList.push_back ( mesh );
+
+                m_ControlPointList.clear ();
             }
         }
 
         auto nodeChildCount = node->GetChildCount ();
         for ( int i = 0; i < nodeChildCount; ++i )
         {
-            LoadFBXMeshesRescursive ( node->GetChild ( i ), inoutMeshList );
+            LoadFBXMesh ( node->GetChild ( i ), inoutMeshList );
         }
     }
 
@@ -284,34 +296,24 @@ namespace ZGE
         }
         
         inoutMesh->VertexList.resize ( polygonVertexCount );
-        inoutMesh->VertexIndexList.resize ( polygonCount * TRIGANLE_VERTEX_COUNT );
-        inoutMesh->ControlPointList.resize ( controlPointCount );
+        inoutMesh->IndexList.resize ( polygonCount * TRIGANLE_VERTEX_COUNT );
 
         // Read All Control Point
         for ( U32 i = 0; i < controlPointCount; ++i )
         {
-            PControlPoint _controlPoint = Property::CreateProperty< PControlPoint > ();
-            _controlPoint->Position.x () = controlPoint[ i ][ 0 ];
-            _controlPoint->Position.y () = controlPoint[ i ][ 1 ];
-            _controlPoint->Position.z () = controlPoint[ i ][ 2 ];
-            _controlPoint->Position.w () = controlPoint[ i ][ 3 ];
-            inoutMesh->ControlPointList.push_back ( _controlPoint );
+            PControlPoint controlPoint = Property::CreateProperty< PControlPoint > ();
+            m_ControlPointList.push_back ( controlPoint );
         }
 
         if ( vertexDataControlModeIsByControlPoint )
         {
             // By Control Point
             // Read Position
-            for ( int index = 0; index < polygonVertexCount; ++index )
+            for ( int controlPointIndex = 0; controlPointIndex < polygonVertexCount; ++controlPointIndex )
             {
-                PVertex outMeshVertex = Property::CreateProperty< PVertex > ();
+                Vertex outMeshVertex;
 
-//                 outMeshVertex->Position.x () = controlPoint[ index ][ 0 ];
-//                 outMeshVertex->Position.y () = controlPoint[ index ][ 1 ];
-//                 outMeshVertex->Position.z () = controlPoint[ index ][ 2 ];
-//                 outMeshVertex->Position.w () = controlPoint[ index ][ 3 ];
-
-                outMeshVertex->VertexControlPoint = inoutMesh->ControlPointList[ index ];
+                FbxVector2Vector ( controlPoint[ controlPointIndex ], outMeshVertex.Position );
 
                 if ( hasNormal )
                 {
@@ -321,21 +323,19 @@ namespace ZGE
                     case FbxLayerElement::eDirect:
                     case FbxLayerElement::eIndex:
                     {
-                        normalIndex = index;
+                        normalIndex = controlPointIndex;
                         break;
                     }
                     case FbxLayerElement::eIndexToDirect:
                     {
-                        normalIndex = mesh->GetElementNormal ( 0 )->GetIndexArray ().GetAt ( index );
+                        normalIndex = mesh->GetElementNormal ( 0 )->GetIndexArray ().GetAt ( controlPointIndex );
                         break;
                     }
                     }
 
                     auto normal = mesh->GetElementNormal ( 0 )->GetDirectArray ().GetAt ( normalIndex );
-                    outMeshVertex->Normal.x () = normal[ 0 ];
-                    outMeshVertex->Normal.y () = normal[ 1 ];
-                    outMeshVertex->Normal.z () = normal[ 2 ];
-                    outMeshVertex->Normal.w () = normal[ 3 ];
+
+                    FbxVector2Vector ( normal, outMeshVertex.Normal );
                 }
 
                 if ( hasUV )
@@ -346,19 +346,19 @@ namespace ZGE
                     case FbxLayerElement::eDirect:
                     case FbxLayerElement::eIndex:
                     {
-                        uvIndex = index;
+                        uvIndex = controlPointIndex;
                         break;
                     }
                     case FbxLayerElement::eIndexToDirect:
                     {
-                        uvIndex = mesh->GetElementUV ( 0 )->GetIndexArray ().GetAt ( index );
+                        uvIndex = mesh->GetElementUV ( 0 )->GetIndexArray ().GetAt ( controlPointIndex );
                         break;
                     }
                     }
 
                     auto uv = mesh->GetElementUV ( 0 )->GetDirectArray ().GetAt ( uvIndex );
-                    outMeshVertex->UV.x () = uv[ 0 ];
-                    outMeshVertex->UV.y () = uv[ 1 ];
+
+                    FbxVector2Vector ( uv, outMeshVertex.UV );
                 }
 
                 // Read Color
@@ -370,24 +370,24 @@ namespace ZGE
                     case FbxLayerElement::eDirect:
                     case FbxLayerElement::eIndex:
                     {
-                        colorIndex = index;
+                        colorIndex = controlPointIndex;
                         break;
                     }
                     case FbxLayerElement::eIndexToDirect:
                     {
-                        colorIndex = mesh->GetElementVertexColor ( 0 )->GetIndexArray ().GetAt ( index );
+                        colorIndex = mesh->GetElementVertexColor ( 0 )->GetIndexArray ().GetAt ( controlPointIndex );
                         break;
                     }
                     }
 
                     auto color = mesh->GetElementVertexColor ( 0 )->GetDirectArray ().GetAt ( colorIndex );
-                    outMeshVertex->Color.x () = color[ 0 ];
-                    outMeshVertex->Color.y () = color[ 1 ];
-                    outMeshVertex->Color.z () = color[ 2 ];
-                    outMeshVertex->Color.w () = color[ 3 ];
+
+                    FbxVector2Vector ( color, outMeshVertex.Color );
                 }
 
-                inoutMesh->VertexList[ index ] = outMeshVertex;
+                inoutMesh->VertexList[ controlPointIndex ] = outMeshVertex;
+
+                m_ControlPointList[ controlPointIndex ]->RelatedVertexList.push_back ( outMeshVertex );
             }          
         }
         else
@@ -396,7 +396,7 @@ namespace ZGE
             int vertexCounter = 0;
             for ( auto polygonIndex = 0; polygonIndex < polygonCount; ++polygonIndex )
             {
-                PVertex outMeshVertex = Property::CreateProperty< PVertex > ();
+                Vertex outMeshVertex;
 
                 // The material for current face.
                 int lMaterialIndex = 0;
@@ -414,38 +414,83 @@ namespace ZGE
                     auto controlPointIndex = mesh->GetPolygonVertex ( polygonIndex, triganleVertexIndex );
 
                     // Read Indices
-                    inoutMesh->VertexIndexList[ lIndexOffset + triganleVertexIndex ] = static_cast<unsigned int>( vertexCounter );
+                    inoutMesh->IndexList[ lIndexOffset + triganleVertexIndex ] = static_cast<unsigned int>( vertexCounter );
 
                     // Read Position
-                    outMeshVertex->VertexControlPoint = inoutMesh->ControlPointList[ controlPointIndex ];
-
-//                     outMeshVertex->Position.x () = vertex[ 0 ];
-//                     outMeshVertex->Position.y () = vertex[ 1 ];
-//                     outMeshVertex->Position.z () = vertex[ 2 ];
-//                     outMeshVertex->Position.w () = vertex[ 3 ];
-
+                    outMeshVertex.Position.x () = controlPoint[ controlPointIndex ][ 0 ];
+                    outMeshVertex.Position.y () = controlPoint[ controlPointIndex ][ 1 ];
+                    outMeshVertex.Position.z () = controlPoint[ controlPointIndex ][ 2 ];
+                    outMeshVertex.Position.w () = controlPoint[ controlPointIndex ][ 3 ];
 
                     // Read Normal
-         
                     if ( hasNormal )
                     {
                         FbxVector4 normal;
                         mesh->GetPolygonVertexNormal ( polygonIndex, triganleVertexIndex, normal );
-                        outMeshVertex->Normal.x () = normal[ 0 ];
-                        outMeshVertex->Normal.y () = normal[ 1 ];
-                        outMeshVertex->Normal.z () = normal[ 2 ];
-                        outMeshVertex->Normal.w () = normal[ 3 ];
+                        outMeshVertex.Normal.x () = normal[ 0 ];
+                        outMeshVertex.Normal.y () = normal[ 1 ];
+                        outMeshVertex.Normal.z () = normal[ 2 ];
+                        outMeshVertex.Normal.w () = normal[ 3 ];
                     }
                     
                     // Read UV
                     if ( hasUV )
                     {
-                        FbxVector2 uv;
-                        const char *uvName = NULL;
-                        bool isUnmappedUV;
-                        mesh->GetPolygonVertexUV ( polygonIndex, triganleVertexIndex, uvName, uv, isUnmappedUV );
-                        outMeshVertex->UV.x () = uv[ 0 ];
-                        outMeshVertex->UV.y () = uv[ 1 ];
+
+                        for (int l = 0; l < mesh->GetElementUVCount (); ++l)
+                        {
+                            FbxGeometryElementUV* leUV = mesh->GetElementUV (l);
+
+                            switch (leUV->GetMappingMode ())
+                            {
+                            default:
+                                break;
+                            case FbxGeometryElement::eByControlPoint:
+                                switch (leUV->GetReferenceMode ())
+                                {
+                                case FbxGeometryElement::eDirect:
+                                {
+                                    auto vec = leUV->GetDirectArray ().GetAt (controlPointIndex);
+                                    FbxVector2Vector (leUV->GetDirectArray ().GetAt (controlPointIndex), outMeshVertex.UV);
+                                    break;
+                                }
+                                case FbxGeometryElement::eIndexToDirect:
+                                {
+                                    int id = leUV->GetIndexArray ().GetAt (controlPointIndex);
+                                    auto vec = leUV->GetDirectArray ().GetAt (id);
+                                    FbxVector2Vector (leUV->GetDirectArray ().GetAt (id), outMeshVertex.UV);
+                                }
+                                break;
+                                default:
+                                    break; // other reference modes not shown here!
+                                }
+                                break;
+
+                            case FbxGeometryElement::eByPolygonVertex:
+                            {
+                                int lTextureUVIndex = mesh->GetTextureUVIndex (polygonIndex, triganleVertexIndex);
+                                switch (leUV->GetReferenceMode ())
+                                {
+                                case FbxGeometryElement::eDirect:
+                                case FbxGeometryElement::eIndexToDirect:
+                                {
+                                    auto vec = leUV->GetDirectArray ().GetAt (lTextureUVIndex);
+                                    FbxVector2Vector (leUV->GetDirectArray ().GetAt (lTextureUVIndex), outMeshVertex.UV);
+                                }
+                                break;
+                                default:
+                                    break; // other reference modes not shown here!
+                                }
+                            }
+                            break;
+
+                            case FbxGeometryElement::eByPolygon: // doesn't make much sense for UVs
+                            case FbxGeometryElement::eAllSame:   // doesn't make much sense for UVs
+                            case FbxGeometryElement::eNone:       // doesn't make much sense for UVs
+                                break;
+                            }
+                        }
+
                     }
 
                     if ( hasColor )
@@ -467,13 +512,16 @@ namespace ZGE
                         }
 
                         auto color = mesh->GetElementVertexColor ( 0 )->GetDirectArray ().GetAt ( colorIndex );
-                        outMeshVertex->Color.x () = color[ 0 ];
-                        outMeshVertex->Color.y () = color[ 1 ];
-                        outMeshVertex->Color.z () = color[ 2 ];
-                        outMeshVertex->Color.w () = color[ 3 ];
+                        outMeshVertex.Color.x () = color[ 0 ];
+                        outMeshVertex.Color.y () = color[ 1 ];
+                        outMeshVertex.Color.z () = color[ 2 ];
+                        outMeshVertex.Color.w () = color[ 3 ];
                     }
+
                     inoutMesh->VertexList[ vertexCounter ] = outMeshVertex;
                     ++vertexCounter;
+
+                    m_ControlPointList[ controlPointIndex ]->RelatedVertexList.push_back ( outMeshVertex );
                 }
                 mSubMeshes[ lMaterialIndex ]->TriangleCount += 1;
             }
@@ -511,7 +559,7 @@ namespace ZGE
 
             for ( auto clusterIndex = 0; clusterIndex < nClusters; ++clusterIndex )
             {
-                PJoint joint = Property::CreateProperty< PJoint > ();
+                Joint joint;
                 auto jointIndex = inoutMesh->JointList.size ();
 
                 FbxCluster *cluster = skin->GetCluster ( clusterIndex );
@@ -524,33 +572,39 @@ namespace ZGE
 
                 for ( int i = 0; i < nIndices; ++i )
                 {
-                    std::pair< U32, I32 > indexWeightPair;
+                    std::pair< U32, F32 > indexWeightPair;
                     indexWeightPair.first = jointIndex;
                     indexWeightPair.second = cluster->GetControlPointWeights ()[ i ];
-                    inoutMesh->ControlPointList[ cluster->GetControlPointIndices ()[ i ] ]->JointIndexWeightPairList.push_back ( indexWeightPair );
+                    m_ControlPointList[ cluster->GetControlPointIndices ()[ i ] ]->JointIndexWeightPairList.push_back ( indexWeightPair );
                 }
 
-                joint->Name     = jointName;
-                FbxMatrix2Float44 ( joint2WorldBindPoseAMatrix, joint->Joint2WorldBindPoseMatrix );
+                joint.Name     = jointName;
+                FbxMatrix2Float44 ( joint2WorldBindPoseAMatrix, joint.Joint2WorldBindPoseMatrix );
 
                 inoutMesh->JointList.push_back ( joint );
             }
 
             // Set All Control Point Joint-Weight Pair Num to ControlPoint::VERTEX_LINK_JOINT_MAX_NUM
             // Fill With Zero element if not enough
-            // Remove element if over ControlPoint::VERTEX_LINK_JOINT_MAX_NUM
-            for ( auto &controlPoint : inoutMesh->ControlPointList )
+            // Remove element if over Vertex::VERTEX_LINK_JOINT_MAX_NUM
+
+            for ( auto &controlPoint : m_ControlPointList )
             {
-                if ( controlPoint->JointIndexWeightPairList.size () < ControlPoint::VERTEX_LINK_JOINT_MAX_NUM )
+                if ( controlPoint->JointIndexWeightPairList.size () < Vertex::VERTEX_LINK_JOINT_MAX_NUM )
                 {
-                    for ( int i = 0; i < ControlPoint::VERTEX_LINK_JOINT_MAX_NUM - controlPoint->JointIndexWeightPairList.size (); ++i )
+                    for ( int i = 0; i < Vertex::VERTEX_LINK_JOINT_MAX_NUM - controlPoint->JointIndexWeightPairList.size (); ++i )
                     {
-                        controlPoint->JointIndexWeightPairList.push_back ( std::make_pair ( 0, 0.0f ) );
+                        controlPoint->JointIndexWeightPairList.push_back ( std::make_pair ( 0U, 0.0f ) );
                     }
                 }
-                else if ( controlPoint->JointIndexWeightPairList.size () > ControlPoint::VERTEX_LINK_JOINT_MAX_NUM )
+                else if ( controlPoint->JointIndexWeightPairList.size () > Vertex::VERTEX_LINK_JOINT_MAX_NUM )
                 {
-                    controlPoint->JointIndexWeightPairList.resize ( ControlPoint::VERTEX_LINK_JOINT_MAX_NUM );
+                    controlPoint->JointIndexWeightPairList.resize ( Vertex::VERTEX_LINK_JOINT_MAX_NUM );
+                }
+
+                for ( auto &vertex : controlPoint->RelatedVertexList )
+                {
+                    vertex.JointIndexWeightPairList = controlPoint->JointIndexWeightPairList;
                 }
             }
             break;

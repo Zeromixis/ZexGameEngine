@@ -159,9 +159,13 @@
     <ClInclude Include="include\Core\Asset\PropertyLoader.h" />
     <ClInclude Include="include\Core\Camera.h" />
     <ClInclude Include="include\Core\CameraController.h" />
+    <ClInclude Include="include\Math\MathConst.h" />
+    <ClInclude Include="include\Render\RenderDeviceHAL.h" />
     <ClInclude Include="include\Core\Input\InputDevice.h" />
     <ClInclude Include="include\Core\Input\InputManager.h" />
     <ClInclude Include="include\Core\Input\WInputDevice.h" />
+    <ClInclude Include="include\Core\Light.h" />
+    <ClInclude Include="include\App\Game.h" />
     <ClInclude Include="include\Math\MathFunc.h" />
     <ClInclude Include="include\Math\Quaternion.h" />
     <ClInclude Include="include\Property\Animation.h" />
@@ -190,7 +194,6 @@
     <ClInclude Include="include\Render\ShaderObject.h" />
     <ClInclude Include="include\Render\ShaderProgram.h" />
     <ClInclude Include="include\Test\FBXTest.h" />
-    <ClInclude Include="include\Test\LightningTest.h" />
     <ClInclude Include="include\Test\RenderTextTest.h" />
     <ClInclude Include="include\Core\Font.h" />
     <ClInclude Include="include\Timer.h" />
@@ -202,6 +205,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="src\App\Game.cpp" />
     <ClCompile Include="src\App\WindowWin.cpp" />
     <ClCompile Include="src\Clock.cpp" />
     <ClCompile Include="src\Core\Camera.cpp" />
@@ -209,7 +213,6 @@
     <ClCompile Include="src\Core\Input\InputManager.cpp" />
     <ClCompile Include="src\Core\Input\WInputDevice.cpp" />
     <ClCompile Include="src\Core\TimeManager.cpp" />
-    <ClCompile Include="src\Core\BufferGL.cpp" />
     <ClCompile Include="src\PropertyLoader\FBXLoader.cpp" />
     <ClCompile Include="src\Render\RenderEngine.cpp" />
     <ClCompile Include="src\Render\ShaderObject.cpp" />

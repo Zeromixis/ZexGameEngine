@@ -1,54 +1,64 @@
-#if _WIN32
-
-#include <windows.h>
 #include "ZGEDecl.h"
 
-#include "App/WindowWin.h"
-#include "App/Context.h"
-#include "Math/Matrix.h"
-#include "Core/TimeManager.h"
-#include "External/boost/signals2.hpp"
-#include "PropertyLoader/FBXLoader.h"
+#include "App/Game.h"
+#include "ZexGameEngine/include/Math/Vector.h"
+
+class B;
+
+template< typename T, std::size_t N >
+class A
+{
+public:
+    A (int i)
+    {
+        m_Array.fill (i);
+    }
+
+    A (const A &&rhs)
+    {
+
+    }
+
+    constexpr A (const B &)
+    {
+
+    }
+
+    template< typename U >
+    A (const U &)
+    {
+
+    }
+
+    constexpr A (const std::array< T, N > &array)
+        : m_Array (array)
+    {
+
+    }
+
+    T & operator [] (const std::size_t &index)
+    {
+        return m_Array [index];
+    }
+
+    constexpr const T & operator [] (const std::size_t &index) const
+    {
+        return m_Array [index];
+    }
+
+private:
+    std::array< T, N > m_Array;
+};
 
 
 int WINAPI WinMain ( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdWindow )
 {
     using namespace ZGE;
-    WindowWin *window = new ZGE::WindowWin ( std::wstring ( L"ZexGameEngine" ) );
+    Vector4f ss{1.0f, 1.0f};
 
-    Context::GetInstance ()->SetWindowPtr ( window );
-    Context::GetInstance ()->SetRenderEngine ( new RenderEngine () );
-
-	// Init various Manager here.
-    InputManager::GetInstance ();
-	TimeManager::GetInstance ();
-
-    MSG msg;
-    ::PeekMessage ( &msg, window->Hwnd (), 0, 0, PM_NOREMOVE );
-    
-    while ( WM_QUIT != msg.message )
-    {
-        BOOL isGotMsg = ::PeekMessage ( &msg, window->Hwnd (), 0, 0, PM_REMOVE );
-        if ( isGotMsg )
-        {
-            ::TranslateMessage ( &msg );
-            ::DispatchMessage ( &msg );
-        }
-        else
-        {
-            TimeManager::GetInstance ()->Update ();
-            InputManager::GetInstance ()->Update ();
-            Context::GetInstance ()->GetRenderEngine ()->Refresh ();
-        }
-    }
-    return msg.wParam;
+    ZGE::Game ZexGame;
+    ZexGame.Init ();
+    ZexGame.Loop ();
+    ZexGame.Finalize ();
 }
-
-#else
-
-int main ( int argc, char* argv[] )
-{
-    return 0;
-}
-#endif
 

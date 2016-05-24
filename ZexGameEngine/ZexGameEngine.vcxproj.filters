@@ -99,9 +99,6 @@
     <ClInclude Include="include\Render\ShaderObject.h">
       <Filter>头文件\Render</Filter>
     </ClInclude>
-    <ClInclude Include="include\Test\LightningTest.h">
-      <Filter>头文件\Test</Filter>
-    </ClInclude>
     <ClInclude Include="include\Util.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -201,6 +198,18 @@
     <ClInclude Include="include\Math\MathFunc.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\Core\Light.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\App\Game.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Render\RenderDeviceHAL.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\MathConst.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -251,10 +260,10 @@
     <ClCompile Include="src\Render\ShaderCode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\BufferGL.cpp">
-      <Filter>源文件\Core</Filter>
-    </ClCompile>
     <ClCompile Include="src\Render\ShaderProgram.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\Game.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

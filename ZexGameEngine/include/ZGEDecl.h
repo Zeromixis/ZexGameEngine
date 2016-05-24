@@ -1,5 +1,4 @@
-#ifndef _ZGEDECL_H_
-#define _ZGEDECL_H_
+#pragma once
 
 /*
     The Global Forward Declaration Of ZexGameEngine.
@@ -39,15 +38,10 @@ namespace ZGE
     class Vector;
     class VectorHelper;
 
-    template < typename T, size_t row, size_t col > 
-    class Matrix;
     template < typename T >
     class Matrix44;
 
-    template < typename T >
     class Quaternion;
 }
-
-#endif // !_ZGE_DECL_H_
 
 

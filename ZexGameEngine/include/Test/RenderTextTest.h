@@ -1,9 +1,12 @@
 #ifndef _TEST_RENDERTEXTTEST_H_
 #define _TEST_RENDERTEXTTEST_H_
 
+#include "ZGEDecl.h"
+
 #include "External/freetype/include/ft2build.h"
 #include FT_FREETYPE_H
 #include "App/Context.h"
+#include "Core/BufferGL.h"
 #include "Util.h"
 
 namespace ZGE

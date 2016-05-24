@@ -1,10 +1,10 @@
-#ifndef _MATH_MATHFUNC_H_
-#define _MATH_MATHFUNC_H_
+#pragma once
 
 #include "ZGEDecl.h"
 
 #include "Math/Vector.h"
 #include "Math/Matrix.h"
+#include "Math/MathConst.h"
 
 
 namespace ZGE
@@ -59,20 +59,6 @@ namespace ZGE
             return dot;
         }
 
-        template< typename T, size_t Row, size_t Col >
-        static Matrix< T, Col, Row >& Transpose ( const Matrix< T, Row, Col >& rhs )
-        {
-            Matrix< T, Col, Row > ret;
-            for ( size_t i = 0; i < ret.Row; ++i )
-            {
-                for ( size_t j = 0; j < ret.Col; ++j )
-                {
-                    ret ( i, j ) = rhs ( j, i );
-                }
-            }
-            return ret;
-        }
-
         template < typename T >
         static Matrix44< T > OrthoLH ( const T& width, const T& height, const T& zNearPlane, const T& zFarPlane )
         {
@@ -111,8 +97,46 @@ namespace ZGE
                     0, 0, -zNearPlane * q,  0
                     );
         }
+
+        template< typename T >
+        static decltype(auto) DegreeToRadian (const T &degree)
+        {
+            return degree * MathConst::PI / T (180);
+        }
+
+        template< typename T >
+        static decltype(auto) RadianToDegree (const T &radian)
+        {
+            return radian / MathConst::PI * T (180);
+        }
+
+        template< typename U, typename R >
+        static Quaternion FromAxisDegree (const Vector< U, 3 > &axis, const R &degree)
+        {
+            Quaternion quat;
+            return quat.FromAxisDegree (axis, degree);
+        }
+
+        template< typename U, typename R >
+        static Quaternion FromAxisRadian (const Vector< U, 3 > &axis, const R &radian)
+        {
+            Quaternion quat;
+            return quat.FromAxisRadian (axis, radian);
+        }
+
+        template< typename U >
+        static Quaternion FromEulerDegree (const Vector< U, 3 > &eulerDegree)
+        {
+            Quaternion quat;
+            return quat.FromEulerDegree (eulerDegree);
+        }
+
+        template< typename U >
+        static Quaternion FromEulerRadian (const Vector< U, 3 > &eulerRadian)
+        {
+            Quaternion quat;
+            return quat.FromEulerRadian (eulerRadian);
+        }
     };
 }
-
-#endif // !_MATH_MATHFUNC_H_
 

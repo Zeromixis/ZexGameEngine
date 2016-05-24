@@ -4,81 +4,81 @@ namespace ZGE
 {
     PShaderProgram ShaderProgram::Create ()
     {
-        PShaderProgram pProgram { new ShaderProgram () };
+        PShaderProgram pProgram{new ShaderProgram ()};
         return pProgram;
     }
 
     ShaderProgram::~ShaderProgram ()
     {
-        for ( auto &pCode : m_ShaderCodeList )
+        for (auto &pCode : m_ShaderCodeList)
         {
-            glDetachShader ( m_ProgramObject, pCode->m_ShaderObject );
+            glDetachShader (m_ProgramObject, pCode->m_ShaderObject);
         }
 
-        if ( m_ProgramObject != 0 )
+        if (m_ProgramObject != 0)
         {
-            glDeleteProgram ( m_ProgramObject );
+            glDeleteProgram (m_ProgramObject);
         }
     }
 
-    void ShaderProgram::AttachCode ( const PShaderCode &pCode )
+    void ShaderProgram::AttachCode (const PShaderCode &pCode)
     {
-        m_ShaderCodeList.insert ( pCode );
+        m_ShaderCodeList.insert (pCode);
     }
 
-    void ShaderProgram::DetachCode ( const PShaderCode &pCode )
+    void ShaderProgram::DetachCode (const PShaderCode &pCode)
     {
-        m_ShaderCodeList.erase ( pCode );
+        m_ShaderCodeList.erase (pCode);
     }
 
-    bool ShaderProgram::Link ( std::string &outErrorStr )
+    bool ShaderProgram::Link (std::string &outErrorStr)
     {
-        for ( auto &pCode : m_ShaderCodeList )
+        for (auto &pCode : m_ShaderCodeList)
         {
-            glAttachShader ( m_ProgramObject, pCode->m_ShaderObject );
+            glAttachShader (m_ProgramObject, pCode->m_ShaderObject);
         }
 
-        glLinkProgram ( m_ProgramObject );
+        glLinkProgram (m_ProgramObject);
 
         GLint isLinked = false;
-        glGetProgramiv ( m_ProgramObject, GL_LINK_STATUS, &isLinked );
-        if ( !isLinked )
+        glGetProgramiv (m_ProgramObject, GL_LINK_STATUS, &isLinked);
+        if (!isLinked)
         {
             std::cout << "Shader Program Link Failed!" << std::endl;
             GLsizei logSize = 0;
-            glGetProgramiv ( m_ProgramObject, GL_INFO_LOG_LENGTH, &logSize );
+            glGetProgramiv (m_ProgramObject, GL_INFO_LOG_LENGTH, &logSize);
 
-            std::vector< char > errorlog ( logSize );
-            glGetProgramInfoLog ( m_ProgramObject, logSize, &logSize, &errorlog[ 0 ] );
+            std::vector< char > errorlog (logSize);
+            glGetProgramInfoLog (m_ProgramObject, logSize, &logSize, &errorlog [0]);
 
-            outErrorStr.assign ( errorlog.begin (), errorlog.end () );
+            outErrorStr.assign (errorlog.begin (), errorlog.end ());
         }
         return isLinked;
     }
 
-    ZGE::I32 ShaderProgram::GetUniformLocation ( const std::string &uniformName )
+    ZGE::I32 ShaderProgram::GetUniformLocation (const std::string &uniformName)
     {
         I32 nowUsingProgram = 0;
-        glGetIntegerv ( GL_CURRENT_PROGRAM, &nowUsingProgram );
-        glUseProgram ( m_ProgramObject );
-        I32 loc = glGetUniformLocation ( m_ProgramObject, uniformName.c_str () );
-        glUseProgram ( nowUsingProgram );
+        glGetIntegerv (GL_CURRENT_PROGRAM, &nowUsingProgram);
+        glUseProgram (m_ProgramObject);
+        I32 loc = glGetUniformLocation (m_ProgramObject, uniformName.c_str ());
+        glUseProgram (nowUsingProgram);
         return loc;
     }
 
-    void ShaderProgram::Uniform1i ( const I32 &uniformLoc, const I32 &value )
+    void ShaderProgram::Uniform1i (const I32 &uniformLoc, const I32 &value)
     {
-        glUniform1i ( m_ProgramObject, value );
+        glUniform1i (m_ProgramObject, value);
     }
 
-    void ShaderProgram::UniformMatrix4fv ( const I32 &uniformLoc, const Float44 &mat )
+    void ShaderProgram::UniformMatrix4fv (const I32 &uniformLoc, const Float44 &mat)
     {
-        glUniformMatrix4fv ( uniformLoc, 1, false, &mat[ 0 ] );
+        glUniformMatrix4fv (uniformLoc, 1, false, &mat [0] [0]);
     }
 
-    void ShaderProgram::BindAttrLocation ( const U32 &index, const std::string &attrName )
+    void ShaderProgram::BindAttrLocation (const U32 &index, const std::string &attrName)
     {
-        glBindAttribLocation ( m_ProgramObject, index, attrName.c_str () );
+        glBindAttribLocation (m_ProgramObject, index, attrName.c_str ());
     }
 
     ShaderProgram::ShaderProgram ()

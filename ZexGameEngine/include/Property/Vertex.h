@@ -7,35 +7,19 @@
 
 namespace ZGE
 {
-    struct ControlPoint
-        : public Property
-    {
-        constexpr static U32 VERTEX_LINK_JOINT_MAX_NUM = 4;
-
-        ControlPoint ()
-        {
-            Position = Vector4f ( 0.0f, 0.0f, 0.0f, 1.0f );
-
-            JointIndexWeightPairList.reserve ( VERTEX_LINK_JOINT_MAX_NUM );
-        }
-
-        Vector4f Position;
-
-        std::vector< std::pair < U32, I32 > > JointIndexWeightPairList;
-    };
-
-    using PControlPoint = PropertyHandle< ControlPoint >/* PControlPoint*/;
-
     struct Vertex
-        : public Property
     {
         constexpr static U32 VERTEX_LINK_JOINT_MAX_NUM = 4;
 
         Vertex ()
         {
+            Position = Vector4f ( 0.0f, 0.0f, 0.0f, 1.0f );
             Color   = Vector4f ( 0.0f, 0.0f, 0.0f, 1.0f );
             Normal  = Vector4f ( 0.0f, 0.0f, 0.0f, 1.0f );
             UV      = Vector2f ( 0.0f, 0.0f );
+
+            JointIndexWeightPairList.reserve ( VERTEX_LINK_JOINT_MAX_NUM );
+
         }
 
         ~Vertex ()
@@ -43,16 +27,18 @@ namespace ZGE
             
         }
 
-        PControlPoint VertexControlPoint;
+        //PControlPoint VertexControlPoint;
+
+        Vector4f Position;
 
         Vector4f Color;         // RGBA
 
         Vector4f Normal;
 
         Vector2f UV;
-    };
 
-    typedef PropertyHandle< Vertex > PVertex;
+        std::vector< std::pair < U32, F32 > > JointIndexWeightPairList;
+    };
 }
 
 #endif

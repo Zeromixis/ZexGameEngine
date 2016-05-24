@@ -211,7 +211,7 @@ typedef EGLNativeWindowType  NativeWindowType;
 
 #if defined(_MSC_VER)
 	#pragma warning(disable: 4055) // Allow casting from a void* to a function pointer.
-	#define GLLOADER_HAS_DECLSPEC
+	//#define GLLOADER_HAS_DECLSPEC // We use static link now so not use the Deslspec
 #elif defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
 	#if !defined(__GNUC__) && !defined(GLLOADER_HAS_DECLSPEC)
 		#define GLLOADER_HAS_DECLSPEC
