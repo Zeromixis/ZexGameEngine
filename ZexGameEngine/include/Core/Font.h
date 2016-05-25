@@ -1,9 +1,11 @@
-#ifndef _CORE_FONT_H_
-#define _CORE_FONT_H_
+#pragma once
+
+#include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "External/freetype/include/ft2build.h"
 #include FT_FREETYPE_H
-#include "Core/Texture.h"
+#include "Property/Texture.h"
 #include "Util.h"
 #include "App/WindowWin.h"
 #include "App/Context.h"
@@ -62,12 +64,13 @@ namespace ZGE
 			FT_Done_Face ( m_FTFace );
 		}
 
-		TextureProperty TextTextureOut ( const std::wstring &text )
+		PTexture TextTextureOut ( const std::wstring &text )
 		{
 			
 		}
 
 		I32 CharSize;
+        std::wstring Path;
 
 	private:
 		FT_Face m_FTFace;
@@ -77,4 +80,3 @@ namespace ZGE
 
 }
 
-#endif

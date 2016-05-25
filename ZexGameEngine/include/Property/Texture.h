@@ -1,5 +1,7 @@
-#ifndef _CORE_TEXTURE_H_
-#define _CORE_TEXTURE_H_
+#pragma once
+
+#include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "Core/Asset/Property.h"
 
@@ -38,8 +40,5 @@ namespace ZGE
 		U8 *TexData;
 	};
 
-	typedef PropertyHandle< Texture > TextureProperty;
+	typedef PropertyHandle< Texture > PTexture;
 }
-
-
-#endif

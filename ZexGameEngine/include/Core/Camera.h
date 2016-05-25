@@ -1,5 +1,4 @@
-#ifndef _CORE_CAMERA_H_
-#define _CORE_CAMERA_H_
+#pragma once
 
 #include "ZGEDecl.h"
 #include "ZGEDef.h"
@@ -94,6 +93,3 @@ namespace ZGE
         F32 m_FarPlane;
     };
 }
-
-
-#endif  //_CORE_CAMERA_H_

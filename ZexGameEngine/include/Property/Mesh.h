@@ -1,7 +1,7 @@
-#ifndef _CORE_PROPERTY_MESH_H_
-#define _CORE_PROPERTY_MESH_H_
+#pragma once
 
 #include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "Core/Asset/Property.h"
 #include "Property/Vertex.h"
@@ -30,4 +30,3 @@ namespace ZGE
     typedef PropertyHandle< Mesh > PMesh;
 }
 
-#endif

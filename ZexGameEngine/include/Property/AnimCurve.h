@@ -1,5 +1,4 @@
-#ifndef _PROPERTY_ANIMCURVE_H_
-#define _PROPERTY_ANIMCURVE_H_
+#pragma once
 
 #include "ZGEDecl.h"
 
@@ -31,6 +30,4 @@ namespace ZGE
 
     typedef std::shared_ptr< AnimCurve > PAnimCurve;
 }
-
-#endif // !_PROPERTY_ANIMCURVE_H_
 

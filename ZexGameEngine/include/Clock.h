@@ -1,5 +1,4 @@
-#ifndef _CLOCK_H_
-#define _CLOCK_H_
+#pragma once
 
 #include "ZGEDecl.h"
 
@@ -23,5 +22,4 @@ namespace ZGE
     };
 }
 
-#endif
 

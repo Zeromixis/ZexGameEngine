@@ -1,7 +1,7 @@
-#ifndef _PROPERTY_ANIMLAYER_H_
-#define _PROPERTY_ANIMLAYER_H_
+#pragma once
 
 #include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "Core/Asset/Property.h"
 #include "AnimCurves.h"
@@ -23,5 +23,3 @@ namespace ZGE
 
     typedef std::shared_ptr< AnimLayer > PAnimLayer;
 }
-
-#endif //!_PROPERTY_ANIMLAYER_H_

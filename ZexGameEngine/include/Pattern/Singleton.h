@@ -1,5 +1,4 @@
-#ifndef _PATTERN_SINGLETON_H_
-#define _PATTERN_SINGLETON_H_
+#pragma once
 
 /******************************************************************************************************************************************/
 /* Thanks to Technical reference which coming from																						  */
@@ -8,8 +7,8 @@
 
 // I think it's too complicated...
 
-#include <mutex>
-#include <atomic>
+#include "ZGEDecl.h"
+
 #include "External/boost/noncopyable.hpp"
 
 namespace ZGE
@@ -32,11 +31,6 @@ namespace ZGE
 			}
             return m_Instance;
         }
-
-//         virtual void Init ()        = 0;
-// 
-//         virtual void Finalize ()    = 0;
-
     protected:
         static void Destroy ()
         {
@@ -70,5 +64,4 @@ namespace ZGE
 	std::mutex Singleton< T >::m;
 }
 
-#endif // _PATTERN_SINGLETON_H_
 

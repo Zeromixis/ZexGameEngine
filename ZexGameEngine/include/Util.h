@@ -1,11 +1,6 @@
-#ifndef _UTIL_H_
-#define _UTIL_H_
+#pragma once
 
-#include <string>
-#include <codecvt>
-#include <iostream>
-#include <fstream>
-#include <sstream>
+#include "ZGEDecl.h"
 
 namespace ZGE
 {
@@ -34,4 +29,3 @@ namespace ZGE
     }
     
 }
-#endif

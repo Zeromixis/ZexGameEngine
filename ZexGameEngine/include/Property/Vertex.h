@@ -2,6 +2,7 @@
 #define _CORE_PROPERTY_VERTEX_H_
 
 #include "ZGEDecl.h"
+
 #include "Math/Vector.h"
 #include "Core/Asset/Property.h"
 
@@ -13,18 +14,17 @@ namespace ZGE
 
         Vertex ()
         {
-            Position = Vector4f ( 0.0f, 0.0f, 0.0f, 1.0f );
-            Color   = Vector4f ( 0.0f, 0.0f, 0.0f, 1.0f );
-            Normal  = Vector4f ( 0.0f, 0.0f, 0.0f, 1.0f );
-            UV      = Vector2f ( 0.0f, 0.0f );
+            Position    = Vector4f (0.0f, 0.0f, 0.0f, 1.0f);
+            Color       = Vector4f (0.0f, 0.0f, 0.0f, 1.0f);
+            Normal      = Vector4f (0.0f, 0.0f, 0.0f, 1.0f);
+            UV          = Vector2f (0.0f, 0.0f);
 
-            JointIndexWeightPairList.reserve ( VERTEX_LINK_JOINT_MAX_NUM );
-
+            JointIndexWeightPairList.reserve (VERTEX_LINK_JOINT_MAX_NUM);
         }
 
         ~Vertex ()
         {
-            
+
         }
 
         //PControlPoint VertexControlPoint;

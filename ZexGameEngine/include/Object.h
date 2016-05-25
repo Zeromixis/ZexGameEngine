@@ -1,5 +1,4 @@
-#ifndef _PATTERN_UUIDOBJECT_H_
-#define _PATTERN_UUIDOBJECT_H_
+#pragma once
 
 #include "ZGEDecl.h"
 
@@ -72,5 +71,3 @@ namespace ZGE
 		boost::uuids::uuid m_Uuid;
 	};
 }
-
-#endif

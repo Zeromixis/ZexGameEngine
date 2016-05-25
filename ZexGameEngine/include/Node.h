@@ -1,7 +1,7 @@
-#ifndef _NODE_H_
-#define _NODE_H_
+#pragma once
 
-#include <set>
+#include "ZGEDecl.h"
+
 #include "Math/Vector.h"
 
 namespace ZGE
@@ -126,4 +126,4 @@ namespace ZGE
     typedef NodeBase< Vector2f > Node2D;
     typedef NodeBase< Vector3f > Node3D;
 }
-#endif // _NODE_H_
+

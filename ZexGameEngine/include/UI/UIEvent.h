@@ -1,5 +1,4 @@
-#ifndef _UI_UIEVENT_H_
-#define _UI_UIEVENT_H_
+#pragma once
 
 #include "ZGEDecl.h"
 
@@ -46,5 +45,3 @@ namespace ZGE
 		EventType EType;
 	};
 }
-
-#endif // _UI_UIEVENT_H_

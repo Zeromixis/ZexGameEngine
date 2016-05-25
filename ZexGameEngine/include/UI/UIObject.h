@@ -1,7 +1,7 @@
-#ifndef _UI_UIOBJECT_H_
-#define _UI_UIOBJECT_H_
+#pragma once
 
-#include <map>
+#include "ZGEDecl.h"
+
 #include "External/boost/uuid/uuid.hpp"
 #include "External/boost/uuid/random_generator.hpp"
 
@@ -53,5 +53,3 @@ namespace ZGE
 
 	std::map< boost::uuids::uuid, UIObject * > UIObject::ObjectMap;
 }
-
-#endif // _UI_UIOBJECT_H_

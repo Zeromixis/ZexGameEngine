@@ -1,7 +1,7 @@
-#ifndef _CORE_CAMERACONTROLLER_H_
-#define _CORE_CAMERACONTROLLER_H_
+#pragma once
 
 #include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "Core/Camera.h"
 #include "Input/InputDevice.h"
@@ -72,4 +72,3 @@ namespace ZGE
     };
 }
 
-#endif // !_CORE_CAMERACONTROLLER_H_

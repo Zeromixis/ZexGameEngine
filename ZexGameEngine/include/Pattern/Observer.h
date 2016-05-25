@@ -1,7 +1,6 @@
-#ifndef _PATTERN_OBSERVER_H_
-#define _PATTERN_OBSERVER_H_
+#pragma once
 
-#include <set>
+#include "ZGEDecl.h"
 
 namespace ZGE
 {
@@ -41,5 +40,3 @@ namespace ZGE
 		virtual void OnNotify ( Subject< typename Args... > &subject, Args... args) = 0;
 	};
 }
-
-#endif // _PATTERN_OBSERVER_H_

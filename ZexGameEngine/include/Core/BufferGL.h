@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "External/boost/noncopyable.hpp"
 

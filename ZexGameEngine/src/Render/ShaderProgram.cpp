@@ -40,9 +40,9 @@ namespace ZGE
 
         glLinkProgram (m_ProgramObject);
 
-        GLint isLinked = false;
+        GLint isLinked = GL_FALSE;
         glGetProgramiv (m_ProgramObject, GL_LINK_STATUS, &isLinked);
-        if (!isLinked)
+        if (isLinked == GL_FALSE)
         {
             std::cout << "Shader Program Link Failed!" << std::endl;
             GLsizei logSize = 0;
@@ -53,7 +53,7 @@ namespace ZGE
 
             outErrorStr.assign (errorlog.begin (), errorlog.end ());
         }
-        return isLinked;
+        return isLinked == GL_TRUE;
     }
 
     ZGE::I32 ShaderProgram::GetUniformLocation (const std::string &uniformName)

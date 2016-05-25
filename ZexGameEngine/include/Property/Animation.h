@@ -1,7 +1,7 @@
-#ifndef _PROPERTY_ANIMATION_H_
-#define _PROPERTY_ANIMATION_H_
+#pragma once
 
 #include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "Core/Asset/Property.h"
 #include "Math/Vector.h"
@@ -45,6 +45,4 @@ namespace ZGE
 
     typedef PropertyHandle< AnimNode > PAnimNode;
 }
-
-#endif // !_PROPERTY_ANIMATION_H_
 
