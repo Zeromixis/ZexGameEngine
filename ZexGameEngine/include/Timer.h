@@ -1,7 +1,7 @@
-#ifndef _TIMER_H_
-#define _TIMER_H_
+#pragma once
 
 #include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 namespace ZGE
 {
@@ -24,6 +24,3 @@ namespace ZGE
         bool m_IsStart;
     };
 }
-
-#endif
-

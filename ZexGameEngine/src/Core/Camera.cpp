@@ -45,7 +45,7 @@ namespace ZGE
 
 		//////////////////////////////////////////////////////////////////////////
 
-		m_InvViewMat = Inverse ( m_ViewMat );
+		m_InvViewMat = MathFunc::MatrixInverse ( m_ViewMat );
 	}
 
 	void Camera::SetProj ( F32 fov, F32 aspect, F32 nearPlane, F32 farPlane )

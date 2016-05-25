@@ -209,7 +209,7 @@ namespace ZGE
     {
 
         GLuint mvpMatrixLoc = glGetUniformLocation ( m_Shader.Program (), "mvpMatrix" );
-        auto modelMatrix = Float44::Identity () * Float44::CreateScaleMatrix (10.0f);
+        auto modelMatrix = Float44::Identity () * MathFunc::CreateScaleMatrix (10.0f);
         auto viewMatrix = m_CameraController->GetCamera ()->ViewMatrix ();
         auto projMatrix = m_CameraController->GetCamera ()->ProjMatrix ();
         auto mvpMatrix = modelMatrix * viewMatrix * projMatrix;

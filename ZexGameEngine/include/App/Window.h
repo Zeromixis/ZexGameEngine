@@ -1,7 +1,7 @@
-#ifndef _WINDOW_H_
-#define _WINDOW_H_
+#pragma once
 
 #include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 namespace ZGE
 {
@@ -64,6 +64,3 @@ namespace ZGE
         bool m_IsActive;
     };
 }
-
-
-#endif

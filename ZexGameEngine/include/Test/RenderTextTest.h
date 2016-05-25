@@ -1,7 +1,7 @@
-#ifndef _TEST_RENDERTEXTTEST_H_
-#define _TEST_RENDERTEXTTEST_H_
+#pragma once
 
 #include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "External/freetype/include/ft2build.h"
 #include FT_FREETYPE_H
@@ -70,6 +70,3 @@ namespace ZGE
 		
     };
 }
-
-
-#endif

@@ -1,7 +1,7 @@
-#ifndef _PROPERTY_JOINT_H_
-#define _PROPERTY_JOINT_H_
+#pragma once
 
 #include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "Math/Matrix.h"
 #include "Math/Vector.h"
@@ -20,5 +20,3 @@ namespace ZGE
         Float44 Joint2WorldBindPoseMatrix;
     };
 }
-
-#endif // !_PROPERTY_JOINT_H_

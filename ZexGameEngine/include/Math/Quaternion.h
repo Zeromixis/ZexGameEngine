@@ -1,7 +1,7 @@
-#ifndef _MATH_QUATERNION_H_
-#define _MATH_QUATERNION_H_
+#pragma once
 
 #include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "External/boost/operators.hpp"
 
@@ -56,7 +56,7 @@ namespace ZGE
         }
 
         template< typename U >
-        explicit constexpr Quaternion (const Vector< U, 4 > &vec)
+        explicit Quaternion (const Vector< U, 4 > &vec)
             : m_Quat (vec [0], vec [1], vec [2], 0.0f)
         {
 
@@ -67,7 +67,7 @@ namespace ZGE
             return m_Quat [0];
         }
 
-        constexpr const F32 & x () const
+        const F32 & x () const
         {
             return m_Quat [0];
         }
@@ -77,7 +77,7 @@ namespace ZGE
             return m_Quat [1];
         }
 
-        constexpr const F32 & y () const
+        const F32 & y () const
         {
             return m_Quat [1];
         }
@@ -87,7 +87,7 @@ namespace ZGE
             return m_Quat [2];
         }
 
-        constexpr const F32 & z () const
+        const F32 & z () const
         {
             return m_Quat [2];
         }
@@ -97,7 +97,7 @@ namespace ZGE
             return m_Quat [3];
         }
 
-        constexpr const F32 & w () const
+        const F32 & w () const
         {
             return m_Quat [3];
         }
@@ -233,6 +233,7 @@ namespace ZGE
             quat.Normalize ();
             radian = 2.0f * std::acos (w ());
             auto s = std::sqrt (1 - w () * w ());
+            // If closed to zero////////
             if (s < 0.000001f)
             {
                 axis = quat.m_Quat;
@@ -432,5 +433,3 @@ namespace ZGE
         return retVec;
     }
 }
-
-#endif // !_MATH_QUATERNION_H_

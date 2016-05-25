@@ -1,5 +1,4 @@
-#ifndef _MATH_VECTOR_H_
-#define _MATH_VECTOR_H_
+#pragma once
 
 #include "ZGEDecl.h"
 
@@ -9,16 +8,6 @@
 
 namespace ZGE
 {
-    typedef Vector<I32, 2> Vector2i;
-    typedef Vector<F32, 2> Vector2f;
-    typedef Vector<U32, 2> Vector2u;
-    typedef Vector<I32, 3> Vector3i;
-    typedef Vector<F32, 3> Vector3f;
-    typedef Vector<U32, 3> Vector3u;
-    typedef Vector<I32, 4> Vector4i;
-    typedef Vector<F32, 4> Vector4f;
-    typedef Vector<U32, 4> Vector4u;
-
     template< typename T, U32 N >
     class Vector
         :
@@ -146,7 +135,7 @@ namespace ZGE
             return m_VecArray [0];
         }
 
-        constexpr const T & x () const
+        const T & x () const
         {
             ZGE_STATIC_ASSART (ElemNum >= 1);
             return m_VecArray [0];
@@ -159,7 +148,7 @@ namespace ZGE
             return m_VecArray [1];
         }
 
-        constexpr const T & y () const
+        const T & y () const
         {
             ZGE_STATIC_ASSART (ElemNum >= 2);
             return m_VecArray [1];
@@ -171,7 +160,7 @@ namespace ZGE
             return m_VecArray [2];
         }
 
-        constexpr const T & z () const
+        const T & z () const
         {
             ZGE_STATIC_ASSART (ElemNum >= 3);
             return m_VecArray [2];
@@ -183,7 +172,7 @@ namespace ZGE
             return m_VecArray [3];
         }
 
-        constexpr const T & w () const
+        const T & w () const
         {
             ZGE_STATIC_ASSART (ElemNum >= 4);
             return m_VecArray [3];
@@ -215,7 +204,7 @@ namespace ZGE
             return m_VecArray [index];
         }
 
-        constexpr const T & operator [] (const size_t &index) const
+        const T & operator [] (const size_t &index) const
         {
             assert (index < ElemNum);
             return m_VecArray [index];
@@ -438,5 +427,3 @@ namespace ZGE
         }
     };
 }
-
-#endif // !_MATH_VECTOR_H_

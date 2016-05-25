@@ -2,6 +2,9 @@
 #define _CORE_CAMERA_H_
 
 #include "ZGEDecl.h"
+#include "ZGEDef.h"
+
+#include "Object.h"
 
 #include "Math/Vector.h"
 #include "Math/Matrix.h"
@@ -24,37 +27,37 @@ namespace ZGE
              
         virtual ~Camera ();
 
-        const Vector3f& RightVector () const
+        const Vector3f & RightVector () const
         {
-            return reinterpret_cast< const Vector3f& > ( m_InvViewMat.RowVector ( 0 ) );
+            return reinterpret_cast< const Vector3f & > ( m_InvViewMat.RowVector ( 0 ) );
         }
 
-        const Vector3f& UpVector () const
+        const Vector3f & UpVector () const
         {
-            return reinterpret_cast< const Vector3f& >( m_InvViewMat.RowVector ( 1 ) );
+            return reinterpret_cast< const Vector3f & >( m_InvViewMat.RowVector ( 1 ) );
         }
 
-        const Vector3f& ForwardVector () const
+        const Vector3f & ForwardVector () const
         {
-            return reinterpret_cast< const Vector3f& >( m_InvViewMat.RowVector ( 2 ) );
+            return reinterpret_cast< const Vector3f & >( m_InvViewMat.RowVector ( 2 ) );
         }
 
-        const Float44& ViewMatrix () const
+        const Float44 & ViewMatrix () const
         {
             return m_ViewMat;
         }
 
-        const Float44& ProjMatrix () const
+        const Float44 & ProjMatrix () const
         {
             return m_ProjMat;
         }
 
-        const Vector3f& EyePos () const
+        const Vector3f & EyePos () const
         {
             return m_EyePos;
         }
 
-        const Vector3f& LookAt () const
+        const Vector3f & LookAt () const
         {
             return m_LookAt;
         }

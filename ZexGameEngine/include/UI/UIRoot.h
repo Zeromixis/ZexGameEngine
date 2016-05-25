@@ -1,5 +1,7 @@
-#ifndef _UI_UIROOT_H_
-#define _UI_UIROOT_H_
+#pragma once
+
+#include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "UIComponent.h"
 #include "Pattern/Singleton.h"
@@ -32,6 +34,3 @@ namespace ZGE
 	
 
 }
-
-
-#endif

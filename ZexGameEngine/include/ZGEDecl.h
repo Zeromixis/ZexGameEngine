@@ -23,9 +23,6 @@
 #include <assert.h>
 
 #include "glloader/glloader.h"
-#include "ZGEDef.h"
-#include "Object.h"
-#include "Util.h"
 
 namespace ZGE
 {
@@ -36,10 +33,14 @@ namespace ZGE
     
     template< typename T, size_t N >
     class Vector;
+
     class VectorHelper;
 
-    template < typename T >
+    template< typename T >
     class Matrix44;
+
+    template< typename T >
+    class Matrix44ColProxy;
 
     class Quaternion;
 }

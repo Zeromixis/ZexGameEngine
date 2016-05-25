@@ -1,9 +1,10 @@
-#ifndef _CORE_ASSET_PROPERTY_H_
-#define _CORE_ASSET_PROPERTY_H_
+#pragma once
 
 #include "ZGEDecl.h"
 
 #include "External/boost/core/noncopyable.hpp"
+
+#include "Object.h"
 
 namespace ZGE
 {
@@ -18,12 +19,6 @@ namespace ZGE
 		: public Object
 		, private boost::noncopyable
 	{
-//         template < class T >
-//         static PropertyHandle< T > CreateProperty ()
-//         {
-//             return std::make_shared< T > ();
-//         }
-
         template < typename THandle >
         static PropertyHandle< typename THandle::element_type > CreateProperty ()
         {
@@ -58,5 +53,3 @@ namespace ZGE
 		}
 	}
 }
-
-#endif

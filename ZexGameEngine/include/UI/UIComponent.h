@@ -1,5 +1,7 @@
-#ifndef _UI_UICOMPONENT_H_
-#define _UI_UICOMPONENT_H_
+#pragma once
+
+#include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "UIObject.h"
 #include "Node.h"
@@ -145,5 +147,3 @@ namespace ZGE
 
 	};
 }
-
-#endif // _UI_UICOMPONENT_H_
