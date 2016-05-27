@@ -1,5 +1,4 @@
-#ifndef _RENDER_SHADERCODE_H_
-#define _RENDER_SHADERCODE_H_
+#pragma once
 
 #include "ZGEDecl.h"
 
@@ -42,5 +41,3 @@ namespace ZGE
     };
 }
 
-
-#endif // !_RENDER_SHADERCODE_H_

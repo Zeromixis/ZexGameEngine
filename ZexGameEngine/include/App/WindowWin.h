@@ -1,5 +1,4 @@
-#ifndef _WINDOW_WIN_H
-#define _WINDOW_WIN_H
+#pragma once
 
 #ifdef _WIN32
 
@@ -49,7 +48,5 @@ namespace ZGE
         RawInputEvent m_RawInputEvent;
     };
 }
-
-#endif
 
 #endif

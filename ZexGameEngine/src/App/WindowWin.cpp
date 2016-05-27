@@ -10,77 +10,77 @@
 
 namespace ZGE
 {
-    LRESULT CALLBACK WndProc ( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
+    LRESULT CALLBACK WndProc (HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
         Window *window = Context::GetInstance ()->GetWindowPtr ().get ();
-        WindowWin *windowWin = reinterpret_cast< WindowWin* >( window );
+        WindowWin *windowWin = reinterpret_cast<WindowWin*>(window);
 
         LRESULT result = 0L;
-        if ( nullptr != windowWin )
+        if (nullptr != windowWin)
         {
-            result = windowWin->MsgProc ( hwnd, msg, wParam, lParam );
+            result = windowWin->MsgProc (hwnd, msg, wParam, lParam);
         }
         else
         {
-            result = ::DefWindowProc ( hwnd, msg, wParam, lParam );
+            result = ::DefWindowProc (hwnd, msg, wParam, lParam);
         }
         return result;
     }
 
-    WindowWin::WindowWin ( const std::wstring& name ) : Window ( name )
+    WindowWin::WindowWin (const std::wstring& name) : Window (name)
     {
         // Open the console for debug info output
         OpenConsole ();
 
-        m_hInstance = GetModuleHandle ( nullptr );
+        m_hInstance = GetModuleHandle (nullptr);
         LPCWSTR szClassName = L"ZexGameEngine";
         LPCWSTR windowName = name.c_str ();
         HWND hwnd;
 
         WNDCLASSEXW wc;
-        wc.cbSize           = sizeof( wc );
-        wc.style            = CS_HREDRAW | CS_VREDRAW;
-        wc.lpfnWndProc      = WndProc;
-        wc.cbClsExtra       = 0;
-        wc.cbWndExtra       = sizeof ( this );
-        wc.hInstance        = m_hInstance;
-        wc.hIcon            = nullptr;
-        wc.hCursor          = LoadCursor ( nullptr, IDC_ARROW );
-        wc.hbrBackground    = static_cast< HBRUSH >( ::GetStockObject ( BLACK_BRUSH ) );
-        wc.lpszMenuName     = nullptr;
-        wc.lpszClassName    = szClassName;
-        wc.hIconSm          = nullptr;
+        wc.cbSize = sizeof (wc);
+        wc.style = CS_HREDRAW | CS_VREDRAW;
+        wc.lpfnWndProc = WndProc;
+        wc.cbClsExtra = 0;
+        wc.cbWndExtra = sizeof (this);
+        wc.hInstance = m_hInstance;
+        wc.hIcon = nullptr;
+        wc.hCursor = LoadCursor (nullptr, IDC_ARROW);
+        wc.hbrBackground = static_cast<HBRUSH>(::GetStockObject (BLACK_BRUSH));
+        wc.lpszMenuName = nullptr;
+        wc.lpszClassName = szClassName;
+        wc.hIconSm = nullptr;
 
-        RegisterClassExW ( &wc );
+        RegisterClassExW (&wc);
 
-        hwnd = CreateWindowW ( L"ZexGameEngine", name.c_str(), 
+        hwnd = CreateWindowW (L"ZexGameEngine", name.c_str (),
             WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
             CW_USEDEFAULT,
             nullptr,
             nullptr,
             m_hInstance,
             nullptr
-            );
+        );
 
         this->m_Hwnd = hwnd;
 
         // Create temp window first
         static PIXELFORMATDESCRIPTOR pfd;
 
-        HDC hDC = ::GetDC ( m_Hwnd );
+        HDC hDC = ::GetDC (m_Hwnd);
 
-        int pixelFormat = ::ChoosePixelFormat ( hDC, &pfd );
-        ::SetPixelFormat ( hDC, 1, &pfd );
-        HGLRC hRC = ::wglCreateContext ( hDC );
-        ::wglMakeCurrent ( hDC, hRC );
+        int pixelFormat = ::ChoosePixelFormat (hDC, &pfd);
+        ::SetPixelFormat (hDC, 1, &pfd);
+        HGLRC hRC = ::wglCreateContext (hDC);
+        ::wglMakeCurrent (hDC, hRC);
 
         // Before function glloader_init be called, the opengl context must be created before.
         glloader_init ();
 
-        
+
         int nPixCount = 0;
-        int searchResult[ 200 ] = { 0 };
-        int pixAttribs[] =
+        int searchResult [200] = {0};
+        int pixAttribs [] =
         {
             WGL_SUPPORT_OPENGL_ARB, GL_TRUE,
             WGL_DRAW_TO_WINDOW_ARB, GL_TRUE,
@@ -94,20 +94,20 @@ namespace ZGE
             0
         };
 
-        ::wglChoosePixelFormatARB ( hDC, pixAttribs, nullptr, 200, searchResult, ( UINT * )( &nPixCount ) );
+        ::wglChoosePixelFormatARB (hDC, pixAttribs, nullptr, 200, searchResult, (UINT *)(&nPixCount));
         int majorVer = 0, minorVer = 0;
-        glGetIntegerv ( GL_MAJOR_VERSION, &majorVer );
-        glGetIntegerv ( GL_MINOR_VERSION, &minorVer );
+        glGetIntegerv (GL_MAJOR_VERSION, &majorVer);
+        glGetIntegerv (GL_MINOR_VERSION, &minorVer);
 
         //Recreate the window
 
-        wglMakeCurrent ( hDC, nullptr );
-        wglDeleteContext ( hRC );
-        ::ReleaseDC ( m_Hwnd, hDC );
-        ::DestroyWindow ( hwnd );
+        wglMakeCurrent (hDC, nullptr);
+        wglDeleteContext (hRC);
+        ::ReleaseDC (m_Hwnd, hDC);
+        ::DestroyWindow (hwnd);
 
-        hwnd = CreateWindowW 
-        ( 
+        hwnd = CreateWindowW
+        (
             L"ZexGameEngine", name.c_str (),
             WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
             CW_USEDEFAULT,
@@ -119,15 +119,15 @@ namespace ZGE
 
         this->m_Hwnd = hwnd;
 
-        ::ShowWindow ( hwnd, 1 );
-        ::UpdateWindow ( hwnd );
-        ::SetFocus ( hwnd );
+        ::ShowWindow (hwnd, 1);
+        ::UpdateWindow (hwnd);
+        ::SetFocus (hwnd);
 
-        hDC = ::GetDC ( this->m_Hwnd );
+        hDC = ::GetDC (this->m_Hwnd);
         this->m_Hdc = hDC;
 
-        ::SetPixelFormat ( hDC, searchResult[ 0 ], &pfd );
-        const int attr[] = 
+        ::SetPixelFormat (hDC, searchResult [0], &pfd);
+        const int attr [] =
         {
             WGL_CONTEXT_MAJOR_VERSION_ARB, majorVer,
             WGL_CONTEXT_MINOR_VERSION_ARB, minorVer,
@@ -135,22 +135,22 @@ namespace ZGE
             WGL_CONTEXT_PROFILE_MASK_ARB,  WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB,
             0
         };
-        
-        hRC = wglCreateContextAttribsARB ( hDC, nullptr, attr );
 
-        wglMakeCurrent ( hDC, hRC );
+        hRC = wglCreateContextAttribsARB (hDC, nullptr, attr);
+
+        wglMakeCurrent (hDC, hRC);
 
         // Re-Init the glloader
         glloader_init ();
 
-		// Disable vsync
-		wglSwapIntervalEXT ( 0 );
+        // Disable vsync
+        wglSwapIntervalEXT (0);
 
         // Set Window Property
         ::RECT windowRect;
         ::RECT clientRect;
-        ::GetWindowRect ( hwnd, &windowRect );
-        ::GetClientRect ( hwnd, &clientRect );
+        ::GetWindowRect (hwnd, &windowRect);
+        ::GetClientRect (hwnd, &clientRect);
 
         m_Left = windowRect.left;
         m_Top = windowRect.top;
@@ -158,24 +158,24 @@ namespace ZGE
         m_Height = clientRect.bottom;
     }
 
-    LRESULT WindowWin::MsgProc ( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
+    LRESULT WindowWin::MsgProc (HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
-        switch ( msg )
+        switch (msg)
         {
         case WM_PAINT:
-            DefWindowProc ( hwnd, msg, wParam, lParam );
+            DefWindowProc (hwnd, msg, wParam, lParam);
             break;
         case WM_CLOSE:
-            DestroyWindow ( hwnd );
+            DestroyWindow (hwnd);
             break;
         case WM_DESTROY:
-            PostQuitMessage ( 0 );
+            PostQuitMessage (0);
             break;
         case WM_SIZE:
-            if ( SIZE_MAXHIDE != wParam && SIZE_MINIMIZED != wParam )
+            if (SIZE_MAXHIDE != wParam && SIZE_MINIMIZED != wParam)
             {
                 this->m_IsActive = true;
-                this->OnSize ( LOWORD ( lParam ), HIWORD ( lParam ) );
+                this->OnSize (LOWORD (lParam), HIWORD (lParam));
             }
             else
             {
@@ -184,10 +184,10 @@ namespace ZGE
             }
             break;
         case WM_INPUT:
-            this->OnRawInput ()( *this, reinterpret_cast< HRAWINPUT >( lParam ) );
+            this->OnRawInput ()(*this, reinterpret_cast<HRAWINPUT>(lParam));
             break;
         default:
-            return DefWindowProc ( hwnd, msg, wParam, lParam );
+            return DefWindowProc (hwnd, msg, wParam, lParam);
         }
         return 0;
     }
@@ -205,36 +205,36 @@ namespace ZGE
         AllocConsole ();
 
         // Set the screen buffer to be big enough to let us scroll text
-        GetConsoleScreenBufferInfo ( GetStdHandle ( STD_OUTPUT_HANDLE ), &conInfo );
+        GetConsoleScreenBufferInfo (GetStdHandle (STD_OUTPUT_HANDLE), &conInfo);
         conInfo.dwSize.Y = MAX_CONSOLE_LINES;
-        SetConsoleScreenBufferSize ( GetStdHandle ( STD_OUTPUT_HANDLE ), conInfo.dwSize );
+        SetConsoleScreenBufferSize (GetStdHandle (STD_OUTPUT_HANDLE), conInfo.dwSize);
 
         // Redirect unbuffered STDOUT to the console
-        lStdHandle = ( long )GetStdHandle ( STD_OUTPUT_HANDLE );
+        lStdHandle = (long)GetStdHandle (STD_OUTPUT_HANDLE);
 
         // Convert the HANDLE to C FILE pointer.
-        hConHandle = _open_osfhandle ( lStdHandle, _O_TEXT );
-        fp = _fdopen ( hConHandle, "w" );
+        hConHandle = _open_osfhandle (lStdHandle, _O_TEXT);
+        fp = _fdopen (hConHandle, "w");
 
         // Redirect
         *stdout = *fp;
 
         // Do not use the buffer
-        setvbuf ( stdout, nullptr, _IONBF, 0 );
+        setvbuf (stdout, nullptr, _IONBF, 0);
 
         // Redirect unbuffered STDIN to the console
-        lStdHandle = ( long )GetStdHandle ( STD_INPUT_HANDLE );
-        hConHandle = _open_osfhandle ( lStdHandle, _O_TEXT );
-        fp = _fdopen ( hConHandle, "r" );
+        lStdHandle = (long)GetStdHandle (STD_INPUT_HANDLE);
+        hConHandle = _open_osfhandle (lStdHandle, _O_TEXT);
+        fp = _fdopen (hConHandle, "r");
         *stdin = *fp;
-        setvbuf ( stdin, nullptr, _IONBF, 0 );
+        setvbuf (stdin, nullptr, _IONBF, 0);
 
         // Redirect unbuffered STDERR to the console
-        lStdHandle = ( long )GetStdHandle ( STD_ERROR_HANDLE );
-        hConHandle = _open_osfhandle ( lStdHandle, _O_TEXT );
-        fp = _fdopen ( hConHandle, "w" );
+        lStdHandle = (long)GetStdHandle (STD_ERROR_HANDLE);
+        hConHandle = _open_osfhandle (lStdHandle, _O_TEXT);
+        fp = _fdopen (hConHandle, "w");
         *stderr = *fp;
-        setvbuf ( stderr , nullptr, _IONBF, 0 );
+        setvbuf (stderr, nullptr, _IONBF, 0);
 
         // Make cout, wcout, cin, wcin, wcerr, cerr, wclog and clog
         // point to console as well
@@ -243,14 +243,14 @@ namespace ZGE
         m_IsShowCmd = true;
     }
 
-    void WindowWin::OnSize ( U32 width, U32 height )
+    void WindowWin::OnSize (U32 width, U32 height)
     {
-        glViewport ( 0, 0, width, height );
+        glViewport (0, 0, width, height);
     }
 
     void WindowWin::SwapBuffer ()
     {
-        SwapBuffers ( m_Hdc );
+        SwapBuffers (m_Hdc);
     }
 
 }

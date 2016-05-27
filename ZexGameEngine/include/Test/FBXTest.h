@@ -1,8 +1,11 @@
-#ifndef _TEST_FBXTEST_H_
-#define _TEST_FBXTEST_H_
+#pragma once
+
+#include "ZGEDecl.h"
+#include "ZGEDef.h"
 
 #include "Property/Mesh.h"
 #include "Render/ShaderObject.h"
+#include "Render/ShaderProgram.h"
 #include "Core/Camera.h"
 #include "Core/CameraController.h"
 #include "Core/BufferGL.h"
@@ -27,6 +30,8 @@ namespace ZGE
 
         ShaderObject m_Shader;
 
+        PShaderProgram m_NewShader;
+
         CameraController *m_CameraController;
 
         Camera m_Camera;
@@ -46,4 +51,3 @@ namespace ZGE
     };
 }
 
-#endif
